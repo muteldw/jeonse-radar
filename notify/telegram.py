@@ -5,20 +5,14 @@ TELEGRAM_BOT_TOKEN, TELEGRAM_CHAT_ID 가 둘 다 있어야 보낸다.
 """
 from __future__ import annotations
 
-import json
 import os
 import sys
 from pathlib import Path
 
 import requests
 
-ROOT = Path(__file__).resolve().parents[1]
-PAGES_URL = os.environ.get("PAGES_URL", "https://muteldw.github.io/jeonse-radar/")
-
-
-def pick_top(items: list[dict], n: int = 5) -> list[dict]:
-    ok = [i for i in items if i.get("within_budget") and i.get("deals_12m", 0) >= 3]
-    return ok[:n]
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from common import PAGES_URL, load_rec, pick_top, prev_ids  # noqa: E402
 
 
 def compose(rec: dict, prev_ids: set[str]) -> str:
@@ -46,14 +40,10 @@ def main() -> int:
         print("TELEGRAM_CHAT_ID 가 없습니다. 봇에게 아무 메시지나 보낸 뒤 다시 실행하세요.")
         print("찾은 chat id:", ", ".join(map(str, ids)) or "(없음)")
         return 0
-    rec = json.loads((ROOT / "web" / "data" / "recommend.json").read_text(encoding="utf-8"))
-    last_p = ROOT / "data" / "last_top.json"
-    prev = set(json.loads(last_p.read_text(encoding="utf-8"))) if last_p.exists() else set()
-    msg = compose(rec, prev)
+    msg = compose(load_rec(), prev_ids())
     r = requests.post(f"{api}/sendMessage", json={"chat_id": chat, "text": msg,
                                                    "disable_web_page_preview": True}, timeout=15)
     print("텔레그램 전송:", r.status_code, r.text[:120] if r.status_code != 200 else "OK")
-    last_p.write_text(json.dumps([i["id"] for i in pick_top(rec["items"])], ensure_ascii=False), encoding="utf-8")
     return 0
 
 

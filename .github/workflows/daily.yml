@@ -6,7 +6,7 @@ on:
   workflow_dispatch:         # Actions 탭에서 수동 실행
     inputs:
       notify:
-        description: "텔레그램 알림도 보내기"
+        description: "텔레그램·메일 알림도 보내기"
         type: boolean
         default: true
 
@@ -44,6 +44,16 @@ jobs:
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
         run: python notify/telegram.py
+      - name: 지메일 아침 알림
+        if: github.event_name == 'schedule' || inputs.notify == true
+        env:
+          GMAIL_USER: ${{ secrets.GMAIL_USER }}
+          GMAIL_APP_PASSWORD: ${{ secrets.GMAIL_APP_PASSWORD }}
+          MAIL_TO: ${{ secrets.MAIL_TO }}
+        run: python notify/email_alert.py
+      - name: 오늘 TOP 저장
+        if: github.event_name == 'schedule' || inputs.notify == true
+        run: python notify/common.py save
       - name: 데이터 커밋
         run: |
           git config user.name "jeonse-radar-bot"

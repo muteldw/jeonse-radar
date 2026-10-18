@@ -4,7 +4,7 @@ from datetime import date
 from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 sys.path[:0] = [str(ROOT / "collector"), str(ROOT / "model"), str(ROOT / "notify")]
-import geo, rank, telegram  # noqa: E402
+import geo, rank, telegram, email_alert  # noqa: E402
 
 
 class Resp:
@@ -40,7 +40,10 @@ def test():
     assert with_geo["station"] == "마곡나루" and with_geo["score"] > no_geo["score"]
     msg = telegram.compose({"generated_at": "2026-10-19T06:05", "budget_eok": 8.0, "items": [with_geo]}, set())
     assert "마곡엠밸리7단지" in msg and "🆕" in msg and "도보 6분" in msg
-    print("OK: 위치·역·인프라·점수·알림 메시지 통과")
+    subj, text, body = email_alert.build({"generated_at": "2026-10-19T06:05", "budget_eok": 8.0, "items": [with_geo]}, set())
+    assert "1위 마곡엠밸리7단지" in subj and "NEW" in body and "도보 6분" in text
+    print("OK: 위치·역·인프라·점수·텔레그램·메일 메시지 통과")
+    open(ROOT / "tests" / "_mail_preview.html", "w", encoding="utf-8").write(body)
     print(msg)
 
 
