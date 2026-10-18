@@ -42,7 +42,22 @@ def load_rows() -> list[dict]:
         return list(csv.DictReader(f))
 
 
+def drop_public_lease(rows: list[dict], ratio: float = 0.55) -> list[dict]:
+    """SH 장기전세·공공임대처럼 시장에서 구할 수 없는 저가 거래를 걸러낸다.
+    같은 구·면적대·연도 중위가의 ratio 미만인 전세 거래를 제외."""
+    def band_of(r):
+        a = float(r["area_m2"])
+        return 84 if a < 95 else (99 if a < 110 else 115)
+    pool: dict[tuple, list[float]] = defaultdict(list)
+    for r in rows:
+        pool[(r["sgg"], band_of(r), r["deal_date"][:4])].append(int(r["deposit_man"]))
+    med = {k: median(v) for k, v in pool.items()}
+    return [r for r in rows
+            if int(r["deposit_man"]) >= ratio * med[(r["sgg"], band_of(r), r["deal_date"][:4])]]
+
+
 def build(rows: list[dict], cfg: dict, weights: dict, today: date) -> list[dict]:
+    rows = drop_public_lease(rows, cfg.get("public_lease_ratio", 0.55))
     groups: dict[tuple, list[dict]] = defaultdict(list)
     for r in rows:
         a = float(r["area_m2"])
@@ -55,6 +70,15 @@ def build(rows: list[dict], cfg: dict, weights: dict, today: date) -> list[dict]
     out = []
     for (sgg, umd, apt, band), deals in groups.items():
         deals.sort(key=lambda r: r["deal_date"])
+        # 신규 계약이 있으면 신규만 시세로 사용 (갱신 계약은 5% 상한으로 시세보다 낮게 묶임)
+        new_only = [d for d in deals if d.get("contract_type") == "신규"]
+        if len(new_only) >= 3:
+            deals = new_only
+        # 단지 안에 섞인 장기전세(SH) 등 저가 거래 제외: 최근 거래 상위 25% 가격의 78% 미만
+        if len(deals) >= 4:
+            ps = sorted(int(d["deposit_man"]) for d in deals[-24:])
+            p75 = ps[int(len(ps) * 0.75)]
+            deals = [d for d in deals if int(d["deposit_man"]) >= 0.78 * p75]
         recent = [d for d in deals if d["deal_date"] >= (today.replace(year=today.year - 1)).isoformat()]
         if not recent:
             continue
