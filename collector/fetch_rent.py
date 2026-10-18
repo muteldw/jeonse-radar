@@ -55,7 +55,10 @@ def _t(item: ET.Element, *names: str) -> str:
 
 
 def parse(xml_text: str, sgg_name: str) -> tuple[list[dict], int]:
-    root = ET.fromstring(xml_text)
+    try:
+        root = ET.fromstring(xml_text)
+    except ET.ParseError:
+        raise RuntimeError(f"XML이 아닌 응답: {xml_text[:150]!r}")
     code = root.findtext(".//resultCode", "")
     if code not in ("00", "000", ""):
         raise RuntimeError(f"API 오류 {code}: {root.findtext('.//resultMsg', '')}")
@@ -134,10 +137,18 @@ def main() -> int:
     rows = load_existing(out_path)
     # 처음에는 months_back 전체, 이후에는 최근 3개월만 다시 받아 지연 신고분을 반영
     n = cfg["months_back"] if not rows else 3
-    added = 0
+    added, failed, calls = 0, 0, 0
     for lawd, name in cfg["regions"].items():
         for ymd in months_back(n):
-            for r in fetch_month(key, lawd, ymd, name):
+            calls += 1
+            try:
+                month_rows = fetch_month(key, lawd, ymd, name)
+            except (RuntimeError, ET.ParseError, requests.RequestException) as e:
+                # 공공데이터 API 일시 장애·트래픽 초과 시 기존 데이터로 계속 진행
+                failed += 1
+                print(f"[경고] {name} {ymd} 수집 실패: {e}")
+                continue
+            for r in month_rows:
                 if keep(r, cfg):
                     k = _key({kk: str(v) for kk, v in r.items()})
                     if k not in rows:
@@ -150,6 +161,10 @@ def main() -> int:
         for r in sorted(rows.values(), key=lambda r: r["deal_date"]):
             w.writerow({k: r[k] for k in FIELDS})
     print(f"전세 거래 {len(rows)}건 저장 (신규 {added}건)")
+    if failed:
+        print(f"[경고] {calls}건 중 {failed}건 수집 실패 — 기존 데이터로 추천을 계속 만듭니다.")
+    if failed == calls and not rows:
+        return 1  # 처음 실행인데 하나도 못 받은 경우만 실패 처리
     return 0
 
 

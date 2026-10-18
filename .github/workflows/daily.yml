@@ -50,6 +50,7 @@ jobs:
           git config user.email "actions@users.noreply.github.com"
           git add data web/data
           git diff --cached --quiet || git commit -m "daily: $(TZ=Asia/Seoul date +%F) 실거래 갱신"
+          git pull --rebase -X theirs origin main || true
           git push
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
