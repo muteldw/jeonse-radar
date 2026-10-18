@@ -120,7 +120,11 @@ def _key(r: dict) -> tuple:
 
 
 def main() -> int:
-    key = os.environ.get("MOLIT_API_KEY")
+    key = (os.environ.get("MOLIT_API_KEY") or "").strip()
+    # 포털의 Encoding 키(%2B 등 포함)를 넣어도 동작하도록 디코딩 (requests가 다시 인코딩함)
+    if "%" in key:
+        from urllib.parse import unquote
+        key = unquote(key)
     if not key:
         print("MOLIT_API_KEY 환경변수가 없습니다. GitHub 저장소 Settings > Secrets에 등록하세요.")
         return 1
