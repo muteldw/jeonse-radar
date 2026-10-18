@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>전세 레이더 9</title>
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#a8954f">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;500;700&family=IBM+Plex+Mono:wght@500&display=swap">
+<style>
+:root{--bg:#f6f5f1;--surface:#fff;--ink:#1f2328;--muted:#6b6f63;--line:#e3e0d6;--accent:#a8954f;--accent-soft:#efe9d3;--good:#2f7d4f;--bad:#b23b3b;
+--f-body:"IBM Plex Sans KR",system-ui,-apple-system,"Apple SD Gothic Neo",sans-serif;--f-num:"IBM Plex Mono",ui-monospace,monospace;color-scheme:light}
+@media (prefers-color-scheme:dark){:root{--bg:#15171a;--surface:#1e2125;--ink:#ebe9e2;--muted:#9a9c92;--line:#2e3238;--accent:#cdb86e;--accent-soft:#2f2c20;--good:#5fbf86;--bad:#e07a7a;color-scheme:dark}}
+*{box-sizing:border-box}
+html{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.55 var(--f-body)}
+.wrap{max-width:1040px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:20px 48px}
+header{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:8px;margin-bottom:14px}
+h1{margin:0;font-size:1.6rem;letter-spacing:-.02em}
+h1 span{display:inline-block;background:var(--accent);color:#fff;border-radius:999px;font:500 .8rem var(--f-num);padding:2px 9px;vertical-align:middle;margin-left:6px}
+.sub{color:var(--muted);font-size:.86rem}
+.note{font-size:.8rem;background:var(--accent-soft);border-radius:8px;padding:8px 12px;margin-bottom:14px}
+.filters{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px;background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:12px;margin-bottom:14px}
+.filters label{display:flex;flex-direction:column;gap:4px;font-size:.78rem;color:var(--muted)}
+.filters select,.filters input{font:inherit;font-size:.92rem;color:var(--ink);background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:7px 8px;width:100%}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,440px),1fr));gap:14px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:14px;display:flex;flex-direction:column;gap:10px;min-width:0}
+.top{display:flex;justify-content:space-between;gap:10px}
+.card h3{margin:2px 0 0;font-size:1.06rem}
+.meta{font-size:.82rem;color:var(--muted)}
+.score b{font:500 1.6rem/1 var(--f-num);color:var(--accent)}.score small{display:block;font-size:.7rem;color:var(--muted);text-align:right}
+.facts{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.fact{background:var(--bg);border-radius:8px;padding:7px 9px;min-width:0}
+.fact small{display:block;font-size:.7rem;color:var(--muted)}.fact strong{font:500 .95rem var(--f-num)}
+.chip{display:inline-block;font-size:.74rem;border:1px solid var(--accent);background:var(--accent-soft);border-radius:999px;padding:2px 8px}
+.chart{background:var(--bg);border-radius:8px;padding:8px}.chart svg{display:block;width:100%;height:auto}
+.chart .lbl{display:flex;justify-content:space-between;font-size:.7rem;color:var(--muted)}
+.actions{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.btn{font:500 .84rem var(--f-body);border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:8px;padding:6px 12px;cursor:pointer}
+.btn[aria-pressed="true"].like{background:var(--good);color:#fff;border-color:var(--good)}
+.actions a{font-size:.82rem;color:var(--accent);text-decoration:none}
+.empty{background:var(--surface);border:1px dashed var(--line);border-radius:12px;padding:24px;text-align:center;color:var(--muted)}
+.over{opacity:.6}
+button:focus-visible,select:focus-visible,input:focus-visible,a:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+footer{margin-top:20px;font-size:.78rem;color:var(--muted);display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+</style>
+</head>
+<body>
+<div class="wrap">
+ <header>
+  <div><h1>전세 레이더<span>9</span></h1><div class="sub" id="gen">불러오는 중…</div></div>
+  <div class="sub">강서·양천 · 전용 80㎡↑ 전세 실거래</div>
+ </header>
+ <div class="note" id="note" hidden></div>
+ <div class="filters">
+  <label>구<select id="f-sgg"><option value="all">전체</option></select></label>
+  <label>전세 예산(억)<input id="f-bud" type="number" step="0.5" min="3" max="20"></label>
+  <label>최소 평형<select id="f-py"><option value="34">34평형↑</option><option value="40">40평형↑</option></select></label>
+  <label>단지명 검색<input id="f-q" type="search" placeholder="예: 엠밸리"></label>
+  <label>예산 초과 단지<select id="f-over"><option value="hide">숨기기</option><option value="show">흐리게 보기</option></select></label>
+ </div>
+ <p class="sub" id="count"></p>
+ <div class="grid" id="list"></div>
+ <footer>
+  <span id="src"></span>
+  <button class="btn" id="export">관심/제외 기록 복사</button>
+  <span id="exmsg"></span>
+ </footer>
+</div>
+<script>
+const $=s=>document.querySelector(s);
+let DATA=null,FB={};
+try{FB=JSON.parse(localStorage.getItem("jr9_fb")||"{}")}catch(e){}
+const saveFB=()=>{try{localStorage.setItem("jr9_fb",JSON.stringify(FB))}catch(e){}};
+function spark(tr,qs){
+  if(tr.length<2)return '<div class="meta">거래 분기가 부족합니다</div>';
+  const w=300,h=60,p=6,mn=Math.min(...tr)-.1,mx=Math.max(...tr)+.1;
+  const X=i=>p+i*(w-2*p)/(tr.length-1),Y=v=>h-p-(v-mn)/(mx-mn)*(h-2*p);
+  const pts=tr.map((v,i)=>X(i)+","+Y(v)).join(" ");
+  return `<svg viewBox="0 0 ${w} ${h}" role="img" aria-label="분기별 전세 중위가"><polygon points="${X(0)},${h-p} ${pts} ${X(tr.length-1)},${h-p}" fill="var(--accent-soft)"/><polyline points="${pts}" fill="none" stroke="var(--accent)" stroke-width="2"/><circle cx="${X(tr.length-1)}" cy="${Y(tr.at(-1))}" r="3.5" fill="var(--accent)"/></svg>`;
+}
+function card(it,i,bud){
+  const q=encodeURIComponent(it.name+" "+it.umd), over=it.price_eok>bud+0.5;
+  const st=it.station?`<span class="chip">${it.station}역 도보 ${it.walk_min}분</span>`:'<span class="meta">역 정보는 2단계(카카오맵)에서 자동 추가</span>';
+  return `<article class="card${over?' over':''}">
+  <div class="top"><div><div class="meta">#${i+1} · ${it.sgg} ${it.umd}</div><h3>${it.name}</h3>
+   <div class="meta">${it.built||"?"}년 준공 · ${it.pyeong}평형대(전용 ${it.area_m2}㎡) · 욕실 ${it.bath}</div></div>
+   <div class="score"><b>${it.score}</b><small>추천 점수</small></div></div>
+  <div class="facts">
+   <div class="fact"><small>최근 전세(중위)</small><strong>${it.price_eok.toFixed(2)}억</strong></div>
+   <div class="fact"><small>12개월 거래</small><strong>${it.deals_12m}건</strong></div>
+   <div class="fact"><small>마지막 거래</small><strong>${it.last_deal.slice(2)}</strong></div>
+  </div>
+  <div>${st}</div>
+  <div class="chart"><div class="lbl"><span>분기별 전세 중위가</span><span>${it.trend_q[0]||""}–${it.trend_q.at(-1)||""}</span></div>${spark(it.trend,it.trend_q)}</div>
+  <div class="actions">
+   <button class="btn like" data-id="${it.id}" data-k="like" aria-pressed="${FB[it.id]==='like'}">관심</button>
+   <button class="btn" data-id="${it.id}" data-k="no">제외</button>
+   <a href="https://map.kakao.com/?q=${q}" target="_blank" rel="noopener">카카오맵</a>
+   <a href="https://new.land.naver.com/search?query=${encodeURIComponent(it.name)}" target="_blank" rel="noopener">호가 보기</a>
+  </div></article>`;
+}
+function render(){
+  const sgg=$("#f-sgg").value,bud=+$("#f-bud").value||DATA.budget_eok,py=+$("#f-py").value,q=$("#f-q").value.trim(),showOver=$("#f-over").value==="show";
+  const items=DATA.items.filter(it=>(sgg==="all"||it.sgg===sgg)&&it.pyeong>=py&&FB[it.id]!=="no"&&(!q||it.name.includes(q))&&(showOver||it.price_eok<=bud+0.5));
+  const hid=Object.values(FB).filter(v=>v==="no").length;
+  $("#count").textContent=`단지 ${items.length}곳`+(hid?` · 제외 ${hid}곳 숨김`:"");
+  $("#list").innerHTML=items.length?items.map((it,i)=>card(it,i,bud)).join(""):'<div class="empty">조건에 맞는 단지가 없습니다. 예산을 올리거나 구를 바꿔보세요.</div>';
+}
+$("#list").addEventListener("click",e=>{const b=e.target.closest("[data-k]");if(!b)return;const id=b.dataset.id,k=b.dataset.k;
+  if(FB[id]===k)delete FB[id];else FB[id]=k;saveFB();render()});
+$("#export").addEventListener("click",async()=>{const t=JSON.stringify(FB,null,1);
+  try{await navigator.clipboard.writeText(t);$("#exmsg").textContent="복사됨 · 저장소 data/feedback.json에 붙여넣으면 내일 추천에 반영됩니다"}catch(e){$("#exmsg").textContent=t}});
+["#f-sgg","#f-bud","#f-py","#f-q","#f-over"].forEach(s=>$(s).addEventListener("input",render));
+fetch("data/recommend.json",{cache:"no-store"}).then(r=>r.json()).then(d=>{
+  DATA=d;$("#f-bud").value=d.budget_eok;
+  [...new Set(d.items.map(i=>i.sgg))].forEach(s=>$("#f-sgg").insertAdjacentHTML("beforeend",`<option>${s}</option>`));
+  $("#gen").textContent=`${d.generated_at.replace("T"," ")} 기준 추천`;
+  $("#src").textContent=`출처: ${d.source}`;
+  if(d.sample){$("#note").hidden=false;$("#note").textContent="예시 데이터입니다. 첫 자동 실행(매일 06:00) 후 실제 실거래가로 바뀝니다."}
+  render();
+}).catch(()=>{$("#gen").textContent="데이터를 불러오지 못했습니다";$("#list").innerHTML='<div class="empty">recommend.json이 아직 없습니다. GitHub Actions에서 daily-recommend를 한 번 실행하세요.</div>'});
+</script>
+</body>
+</html>

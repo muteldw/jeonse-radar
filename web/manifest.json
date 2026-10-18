@@ -1,0 +1,9 @@
+{
+  "name": "전세 레이더 9",
+  "short_name": "전세레이더",
+  "start_url": ".",
+  "display": "standalone",
+  "background_color": "#f6f5f1",
+  "theme_color": "#a8954f",
+  "lang": "ko"
+}

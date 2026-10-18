@@ -1,0 +1,326 @@
+{
+ "generated_at": "2026-10-18T22:50",
+ "budget_eok": 8.0,
+ "weights": {
+  "station": 1.3,
+  "age": 0.8,
+  "budget": 1.0,
+  "trend": 0.7,
+  "activity": 0.5
+ },
+ "source": "예시 데이터 (실제 시세 아님)",
+ "sample": true,
+ "items": [
+  {
+   "id": "강서구-마곡동-마곡엠밸리2단지-84",
+   "name": "마곡엠밸리2단지",
+   "sgg": "강서구",
+   "umd": "마곡동",
+   "built": 2014,
+   "area_m2": 84,
+   "pyeong": 34,
+   "bath": 2,
+   "price_eok": 7.09,
+   "deals_12m": 8,
+   "last_deal": "2026-06-15",
+   "trend_q": [
+    "2024Q4",
+    "2025Q1",
+    "2025Q2",
+    "2025Q3",
+    "2025Q4",
+    "2026Q1",
+    "2026Q2"
+   ],
+   "trend": [
+    6.51,
+    6.68,
+    6.71,
+    6.83,
+    6.85,
+    6.85,
+    7.09
+   ],
+   "station": "마곡",
+   "walk_min": 5,
+   "lines": [
+    "5"
+   ],
+   "within_budget": true,
+   "features": {
+    "station": 0.6,
+    "age": 0.7,
+    "budget": 0.955,
+    "trend": 0.765,
+    "activity": 0.667
+   },
+   "score": 74
+  },
+  {
+   "id": "강서구-마곡동-마곡엠밸리6단지-84",
+   "name": "마곡엠밸리6단지",
+   "sgg": "강서구",
+   "umd": "마곡동",
+   "built": 2014,
+   "area_m2": 84,
+   "pyeong": 34,
+   "bath": 2,
+   "price_eok": 7.68,
+   "deals_12m": 8,
+   "last_deal": "2026-06-15",
+   "trend_q": [
+    "2024Q4",
+    "2025Q1",
+    "2025Q2",
+    "2025Q3",
+    "2025Q4",
+    "2026Q1",
+    "2026Q2"
+   ],
+   "trend": [
+    7.19,
+    7.21,
+    7.31,
+    7.48,
+    7.48,
+    7.56,
+    7.68
+   ],
+   "station": "마곡나루",
+   "walk_min": 9,
+   "lines": [
+    "9",
+    "공항"
+   ],
+   "within_budget": true,
+   "features": {
+    "station": 0.7,
+    "age": 0.7,
+    "budget": 0.66,
+    "trend": 0.891,
+    "activity": 0.667
+   },
+   "score": 72
+  },
+  {
+   "id": "강서구-가양동-강서한강자이-84",
+   "name": "강서한강자이",
+   "sgg": "강서구",
+   "umd": "가양동",
+   "built": 2010,
+   "area_m2": 84,
+   "pyeong": 34,
+   "bath": 2,
+   "price_eok": 6.66,
+   "deals_12m": 8,
+   "last_deal": "2026-06-15",
+   "trend_q": [
+    "2024Q4",
+    "2025Q1",
+    "2025Q2",
+    "2025Q3",
+    "2025Q4",
+    "2026Q1",
+    "2026Q2"
+   ],
+   "trend": [
+    6.21,
+    6.28,
+    6.43,
+    6.37,
+    6.53,
+    6.56,
+    6.66
+   ],
+   "station": "가양",
+   "walk_min": 7,
+   "lines": [
+    "9"
+   ],
+   "within_budget": true,
+   "features": {
+    "station": 0.567,
+    "age": 0.5,
+    "budget": 1.0,
+    "trend": 0.865,
+    "activity": 0.667
+   },
+   "score": 72
+  },
+  {
+   "id": "강서구-마곡동-마곡엠밸리7단지-84",
+   "name": "마곡엠밸리7단지",
+   "sgg": "강서구",
+   "umd": "마곡동",
+   "built": 2014,
+   "area_m2": 84,
+   "pyeong": 34,
+   "bath": 2,
+   "price_eok": 8.26,
+   "deals_12m": 8,
+   "last_deal": "2026-06-15",
+   "trend_q": [
+    "2024Q4",
+    "2025Q1",
+    "2025Q2",
+    "2025Q3",
+    "2025Q4",
+    "2026Q1",
+    "2026Q2"
+   ],
+   "trend": [
+    7.57,
+    7.75,
+    7.76,
+    7.84,
+    8.01,
+    8.05,
+    8.26
+   ],
+   "station": "마곡나루",
+   "walk_min": 6,
+   "lines": [
+    "9",
+    "공항"
+   ],
+   "within_budget": true,
+   "features": {
+    "station": 0.8,
+    "age": 0.7,
+    "budget": 0.37,
+    "trend": 0.753,
+    "activity": 0.667
+   },
+   "score": 66
+  },
+  {
+   "id": "강서구-내발산동-우장산아이파크이편한세상-84",
+   "name": "우장산아이파크이편한세상",
+   "sgg": "강서구",
+   "umd": "내발산동",
+   "built": 2008,
+   "area_m2": 84,
+   "pyeong": 34,
+   "bath": 2,
+   "price_eok": 6.24,
+   "deals_12m": 8,
+   "last_deal": "2026-06-15",
+   "trend_q": [
+    "2024Q4",
+    "2025Q1",
+    "2025Q2",
+    "2025Q3",
+    "2025Q4",
+    "2026Q1",
+    "2026Q2"
+   ],
+   "trend": [
+    5.61,
+    5.69,
+    5.82,
+    5.91,
+    6.1,
+    6.05,
+    6.24
+   ],
+   "station": null,
+   "walk_min": null,
+   "lines": [],
+   "within_budget": true,
+   "features": {
+    "station": 0.0,
+    "age": 0.4,
+    "budget": 1.0,
+    "trend": 0.626,
+    "activity": 0.667
+   },
+   "score": 49
+  },
+  {
+   "id": "양천구-목동-목동신시가지7단지-99",
+   "name": "목동신시가지7단지",
+   "sgg": "양천구",
+   "umd": "목동",
+   "built": 1986,
+   "area_m2": 99,
+   "pyeong": 40,
+   "bath": 2,
+   "price_eok": 7.45,
+   "deals_12m": 8,
+   "last_deal": "2026-06-15",
+   "trend_q": [
+    "2024Q4",
+    "2025Q1",
+    "2025Q2",
+    "2025Q3",
+    "2025Q4",
+    "2026Q1",
+    "2026Q2"
+   ],
+   "trend": [
+    6.73,
+    6.89,
+    6.88,
+    7.09,
+    7.19,
+    7.28,
+    7.45
+   ],
+   "station": null,
+   "walk_min": null,
+   "lines": [],
+   "within_budget": true,
+   "features": {
+    "station": 0.0,
+    "age": 0.0,
+    "budget": 0.775,
+    "trend": 0.658,
+    "activity": 0.667
+   },
+   "score": 36
+  },
+  {
+   "id": "강서구-마곡동-마곡힐스테이트마스터-99",
+   "name": "마곡힐스테이트마스터",
+   "sgg": "강서구",
+   "umd": "마곡동",
+   "built": 2017,
+   "area_m2": 99,
+   "pyeong": 40,
+   "bath": 2,
+   "price_eok": 9.45,
+   "deals_12m": 8,
+   "last_deal": "2026-06-15",
+   "trend_q": [
+    "2024Q4",
+    "2025Q1",
+    "2025Q2",
+    "2025Q3",
+    "2025Q4",
+    "2026Q1",
+    "2026Q2"
+   ],
+   "trend": [
+    8.82,
+    8.85,
+    8.97,
+    9.07,
+    9.17,
+    9.48,
+    9.45
+   ],
+   "station": null,
+   "walk_min": null,
+   "lines": [],
+   "within_budget": false,
+   "features": {
+    "station": 0.0,
+    "age": 0.85,
+    "budget": 0.0,
+    "trend": 0.871,
+    "activity": 0.667
+   },
+   "score": 38
+  }
+ ]
+}
