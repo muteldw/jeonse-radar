@@ -9,6 +9,8 @@
 ```
 config.json                 지역·예산·면적 조건, 단지별 역 정보
 collector/fetch_rent.py     국토부 아파트 전월세 실거래 API 수집 → data/rent_raw.csv
+collector/geo.py            카카오 로컬 API 위치·역·인프라 → data/geo.json
+notify/telegram.py          매일 아침 TOP 5 텔레그램 알림
 model/rank.py               단지별 집계·추천 점수·취향 학습 → web/data/recommend.json
 web/                        화면 (GitHub Pages로 배포)
 data/feedback.json          관심/제외 기록 (화면의 '기록 복사' 내용을 붙여넣기)
@@ -24,6 +26,14 @@ tests/                      모의 데이터 테스트
 3. **Pages 켜기**: Settings → Pages → Source를 `GitHub Actions`로 선택.
 4. **첫 실행**: Actions 탭 → `daily-recommend` → Run workflow. 첫 실행은 24개월치를 받느라 몇 분 걸린다.
 5. 휴대폰에서 Pages 주소를 열고 '홈 화면에 추가'하면 앱처럼 쓸 수 있다.
+
+## 2단계 선택 기능 (키를 넣으면 자동으로 켜짐)
+
+| Secret 이름 | 용도 | 발급 |
+|---|---|---|
+| `KAKAO_REST_KEY` | 단지 위치, 가까운 역·도보시간, 학교·어린이집·마트·병원 수 | developers.kakao.com → 앱 추가 → REST API 키. 앱 설정에서 '카카오맵' 사용 설정 ON |
+| `TELEGRAM_BOT_TOKEN` | 매일 아침 TOP 5 알림 | 텔레그램 @BotFather → /newbot |
+| `TELEGRAM_CHAT_ID` | 알림 받을 대화방 | 봇에게 메시지를 보낸 뒤 Actions를 실행하면 로그에 chat id가 출력됨 |
 
 ## 조건 바꾸기
 
@@ -41,7 +51,7 @@ cd web && python -m http.server  # http://localhost:8000
 
 ## 로드맵
 
-1. 실거래 수집 + 추천 화면 + 매일 자동 실행 (현재)
-2. 카카오맵 역·인프라 자동 계산, 텔레그램 아침 알림
+1. 실거래 수집 + 추천 화면 + 매일 자동 실행 (완료)
+2. 카카오맵 역·인프라 자동 계산, 텔레그램 아침 알림 (코드 완료, 키 등록 필요)
 3. 가격 전망 모델(LightGBM) 학습·백테스트, 피드백 자동 저장
 4. 위험 필터(전세가율·등기), 시계열 딥러닝 모델 시험

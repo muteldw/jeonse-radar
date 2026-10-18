@@ -33,6 +33,7 @@ h1 span{display:inline-block;background:var(--accent);color:#fff;border-radius:9
 .fact{background:var(--bg);border-radius:8px;padding:7px 9px;min-width:0}
 .fact small{display:block;font-size:.7rem;color:var(--muted)}.fact strong{font:500 .95rem var(--f-num)}
 .chip{display:inline-block;font-size:.74rem;border:1px solid var(--accent);background:var(--accent-soft);border-radius:999px;padding:2px 8px}
+.chips{display:flex;flex-wrap:wrap;gap:6px;align-items:center}.tag{font-size:.74rem;border:1px solid var(--line);border-radius:999px;padding:2px 8px}
 .chart{background:var(--bg);border-radius:8px;padding:8px}.chart svg{display:block;width:100%;height:auto}
 .chart .lbl{display:flex;justify-content:space-between;font-size:.7rem;color:var(--muted)}
 .actions{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
@@ -81,7 +82,11 @@ function spark(tr,qs){
 }
 function card(it,i,bud){
   const q=encodeURIComponent(it.name+" "+it.umd), over=it.price_eok>bud+0.5;
-  const st=it.station?`<span class="chip">${it.station}역 도보 ${it.walk_min}분</span>`:'<span class="meta">역 정보는 2단계(카카오맵)에서 자동 추가</span>';
+  const lines=(it.lines||[]).join("·");
+  const st=it.station?`<span class="chip">${it.station}역${lines?" "+lines:""} · 도보 ${it.walk_min}분</span>`:'<span class="meta">역 정보 준비 중</span>';
+  const inf=it.infra?Object.entries(it.infra).map(([k,v])=>`<span class="tag">${k} ${v}</span>`).join(""):"";
+  const base=it.base_km!=null?`<span class="tag">마곡나루까지 ${it.base_km}km</span>`:"";
+  const map=it.lat?`https://map.kakao.com/link/map/${encodeURIComponent(it.name)},${it.lat},${it.lng}`:`https://map.kakao.com/?q=${q}`;
   return `<article class="card${over?' over':''}">
   <div class="top"><div><div class="meta">#${i+1} · ${it.sgg} ${it.umd}</div><h3>${it.name}</h3>
    <div class="meta">${it.built||"?"}년 준공 · ${it.pyeong}평형대(전용 ${it.area_m2}㎡) · 욕실 ${it.bath}</div></div>
@@ -91,12 +96,12 @@ function card(it,i,bud){
    <div class="fact"><small>12개월 거래</small><strong>${it.deals_12m}건</strong></div>
    <div class="fact"><small>마지막 거래</small><strong>${it.last_deal.slice(2)}</strong></div>
   </div>
-  <div>${st}</div>
+  <div class="chips">${st}${base}${inf}</div>
   <div class="chart"><div class="lbl"><span>분기별 전세 중위가</span><span>${it.trend_q[0]||""}–${it.trend_q.at(-1)||""}</span></div>${spark(it.trend,it.trend_q)}</div>
   <div class="actions">
    <button class="btn like" data-id="${it.id}" data-k="like" aria-pressed="${FB[it.id]==='like'}">관심</button>
    <button class="btn" data-id="${it.id}" data-k="no">제외</button>
-   <a href="https://map.kakao.com/?q=${q}" target="_blank" rel="noopener">카카오맵</a>
+   <a href="${map}" target="_blank" rel="noopener">카카오맵</a>
    <a href="https://new.land.naver.com/search?query=${encodeURIComponent(it.name)}" target="_blank" rel="noopener">호가 보기</a>
   </div></article>`;
 }

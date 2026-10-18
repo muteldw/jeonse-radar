@@ -3,7 +3,12 @@ name: daily-recommend
 on:
   schedule:
     - cron: "0 21 * * *"   # 매일 06:00 KST (UTC 21:00)
-  workflow_dispatch: {}      # Actions 탭에서 수동 실행
+  workflow_dispatch:         # Actions 탭에서 수동 실행
+    inputs:
+      notify:
+        description: "텔레그램 알림도 보내기"
+        type: boolean
+        default: true
 
 permissions:
   contents: write
@@ -27,8 +32,18 @@ jobs:
         env:
           MOLIT_API_KEY: ${{ secrets.MOLIT_API_KEY }}
         run: python collector/fetch_rent.py
+      - name: 위치·역·인프라 (카카오)
+        env:
+          KAKAO_REST_KEY: ${{ secrets.KAKAO_REST_KEY }}
+        run: python collector/geo.py
       - name: 추천 계산
         run: python model/rank.py
+      - name: 텔레그램 아침 알림
+        if: github.event_name == 'schedule' || inputs.notify == true
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+        run: python notify/telegram.py
       - name: 데이터 커밋
         run: |
           git config user.name "jeonse-radar-bot"

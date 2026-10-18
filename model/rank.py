@@ -16,7 +16,7 @@ from pathlib import Path
 from statistics import median
 
 ROOT = Path(__file__).resolve().parents[1]
-DEFAULT_W = {"station": 1.3, "age": 0.8, "budget": 1.0, "trend": 0.7, "activity": 0.5}
+DEFAULT_W = {"station": 1.3, "age": 0.8, "budget": 1.0, "trend": 0.7, "activity": 0.5, "infra": 0.8}
 KST = timezone(timedelta(hours=9))
 
 
@@ -56,7 +56,15 @@ def drop_public_lease(rows: list[dict], ratio: float = 0.55) -> list[dict]:
             if int(r["deposit_man"]) >= ratio * med[(r["sgg"], band_of(r), r["deal_date"][:4])]]
 
 
-def build(rows: list[dict], cfg: dict, weights: dict, today: date) -> list[dict]:
+def infra_score(inf: dict | None) -> float:
+    if not inf:
+        return 0.4
+    return min(1.0, 0.3 * min(1, inf.get("학교", 0) / 3) + 0.2 * min(1, inf.get("어린이집·유치원", 0) / 5)
+               + 0.3 * min(1, inf.get("대형마트", 0) / 2) + 0.2 * min(1, inf.get("병원", 0) / 10))
+
+
+def build(rows: list[dict], cfg: dict, weights: dict, today: date, geo: dict | None = None) -> list[dict]:
+    geo = geo or {}
     rows = drop_public_lease(rows, cfg.get("public_lease_ratio", 0.55))
     groups: dict[tuple, list[dict]] = defaultdict(list)
     for r in rows:
@@ -91,19 +99,28 @@ def build(rows: list[dict], cfg: dict, weights: dict, today: date) -> list[dict]
         price = round(median(last3), 2)
         built = int(deals[-1]["build_year"] or 0)
         m = meta.get(norm_name(apt), {})
-        walk = m.get("walk_min")
-        stn = m.get("station")
+        g = geo.get(f"{sgg}|{umd}|{apt}", {})
+        g = g if g.get("ok") else {}
+        walk = g.get("walk_min", m.get("walk_min"))
+        stn = g.get("station", m.get("station"))
+        lines = g.get("lines") or m.get("lines", [])
+        if g.get("base_km") is not None:
+            # 도보시간 + 기준역(마곡나루)까지 거리 1km당 3분으로 환산
+            station_f = max(0.0, 1 - (min(walk or 20, 20) + g["base_km"] * 3) / 35)
+        else:
+            station_f = max(0.0, 1 - ((walk or 15) + st_min.get(stn, 15)) / 30)
 
         f = {
-            "station": max(0.0, 1 - ((walk or 15) + st_min.get(stn, 15)) / 30),
+            "station": station_f,
             "age": max(0.0, min(1.0, (built - 2000) / 20)) if built else 0.3,
             "budget": max(0.0, min(1.0, (budget - price) / 2 + 0.5)),
             "trend": 0.5,
             "activity": min(1.0, len(recent) / 12),
+            "infra": infra_score(g.get("infra")),
         }
         if len(trend) >= 3:
-            g = (trend[-1] - trend[0]) / trend[0]
-            f["trend"] = max(0.0, 1 - abs(g - 0.05) * 6)
+            growth = (trend[-1] - trend[0]) / trend[0]
+            f["trend"] = max(0.0, 1 - abs(growth - 0.05) * 6)
         tot = sum(abs(v) for v in weights.values()) or 1
         score = round(100 * sum(weights[k] * f[k] for k in weights) / tot)
 
@@ -114,7 +131,9 @@ def build(rows: list[dict], cfg: dict, weights: dict, today: date) -> list[dict]
             "price_eok": price, "deals_12m": len(recent),
             "last_deal": recent[-1]["deal_date"],
             "trend_q": qs, "trend": trend,
-            "station": stn, "walk_min": walk, "lines": m.get("lines", []),
+            "station": stn, "walk_min": walk, "lines": lines,
+            "lat": g.get("lat"), "lng": g.get("lng"), "base_km": g.get("base_km"),
+            "infra": g.get("infra"),
             "within_budget": price <= budget + 0.5,
             "features": {k: round(v, 3) for k, v in f.items()},
             "score": score,
@@ -145,11 +164,13 @@ def main() -> None:
     fb_path = ROOT / "data" / "feedback.json"
     feedback = json.loads(fb_path.read_text(encoding="utf-8")) if fb_path.exists() else {}
     rows = load_rows()
+    gp = ROOT / "data" / "geo.json"
+    geo = json.loads(gp.read_text(encoding="utf-8")) if gp.exists() else {}
     today = datetime.now(KST).date()
-    items = build(rows, cfg, DEFAULT_W, today)
+    items = build(rows, cfg, DEFAULT_W, today, geo)
     w = update_weights(DEFAULT_W, items, feedback)
     if w != DEFAULT_W:
-        items = build(rows, cfg, w, today)
+        items = build(rows, cfg, w, today, geo)
     out = {
         "generated_at": datetime.now(KST).isoformat(timespec="minutes"),
         "budget_eok": cfg["budget_eok"],
