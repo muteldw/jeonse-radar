@@ -21,7 +21,7 @@ import requests
 ROOT = Path(__file__).resolve().parents[1]
 API = "https://apis.data.go.kr/1613000/RTMSDataSvcAptRent/getRTMSDataSvcAptRent"
 FIELDS = ["sgg", "umd", "apt", "jibun", "build_year", "area_m2", "floor",
-          "deal_date", "deposit_man", "monthly_man", "contract_type"]
+          "deal_date", "deposit_man", "monthly_man", "contract_type", "contract_term", "use_rr"]
 
 
 def months_back(n: int, today: date | None = None) -> list[str]:
@@ -78,6 +78,8 @@ def parse(xml_text: str, sgg_name: str) -> tuple[list[dict], int]:
             "deposit_man": int(_num(_t(it, "deposit", "보증금액", "dealAmount", "거래금액"))),
             "monthly_man": int(_num(_t(it, "monthlyRent", "월세금액"))),
             "contract_type": _t(it, "contractType", "계약구분"),
+            "contract_term": _t(it, "contractTerm", "계약기간"),   # 예: "25.01~27.01"
+            "use_rr": _t(it, "useRRRight", "갱신요구권사용"),       # "사용" 또는 빈칸
         })
     return rows, total
 
@@ -135,8 +137,10 @@ def main() -> int:
     out_path = ROOT / "data" / "rent_raw.csv"
     out_path.parent.mkdir(exist_ok=True)
     rows = load_existing(out_path)
+    # 계약기간 열이 없던 예전 파일이면 전체를 다시 받아 채운다(이사 시기 예측용, 한 번만)
+    has_term = out_path.exists() and "contract_term" in out_path.open(encoding="utf-8").readline()
     # 처음에는 months_back 전체, 이후에는 최근 3개월만 다시 받아 지연 신고분을 반영
-    n = cfg["months_back"] if not rows else 3
+    n = cfg["months_back"] if (not rows or not has_term) else 3
     added, failed, calls = 0, 0, 0
     for lawd, name in cfg["regions"].items():
         for ymd in months_back(n):
@@ -159,7 +163,7 @@ def main() -> int:
         w = csv.DictWriter(f, fieldnames=FIELDS)
         w.writeheader()
         for r in sorted(rows.values(), key=lambda r: r["deal_date"]):
-            w.writerow({k: r[k] for k in FIELDS})
+            w.writerow({k: r.get(k, "") for k in FIELDS})
     print(f"전세 거래 {len(rows)}건 저장 (신규 {added}건)")
     if failed:
         print(f"[경고] {calls}건 중 {failed}건 수집 실패 — 기존 데이터로 추천을 계속 만듭니다.")

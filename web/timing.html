@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>이사 시기 · 전세 레이더 9</title>
+<link rel="manifest" href="manifest.json">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;500;700&family=IBM+Plex+Mono:wght@500&display=swap">
+<link rel="stylesheet" href="app.css">
+<style>
+.reco{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr));gap:10px}
+.rc{border:1px solid var(--line);border-radius:10px;padding:12px}
+.rc.main{border-color:var(--accent);background:var(--accent-soft)}
+.rc small{display:block;font-size:.74rem;color:var(--muted)}
+.rc strong{font:500 1.25rem/1.25 var(--f-num);display:block;margin:2px 0}
+.rc p{margin:4px 0 0;font-size:.8rem;color:var(--muted)}
+#chart svg{display:block;width:100%;height:auto}
+.chartbox{overflow-x:auto}
+.heat td.c{text-align:center;font:500 .78rem var(--f-num);padding:6px 2px;min-width:38px}
+.heat th.c{text-align:center;font-size:.7rem;padding:6px 2px}
+.heat th.c.win,.heat td.c.win{box-shadow:inset 0 2px 0 var(--accent),inset 0 -2px 0 var(--accent)}
+.heat td.name{white-space:nowrap;max-width:180px;overflow:hidden;text-overflow:ellipsis}
+.heat td.r{white-space:nowrap}
+#chart svg{min-width:560px}
+.heat td.best{outline:2px solid var(--accent);outline-offset:-2px;border-radius:4px}
+.legend{display:flex;flex-wrap:wrap;gap:12px;font-size:.76rem;color:var(--muted);margin-top:6px}
+.legend i{display:inline-block;width:12px;height:12px;border-radius:2px;vertical-align:-2px;margin-right:4px}
+</style>
+</head>
+<body>
+<div class="wrap">
+ <nav class="topnav">
+  <a class="brand" href="./">전세 레이더<span>9</span></a>
+  <a class="tab" href="./">추천</a><a class="tab" href="map.html">지도</a><a class="tab" href="timing.html" aria-current="page">이사 시기</a><a class="tab" href="buyer.html">매수자 분석</a><a class="tab" href="settings.html">알림 설정</a>
+ </nav>
+ <h1>이사 시기</h1>
+ <p class="sub">실거래 신고의 계약기간으로 단지별 전세 만기를 세고, 단지의 갱신 비율로 나올 매물을 추정합니다. 매물은 보통 만기 <span id="lead">2</span>개월 전에 나옵니다.</p>
+
+ <section class="panel">
+  <div class="grid2">
+   <label class="f">지금 집 만기일 (이 기기에만 저장)<input id="end" type="date"></label>
+   <label class="f">앞당겨 이사 가능<select id="shift"><option value="0">만기일에만</option><option value="1">1개월 전까지</option><option value="2" selected>2개월 전까지</option><option value="3">3개월 전까지</option></select></label>
+   <label class="f">전세 예산 (억)<input id="bud" type="number" step="0.5" min="3" max="20"></label>
+   <label class="f">대상 단지<select id="scope"><option value="top20">추천 상위 20곳</option><option value="budget">예산 안 전체</option><option value="liked">관심 표시한 단지</option></select></label>
+  </div>
+ </section>
+
+ <section class="panel" id="recoBox"><div class="reco" id="reco"><p class="sub">만기일을 넣으면 추천 입주일과 계약 일정을 계산합니다.</p></div></section>
+
+ <section class="panel">
+  <h2>월별 예상 전세 매물 (대상 단지 합계)</h2>
+  <div class="chartbox"><div id="chart"></div></div>
+  <div class="legend"><span><i style="background:var(--accent)"></i>예상 매물 (건)</span><span><i style="background:var(--line)"></i>이사 가능 기간 밖</span><span>점선: 그 달의 계절 시세 (100 = 연평균)</span></div>
+ </section>
+
+ <section class="panel">
+  <h2>단지별 월별 예상 매물</h2>
+  <div class="tblwrap"><table class="heat" id="heat"></table></div>
+  <p class="sub" id="foot"></p>
+ </section>
+</div>
+<script>
+const $=s=>document.querySelector(s);
+const esc=s=>String(s??"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+let REC=null,SUP=null;
+const store={get(k){try{return localStorage.getItem(k)}catch(e){return null}},set(k,v){try{localStorage.setItem(k,v)}catch(e){}}};
+const mLabel=m=>`${m.slice(2,4)}.${m.slice(5)}`;
+function addMonths(d,k){const x=new Date(d+"T00:00:00");const day=x.getDate();x.setDate(1);x.setMonth(x.getMonth()+k);const last=new Date(x.getFullYear(),x.getMonth()+1,0).getDate();x.setDate(Math.min(day,last));return x}
+const iso=x=>`${x.getFullYear()}-${String(x.getMonth()+1).padStart(2,"0")}-${String(x.getDate()).padStart(2,"0")}`;
+const kdate=x=>`${x.getFullYear()}년 ${x.getMonth()+1}월 ${x.getDate()}일`;
+function liked(){try{const f=JSON.parse(localStorage.getItem("jr9_fb")||"{}");return new Set(Object.keys(f).filter(k=>f[k]==="like"))}catch(e){return new Set()}}
+function targets(){const bud=+$("#bud").value||REC.budget_eok,sc=$("#scope").value;
+  let its=REC.items.filter(i=>i.pyeong>=34&&i.price_eok<=bud+0.5&&SUP.items[i.id]);
+  if(sc==="top20")its=its.filter(i=>i.deals_12m>=3).slice(0,20);
+  if(sc==="liked"){const L=liked();its=its.filter(i=>L.has(i.id))}
+  return its}
+function window_(){const end=$("#end").value;if(!end)return null;const sh=+$("#shift").value;
+  const mEnd=end.slice(0,7),mStart=iso(addMonths(end,-sh)).slice(0,7);return {end,mStart,mEnd}}
+function render(){
+  if(!REC||!SUP)return;
+  const its=targets(),M=SUP.months,W=window_();
+  const tot=M.map((_,i)=>its.reduce((s,it)=>s+SUP.items[it.id].list[i],0));
+  const inWin=m=>W&&m>=W.mStart&&m<=W.mEnd;
+  // 추천
+  if(W){
+    const cand=M.map((m,i)=>({m,i,n:tot[i],p:(SUP.season[String(+m.slice(5))]||{}).price||1})).filter(c=>inWin(c.m));
+    if(!cand.length){$("#reco").innerHTML=`<p class="sub">만기일이 예측 범위(${M[0]}~${M[M.length-1]})를 벗어났어요.</p>`}
+    else{
+      const maxN=Math.max(...cand.map(c=>c.n))||1;
+      // 앞당길수록 두 집 비용이 겹치므로 한 달당 25% 감점, 계절 시세 1% 비싸면 30% 감점
+      const ei=M.indexOf(W.mEnd);
+      cand.forEach(c=>c.score=c.n/maxN-0.25*Math.max(0,ei-c.i)-30*(c.p-1));
+      const endC=cand.find(c=>c.m===W.mEnd);
+      const best=cand.reduce((a,b)=>b.score>a.score?b:a,endC||cand[cand.length-1]);
+      const move=best.m===W.mEnd?new Date(W.end+"T00:00:00"):addMonths(W.end,-(M.indexOf(W.mEnd)-best.i));
+      const look=addMonths(iso(move),-3),signA=addMonths(iso(move),-3),signB=addMonths(iso(move),-1),notify=addMonths(W.end,-2);
+      const early=best.m!==W.mEnd;
+      $("#reco").innerHTML=`
+       <div class="rc main"><small>추천 입주일</small><strong>${kdate(move)}</strong><p>${early?`만기보다 ${M.indexOf(W.mEnd)-best.i}개월 이른 ${mLabel(best.m)}에 매물이 가장 많아요. 그만큼 두 집 비용이 겹칠 수 있어 지금 집주인과 조기 퇴거를 협의해야 해요.`:"만기일에 맞춰 들어가면 두 집 비용이 겹치지 않고, 이 달 예상 매물도 충분해요."}</p></div>
+       <div class="rc"><small>그 달 예상 매물 (대상 ${its.length}곳 합계)</small><strong>${best.n.toFixed(1)}건</strong><p>이사 가능 기간 평균 ${(cand.reduce((s,c)=>s+c.n,0)/cand.length).toFixed(1)}건 · 계절 시세 ${Math.round(best.p*100)}</p></div>
+       <div class="rc"><small>매물 확인 시작 → 계약</small><strong>${look.getMonth()+1}월 ${look.getDate()}일~</strong><p>가계약은 ${signA.getMonth()+1}/${signA.getDate()}~${signB.getMonth()+1}/${signB.getDate()} 사이가 일반적이에요. 이 기간 아침 알림을 '매일'로 두세요.</p></div>
+       <div class="rc"><small>지금 집주인에게 계약 종료 통보</small><strong>${kdate(notify)}까지</strong><p>만기 2개월 전까지 알리지 않으면 같은 조건으로 묵시적 갱신될 수 있어요.</p></div>`;
+    }
+  } else $("#reco").innerHTML='<p class="sub">만기일을 넣으면 추천 입주일과 계약 일정을 계산합니다.</p>';
+  // 차트
+  const w=760,h=260,l=40,r=16,t=20,b=40,cw=(w-l-r)/M.length,maxY=Math.max(1,...tot)*1.15;
+  const Y=v=>t+(h-t-b)*(1-v/maxY);
+  const ticks=[0,1,2,3,4].map(k=>maxY/4*k);
+  const sp=M.map(m=>(SUP.season[String(+m.slice(5))]||{}).price||1),pMin=0.95,pMax=1.05;
+  const PY=v=>t+(h-t-b)*(1-(v-pMin)/(pMax-pMin||1));
+  let svg=`<svg viewBox="0 0 ${w} ${h}" role="img" aria-label="월별 예상 전세 매물 막대 그래프">`;
+  ticks.forEach(v=>{svg+=`<line x1="${l}" x2="${w-r}" y1="${Y(v)}" y2="${Y(v)}" stroke="var(--line)"/><text x="${l-6}" y="${Y(v)+4}" text-anchor="end" font-size="11" fill="var(--muted)">${Math.round(v)}</text>`});
+  M.forEach((m,i)=>{const x=l+i*cw+cw*0.15,bw=cw*0.7,on=!W||inWin(m);
+    svg+=`<rect x="${x}" y="${Y(tot[i])}" width="${bw}" height="${Y(0)-Y(tot[i])}" rx="3" fill="${on?"var(--accent)":"var(--line)"}"><title>${m} 예상 매물 ${tot[i].toFixed(1)}건</title></rect>`;
+    if(i%2===0||M.length<=12)svg+=`<text x="${x+bw/2}" y="${h-b+16}" text-anchor="middle" font-size="11" fill="${on?"var(--ink)":"var(--muted)"}">${mLabel(m)}</text>`;
+    if(W&&m===W.mEnd)svg+=`<text x="${x+bw/2}" y="${h-b+32}" text-anchor="middle" font-size="11" font-weight="700" fill="var(--accent)">만기</text>`});
+  svg+=`<polyline fill="none" stroke="var(--ink)" stroke-width="1.5" stroke-dasharray="4 3" points="${M.map((m,i)=>`${l+i*cw+cw/2},${PY(sp[i])}`).join(" ")}"/>`;
+  svg+=`<text x="${w-r}" y="${t-6}" text-anchor="end" font-size="11" fill="var(--muted)">점선 = 계절 시세 (위 105 · 아래 95)</text></svg>`;
+  $("#chart").innerHTML=its.length?svg:'<p class="sub">대상 단지가 없습니다. 예산이나 대상을 바꿔보세요.</p>';
+  // 히트맵
+  const show=M.slice(0,12),maxC=Math.max(0.5,...its.flatMap(it=>SUP.items[it.id].list.slice(0,12)));
+  $("#heat").innerHTML=`<thead><tr><th>단지</th><th class="r">전세</th>${show.map(m=>`<th class="c${inWin(m)?" win":""}">${mLabel(m)}</th>`).join("")}<th class="r">기간 합</th></tr></thead><tbody>`+
+   its.slice(0,40).map(it=>{const s=SUP.items[it.id],win=M.map((m,i)=>inWin(m)?s.list[i]:0),bi=W?win.indexOf(Math.max(...win)):-1;
+     return `<tr><td class="name" title="${esc(it.name)}"><a href="map.html?id=${encodeURIComponent(it.id)}" style="color:inherit">${esc(it.name)}</a><div class="sub">갱신율 ${Math.round(s.renew_rate*100)}%</div></td><td class="r num">${it.price_eok.toFixed(1)}억</td>`+
+     show.map((m,i)=>{const v=s.list[i],a=Math.min(1,v/maxC);return `<td class="c${inWin(m)?" win":""}${i===bi&&v>0?" best":""}" style="background:color-mix(in srgb,var(--accent) ${Math.round(a*70)}%,transparent)">${v>=0.05?v.toFixed(1):"·"}</td>`}).join("")+
+     `<td class="r num">${W?win.reduce((x,y)=>x+y,0).toFixed(1):"-"}</td></tr>`}).join("")+"</tbody>";
+  $("#foot").textContent=`예상 매물 = 만기 건수 × 나갈 확률. 첫 계약은 단지 갱신율(지역 평균 ${Math.round(SUP.region_renew_rate*100)}%)로, 갱신권을 이미 쓴 계약은 ${Math.round(SUP.renewed_leave_prob*100)}%가 나간다고 봅니다. 신고된 거래만 세므로 실제 매물보다 적게 잡히는 하한 추정이고, 칸의 숫자는 '그 달에 나올 것으로 보이는 매물 수'입니다. 계약기간 확인 ${SUP.terms_known.toLocaleString()}/${SUP.rows.toLocaleString()}건 (나머지는 계약일+24개월로 계산).`;
+}
+const saved=store.get("jr9_move_end");if(saved)$("#end").value=saved;
+$("#end").addEventListener("input",e=>{store.set("jr9_move_end",e.target.value);render()});
+["#shift","#bud","#scope"].forEach(s=>$(s).addEventListener("input",render));
+Promise.all([fetch("data/recommend.json",{cache:"no-store"}).then(r=>r.json()),fetch("data/supply.json",{cache:"no-store"}).then(r=>r.json())])
+ .then(([r,s])=>{REC=r;SUP=s;$("#bud").value=r.budget_eok;$("#lead").textContent=s.lead_months;render()})
+ .catch(()=>{$("#reco").innerHTML='<p class="sub">예상 매물 데이터가 아직 없습니다. 다음 자동 실행(매일 06시) 후 다시 열어주세요.</p>'});
+</script>
+</body>
+</html>

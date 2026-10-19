@@ -55,5 +55,10 @@
     "name": "마곡나루",
     "lat": 37.5667,
     "lng": 126.8272
+  },
+  "supply": {
+    "listing_lead_months": 2,
+    "renewed_leave_prob": 0.7,
+    "horizon_months": 18
   }
 }

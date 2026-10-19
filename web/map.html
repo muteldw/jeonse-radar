@@ -60,7 +60,7 @@ body{display:flex;flex-direction:column}
 <div class="bar">
  <nav class="topnav">
   <a class="brand" href="./">전세 레이더<span>9</span></a>
-  <a class="tab" href="./">추천</a><a class="tab" href="map.html" aria-current="page">지도</a><a class="tab" href="buyer.html">매수자 분석</a><a class="tab" href="settings.html">알림 설정</a>
+  <a class="tab" href="./">추천</a><a class="tab" href="map.html" aria-current="page">지도</a><a class="tab" href="timing.html">이사 시기</a><a class="tab" href="buyer.html">매수자 분석</a><a class="tab" href="settings.html">알림 설정</a>
  </nav>
  <div class="filters">
   <label>예산 <input id="bud" type="number" step="0.5" min="3" max="20" style="width:70px">억</label>
@@ -80,7 +80,7 @@ body{display:flex;flex-direction:column}
 <script>
 const $=s=>document.querySelector(s);
 const esc=s=>String(s??"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
-let D=null,SEL=null,markers={},rings=null;
+let D=null,SUP=null,SEL=null,markers={},rings=null;
 const map=L.map("map",{zoomControl:true}).setView([37.5605,126.8400],14);
 L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",{maxZoom:19,attribution:'&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'}).addTo(map);
 const cluster=L.markerClusterGroup({showCoverageOnHover:false,maxClusterRadius:45,disableClusteringAtZoom:16,
@@ -114,6 +114,9 @@ function showRings(it){ringLayer.clearLayers();if(!it||!$("#lRing").checked)retu
   const c=getComputedStyle(document.documentElement).getPropertyValue("--accent").trim()||"#a8954f";
   [500,1000].forEach(r=>L.circle([it.lat,it.lng],{radius:r,color:c,weight:1.5,dashArray:"4 4",fill:false,interactive:false}).addTo(ringLayer));
   if(it.st_lat)L.polyline([[it.lat,it.lng],[it.st_lat,it.st_lng]],{color:c,weight:2,interactive:false}).addTo(ringLayer)}
+function supplyMini(id){const s=SUP&&SUP.items[id];if(!s)return"";const M=SUP.months.slice(0,6),v=s.list.slice(0,6),mx=Math.max(1,...v);
+  return `<div style="margin:2px 0 10px"><div class="sub" style="font-size:.74rem;margin-bottom:4px">앞으로 6개월 예상 전세 매물 · <a href="timing.html" style="color:var(--accent)">이사 시기</a></div>
+   <div style="display:flex;gap:4px;align-items:flex-end;height:46px">${v.map((x,i)=>`<div style="flex:1;text-align:center;font:500 10px var(--f-num);color:var(--muted)"><div style="height:${Math.max(2,x/mx*28)}px;background:var(--accent);border-radius:3px;margin-bottom:2px" title="${M[i]} ${x.toFixed(1)}건"></div>${M[i].slice(5)}월</div>`).join("")}</div></div>`}
 function select(id,pan){
   SEL=id;const it=D.items.find(i=>i.id===id);if(!it)return;
   if(pan)map.setView([it.lat,it.lng],Math.max(map.getZoom(),15));
@@ -126,6 +129,7 @@ function select(id,pan){
     <div class="fact"><small>매매(최근)</small><strong>${it.sale_eok?it.sale_eok.toFixed(1)+"억":"-"}</strong></div>
     <div class="fact"><small>전세가율</small><strong>${ratio}</strong></div></div>
    <div class="chips">${it.station?`<span class="chip st">${esc(it.station)}역 ${esc((it.lines||[]).join("·"))} · 도보 ${it.walk_min}분</span>`:""}${it.base_km!=null?`<span class="chip">마곡나루까지 ${it.base_km}km</span>`:""}${inf}</div>
+   ${supplyMini(it.id)}
    <div class="links"><a class="btn" href="https://map.kakao.com/link/map/${encodeURIComponent(it.name)},${it.lat},${it.lng}" target="_blank" rel="noopener">카카오맵</a>
     <a class="btn" href="https://new.land.naver.com/search?query=${encodeURIComponent(it.name)}" target="_blank" rel="noopener">호가·평면도</a>
     <a class="btn primary" href="${buyer}">매수자 자금 분석</a></div>`;
@@ -137,6 +141,7 @@ $("#items").addEventListener("click",e=>{const el=e.target.closest(".item");if(e
 $("#items").addEventListener("keydown",e=>{if(e.key==="Enter"){const el=e.target.closest(".item");if(el)select(el.dataset.id,true)}});
 $("#listToggle").addEventListener("click",()=>{const o=$("#list").classList.toggle("open");$("#listToggle").setAttribute("aria-expanded",o);draw()});
 ["#bud","#py","#showOver","#lStn","#lRing"].forEach(s=>$(s).addEventListener("input",draw));
+fetch("data/supply.json",{cache:"no-store"}).then(r=>r.ok?r.json():null).then(s=>{SUP=s;if(SEL)select(SEL,false)}).catch(()=>{});
 fetch("data/recommend.json",{cache:"no-store"}).then(r=>r.json()).then(d=>{D=d;$("#bud").value=d.budget_eok;draw();
   const b=L.latLngBounds(visible().slice(0,20).map(i=>[i.lat,i.lng]));if(b.isValid())map.fitBounds(b,{padding:[30,30]});
   const q=new URLSearchParams(location.search).get("id");if(q)select(q,true)})

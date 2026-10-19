@@ -37,6 +37,8 @@ jobs:
         run: python collector/geo.py
       - name: 추천 계산
         run: python model/rank.py
+      - name: 월별 예상 매물·이사 시기
+        run: cd model && python supply.py
       - name: 화면용 설정 복사
         run: |
           cp config/notify.json web/data/notify.json
