@@ -63,8 +63,25 @@ def infra_score(inf: dict | None) -> float:
                + 0.3 * min(1, inf.get("대형마트", 0) / 2) + 0.2 * min(1, inf.get("병원", 0) / 10))
 
 
-def build(rows: list[dict], cfg: dict, weights: dict, today: date, geo: dict | None = None) -> list[dict]:
+def band_of_area(a: float) -> int:
+    return 84 if a < 95 else (99 if a < 110 else 115)
+
+
+def sale_prices(sales: list[dict], today: date) -> dict[tuple, float]:
+    """단지·면적대별 최근 12개월 매매 거래 마지막 3건 중위가(억)."""
+    since = today.replace(year=today.year - 1).isoformat()
+    g: dict[tuple, list[dict]] = defaultdict(list)
+    for r in sales:
+        if r["deal_date"] >= since:
+            g[(r["sgg"], r["umd"], r["apt"], band_of_area(float(r["area_m2"])))].append(r)
+    return {k: round(median(int(d["deposit_man"]) / 10000 for d in sorted(v, key=lambda d: d["deal_date"])[-3:]), 2)
+            for k, v in g.items()}
+
+
+def build(rows: list[dict], cfg: dict, weights: dict, today: date, geo: dict | None = None,
+          sales: dict | None = None) -> list[dict]:
     geo = geo or {}
+    sales = sales or {}
     rows = drop_public_lease(rows, cfg.get("public_lease_ratio", 0.55))
     groups: dict[tuple, list[dict]] = defaultdict(list)
     for r in rows:
@@ -134,6 +151,9 @@ def build(rows: list[dict], cfg: dict, weights: dict, today: date, geo: dict | N
             "station": stn, "walk_min": walk, "lines": lines,
             "lat": g.get("lat"), "lng": g.get("lng"), "base_km": g.get("base_km"),
             "infra": g.get("infra"),
+            "st_lat": g.get("st_lat"), "st_lng": g.get("st_lng"),
+            "sale_eok": sales.get((sgg, umd, apt, band)),
+            "jeonse_ratio": round(price / sales[(sgg, umd, apt, band)], 3) if sales.get((sgg, umd, apt, band)) else None,
             "within_budget": price <= budget + 0.5,
             "features": {k: round(v, 3) for k, v in f.items()},
             "score": score,
@@ -164,13 +184,18 @@ def main() -> None:
     fb_path = ROOT / "data" / "feedback.json"
     feedback = json.loads(fb_path.read_text(encoding="utf-8")) if fb_path.exists() else {}
     rows = load_rows()
+    sp = ROOT / "data" / "sale_raw.csv"
+    sales = {}
+    if sp.exists():
+        with sp.open(encoding="utf-8") as f:
+            sales = sale_prices(list(csv.DictReader(f)), datetime.now(KST).date())
     gp = ROOT / "data" / "geo.json"
     geo = json.loads(gp.read_text(encoding="utf-8")) if gp.exists() else {}
     today = datetime.now(KST).date()
-    items = build(rows, cfg, DEFAULT_W, today, geo)
+    items = build(rows, cfg, DEFAULT_W, today, geo, sales)
     w = update_weights(DEFAULT_W, items, feedback)
     if w != DEFAULT_W:
-        items = build(rows, cfg, w, today, geo)
+        items = build(rows, cfg, w, today, geo, sales)
     out = {
         "generated_at": datetime.now(KST).isoformat(timespec="minutes"),
         "budget_eok": cfg["budget_eok"],

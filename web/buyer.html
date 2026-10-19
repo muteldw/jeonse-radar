@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>매수자 자금 분석 · 전세 레이더 9</title>
+<link rel="manifest" href="manifest.json">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;500;700&family=IBM+Plex+Mono:wght@500&display=swap">
+<link rel="stylesheet" href="app.css">
+<style>
+.scen{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:12px}
+.card{border:1px solid var(--line);border-radius:10px;padding:12px;display:flex;flex-direction:column;gap:8px;min-width:0}
+.card h3{margin:0;font-size:.98rem}
+.card.na{opacity:.55}
+.big{font:500 1.5rem/1.1 var(--f-num);color:var(--accent)}
+.bar{display:flex;height:22px;border-radius:6px;overflow:hidden;background:var(--line)}
+.bar i{display:block;height:100%}
+.bar .c{background:var(--accent)}.bar .l{background:var(--good)}.bar .d{background:var(--muted)}
+.legend{display:flex;flex-wrap:wrap;gap:10px;font-size:.76rem;color:var(--muted)}
+.legend b{display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:4px;vertical-align:-1px}
+.kv{display:grid;grid-template-columns:1fr auto;gap:2px 10px;font-size:.86rem}
+.kv span:nth-child(even){text-align:right;font-family:var(--f-num)}
+.pct{font-size:.86rem;background:var(--accent-soft);border-radius:8px;padding:6px 10px}
+.warn{color:var(--warn);font-size:.8rem}
+</style>
+</head>
+<body>
+<div class="wrap">
+ <nav class="topnav">
+  <a class="brand" href="./">전세 레이더<span>9</span></a>
+  <a class="tab" href="./">추천</a><a class="tab" href="map.html">지도</a><a class="tab" href="buyer.html" aria-current="page">매수자 분석</a><a class="tab" href="settings.html">알림 설정</a>
+ </nav>
+ <h1>매수자 자금 분석</h1>
+ <p class="sub" id="who">세입자가 있는 집을 누가 살 수 있는지 계산합니다. 입력값은 이 기기에만 저장됩니다.</p>
+
+ <section class="panel">
+  <div class="grid2">
+   <label class="f">집 이름<input id="name" placeholder="예: 현재 전세집" maxlength="30"></label>
+   <label class="f">매매가 (억)<input id="price" type="number" step="0.1" min="1" inputmode="decimal"></label>
+   <label class="f">세입자 보증금 (억)<input id="dep" type="number" step="0.01" min="0" inputmode="decimal"></label>
+   <label class="f">임대차 만기<input id="end" type="date"></label>
+   <label class="f">매수자 유형<select id="type"><option>무주택</option><option>생애최초</option><option>1주택(처분조건)</option><option>다주택</option></select></label>
+   <label class="f">매수자 연소득 (만원, 선택)<input id="inc" type="number" step="100" min="0" inputmode="numeric" placeholder="비우면 DSR 생략"></label>
+  </div>
+  <div class="row" style="margin-top:10px">
+   <select id="preset" style="width:auto" aria-label="저장된 집"><option value="">저장된 집 불러오기</option></select>
+   <button class="btn" id="save">이 집 저장</button>
+   <button class="btn" id="del">삭제</button>
+   <span class="sub" id="msg"></span>
+  </div>
+ </section>
+
+ <section class="scen" id="out"></section>
+ <p class="sub" id="rules" style="margin-top:12px"></p>
+</div>
+<script>
+const $=s=>document.querySelector(s);
+let R=null,W=null;
+const eok=v=>(Math.round(v*100)/100).toFixed(2).replace(/\.?0+$/,"")+"억";
+function acqTax(p){const r=p<=6?0.01:p>9?0.03:(p*2/3-3)/100;return p*r*(1+(R.acq_tax.local_edu_ratio||0))}
+function capFor(p){for(const [lim,cap] of R.cap_by_price_eok)if(p<=lim)return cap;return 0}
+function dsrMax(incMan){if(!incMan)return Infinity;const r=(R.base_rate+R.stress_rate_add)/12,n=R.term_years*12;const pay=incMan/10000*R.dsr/12;return pay*(1-Math.pow(1+r,-n))/r}
+function incNeeded(loan){const r=(R.base_rate+R.stress_rate_add)/12,n=R.term_years*12;return Math.ceil(loan*r/(1-Math.pow(1+r,-n))*12/R.dsr*10000/100)*100}
+function topPct(x){const P=W.points;if(x<P[0][0])return null;if(x>=P[P.length-1][0])return P[P.length-1][1];
+  for(let i=0;i<P.length-1;i++){const [a,pa]=P[i],[b,pb]=P[i+1];if(x>=a&&x<=b){const t=(Math.log(x)-Math.log(a))/(Math.log(b)-Math.log(a));return Math.exp(Math.log(pa)+t*(Math.log(pb)-Math.log(pa)))}}return null}
+function pctText(x){const p=topPct(x);if(p===null)return `순자산 ${eok(x)} 이상 가구 — 평균(4.7억) 아래라 상위 35% 밖`;
+  if(p<=W.points[W.points.length-1][1]+1e-9)return `순자산 ${eok(x)} 이상 — 상위 1% 이내 자산가`;return `순자산 ${eok(x)} 이상 — 대한민국 가구 상위 약 ${p<10?p.toFixed(1):Math.round(p)}%`}
+function bar(parts){const tot=parts.reduce((s,p)=>s+p[1],0)||1;return `<div class="bar" role="img" aria-label="${parts.map(p=>p[0]+" "+eok(p[1])).join(", ")}">${parts.map(p=>`<i class="${p[2]}" style="width:${p[1]/tot*100}%"></i>`).join("")}</div><div class="legend">${parts.map(p=>`<span><b class="${p[2]}" style="background:var(--${p[2]==="c"?"accent":p[2]==="l"?"good":"muted"})"></b>${p[0]} ${eok(p[1])} (${Math.round(p[1]/tot*100)}%)</span>`).join("")}</div>`}
+function calc(){
+  const p=+$("#price").value,d=+$("#dep").value||0,end=$("#end").value,type=$("#type").value,inc=+$("#inc").value||0;
+  if(!R||!W)return;
+  if(!p){$("#out").innerHTML='<div class="panel">매매가를 넣으면 계산합니다. 추천·지도 화면에서 단지를 고르면 최근 매매가가 채워져요.</div>';return}
+  const tax=acqTax(p),misc=p*R.misc_cost_ratio,extra=tax+misc;
+  // A: 세입자 승계(실거주 유예)
+  const homeless=type==="무주택"||type==="생애최초";
+  const endOk=!end||end<=R.defer.max_move_in;
+  const aCash=Math.max(0,p-d)+extra;
+  const aOk=homeless&&endOk&&d>0;
+  // B: 만기 후 즉시 입주
+  const ltv=R.ltv[type]??0, cap=capFor(p), dm=dsrMax(inc);
+  const loan=Math.max(0,Math.min(ltv*p,cap,dm));
+  const bCash=p-loan+extra;
+  const needInc=loan>0?incNeeded(Math.min(ltv*p,cap)):0;
+  $("#out").innerHTML=`
+  <div class="card${aOk?"":" na"}">
+   <h3>A. 세입자 승계 (실거주 유예)</h3>
+   <div><span class="sub">필요 현금</span><div class="big">${eok(aCash)}</div></div>
+   ${bar([["현금",Math.max(0,p-d),"c"],["보증금 승계",Math.min(d,p),"d"]])}
+   <div class="kv"><span>매매가 − 보증금</span><span>${eok(Math.max(0,p-d))}</span><span>취득세·부대비용</span><span>${eok(extra)}</span><span>주택담보대출</span><span>0 (세입자 거주 중)</span></div>
+   <div class="pct">${pctText(aCash)}</div>
+   ${aOk?`<p class="sub">입주는 세입자 만기${end?"("+end+")":""}까지 미룰 수 있어요. 유예 신청은 ${R.defer.until}까지, ${R.defer.need_homeless_since}부터 계속 무주택이어야 합니다.</p>`:`<p class="warn">${!homeless?"유주택자는 실거주 유예를 받을 수 없어요.":!endOk?"임대차 만기가 유예 최대 기한("+R.defer.max_move_in+")을 넘습니다.":"세입자 보증금을 넣으세요."}</p>`}
+  </div>
+  <div class="card${type==="다주택"?" na":""}">
+   <h3>B. 만기 후 바로 입주 (${type})</h3>
+   <div><span class="sub">필요 현금</span><div class="big">${eok(bCash)}</div></div>
+   ${bar([["현금",p-loan,"c"],["대출",loan,"l"]])}
+   <div class="kv"><span>LTV ${Math.round(ltv*100)}% 기준</span><span>${eok(ltv*p)}</span><span>가격구간 한도</span><span>${eok(cap)}</span>${inc?`<span>DSR ${Math.round(R.dsr*100)}% 한도</span><span>${eok(dm)}</span>`:""}<span>적용 대출</span><span>${eok(loan)}</span><span>취득세·부대비용</span><span>${eok(extra)}</span></div>
+   ${loan>0?`<p class="sub">대출 ${eok(Math.min(ltv*p,cap))}을 다 받으려면 연소득 약 ${needInc.toLocaleString()}만원이 필요해요 (금리 ${(R.base_rate*100).toFixed(1)}% + 스트레스 ${(R.stress_rate_add*100).toFixed(0)}%p, ${R.term_years}년).</p>`:""}
+   <div class="pct">${pctText(bCash)}</div>
+   ${type==="다주택"?'<p class="warn">규제지역에서 추가 주택 구입은 대출이 0원입니다.</p>':""}
+  </div>`;
+  $("#who").textContent=($("#name").value?$("#name").value+" · ":"")+"세입자가 있는 집을 누가 살 수 있는지 계산합니다. 입력값은 이 기기에만 저장됩니다.";
+}
+const KEY="jr9_buyer_presets";
+const getP=()=>{try{return JSON.parse(localStorage.getItem(KEY)||"{}")}catch(e){return {}}};
+const setP=v=>{try{localStorage.setItem(KEY,JSON.stringify(v));return true}catch(e){return false}};
+function fillPresets(){const p=getP();$("#preset").innerHTML='<option value="">저장된 집 불러오기</option>'+Object.keys(p).map(k=>`<option>${k.replace(/</g,"&lt;")}</option>`).join("")}
+$("#save").addEventListener("click",()=>{const n=$("#name").value.trim();if(!n){$("#msg").textContent="집 이름을 넣어주세요";return}
+  const p=getP();p[n]={price:$("#price").value,dep:$("#dep").value,end:$("#end").value,type:$("#type").value,inc:$("#inc").value};
+  $("#msg").textContent=setP(p)?"이 기기에 저장됨":"이 브라우저는 저장을 막고 있어요";fillPresets();$("#preset").value=n});
+$("#del").addEventListener("click",()=>{const n=$("#preset").value;if(!n)return;const p=getP();delete p[n];setP(p);fillPresets();$("#msg").textContent="삭제됨"});
+$("#preset").addEventListener("change",e=>{const v=getP()[e.target.value];if(!v)return;$("#name").value=e.target.value;["price","dep","end","type","inc"].forEach(k=>$("#"+k).value=v[k]||"");calc()});
+["price","dep","end","type","inc","name"].forEach(k=>$("#"+k).addEventListener("input",calc));
+const q=new URLSearchParams(location.search);
+if(q.get("name"))$("#name").value=q.get("name");if(q.get("price"))$("#price").value=q.get("price");if(q.get("deposit"))$("#dep").value=q.get("deposit");
+fillPresets();
+Promise.all([fetch("data/loan_rules.json").then(r=>r.json()),fetch("data/wealth_dist.json").then(r=>r.json())]).then(([r,w])=>{R=r;W=w;
+  $("#rules").textContent=`대출 규칙 기준일 ${r.as_of} · 자산 분포 ${w.as_of} · ${w.notes.slice(0,3).join(" · ")}. 참고용 계산이며 실제 대출 한도는 은행 심사, 세금은 세무사 확인이 필요합니다.`;calc()})
+ .catch(()=>{$("#out").innerHTML='<div class="panel">규칙 파일을 불러오지 못했습니다. 다음 자동 실행 후 다시 열어주세요.</div>'});
+</script>
+</body>
+</html>

@@ -20,7 +20,7 @@ class FakeSession:
         code = params.get("category_group_code")
         if code == "SW8":
             return Resp({"documents": [
-                {"place_name": "마곡나루역 9호선", "distance": "420"},
+                {"place_name": "마곡나루역 9호선", "distance": "420", "x": "126.8295", "y": "37.5667"},
                 {"place_name": "마곡나루역 공항철도", "distance": "450"},
                 {"place_name": "양천향교역 9호선", "distance": "1300"}]})
         return Resp({"documents": [], "meta": {"total_count": {"SC4": 2, "PS3": 6, "MT1": 1, "HP8": 14}[code]}})

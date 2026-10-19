@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-10-19T07:40+09:00",
+ "generated_at": "2026-10-19T14:31+09:00",
  "budget_eok": 8.0,
  "weights": {
   "station": 1.3,
@@ -45,6 +45,10 @@
     "대형마트": 6,
     "병원": 77
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.764,
@@ -102,6 +106,10 @@
     "대형마트": 11,
     "병원": 130
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.776,
@@ -159,6 +167,10 @@
     "대형마트": 10,
     "병원": 137
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.599,
@@ -216,6 +228,10 @@
     "대형마트": 11,
     "병원": 211
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.537,
@@ -263,6 +279,10 @@
     "대형마트": 7,
     "병원": 85
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.686,
@@ -314,6 +334,10 @@
     "대형마트": 17,
     "병원": 166
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.62,
@@ -369,6 +393,10 @@
     "대형마트": 6,
     "병원": 96
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.677,
@@ -420,6 +448,10 @@
     "대형마트": 8,
     "병원": 112
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.775,
@@ -477,6 +509,10 @@
     "대형마트": 6,
     "병원": 22
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.659,
@@ -534,6 +570,10 @@
     "대형마트": 11,
     "병원": 103
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.549,
@@ -585,6 +625,10 @@
     "대형마트": 5,
     "병원": 58
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.699,
@@ -632,6 +676,10 @@
     "대형마트": 6,
     "병원": 76
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.794,
@@ -689,6 +737,10 @@
     "대형마트": 5,
     "병원": 38
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.673,
@@ -746,6 +798,10 @@
     "대형마트": 12,
     "병원": 124
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.653,
@@ -803,6 +859,10 @@
     "대형마트": 4,
     "병원": 58
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.778,
@@ -852,6 +912,10 @@
     "대형마트": 6,
     "병원": 98
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.731,
@@ -901,6 +965,10 @@
     "대형마트": 5,
     "병원": 52
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.801,
@@ -948,6 +1016,10 @@
     "대형마트": 8,
     "병원": 112
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.831,
@@ -1004,6 +1076,10 @@
     "대형마트": 7,
     "병원": 74
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.759,
@@ -1053,6 +1129,10 @@
     "대형마트": 13,
     "병원": 114
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.667,
@@ -1102,6 +1182,10 @@
     "대형마트": 8,
     "병원": 106
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.734,
@@ -1159,6 +1243,10 @@
     "대형마트": 15,
     "병원": 198
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.551,
@@ -1210,6 +1298,10 @@
     "대형마트": 9,
     "병원": 125
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.707,
@@ -1259,6 +1351,10 @@
     "대형마트": 15,
     "병원": 201
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.632,
@@ -1310,6 +1406,10 @@
     "대형마트": 6,
     "병원": 167
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.681,
@@ -1357,6 +1457,10 @@
     "대형마트": 8,
     "병원": 98
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.729,
@@ -1414,6 +1518,10 @@
     "대형마트": 10,
     "병원": 137
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.737,
@@ -1461,6 +1569,10 @@
     "대형마트": 6,
     "병원": 95
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.738,
@@ -1510,6 +1622,10 @@
     "대형마트": 8,
     "병원": 127
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.422,
@@ -1555,6 +1671,10 @@
     "대형마트": 7,
     "병원": 98
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.768,
@@ -1606,6 +1726,10 @@
     "대형마트": 8,
     "병원": 106
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.801,
@@ -1653,6 +1777,10 @@
     "대형마트": 13,
     "병원": 171
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.761,
@@ -1698,6 +1826,10 @@
     "대형마트": 17,
     "병원": 137
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.545,
@@ -1755,6 +1887,10 @@
     "대형마트": 10,
     "병원": 135
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.698,
@@ -1804,6 +1940,10 @@
     "대형마트": 7,
     "병원": 93
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.748,
@@ -1855,6 +1995,10 @@
     "대형마트": 10,
     "병원": 112
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.456,
@@ -1912,6 +2056,10 @@
     "대형마트": 9,
     "병원": 138
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.288,
@@ -1961,6 +2109,10 @@
     "대형마트": 4,
     "병원": 78
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.709,
@@ -2012,6 +2164,10 @@
     "대형마트": 5,
     "병원": 64
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.721,
@@ -2069,6 +2225,10 @@
     "대형마트": 10,
     "병원": 90
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.568,
@@ -2124,6 +2284,10 @@
     "대형마트": 15,
     "병원": 128
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.654,
@@ -2173,6 +2337,10 @@
     "대형마트": 9,
     "병원": 139
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.611,
@@ -2224,6 +2392,10 @@
     "대형마트": 9,
     "병원": 87
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.533,
@@ -2271,6 +2443,10 @@
     "대형마트": 4,
     "병원": 53
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.656,
@@ -2323,6 +2499,10 @@
     "대형마트": 7,
     "병원": 75
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.793,
@@ -2370,6 +2550,10 @@
     "대형마트": 16,
     "병원": 157
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.678,
@@ -2421,6 +2605,10 @@
     "대형마트": 7,
     "병원": 93
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.748,
@@ -2478,6 +2666,10 @@
     "대형마트": 10,
     "병원": 144
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.312,
@@ -2525,6 +2717,10 @@
     "대형마트": 5,
     "병원": 101
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.376,
@@ -2572,6 +2768,10 @@
     "대형마트": 6,
     "병원": 89
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.674,
@@ -2619,6 +2819,10 @@
     "대형마트": 14,
     "병원": 141
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.609,
@@ -2668,6 +2872,10 @@
     "대형마트": 12,
     "병원": 153
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.59,
@@ -2715,6 +2923,10 @@
     "대형마트": 17,
     "병원": 187
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.656,
@@ -2764,6 +2976,10 @@
     "대형마트": 7,
     "병원": 94
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.667,
@@ -2811,6 +3027,10 @@
     "대형마트": 7,
     "병원": 158
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.192,
@@ -2864,6 +3084,10 @@
     "대형마트": 8,
     "병원": 78
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.761,
@@ -2913,6 +3137,10 @@
     "대형마트": 6,
     "병원": 128
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.473,
@@ -2967,6 +3195,10 @@
     "대형마트": 7,
     "병원": 75
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.793,
@@ -3016,6 +3248,10 @@
     "대형마트": 6,
     "병원": 91
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.65,
@@ -3065,6 +3301,10 @@
     "대형마트": 10,
     "병원": 130
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.843,
@@ -3114,6 +3354,10 @@
     "대형마트": 17,
     "병원": 166
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.62,
@@ -3163,6 +3407,10 @@
     "대형마트": 6,
     "병원": 21
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.667,
@@ -3210,6 +3458,10 @@
     "대형마트": 15,
     "병원": 181
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.642,
@@ -3257,6 +3509,10 @@
     "대형마트": 4,
     "병원": 166
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.501,
@@ -3309,6 +3565,10 @@
     "대형마트": 6,
     "병원": 69
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.794,
@@ -3356,6 +3616,10 @@
     "대형마트": 14,
     "병원": 135
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.601,
@@ -3403,6 +3667,10 @@
     "대형마트": 10,
     "병원": 167
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.657,
@@ -3446,6 +3714,10 @@
     "대형마트": 14,
     "병원": 130
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.745,
@@ -3491,6 +3763,10 @@
     "대형마트": 6,
     "병원": 98
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.629,
@@ -3534,6 +3810,10 @@
     "대형마트": 9,
     "병원": 166
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.613,
@@ -3587,6 +3867,10 @@
     "대형마트": 10,
     "병원": 127
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.498,
@@ -3639,6 +3923,10 @@
     "대형마트": 5,
     "병원": 184
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.505,
@@ -3684,6 +3972,10 @@
     "대형마트": 6,
     "병원": 97
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.688,
@@ -3741,6 +4033,10 @@
     "대형마트": 10,
     "병원": 72
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.523,
@@ -3798,6 +4094,10 @@
     "대형마트": 8,
     "병원": 51
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.421,
@@ -3845,6 +4145,10 @@
     "대형마트": 16,
     "병원": 136
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.591,
@@ -3896,6 +4200,10 @@
     "대형마트": 5,
     "병원": 38
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.673,
@@ -3943,6 +4251,10 @@
     "대형마트": 6,
     "병원": 89
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.723,
@@ -3988,6 +4300,10 @@
     "대형마트": 20,
     "병원": 196
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.656,
@@ -4031,6 +4347,10 @@
     "대형마트": 10,
     "병원": 122
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.537,
@@ -4076,6 +4396,10 @@
     "대형마트": 5,
     "병원": 58
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.679,
@@ -4119,6 +4443,10 @@
     "대형마트": 14,
     "병원": 178
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.606,
@@ -4166,6 +4494,10 @@
     "대형마트": 14,
     "병원": 134
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.682,
@@ -4213,6 +4545,10 @@
     "대형마트": 17,
     "병원": 202
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.583,
@@ -4266,6 +4602,10 @@
     "대형마트": 6,
     "병원": 116
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.314,
@@ -4317,6 +4657,10 @@
     "대형마트": 9,
     "병원": 120
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.876,
@@ -4366,6 +4710,10 @@
     "대형마트": 8,
     "병원": 64
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.545,
@@ -4419,6 +4767,10 @@
     "대형마트": 6,
     "병원": 89
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.626,
@@ -4466,6 +4818,10 @@
     "대형마트": 4,
     "병원": 157
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.466,
@@ -4511,6 +4867,10 @@
     "대형마트": 6,
     "병원": 95
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.738,
@@ -4556,6 +4916,10 @@
     "대형마트": 6,
     "병원": 95
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.738,
@@ -4605,6 +4969,10 @@
     "대형마트": 5,
     "병원": 132
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.44,
@@ -4652,6 +5020,10 @@
     "대형마트": 14,
     "병원": 206
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.582,
@@ -4697,6 +5069,10 @@
     "대형마트": 6,
     "병원": 97
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.719,
@@ -4740,6 +5116,10 @@
     "대형마트": 9,
     "병원": 165
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.593,
@@ -4783,6 +5163,10 @@
     "대형마트": 13,
     "병원": 181
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.654,
@@ -4830,6 +5214,10 @@
     "대형마트": 14,
     "병원": 182
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.634,
@@ -4883,6 +5271,10 @@
     "대형마트": 9,
     "병원": 165
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.602,
@@ -4940,6 +5332,10 @@
     "대형마트": 3,
     "병원": 51
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.747,
@@ -4985,6 +5381,10 @@
     "대형마트": 6,
     "병원": 97
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.651,
@@ -5038,6 +5438,10 @@
     "대형마트": 9,
     "병원": 111
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.543,
@@ -5095,6 +5499,10 @@
     "대형마트": 4,
     "병원": 58
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.778,
@@ -5152,6 +5560,10 @@
     "대형마트": 6,
     "병원": 129
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.176,
@@ -5207,6 +5619,10 @@
     "대형마트": 9,
     "병원": 134
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.239,
@@ -5254,6 +5670,10 @@
     "대형마트": 10,
     "병원": 100
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.738,
@@ -5305,6 +5725,10 @@
     "대형마트": 6,
     "병원": 120
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.476,
@@ -5360,6 +5784,10 @@
     "대형마트": 1,
     "병원": 12
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.548,
@@ -5415,6 +5843,10 @@
     "대형마트": 8,
     "병원": 96
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.725,
@@ -5460,6 +5892,10 @@
     "대형마트": 14,
     "병원": 124
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.648,
@@ -5513,6 +5949,10 @@
     "대형마트": 8,
     "병원": 40
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.755,
@@ -5558,6 +5998,10 @@
     "대형마트": 6,
     "병원": 96
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.72,
@@ -5605,6 +6049,10 @@
     "대형마트": 8,
     "병원": 109
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.766,
@@ -5650,6 +6098,10 @@
     "대형마트": 17,
     "병원": 186
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.618,
@@ -5695,6 +6147,10 @@
     "대형마트": 5,
     "병원": 75
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.693,
@@ -5740,6 +6196,10 @@
     "대형마트": 10,
     "병원": 124
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.754,
@@ -5785,6 +6245,10 @@
     "대형마트": 16,
     "병원": 179
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.653,
@@ -5828,6 +6292,10 @@
     "대형마트": 15,
     "병원": 120
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.72,
@@ -5871,6 +6339,10 @@
     "대형마트": 16,
     "병원": 192
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.657,
@@ -5914,6 +6386,10 @@
     "대형마트": 16,
     "병원": 185
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.615,
@@ -5957,6 +6433,10 @@
     "대형마트": 12,
     "병원": 150
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.736,
@@ -6014,6 +6494,10 @@
     "대형마트": 12,
     "병원": 172
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.644,
@@ -6069,6 +6553,10 @@
     "대형마트": 5,
     "병원": 76
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.418,
@@ -6114,6 +6602,10 @@
     "대형마트": 11,
     "병원": 99
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.582,
@@ -6163,6 +6655,10 @@
     "대형마트": 10,
     "병원": 109
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.616,
@@ -6210,6 +6706,10 @@
     "대형마트": 8,
     "병원": 106
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.744,
@@ -6259,6 +6759,10 @@
     "대형마트": 8,
     "병원": 132
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.485,
@@ -6310,6 +6814,10 @@
     "대형마트": 8,
     "병원": 43
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.856,
@@ -6355,6 +6863,10 @@
     "대형마트": 17,
     "병원": 200
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.648,
@@ -6405,6 +6917,10 @@
     "대형마트": 4,
     "병원": 176
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.276,
@@ -6448,6 +6964,10 @@
     "대형마트": 13,
     "병원": 147
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.621,
@@ -6491,6 +7011,10 @@
     "대형마트": 7,
     "병원": 165
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.601,
@@ -6536,6 +7060,10 @@
     "대형마트": 6,
     "병원": 117
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.445,
@@ -6593,6 +7121,10 @@
     "대형마트": 6,
     "병원": 149
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.5,
@@ -6644,6 +7176,10 @@
     "대형마트": 9,
     "병원": 89
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.444,
@@ -6701,6 +7237,10 @@
     "대형마트": 12,
     "병원": 186
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.563,
@@ -6756,6 +7296,10 @@
     "대형마트": 9,
     "병원": 66
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.112,
@@ -6806,6 +7350,10 @@
     "대형마트": 5,
     "병원": 106
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.148,
@@ -6861,6 +7409,10 @@
     "대형마트": 8,
     "병원": 106
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.378,
@@ -6908,6 +7460,10 @@
     "대형마트": 6,
     "병원": 102
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.681,
@@ -6955,6 +7511,10 @@
     "대형마트": 6,
     "병원": 117
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.425,
@@ -7000,6 +7560,10 @@
     "대형마트": 17,
     "병원": 138
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.609,
@@ -7049,6 +7613,10 @@
     "대형마트": 13,
     "병원": 126
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.721,
@@ -7096,6 +7664,10 @@
     "대형마트": 5,
     "병원": 169
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.28,
@@ -7145,6 +7717,10 @@
     "대형마트": 10,
     "병원": 102
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.428,
@@ -7190,6 +7766,10 @@
     "대형마트": 11,
     "병원": 177
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.529,
@@ -7235,6 +7815,10 @@
     "대형마트": 14,
     "병원": 206
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.585,
@@ -7280,6 +7864,10 @@
     "대형마트": 10,
     "병원": 102
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.615,
@@ -7325,6 +7913,10 @@
     "대형마트": 4,
     "병원": 43
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.608,
@@ -7368,6 +7960,10 @@
     "대형마트": 11,
     "병원": 170
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.693,
@@ -7415,6 +8011,10 @@
     "대형마트": 15,
     "병원": 114
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.373,
@@ -7458,6 +8058,10 @@
     "대형마트": 16,
     "병원": 182
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.681,
@@ -7501,6 +8105,10 @@
     "대형마트": 10,
     "병원": 162
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.613,
@@ -7544,6 +8152,10 @@
     "대형마트": 14,
     "병원": 206
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.585,
@@ -7601,6 +8213,10 @@
     "대형마트": 13,
     "병원": 126
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.764,
@@ -7654,6 +8270,10 @@
     "대형마트": 6,
     "병원": 118
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.345,
@@ -7699,6 +8319,10 @@
     "대형마트": 2,
     "병원": 78
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.256,
@@ -7756,6 +8380,10 @@
     "대형마트": 8,
     "병원": 134
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.187,
@@ -7807,6 +8435,10 @@
     "대형마트": 4,
     "병원": 78
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.709,
@@ -7854,6 +8486,10 @@
     "대형마트": 6,
     "병원": 117
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.338,
@@ -7903,6 +8539,10 @@
     "대형마트": 11,
     "병원": 128
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.53,
@@ -7954,6 +8594,10 @@
     "대형마트": 10,
     "병원": 83
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.577,
@@ -7999,6 +8643,10 @@
     "대형마트": 14,
     "병원": 137
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.615,
@@ -8056,6 +8704,10 @@
     "대형마트": 7,
     "병원": 140
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.443,
@@ -8103,6 +8755,10 @@
     "대형마트": 15,
     "병원": 193
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.435,
@@ -8152,6 +8808,10 @@
     "대형마트": 6,
     "병원": 116
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.494,
@@ -8201,6 +8861,10 @@
     "대형마트": 6,
     "병원": 96
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.656,
@@ -8246,6 +8910,10 @@
     "대형마트": 10,
     "병원": 162
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.623,
@@ -8295,6 +8963,10 @@
     "대형마트": 9,
     "병원": 111
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.543,
@@ -8343,6 +9015,10 @@
     "대형마트": 6,
     "병원": 110
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.356,
@@ -8390,6 +9066,10 @@
     "대형마트": 9,
     "병원": 122
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.827,
@@ -8443,6 +9123,10 @@
     "대형마트": 3,
     "병원": 47
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.683,
@@ -8489,6 +9173,10 @@
     "대형마트": 6,
     "병원": 115
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.602,
@@ -8532,6 +9220,10 @@
     "대형마트": 6,
     "병원": 178
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.607,
@@ -8575,6 +9267,10 @@
     "대형마트": 13,
     "병원": 178
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.405,
@@ -8618,6 +9314,10 @@
     "대형마트": 14,
     "병원": 137
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.615,
@@ -8663,6 +9363,10 @@
     "대형마트": 16,
     "병원": 184
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.463,
@@ -8706,6 +9410,10 @@
     "대형마트": 13,
     "병원": 163
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.477,
@@ -8749,6 +9457,10 @@
     "대형마트": 15,
     "병원": 196
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.578,
@@ -8794,6 +9506,10 @@
     "대형마트": 16,
     "병원": 148
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.552,
@@ -8837,6 +9553,10 @@
     "대형마트": 4,
     "병원": 145
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.399,
@@ -8890,6 +9610,10 @@
     "대형마트": 8,
     "병원": 134
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.386,
@@ -8941,6 +9665,10 @@
     "대형마트": 11,
     "병원": 127
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.531,
@@ -8990,6 +9718,10 @@
     "대형마트": 10,
     "병원": 97
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.528,
@@ -9047,6 +9779,10 @@
     "대형마트": 12,
     "병원": 186
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.563,
@@ -9098,6 +9834,10 @@
     "대형마트": 6,
     "병원": 89
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.657,
@@ -9143,6 +9883,10 @@
     "대형마트": 4,
     "병원": 65
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.267,
@@ -9194,6 +9938,10 @@
     "대형마트": 6,
     "병원": 98
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.656,
@@ -9241,6 +9989,10 @@
     "대형마트": 12,
     "병원": 166
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.385,
@@ -9288,6 +10040,10 @@
     "대형마트": 15,
     "병원": 168
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.585,
@@ -9333,6 +10089,10 @@
     "대형마트": 17,
     "병원": 203
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.583,
@@ -9379,6 +10139,10 @@
     "대형마트": 5,
     "병원": 185
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.476,
@@ -9426,6 +10190,10 @@
     "대형마트": 11,
     "병원": 136
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.586,
@@ -9475,6 +10243,10 @@
     "대형마트": 3,
     "병원": 21
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.0,
@@ -9522,6 +10294,10 @@
     "대형마트": 14,
     "병원": 173
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.629,
@@ -9567,6 +10343,10 @@
     "대형마트": 16,
     "병원": 182
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.579,
@@ -9612,6 +10392,10 @@
     "대형마트": 17,
     "병원": 203
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.583,
@@ -9662,6 +10446,10 @@
     "대형마트": 7,
     "병원": 173
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.361,
@@ -9707,6 +10495,10 @@
     "대형마트": 11,
     "병원": 171
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.493,
@@ -9754,6 +10546,10 @@
     "대형마트": 5,
     "병원": 122
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.379,
@@ -9803,6 +10599,10 @@
     "대형마트": 6,
     "병원": 100
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.282,
@@ -9846,6 +10646,10 @@
     "대형마트": 17,
     "병원": 203
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.548,
@@ -9889,6 +10693,10 @@
     "대형마트": 12,
     "병원": 122
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.529,
@@ -9932,6 +10740,10 @@
     "대형마트": 14,
     "병원": 180
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.411,
@@ -9975,6 +10787,10 @@
     "대형마트": 6,
     "병원": 188
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.535,
@@ -10020,6 +10836,10 @@
     "대형마트": 10,
     "병원": 111
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.449,
@@ -10064,6 +10884,10 @@
     "대형마트": 6,
     "병원": 127
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.502,
@@ -10107,6 +10931,10 @@
     "대형마트": 15,
     "병원": 205
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.632,
@@ -10150,6 +10978,10 @@
     "대형마트": 12,
     "병원": 177
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.519,
@@ -10193,6 +11025,10 @@
     "대형마트": 13,
     "병원": 126
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.721,
@@ -10236,6 +11072,10 @@
     "대형마트": 17,
     "병원": 195
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.578,
@@ -10279,6 +11119,10 @@
     "대형마트": 6,
     "병원": 129
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.473,
@@ -10336,6 +11180,10 @@
     "대형마트": 11,
     "병원": 88
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.299,
@@ -10387,6 +11235,10 @@
     "대형마트": 12,
     "병원": 116
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.501,
@@ -10432,6 +11284,10 @@
     "대형마트": 12,
     "병원": 174
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.407,
@@ -10479,6 +11335,10 @@
     "대형마트": 10,
     "병원": 110
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.834,
@@ -10530,6 +11390,10 @@
     "대형마트": 6,
     "병원": 92
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.722,
@@ -10581,6 +11445,10 @@
     "대형마트": 4,
     "병원": 48
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.711,
@@ -10626,6 +11494,10 @@
     "대형마트": 12,
     "병원": 175
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.6,
@@ -10673,6 +11545,10 @@
     "대형마트": 6,
     "병원": 89
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.723,
@@ -10722,6 +11598,10 @@
     "대형마트": 17,
     "병원": 190
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.585,
@@ -10769,6 +11649,10 @@
     "대형마트": 3,
     "병원": 21
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.0,
@@ -10818,6 +11702,10 @@
     "대형마트": 9,
     "병원": 141
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.373,
@@ -10865,6 +11753,10 @@
     "대형마트": 11,
     "병원": 177
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.529,
@@ -10918,6 +11810,10 @@
     "대형마트": 8,
     "병원": 134
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.242,
@@ -10969,6 +11865,10 @@
     "대형마트": 12,
     "병원": 175
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.6,
@@ -11020,6 +11920,10 @@
     "대형마트": 13,
     "병원": 129
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.602,
@@ -11069,6 +11973,10 @@
     "대형마트": 5,
     "병원": 108
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.418,
@@ -11116,6 +12024,10 @@
     "대형마트": 6,
     "병원": 98
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.656,
@@ -11163,6 +12075,10 @@
     "대형마트": 19,
     "병원": 191
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.653,
@@ -11208,6 +12124,10 @@
     "대형마트": 17,
     "병원": 118
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.474,
@@ -11257,6 +12177,10 @@
     "대형마트": 16,
     "병원": 50
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.288,
@@ -11302,6 +12226,10 @@
     "대형마트": 14,
     "병원": 182
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.4,
@@ -11345,6 +12273,10 @@
     "대형마트": 15,
     "병원": 190
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.603,
@@ -11390,6 +12322,10 @@
     "대형마트": 14,
     "병원": 172
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.515,
@@ -11435,6 +12371,10 @@
     "대형마트": 9,
     "병원": 138
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.288,
@@ -11478,6 +12418,10 @@
     "대형마트": 2,
     "병원": 72
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.225,
@@ -11523,6 +12467,10 @@
     "대형마트": 10,
     "병원": 152
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.399,
@@ -11566,6 +12514,10 @@
     "대형마트": 18,
     "병원": 127
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.477,
@@ -11609,6 +12561,10 @@
     "대형마트": 10,
     "병원": 137
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.485,
@@ -11660,6 +12616,10 @@
     "대형마트": 17,
     "병원": 145
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.536,
@@ -11717,6 +12677,10 @@
     "대형마트": 6,
     "병원": 74
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.04,
@@ -11766,6 +12730,10 @@
     "대형마트": 12,
     "병원": 175
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.518,
@@ -11813,6 +12781,10 @@
     "대형마트": 6,
     "병원": 116
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.439,
@@ -11868,6 +12840,10 @@
     "대형마트": 3,
     "병원": 14
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.0,
@@ -11919,6 +12895,10 @@
     "대형마트": 8,
     "병원": 119
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.524,
@@ -11967,6 +12947,10 @@
     "대형마트": 5,
     "병원": 122
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.418,
@@ -12015,6 +12999,10 @@
     "대형마트": 6,
     "병원": 179
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.33,
@@ -12062,6 +13050,10 @@
     "대형마트": 1,
     "병원": 43
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.114,
@@ -12109,6 +13101,10 @@
     "대형마트": 10,
     "병원": 142
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.369,
@@ -12154,6 +13150,10 @@
     "대형마트": 16,
     "병원": 187
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.54,
@@ -12199,6 +13199,10 @@
     "대형마트": 17,
     "병원": 198
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.547,
@@ -12242,6 +13246,10 @@
     "대형마트": 12,
     "병원": 116
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.501,
@@ -12286,6 +13294,10 @@
     "대형마트": 6,
     "병원": 104
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.335,
@@ -12329,6 +13341,10 @@
     "대형마트": 4,
     "병원": 151
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.403,
@@ -12372,6 +13388,10 @@
     "대형마트": 8,
     "병원": 165
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.487,
@@ -12415,6 +13435,10 @@
     "대형마트": 11,
     "병원": 127
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.531,
@@ -12458,6 +13482,10 @@
     "대형마트": 9,
     "병원": 175
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.412,
@@ -12507,6 +13535,10 @@
     "대형마트": 6,
     "병원": 119
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.367,
@@ -12564,6 +13596,10 @@
     "대형마트": 18,
     "병원": 194
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.686,
@@ -12621,6 +13657,10 @@
     "대형마트": 6,
     "병원": 89
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.053,
@@ -12678,6 +13718,10 @@
     "대형마트": 12,
     "병원": 63
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.135,
@@ -12735,6 +13779,10 @@
     "대형마트": 6,
     "병원": 149
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.5,
@@ -12782,6 +13830,10 @@
     "대형마트": 2,
     "병원": 63
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.095,
@@ -12827,6 +13879,10 @@
     "대형마트": 12,
     "병원": 193
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.418,
@@ -12872,6 +13928,10 @@
     "대형마트": 14,
     "병원": 148
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.465,
@@ -12921,6 +13981,10 @@
     "대형마트": 10,
     "병원": 64
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.044,
@@ -12966,6 +14030,10 @@
     "대형마트": 9,
     "병원": 128
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.529,
@@ -13013,6 +14081,10 @@
     "대형마트": 8,
     "병원": 103
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.703,
@@ -13060,6 +14132,10 @@
     "대형마트": 17,
     "병원": 185
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.621,
@@ -13107,6 +14183,10 @@
     "대형마트": 8,
     "병원": 65
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.505,
@@ -13150,6 +14230,10 @@
     "대형마트": 6,
     "병원": 126
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.416,
@@ -13193,6 +14277,10 @@
     "대형마트": 16,
     "병원": 81
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.357,
@@ -13238,6 +14326,10 @@
     "대형마트": 10,
     "병원": 124
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.378,
@@ -13283,6 +14375,10 @@
     "대형마트": 14,
     "병원": 204
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.306,
@@ -13326,6 +14422,10 @@
     "대형마트": 16,
     "병원": 206
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.265,
@@ -13379,6 +14479,10 @@
     "대형마트": 7,
     "병원": 17
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.306,
@@ -13428,6 +14532,10 @@
     "대형마트": 14,
     "병원": 122
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.622,
@@ -13473,6 +14581,10 @@
     "대형마트": 6,
     "병원": 124
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.477,
@@ -13522,6 +14634,10 @@
     "대형마트": 11,
     "병원": 126
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.497,
@@ -13568,6 +14684,10 @@
     "대형마트": 3,
     "병원": 83
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.073,
@@ -13621,6 +14741,10 @@
     "대형마트": 7,
     "병원": 132
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.263,
@@ -13674,6 +14798,10 @@
     "대형마트": 6,
     "병원": 106
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.292,
@@ -13725,6 +14853,10 @@
     "대형마트": 9,
     "병원": 135
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.392,
@@ -13774,6 +14906,10 @@
     "대형마트": 13,
     "병원": 121
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.642,
@@ -13823,6 +14959,10 @@
     "대형마트": 16,
     "병원": 115
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.377,
@@ -13880,6 +15020,10 @@
     "대형마트": 16,
     "병원": 150
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.437,
@@ -13931,6 +15075,10 @@
     "대형마트": 9,
     "병원": 139
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.577,
@@ -13982,6 +15130,10 @@
     "대형마트": 3,
     "병원": 47
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.683,
@@ -14033,6 +15185,10 @@
     "대형마트": 13,
     "병원": 135
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.169,
@@ -14080,6 +15236,10 @@
     "대형마트": 7,
     "병원": 155
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.327,
@@ -14129,6 +15289,10 @@
     "대형마트": 13,
     "병원": 137
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.569,
@@ -14176,6 +15340,10 @@
     "대형마트": 8,
     "병원": 135
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.512,
@@ -14221,6 +15389,10 @@
     "대형마트": 6,
     "병원": 141
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.269,
@@ -14266,6 +15438,10 @@
     "대형마트": 12,
     "병원": 196
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.437,
@@ -14315,6 +15491,10 @@
     "대형마트": 13,
     "병원": 120
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.186,
@@ -14368,6 +15548,10 @@
     "대형마트": 9,
     "병원": 225
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.435,
@@ -14419,6 +15603,10 @@
     "대형마트": 16,
     "병원": 51
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.289,
@@ -14466,6 +15654,10 @@
     "대형마트": 9,
     "병원": 165
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.607,
@@ -14513,6 +15705,10 @@
     "대형마트": 6,
     "병원": 150
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.298,
@@ -14558,6 +15754,10 @@
     "대형마트": 8,
     "병원": 142
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.339,
@@ -14602,6 +15802,10 @@
     "대형마트": 7,
     "병원": 175
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.357,
@@ -14647,6 +15851,10 @@
     "대형마트": 8,
     "병원": 110
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.372,
@@ -14694,6 +15902,10 @@
     "대형마트": 17,
     "병원": 195
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.578,
@@ -14743,6 +15955,10 @@
     "대형마트": 12,
     "병원": 118
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.177,
@@ -14794,6 +16010,10 @@
     "대형마트": 13,
     "병원": 132
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.538,
@@ -14843,6 +16063,10 @@
     "대형마트": 8,
     "병원": 91
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.536,
@@ -14894,6 +16118,10 @@
     "대형마트": 13,
     "병원": 129
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.602,
@@ -14945,6 +16173,10 @@
     "대형마트": 7,
     "병원": 185
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.287,
@@ -14991,6 +16223,10 @@
     "대형마트": 5,
     "병원": 184
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.505,
@@ -15041,6 +16277,10 @@
     "대형마트": 4,
     "병원": 79
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.059,
@@ -15089,6 +16329,10 @@
     "대형마트": 6,
     "병원": 124
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.536,
@@ -15135,6 +16379,10 @@
     "대형마트": 6,
     "병원": 164
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.337,
@@ -15183,6 +16431,10 @@
     "대형마트": 4,
     "병원": 144
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.354,
@@ -15226,6 +16478,10 @@
     "대형마트": 16,
     "병원": 192
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.425,
@@ -15269,6 +16525,10 @@
     "대형마트": 13,
     "병원": 199
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.279,
@@ -15312,6 +16572,10 @@
     "대형마트": 4,
     "병원": 154
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.384,
@@ -15355,6 +16619,10 @@
     "대형마트": 6,
     "병원": 123
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.414,
@@ -15399,6 +16667,10 @@
     "대형마트": 3,
     "병원": 106
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.26,
@@ -15442,6 +16714,10 @@
     "대형마트": 8,
     "병원": 141
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.304,
@@ -15489,6 +16765,10 @@
     "대형마트": 10,
     "병원": 142
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.369,
@@ -15536,6 +16816,10 @@
     "대형마트": 10,
     "병원": 65
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.175,
@@ -15583,6 +16867,10 @@
     "대형마트": 11,
     "병원": 144
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.352,
@@ -15628,6 +16916,10 @@
     "대형마트": 6,
     "병원": 121
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.405,
@@ -15678,6 +16970,10 @@
     "대형마트": 3,
     "병원": 179
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.333,
@@ -15729,6 +17025,10 @@
     "대형마트": 15,
     "병원": 196
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.578,
@@ -15780,6 +17080,10 @@
     "대형마트": 7,
     "병원": 139
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.32,
@@ -15830,6 +17134,10 @@
     "대형마트": 5,
     "병원": 121
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.18,
@@ -15877,6 +17185,10 @@
     "대형마트": 7,
     "병원": 115
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.14,
@@ -15926,6 +17238,10 @@
     "대형마트": 8,
     "병원": 135
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.539,
@@ -15977,6 +17293,10 @@
     "대형마트": 13,
     "병원": 96
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.119,
@@ -16026,6 +17346,10 @@
     "대형마트": 15,
     "병원": 143
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.549,
@@ -16072,6 +17396,10 @@
     "대형마트": 4,
     "병원": 173
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.243,
@@ -16121,6 +17449,10 @@
     "대형마트": 14,
     "병원": 181
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.425,
@@ -16168,6 +17500,10 @@
     "대형마트": 12,
     "병원": 91
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.079,
@@ -16221,6 +17557,10 @@
     "대형마트": 6,
     "병원": 98
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.612,
@@ -16269,6 +17609,10 @@
     "대형마트": 4,
     "병원": 108
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.164,
@@ -16316,6 +17660,10 @@
     "대형마트": 3,
     "병원": 47
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.244,
@@ -16363,6 +17711,10 @@
     "대형마트": 8,
     "병원": 127
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.423,
@@ -16408,6 +17760,10 @@
     "대형마트": 3,
     "병원": 21
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.0,
@@ -16453,6 +17809,10 @@
     "대형마트": 13,
     "병원": 175
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.356,
@@ -16498,6 +17858,10 @@
     "대형마트": 2,
     "병원": 61
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.093,
@@ -16543,6 +17907,10 @@
     "대형마트": 11,
     "병원": 121
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.295,
@@ -16587,6 +17955,10 @@
     "대형마트": 5,
     "병원": 133
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.412,
@@ -16630,6 +18002,10 @@
     "대형마트": 1,
     "병원": 12
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.548,
@@ -16676,6 +18052,10 @@
     "대형마트": 7,
     "병원": 101
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.212,
@@ -16719,6 +18099,10 @@
     "대형마트": 9,
     "병원": 221
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.383,
@@ -16762,6 +18146,10 @@
     "대형마트": 12,
     "병원": 113
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.276,
@@ -16811,6 +18199,10 @@
     "대형마트": 17,
     "병원": 142
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.563,
@@ -16862,6 +18254,10 @@
     "대형마트": 8,
     "병원": 115
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.408,
@@ -16909,6 +18305,10 @@
     "대형마트": 9,
     "병원": 128
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.529,
@@ -16954,6 +18354,10 @@
     "대형마트": 6,
     "병원": 123
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.414,
@@ -17003,6 +18407,10 @@
     "대형마트": 2,
     "병원": 21
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.0,
@@ -17052,6 +18460,10 @@
     "대형마트": 6,
     "병원": 88
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.375,
@@ -17098,6 +18510,10 @@
     "대형마트": 5,
     "병원": 96
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.157,
@@ -17145,6 +18561,10 @@
     "대형마트": 12,
     "병원": 124
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.195,
@@ -17190,6 +18610,10 @@
     "대형마트": 6,
     "병원": 116
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.314,
@@ -17239,6 +18663,10 @@
     "대형마트": 9,
     "병원": 99
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.216,
@@ -17286,6 +18714,10 @@
     "대형마트": 8,
     "병원": 132
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.485,
@@ -17331,6 +18763,10 @@
     "대형마트": 12,
     "병원": 122
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.191,
@@ -17376,6 +18812,10 @@
     "대형마트": 12,
     "병원": 102
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.137,
@@ -17419,6 +18859,10 @@
     "대형마트": 3,
     "병원": 26
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.0,
@@ -17464,6 +18908,10 @@
     "대형마트": 10,
     "병원": 102
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.428,
@@ -17507,6 +18955,10 @@
     "대형마트": 7,
     "병원": 132
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.164,
@@ -17550,6 +19002,10 @@
     "대형마트": 3,
     "병원": 35
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.0,
@@ -17593,6 +19049,10 @@
     "대형마트": 11,
     "병원": 161
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.348,
@@ -17637,6 +19097,10 @@
     "대형마트": 3,
     "병원": 60
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.097,
@@ -17686,6 +19150,10 @@
     "대형마트": 13,
     "병원": 115
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.118,
@@ -17735,6 +19203,10 @@
     "대형마트": 6,
     "병원": 117
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.42,
@@ -17790,6 +19262,10 @@
     "대형마트": 6,
     "병원": 95
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.329,
@@ -17837,6 +19313,10 @@
     "대형마트": 6,
     "병원": 82
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.371,
@@ -17888,6 +19368,10 @@
     "대형마트": 12,
     "병원": 117
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.142,
@@ -17943,6 +19427,10 @@
     "대형마트": 14,
     "병원": 93
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.16,
@@ -17994,6 +19482,10 @@
     "대형마트": 11,
     "병원": 110
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.459,
@@ -18045,6 +19537,10 @@
     "대형마트": 6,
     "병원": 125
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.429,
@@ -18094,6 +19590,10 @@
     "대형마트": 9,
     "병원": 138
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.257,
@@ -18139,6 +19639,10 @@
     "대형마트": 6,
     "병원": 104
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.301,
@@ -18186,6 +19690,10 @@
     "대형마트": 9,
     "병원": 134
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.239,
@@ -18239,6 +19747,10 @@
     "대형마트": 10,
     "병원": 142
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.369,
@@ -18290,6 +19802,10 @@
     "대형마트": 5,
     "병원": 58
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.0,
@@ -18335,6 +19851,10 @@
     "대형마트": 8,
     "병원": 113
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.175,
@@ -18382,6 +19902,10 @@
     "대형마트": 14,
     "병원": 148
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.436,
@@ -18425,6 +19949,10 @@
     "대형마트": 12,
     "병원": 114
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.155,
@@ -18470,6 +19998,10 @@
     "대형마트": 6,
     "병원": 129
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.176,
@@ -18513,6 +20045,10 @@
     "대형마트": 11,
     "병원": 121
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.275,
@@ -18556,6 +20092,10 @@
     "대형마트": 9,
     "병원": 132
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.3,
@@ -18599,6 +20139,10 @@
     "대형마트": 17,
     "병원": 56
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.332,
@@ -18652,6 +20196,10 @@
     "대형마트": 10,
     "병원": 89
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.305,
@@ -18701,6 +20249,10 @@
     "대형마트": 4,
     "병원": 56
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.0,
@@ -18758,6 +20310,10 @@
     "대형마트": 15,
     "병원": 138
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.219,
@@ -18809,6 +20365,10 @@
     "대형마트": 6,
     "병원": 66
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.0,
@@ -18866,6 +20426,10 @@
     "대형마트": 17,
     "병원": 98
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.118,
@@ -18917,6 +20481,10 @@
     "대형마트": 8,
     "병원": 119
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.468,
@@ -18963,6 +20531,10 @@
     "대형마트": 3,
     "병원": 179
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.333,
@@ -19018,6 +20590,10 @@
     "대형마트": 10,
     "병원": 64
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.044,
@@ -19065,6 +20641,10 @@
     "대형마트": 11,
     "병원": 59
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.173,
@@ -19116,6 +20696,10 @@
     "대형마트": 10,
     "병원": 82
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.494,
@@ -19166,6 +20750,10 @@
     "대형마트": 3,
     "병원": 86
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.106,
@@ -19215,6 +20803,10 @@
     "대형마트": 9,
     "병원": 108
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.272,
@@ -19262,6 +20854,10 @@
     "대형마트": 9,
     "병원": 96
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.071,
@@ -19308,6 +20904,10 @@
     "대형마트": 4,
     "병원": 83
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.125,
@@ -19365,6 +20965,10 @@
     "대형마트": 12,
     "병원": 63
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.135,
@@ -19412,6 +21016,10 @@
     "대형마트": 7,
     "병원": 129
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.229,
@@ -19459,6 +21067,10 @@
     "대형마트": 7,
     "병원": 123
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.184,
@@ -19506,6 +21118,10 @@
     "대형마트": 16,
     "병원": 115
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.377,
@@ -19553,6 +21169,10 @@
     "대형마트": 4,
     "병원": 55
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.0,
@@ -19596,6 +21216,10 @@
     "대형마트": 15,
     "병원": 148
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.297,
@@ -19641,6 +21265,10 @@
     "대형마트": 14,
     "병원": 186
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.205,
@@ -19689,6 +21317,10 @@
     "대형마트": 9,
     "병원": 84
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.147,
@@ -19742,6 +21374,10 @@
     "대형마트": 10,
     "병원": 127
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.325,
@@ -19791,6 +21427,10 @@
     "대형마트": 16,
     "병원": 210
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.354,
@@ -19845,6 +21485,10 @@
     "대형마트": 3,
     "병원": 63
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.135,
@@ -19892,6 +21536,10 @@
     "대형마트": 15,
     "병원": 114
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.373,
@@ -19937,6 +21585,10 @@
     "대형마트": 13,
     "병원": 137
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.217,
@@ -19988,6 +21640,10 @@
     "대형마트": 11,
     "병원": 59
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.173,
@@ -20035,6 +21691,10 @@
     "대형마트": 13,
     "병원": 105
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.122,
@@ -20083,6 +21743,10 @@
     "대형마트": 3,
     "병원": 59
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.076,
@@ -20126,6 +21790,10 @@
     "대형마트": 13,
     "병원": 150
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.133,
@@ -20171,6 +21839,10 @@
     "대형마트": 10,
     "병원": 92
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.042,
@@ -20214,6 +21886,10 @@
     "대형마트": 14,
     "병원": 142
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.328,
@@ -20259,6 +21935,10 @@
     "대형마트": 7,
     "병원": 122
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.147,
@@ -20302,6 +21982,10 @@
     "대형마트": 11,
     "병원": 95
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.061,
@@ -20357,6 +22041,10 @@
     "대형마트": 14,
     "병원": 115
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.16,
@@ -20410,6 +22098,10 @@
     "대형마트": 4,
     "병원": 56
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.0,
@@ -20465,6 +22157,10 @@
     "대형마트": 6,
     "병원": 115
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.413,
@@ -20520,6 +22216,10 @@
     "대형마트": 4,
     "병원": 59
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.0,
@@ -20567,6 +22267,10 @@
     "대형마트": 5,
     "병원": 58
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.0,
@@ -20618,6 +22322,10 @@
     "대형마트": 17,
     "병원": 110
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.073,
@@ -20664,6 +22372,10 @@
     "대형마트": 4,
     "병원": 87
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.135,
@@ -20711,6 +22423,10 @@
     "대형마트": 6,
     "병원": 104
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.301,
@@ -20756,6 +22472,10 @@
     "대형마트": 12,
     "병원": 111
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.173,
@@ -20799,6 +22519,10 @@
     "대형마트": 9,
     "병원": 101
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.144,
@@ -20852,6 +22576,10 @@
     "대형마트": 15,
     "병원": 144
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.354,
@@ -20905,6 +22633,10 @@
     "대형마트": 15,
     "병원": 67
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.132,
@@ -20958,6 +22690,10 @@
     "대형마트": 6,
     "병원": 149
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.5,
@@ -21005,6 +22741,10 @@
     "대형마트": 14,
     "병원": 183
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.271,
@@ -21050,6 +22790,10 @@
     "대형마트": 9,
     "병원": 101
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.109,
@@ -21095,6 +22839,10 @@
     "대형마트": 5,
     "병원": 85
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.014,
@@ -21140,6 +22888,10 @@
     "대형마트": 4,
     "병원": 85
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.017,
@@ -21183,6 +22935,10 @@
     "대형마트": 10,
     "병원": 92
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.042,
@@ -21240,6 +22996,10 @@
     "대형마트": 9,
     "병원": 83
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.043,
@@ -21293,6 +23053,10 @@
     "대형마트": 3,
     "병원": 35
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.0,
@@ -21340,6 +23104,10 @@
     "대형마트": 5,
     "병원": 169
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.226,
@@ -21383,6 +23151,10 @@
     "대형마트": 14,
     "병원": 181
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.383,
@@ -21426,6 +23198,10 @@
     "대형마트": 5,
     "병원": 66
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.0,
@@ -21479,6 +23255,10 @@
     "대형마트": 12,
     "병원": 115
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.143,
@@ -21534,6 +23314,10 @@
     "대형마트": 17,
     "병원": 95
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.065,
@@ -21581,6 +23365,10 @@
     "대형마트": 15,
     "병원": 239
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.351,
@@ -21628,6 +23416,10 @@
     "대형마트": 13,
     "병원": 119
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.085,
@@ -21675,6 +23467,10 @@
     "대형마트": 14,
     "병원": 232
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.321,
@@ -21722,6 +23518,10 @@
     "대형마트": 15,
     "병원": 186
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.291,
@@ -21765,6 +23565,10 @@
     "대형마트": 3,
     "병원": 49
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.0,
@@ -21818,6 +23622,10 @@
     "대형마트": 4,
     "병원": 55
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.0,
@@ -21863,6 +23671,10 @@
     "대형마트": 13,
     "병원": 186
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.189,
@@ -21912,6 +23724,10 @@
     "대형마트": 3,
     "병원": 49
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.0,
@@ -21967,6 +23783,10 @@
     "대형마트": 1,
     "병원": 9
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.483,
@@ -22020,6 +23840,10 @@
     "대형마트": 16,
     "병원": 150
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.437,
@@ -22067,6 +23891,10 @@
     "대형마트": 9,
     "병원": 111
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.543,
@@ -22114,6 +23942,10 @@
     "대형마트": 6,
     "병원": 74
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.035,
@@ -22157,6 +23989,10 @@
     "대형마트": 9,
     "병원": 99
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.216,
@@ -22208,6 +24044,10 @@
     "대형마트": 5,
     "병원": 66
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.0,
@@ -22257,6 +24097,10 @@
     "대형마트": 6,
     "병원": 106
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.292,
@@ -22308,6 +24152,10 @@
     "대형마트": 6,
     "병원": 83
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.091,
@@ -22357,6 +24205,10 @@
     "대형마트": 18,
     "병원": 126
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.443,
@@ -22404,6 +24256,10 @@
     "대형마트": 9,
     "병원": 101
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.144,
@@ -22449,6 +24305,10 @@
     "대형마트": 9,
     "병원": 99
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.216,
@@ -22506,6 +24366,10 @@
     "대형마트": 13,
     "병원": 195
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.269,
@@ -22553,6 +24417,10 @@
     "대형마트": 17,
     "병원": 165
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.41,
@@ -22600,6 +24468,10 @@
     "대형마트": 1,
     "병원": 9
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.483,
@@ -22649,6 +24521,10 @@
     "대형마트": 12,
     "병원": 116
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.149,
@@ -22696,6 +24572,10 @@
     "대형마트": 11,
     "병원": 194
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.398,
@@ -22743,6 +24623,10 @@
     "대형마트": 10,
     "병원": 93
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.065,
@@ -22796,6 +24680,10 @@
     "대형마트": 9,
     "병원": 96
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.071,
@@ -22851,6 +24739,10 @@
     "대형마트": 16,
     "병원": 120
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.143,
@@ -22898,6 +24790,10 @@
     "대형마트": 6,
     "병원": 116
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.494,
@@ -22947,6 +24843,10 @@
     "대형마트": 11,
     "병원": 202
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.288,
@@ -23000,6 +24900,10 @@
     "대형마트": 14,
     "병원": 155
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.305,
@@ -23047,6 +24951,10 @@
     "대형마트": 6,
     "병원": 68
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.002,
@@ -23094,6 +25002,10 @@
     "대형마트": 10,
     "병원": 78
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.159,
@@ -23143,6 +25055,10 @@
     "대형마트": 8,
     "병원": 68
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.0,
@@ -23190,6 +25106,10 @@
     "대형마트": 6,
     "병원": 79
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.422,
@@ -23235,6 +25155,10 @@
     "대형마트": 10,
     "병원": 71
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.238,
@@ -23280,6 +25204,10 @@
     "대형마트": 13,
     "병원": 137
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.052,
@@ -23337,6 +25265,10 @@
     "대형마트": 13,
     "병원": 171
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.154,
@@ -23384,6 +25316,10 @@
     "대형마트": 13,
     "병원": 165
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.128,
@@ -23433,6 +25369,10 @@
     "대형마트": 10,
     "병원": 71
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.238,
@@ -23484,6 +25424,10 @@
     "대형마트": 14,
     "병원": 84
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.054,
@@ -23531,6 +25475,10 @@
     "대형마트": 13,
     "병원": 142
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.102,
@@ -23582,6 +25530,10 @@
     "대형마트": 12,
     "병원": 111
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.049,
@@ -23629,6 +25581,10 @@
     "대형마트": 12,
     "병원": 110
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.12,
@@ -23676,6 +25632,10 @@
     "대형마트": 13,
     "병원": 140
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.049,
@@ -23725,6 +25685,10 @@
     "대형마트": 13,
     "병원": 140
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.049,
@@ -23772,6 +25736,10 @@
     "대형마트": 13,
     "병원": 171
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": true,
    "features": {
     "station": 0.154,
@@ -23829,6 +25797,10 @@
     "대형마트": 9,
     "병원": 100
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": false,
    "features": {
     "station": 0.635,
@@ -23886,6 +25858,10 @@
     "대형마트": 12,
     "병원": 172
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": false,
    "features": {
     "station": 0.614,
@@ -23943,6 +25919,10 @@
     "대형마트": 10,
     "병원": 124
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": false,
    "features": {
     "station": 0.754,
@@ -23995,6 +25975,10 @@
     "대형마트": 6,
     "병원": 69
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": false,
    "features": {
     "station": 0.794,
@@ -24048,6 +26032,10 @@
     "대형마트": 11,
     "병원": 103
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": false,
    "features": {
     "station": 0.549,
@@ -24097,6 +26085,10 @@
     "대형마트": 11,
     "병원": 130
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": false,
    "features": {
     "station": 0.776,
@@ -24155,6 +26147,10 @@
     "대형마트": 8,
     "병원": 108
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": false,
    "features": {
     "station": 0.795,
@@ -24212,6 +26208,10 @@
     "대형마트": 12,
     "병원": 91
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": false,
    "features": {
     "station": 0.733,
@@ -24267,6 +26267,10 @@
     "대형마트": 11,
     "병원": 166
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": false,
    "features": {
     "station": 0.705,
@@ -24312,6 +26316,10 @@
     "대형마트": 12,
     "병원": 91
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": false,
    "features": {
     "station": 0.733,
@@ -24359,6 +26367,10 @@
     "대형마트": 8,
     "병원": 106
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": false,
    "features": {
     "station": 0.801,
@@ -24416,6 +26428,10 @@
     "대형마트": 13,
     "병원": 163
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": false,
    "features": {
     "station": 0.362,
@@ -24473,6 +26489,10 @@
     "대형마트": 15,
     "병원": 185
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": false,
    "features": {
     "station": 0.727,
@@ -24528,6 +26548,10 @@
     "대형마트": 10,
     "병원": 130
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": false,
    "features": {
     "station": 0.843,
@@ -24585,6 +26609,10 @@
     "대형마트": 12,
     "병원": 172
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": false,
    "features": {
     "station": 0.614,
@@ -24639,6 +26667,10 @@
     "대형마트": 8,
     "병원": 108
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": false,
    "features": {
     "station": 0.795,
@@ -24684,6 +26716,10 @@
     "대형마트": 11,
     "병원": 166
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": false,
    "features": {
     "station": 0.705,
@@ -24739,6 +26775,10 @@
     "대형마트": 6,
     "병원": 128
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": false,
    "features": {
     "station": 0.458,
@@ -24796,6 +26836,10 @@
     "대형마트": 10,
     "병원": 148
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": false,
    "features": {
     "station": 0.453,
@@ -24853,6 +26897,10 @@
     "대형마트": 15,
     "병원": 185
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": false,
    "features": {
     "station": 0.727,
@@ -24908,6 +26956,10 @@
     "대형마트": 6,
     "병원": 21
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": false,
    "features": {
     "station": 0.667,
@@ -24961,6 +27013,10 @@
     "대형마트": 8,
     "병원": 112
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": false,
    "features": {
     "station": 0.831,
@@ -25014,6 +27070,10 @@
     "대형마트": 18,
     "병원": 194
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": false,
    "features": {
     "station": 0.686,
@@ -25067,6 +27127,10 @@
     "대형마트": 11,
     "병원": 103
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": false,
    "features": {
     "station": 0.549,
@@ -25124,6 +27188,10 @@
     "대형마트": 18,
     "병원": 194
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": false,
    "features": {
     "station": 0.686,
@@ -25175,6 +27243,10 @@
     "대형마트": 13,
     "병원": 163
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": false,
    "features": {
     "station": 0.362,
@@ -25222,6 +27294,10 @@
     "대형마트": 8,
     "병원": 119
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": false,
    "features": {
     "station": 0.524,
@@ -25269,6 +27345,10 @@
     "대형마트": 13,
     "병원": 163
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": false,
    "features": {
     "station": 0.362,
@@ -25326,6 +27406,10 @@
     "대형마트": 11,
     "병원": 66
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": false,
    "features": {
     "station": 0.199,
@@ -25375,6 +27459,10 @@
     "대형마트": 17,
     "병원": 144
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": false,
    "features": {
     "station": 0.388,
@@ -25422,6 +27510,10 @@
     "대형마트": 10,
     "병원": 97
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": false,
    "features": {
     "station": 0.528,
@@ -25467,6 +27559,10 @@
     "대형마트": 8,
     "병원": 134
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": false,
    "features": {
     "station": 0.386,
@@ -25524,6 +27620,10 @@
     "대형마트": 12,
     "병원": 236
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": false,
    "features": {
     "station": 0.355,
@@ -25581,6 +27681,10 @@
     "대형마트": 13,
     "병원": 137
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": false,
    "features": {
     "station": 0.217,
@@ -25636,6 +27740,10 @@
     "대형마트": 10,
     "병원": 148
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": false,
    "features": {
     "station": 0.453,
@@ -25693,6 +27801,10 @@
     "대형마트": 10,
     "병원": 72
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": false,
    "features": {
     "station": 0.381,
@@ -25750,6 +27862,10 @@
     "대형마트": 15,
     "병원": 162
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": false,
    "features": {
     "station": 0.361,
@@ -25803,6 +27919,10 @@
     "대형마트": 7,
     "병원": 140
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": false,
    "features": {
     "station": 0.443,
@@ -25850,6 +27970,10 @@
     "대형마트": 6,
     "병원": 128
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": false,
    "features": {
     "station": 0.473,
@@ -25905,6 +28029,10 @@
     "대형마트": 14,
     "병원": 93
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": false,
    "features": {
     "station": 0.16,
@@ -25960,6 +28088,10 @@
     "대형마트": 13,
     "병원": 137
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": false,
    "features": {
     "station": 0.217,
@@ -26009,6 +28141,10 @@
     "대형마트": 12,
     "병원": 200
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": false,
    "features": {
     "station": 0.425,
@@ -26066,6 +28202,10 @@
     "대형마트": 16,
     "병원": 206
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": false,
    "features": {
     "station": 0.283,
@@ -26123,6 +28263,10 @@
     "대형마트": 11,
     "병원": 88
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": false,
    "features": {
     "station": 0.299,
@@ -26170,6 +28314,10 @@
     "대형마트": 16,
     "병원": 198
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": false,
    "features": {
     "station": 0.316,
@@ -26217,6 +28365,10 @@
     "대형마트": 18,
     "병원": 141
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": false,
    "features": {
     "station": 0.402,
@@ -26266,6 +28418,10 @@
     "대형마트": 16,
     "병원": 174
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": false,
    "features": {
     "station": 0.281,
@@ -26317,6 +28473,10 @@
     "대형마트": 16,
     "병원": 187
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": false,
    "features": {
     "station": 0.367,
@@ -26370,6 +28530,10 @@
     "대형마트": 13,
     "병원": 186
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": false,
    "features": {
     "station": 0.189,
@@ -26419,6 +28583,10 @@
     "대형마트": 15,
     "병원": 184
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": false,
    "features": {
     "station": 0.388,
@@ -26470,6 +28638,10 @@
     "대형마트": 17,
     "병원": 144
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": false,
    "features": {
     "station": 0.388,
@@ -26527,6 +28699,10 @@
     "대형마트": 16,
     "병원": 174
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": false,
    "features": {
     "station": 0.281,
@@ -26582,6 +28758,10 @@
     "대형마트": 13,
     "병원": 159
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": false,
    "features": {
     "station": 0.399,
@@ -26631,6 +28811,10 @@
     "대형마트": 15,
     "병원": 185
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": false,
    "features": {
     "station": 0.325,
@@ -26682,6 +28866,10 @@
     "대형마트": 15,
     "병원": 228
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": false,
    "features": {
     "station": 0.33,
@@ -26737,6 +28925,10 @@
     "대형마트": 10,
     "병원": 85
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": false,
    "features": {
     "station": 0.252,
@@ -26794,6 +28986,10 @@
     "대형마트": 10,
     "병원": 78
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": false,
    "features": {
     "station": 0.159,
@@ -26847,6 +29043,10 @@
     "대형마트": 14,
     "병원": 93
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": false,
    "features": {
     "station": 0.16,
@@ -26892,6 +29092,10 @@
     "대형마트": 11,
     "병원": 194
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": false,
    "features": {
     "station": 0.398,
@@ -26947,6 +29151,10 @@
     "대형마트": 10,
     "병원": 85
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": false,
    "features": {
     "station": 0.252,
@@ -27002,6 +29210,10 @@
     "대형마트": 13,
     "병원": 171
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": false,
    "features": {
     "station": 0.154,
@@ -27059,6 +29271,10 @@
     "대형마트": 12,
     "병원": 80
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": false,
    "features": {
     "station": 0.338,
@@ -27104,6 +29320,10 @@
     "대형마트": 16,
     "병원": 206
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": false,
    "features": {
     "station": 0.283,
@@ -27149,6 +29369,10 @@
     "대형마트": 11,
     "병원": 202
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": false,
    "features": {
     "station": 0.288,
@@ -27198,6 +29422,10 @@
     "대형마트": 13,
     "병원": 142
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": false,
    "features": {
     "station": 0.102,
@@ -27255,6 +29483,10 @@
     "대형마트": 10,
     "병원": 78
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": false,
    "features": {
     "station": 0.159,
@@ -27312,6 +29544,10 @@
     "대형마트": 10,
     "병원": 85
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": false,
    "features": {
     "station": 0.252,
@@ -27369,6 +29605,10 @@
     "대형마트": 14,
     "병원": 84
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": false,
    "features": {
     "station": 0.054,
@@ -27416,6 +29656,10 @@
     "대형마트": 15,
     "병원": 184
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": false,
    "features": {
     "station": 0.388,
@@ -27469,6 +29713,10 @@
     "대형마트": 15,
     "병원": 202
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": false,
    "features": {
     "station": 0.213,
@@ -27518,6 +29766,10 @@
     "대형마트": 17,
     "병원": 216
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": false,
    "features": {
     "station": 0.293,
@@ -27567,6 +29819,10 @@
     "대형마트": 12,
     "병원": 122
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": false,
    "features": {
     "station": 0.218,
@@ -27616,6 +29872,10 @@
     "대형마트": 15,
     "병원": 127
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": false,
    "features": {
     "station": 0.087,
@@ -27659,6 +29919,10 @@
     "대형마트": 11,
     "병원": 202
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": false,
    "features": {
     "station": 0.288,
@@ -27708,6 +29972,10 @@
     "대형마트": 13,
     "병원": 215
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": false,
    "features": {
     "station": 0.149,
@@ -27763,6 +30031,10 @@
     "대형마트": 12,
     "병원": 80
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": false,
    "features": {
     "station": 0.338,
@@ -27814,6 +30086,10 @@
     "대형마트": 13,
     "병원": 215
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": false,
    "features": {
     "station": 0.149,
@@ -27861,6 +30137,10 @@
     "대형마트": 15,
     "병원": 220
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": false,
    "features": {
     "station": 0.319,
@@ -27910,6 +30190,10 @@
     "대형마트": 15,
     "병원": 229
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": false,
    "features": {
     "station": 0.363,
@@ -27955,6 +30239,10 @@
     "대형마트": 5,
     "병원": 76
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": false,
    "features": {
     "station": 0.392,
@@ -27998,6 +30286,10 @@
     "대형마트": 12,
     "병원": 236
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": false,
    "features": {
     "station": 0.355,
@@ -28045,6 +30337,10 @@
     "대형마트": 16,
     "병원": 194
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": false,
    "features": {
     "station": 0.268,
@@ -28090,6 +30386,10 @@
     "대형마트": 17,
     "병원": 165
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": false,
    "features": {
     "station": 0.41,
@@ -28135,6 +30435,10 @@
     "대형마트": 10,
     "병원": 60
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": false,
    "features": {
     "station": 0.283,
@@ -28188,6 +30492,10 @@
     "대형마트": 12,
     "병원": 120
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": false,
    "features": {
     "station": 0.167,
@@ -28233,6 +30541,10 @@
     "대형마트": 15,
     "병원": 144
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": false,
    "features": {
     "station": 0.354,
@@ -28282,6 +30594,10 @@
     "대형마트": 14,
     "병원": 138
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": false,
    "features": {
     "station": 0.198,
@@ -28333,6 +30649,10 @@
     "대형마트": 15,
     "병원": 138
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": false,
    "features": {
     "station": 0.219,
@@ -28380,6 +30700,10 @@
     "대형마트": 16,
     "병원": 120
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": false,
    "features": {
     "station": 0.143,
@@ -28427,6 +30751,10 @@
     "대형마트": 12,
     "병원": 200
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": false,
    "features": {
     "station": 0.425,
@@ -28484,6 +30812,10 @@
     "대형마트": 14,
     "병원": 84
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": false,
    "features": {
     "station": 0.054,
@@ -28535,6 +30867,10 @@
     "대형마트": 16,
     "병원": 198
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": false,
    "features": {
     "station": 0.231,
@@ -28586,6 +30922,10 @@
     "대형마트": 15,
     "병원": 155
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": false,
    "features": {
     "station": 0.13,
@@ -28637,6 +30977,10 @@
     "대형마트": 15,
     "병원": 138
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": false,
    "features": {
     "station": 0.219,
@@ -28682,6 +31026,10 @@
     "대형마트": 14,
     "병원": 138
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": false,
    "features": {
     "station": 0.198,
@@ -28731,6 +31079,10 @@
     "대형마트": 12,
     "병원": 64
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": false,
    "features": {
     "station": 0.125,
@@ -28780,6 +31132,10 @@
     "대형마트": 13,
     "병원": 88
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": false,
    "features": {
     "station": 0.105,
@@ -28833,6 +31189,10 @@
     "대형마트": 12,
     "병원": 64
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": false,
    "features": {
     "station": 0.125,
@@ -28890,6 +31250,10 @@
     "대형마트": 13,
     "병원": 137
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": false,
    "features": {
     "station": 0.052,
@@ -28947,6 +31311,10 @@
     "대형마트": 13,
     "병원": 67
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": false,
    "features": {
     "station": 0.096,
@@ -28998,6 +31366,10 @@
     "대형마트": 13,
     "병원": 137
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": false,
    "features": {
     "station": 0.052,
@@ -29055,6 +31427,10 @@
     "대형마트": 13,
     "병원": 67
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": false,
    "features": {
     "station": 0.096,
@@ -29106,6 +31482,10 @@
     "대형마트": 12,
     "병원": 111
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": false,
    "features": {
     "station": 0.173,
@@ -29153,6 +31533,10 @@
     "대형마트": 15,
     "병원": 220
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": false,
    "features": {
     "station": 0.319,
@@ -29200,6 +31584,10 @@
     "대형마트": 15,
     "병원": 228
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": false,
    "features": {
     "station": 0.33,
@@ -29245,6 +31633,10 @@
     "대형마트": 12,
     "병원": 64
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": false,
    "features": {
     "station": 0.125,
@@ -29292,6 +31684,10 @@
     "대형마트": 12,
     "병원": 115
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": false,
    "features": {
     "station": 0.143,
@@ -29339,6 +31735,10 @@
     "대형마트": 16,
     "병원": 198
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": false,
    "features": {
     "station": 0.231,
@@ -29386,6 +31786,10 @@
     "대형마트": 14,
     "병원": 88
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": false,
    "features": {
     "station": 0.103,
@@ -29441,6 +31845,10 @@
     "대형마트": 12,
     "병원": 91
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": false,
    "features": {
     "station": 0.085,
@@ -29492,6 +31900,10 @@
     "대형마트": 15,
     "병원": 127
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": false,
    "features": {
     "station": 0.087,
@@ -29545,6 +31957,10 @@
     "대형마트": 14,
     "병원": 63
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": false,
    "features": {
     "station": 0.129,
@@ -29596,6 +32012,10 @@
     "대형마트": 13,
     "병원": 89
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": false,
    "features": {
     "station": 0.079,
@@ -29643,6 +32063,10 @@
     "대형마트": 13,
     "병원": 215
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": false,
    "features": {
     "station": 0.149,
@@ -29690,6 +32114,10 @@
     "대형마트": 15,
     "병원": 67
    },
+   "st_lat": null,
+   "st_lng": null,
+   "sale_eok": null,
+   "jeonse_ratio": null,
    "within_budget": false,
    "features": {
     "station": 0.132,

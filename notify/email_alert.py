@@ -19,10 +19,10 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 from common import PAGES_URL, load_rec, pick_top, prev_ids  # noqa: E402
 
 
-def build(rec: dict, prev: set[str]) -> tuple[str, str, str]:
-    top = pick_top(rec["items"])
+def build(rec: dict, prev: set[str], top: list[dict] | None = None) -> tuple[str, str, str]:
+    top = top if top is not None else pick_top(rec["items"])
     day = rec["generated_at"][:10]
-    subject = f"[전세 레이더] {day} 아침 추천 TOP {len(top)}"
+    subject = f"[전세 레이더] {day} 추천 TOP {len(top)}"
     if top:
         subject += f" · 1위 {top[0]['name']} {top[0]['price_eok']:.1f}억"
     text_lines, rows = [], []
@@ -59,14 +59,13 @@ def build(rec: dict, prev: set[str]) -> tuple[str, str, str]:
     return subject, text, body
 
 
-def main() -> int:
+def send(to: list[str], rec: dict, prev: set[str], top: list[dict] | None = None) -> bool:
     user = (os.environ.get("GMAIL_USER") or "").strip()
     pw = (os.environ.get("GMAIL_APP_PASSWORD") or "").replace(" ", "").strip()
     if not user or not pw:
-        print("GMAIL_USER / GMAIL_APP_PASSWORD 없음 — 메일 알림을 건너뜁니다.")
-        return 0
-    to = [a.strip() for a in (os.environ.get("MAIL_TO") or user).split(",") if a.strip()]
-    subject, text, body = build(load_rec(), prev_ids())
+        print("GMAIL_USER / GMAIL_APP_PASSWORD 없음 — 메일을 건너뜁니다.")
+        return False
+    subject, text, body = build(rec, prev, top)
     msg = MIMEMultipart("alternative")
     msg["Subject"], msg["From"], msg["To"] = subject, f"전세 레이더 <{user}>", ", ".join(to)
     msg.attach(MIMEText(text, "plain", "utf-8"))
@@ -77,8 +76,19 @@ def main() -> int:
             s.sendmail(user, to, msg.as_string())
     except smtplib.SMTPAuthenticationError:
         print("지메일 로그인 실패 — 일반 비밀번호가 아니라 16자리 '앱 비밀번호'를 넣었는지 확인하세요.")
-        return 0
+        return False
+    except (smtplib.SMTPException, OSError) as e:
+        print("메일 전송 실패:", e)
+        return False
     print(f"메일 전송 완료 → {len(to)}명")
+    return True
+
+
+def main() -> int:
+    user = (os.environ.get("GMAIL_USER") or "").strip()
+    to = [a.strip() for a in (os.environ.get("MAIL_TO") or user).split(",") if a.strip()]
+    if to:
+        send(to, load_rec(), prev_ids())
     return 0
 
 

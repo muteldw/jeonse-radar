@@ -1,0 +1,9 @@
+{
+  "_help": "알림 설정. 웹 화면의 '알림 설정'에서 만든 내용을 그대로 붙여넣으면 된다. 메일 주소는 여기 쓰지 말고 GitHub Secret MAIL_RECIPIENTS 에 '별칭=주소' 형식으로 넣는다.",
+  "enabled": true,
+  "top_n": 5,
+  "targets": [
+    {"id": "telegram", "channel": "telegram", "enabled": true, "schedule": "daily", "days": [], "hour": 7},
+    {"id": "me", "channel": "email", "recipient": "본인", "enabled": true, "schedule": "daily", "days": [], "hour": 7}
+  ]
+}

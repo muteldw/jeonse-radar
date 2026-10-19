@@ -84,6 +84,8 @@ class Kakao:
                     lines.append(m.group(1).strip())
         dist = int(first.get("distance") or 0)
         return {"station": name, "lines": sorted(set(lines)), "station_m": dist,
+                "st_lat": round(float(first["y"]), 6) if first.get("y") else None,
+                "st_lng": round(float(first["x"]), 6) if first.get("x") else None,
                 "walk_min": max(1, round(dist / WALK_M_PER_MIN))}
 
     def count(self, code: str, lat: float, lng: float, radius: int) -> int:
@@ -130,6 +132,17 @@ def main() -> int:
     k = Kakao(key)
     todo = [(ck, v) for ck, v in complexes_from_raw().items()
             if ck not in cache or (not cache[ck].get("ok") and cache[ck].get("tried", "") < retry_before)]
+    # 역 좌표가 없던 예전 캐시는 역 정보만 다시 조회 (지도 표시용)
+    patch = [ck for ck, v in cache.items() if v.get("ok") and "st_lat" not in v]
+    for ck in patch:
+        try:
+            st = k.nearest_station(cache[ck]["lat"], cache[ck]["lng"])
+        except (RuntimeError, requests.RequestException) as e:
+            print(e)
+            break
+        cache[ck].update(st or {"st_lat": None, "st_lng": None})
+    if patch:
+        print(f"역 좌표 보강 {len(patch)}곳")
     print(f"위치 조회 대상 {len(todo)}곳 (캐시 {len(cache)}곳)")
     for i, (ck, (sgg, umd, jibun, apt)) in enumerate(todo, 1):
         try:

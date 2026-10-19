@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>지도 · 전세 레이더 9</title>
+<link rel="manifest" href="manifest.json">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;500;700&family=IBM+Plex+Mono:wght@500&display=swap">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.5.3/MarkerCluster.min.css">
+<link rel="stylesheet" href="app.css">
+<style>
+html,body{height:100%}
+body{display:flex;flex-direction:column}
+.bar{padding-left:max(12px,env(safe-area-inset-left,0px));padding-right:max(12px,env(safe-area-inset-right,0px));padding-block:10px;background:var(--surface);border-bottom:1px solid var(--line)}
+.bar .topnav{margin:0 0 8px}
+.filters{display:flex;flex-wrap:wrap;gap:8px;align-items:center;font-size:.85rem}
+.filters input,.filters select{width:auto;padding:5px 7px}
+.filters label{display:inline-flex;align-items:center;gap:6px;color:var(--muted)}
+.layer{display:inline-flex;align-items:center;gap:4px;border:1px solid var(--line);border-radius:999px;padding:3px 10px;cursor:pointer;color:var(--ink)}
+.layer input{width:auto}
+.main{flex:1;display:flex;min-height:0}
+#list{width:320px;overflow-y:auto;border-right:1px solid var(--line);background:var(--bg);padding:10px}
+#map{flex:1;min-height:0}
+.item{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:10px;margin-bottom:8px;cursor:pointer}
+.item.sel{border-color:var(--accent);box-shadow:0 0 0 2px var(--accent-soft)}
+.item b{font-size:.95rem}
+.item .m{font-size:.78rem;color:var(--muted)}
+.item .p{float:right;font:500 .95rem var(--f-num);color:var(--accent)}
+.pill{background:var(--surface);color:var(--ink);border:1.5px solid var(--muted);border-radius:999px;padding:2px 8px;font:500 12px/1.4 var(--f-num);white-space:nowrap;box-shadow:0 1px 3px rgba(0,0,0,.15);transform:translate(-50%,-50%);display:inline-block}
+.pill.top{background:var(--accent);border-color:var(--accent);color:#fff;font-weight:700}
+.pill.over{opacity:.45}
+.pill.sel{outline:3px solid var(--good)}
+.stn{background:#fff;border:3px solid #bdb092;border-radius:50%;width:14px;height:14px;transform:translate(-50%,-50%)}
+.stn.l5{border-color:#8b50a4}.stn.l2{border-color:#00a84d}.stn.ap{border-color:#0090d2}
+.stn-label{font:600 11px var(--f-body);color:#1f2328;text-shadow:0 0 3px #fff,0 0 3px #fff;white-space:nowrap;transform:translate(10px,-50%)}
+#sheet{position:absolute;z-index:1000;right:12px;bottom:12px;width:340px;max-width:calc(100% - 24px);background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:14px;box-shadow:0 6px 24px rgba(0,0,0,.18);margin-bottom:env(safe-area-inset-bottom,0px)}
+#sheet h3{margin:0 0 2px;font-size:1.05rem}
+#sheet .close{position:absolute;top:8px;right:10px;border:0;background:none;font-size:1.2rem;color:var(--muted);cursor:pointer}
+.facts{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin:10px 0}
+.fact{background:var(--bg);border-radius:8px;padding:6px 8px}
+.fact small{display:block;font-size:.68rem;color:var(--muted)}.fact strong{font:500 .9rem var(--f-num)}
+.chips{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:8px}
+.chip{font-size:.72rem;border:1px solid var(--line);border-radius:999px;padding:2px 7px}
+.chip.st{border-color:var(--accent);background:var(--accent-soft)}
+.links{display:flex;flex-wrap:wrap;gap:6px}
+.mapwrap{position:relative;flex:1;display:flex;min-width:0}
+.leaflet-container{font-family:var(--f-body)}
+#listToggle{display:none}
+@media (max-width:760px){
+ #list{position:absolute;z-index:999;left:0;right:0;bottom:0;width:auto;max-height:45%;border-right:0;border-top:1px solid var(--line);border-radius:14px 14px 0 0;box-shadow:0 -4px 16px rgba(0,0,0,.12);transform:translateY(calc(100% - 44px));transition:transform .2s}
+ #list.open{transform:none}
+ #listToggle{display:block;width:100%;border:0;background:none;font:600 .9rem var(--f-body);color:var(--ink);padding:4px 0 10px;cursor:pointer}
+ #sheet{left:12px;right:12px;width:auto;bottom:56px}
+ .main{position:relative}
+}
+</style>
+</head>
+<body>
+<div class="bar">
+ <nav class="topnav">
+  <a class="brand" href="./">전세 레이더<span>9</span></a>
+  <a class="tab" href="./">추천</a><a class="tab" href="map.html" aria-current="page">지도</a><a class="tab" href="buyer.html">매수자 분석</a><a class="tab" href="settings.html">알림 설정</a>
+ </nav>
+ <div class="filters">
+  <label>예산 <input id="bud" type="number" step="0.5" min="3" max="20" style="width:70px">억</label>
+  <label>평형 <select id="py"><option value="34">34평형↑</option><option value="40">40평형↑</option></select></label>
+  <label class="layer"><input type="checkbox" id="showOver">예산 초과도</label>
+  <label class="layer"><input type="checkbox" id="lStn" checked>전철역</label>
+  <label class="layer"><input type="checkbox" id="lRing" checked>도보 500m·1km</label>
+ </div>
+</div>
+<div class="main">
+ <aside id="list"><button id="listToggle" aria-expanded="false">추천 목록 ▲</button><div id="items"></div></aside>
+ <div class="mapwrap"><div id="map" role="region" aria-label="추천 단지 지도"></div>
+  <div id="sheet" hidden></div></div>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.5.3/leaflet.markercluster.min.js"></script>
+<script>
+const $=s=>document.querySelector(s);
+const esc=s=>String(s??"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+let D=null,SEL=null,markers={},rings=null;
+const map=L.map("map",{zoomControl:true}).setView([37.5605,126.8400],14);
+L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",{maxZoom:19,attribution:'&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'}).addTo(map);
+const cluster=L.markerClusterGroup({showCoverageOnHover:false,maxClusterRadius:45,disableClusteringAtZoom:16,
+  iconCreateFunction:c=>{const ps=c.getAllChildMarkers().map(m=>m.options.price).sort((a,b)=>a-b);const med=ps[Math.floor(ps.length/2)];
+    return L.divIcon({className:"",html:`<span class="pill">${ps.length}곳 · ${med.toFixed(1)}억</span>`,iconSize:null})}});
+map.addLayer(cluster);
+const stnLayer=L.layerGroup().addTo(map), ringLayer=L.layerGroup().addTo(map);
+function lineClass(lines){const s=(lines||[]).join(" ");return /5호선/.test(s)?"l5":/2호선/.test(s)?"l2":/공항/.test(s)&&!/9호선/.test(s)?"ap":""}
+function visible(){const bud=+$("#bud").value||D.budget_eok,py=+$("#py").value,over=$("#showOver").checked;
+  return D.items.filter(i=>i.lat&&i.pyeong>=py&&i.deals_12m>=2&&(over||i.price_eok<=bud+0.5))}
+function draw(){
+  cluster.clearLayers();markers={};stnLayer.clearLayers();
+  const bud=+$("#bud").value||D.budget_eok, vis=visible();
+  const top3=new Set(vis.filter(i=>i.price_eok<=bud+0.5).slice(0,3).map(i=>i.id));
+  vis.forEach((it,n)=>{
+    const cls=["pill",top3.has(it.id)?"top":"",it.price_eok>bud+0.5?"over":"",SEL===it.id?"sel":""].join(" ");
+    const m=L.marker([it.lat,it.lng],{price:it.price_eok,title:it.name,icon:L.divIcon({className:"",html:`<span class="${cls}">${it.price_eok.toFixed(1)}억</span>`,iconSize:null})});
+    m.on("click",()=>select(it.id,false));markers[it.id]=m;cluster.addLayer(m);
+  });
+  if($("#lStn").checked){const seen=new Map();D.items.forEach(i=>{if(i.station&&i.st_lat&&!seen.has(i.station))seen.set(i.station,i)});
+    seen.forEach((i,name)=>{L.marker([i.st_lat,i.st_lng],{interactive:false,icon:L.divIcon({className:"",html:`<div class="stn ${lineClass(i.lines)}"></div>`,iconSize:null})}).addTo(stnLayer);
+      L.marker([i.st_lat,i.st_lng],{interactive:false,icon:L.divIcon({className:"",html:`<div class="stn-label">${esc(name)}</div>`,iconSize:null})}).addTo(stnLayer)})}
+  $("#items").innerHTML=vis.slice(0,80).map((it,n)=>`<div class="item${SEL===it.id?" sel":""}" data-id="${esc(it.id)}" tabindex="0">
+    <span class="p">${it.price_eok.toFixed(1)}억</span><b>${n+1}. ${esc(it.name)}</b>
+    <div class="m">${esc(it.umd)} · ${it.built||"?"}년 · ${it.pyeong}평형 · 점수 ${it.score}</div>
+    <div class="m">${it.station?esc(it.station)+"역 도보 "+it.walk_min+"분":"역 정보 없음"}</div></div>`).join("")||'<p class="sub">조건에 맞는 단지가 없습니다. 예산을 올려보세요.</p>';
+  $("#listToggle").textContent=`추천 목록 ${vis.length}곳 ${$("#list").classList.contains("open")?"▼":"▲"}`;
+  if(SEL)showRings(D.items.find(i=>i.id===SEL));
+}
+function showRings(it){ringLayer.clearLayers();if(!it||!$("#lRing").checked)return;
+  const c=getComputedStyle(document.documentElement).getPropertyValue("--accent").trim()||"#a8954f";
+  [500,1000].forEach(r=>L.circle([it.lat,it.lng],{radius:r,color:c,weight:1.5,dashArray:"4 4",fill:false,interactive:false}).addTo(ringLayer));
+  if(it.st_lat)L.polyline([[it.lat,it.lng],[it.st_lat,it.st_lng]],{color:c,weight:2,interactive:false}).addTo(ringLayer)}
+function select(id,pan){
+  SEL=id;const it=D.items.find(i=>i.id===id);if(!it)return;
+  if(pan)map.setView([it.lat,it.lng],Math.max(map.getZoom(),15));
+  const inf=it.infra?Object.entries(it.infra).map(([k,v])=>`<span class="chip">${esc(k)} ${v}</span>`).join(""):"";
+  const ratio=it.jeonse_ratio?Math.round(it.jeonse_ratio*100)+"%":"-";
+  const buyer=`buyer.html?name=${encodeURIComponent(it.name)}&price=${it.sale_eok||""}`;
+  $("#sheet").innerHTML=`<button class="close" aria-label="닫기">×</button>
+   <h3>${esc(it.name)}</h3><div class="sub">${esc(it.sgg)} ${esc(it.umd)} · ${it.built||"?"}년 · ${it.pyeong}평형(전용 ${it.area_m2}㎡) · 욕실 ${it.bath}</div>
+   <div class="facts"><div class="fact"><small>전세(최근 신규)</small><strong>${it.price_eok.toFixed(2)}억</strong></div>
+    <div class="fact"><small>매매(최근)</small><strong>${it.sale_eok?it.sale_eok.toFixed(1)+"억":"-"}</strong></div>
+    <div class="fact"><small>전세가율</small><strong>${ratio}</strong></div></div>
+   <div class="chips">${it.station?`<span class="chip st">${esc(it.station)}역 ${esc((it.lines||[]).join("·"))} · 도보 ${it.walk_min}분</span>`:""}${it.base_km!=null?`<span class="chip">마곡나루까지 ${it.base_km}km</span>`:""}${inf}</div>
+   <div class="links"><a class="btn" href="https://map.kakao.com/link/map/${encodeURIComponent(it.name)},${it.lat},${it.lng}" target="_blank" rel="noopener">카카오맵</a>
+    <a class="btn" href="https://new.land.naver.com/search?query=${encodeURIComponent(it.name)}" target="_blank" rel="noopener">호가·평면도</a>
+    <a class="btn primary" href="${buyer}">매수자 자금 분석</a></div>`;
+  $("#sheet").hidden=false;draw();
+  const el=document.querySelector(`.item[data-id="${CSS.escape(id)}"]`);if(el)el.scrollIntoView({block:"nearest"});
+}
+$("#sheet").addEventListener("click",e=>{if(e.target.closest(".close")){$("#sheet").hidden=true;SEL=null;ringLayer.clearLayers();draw()}});
+$("#items").addEventListener("click",e=>{const el=e.target.closest(".item");if(el){select(el.dataset.id,true);$("#list").classList.remove("open")}});
+$("#items").addEventListener("keydown",e=>{if(e.key==="Enter"){const el=e.target.closest(".item");if(el)select(el.dataset.id,true)}});
+$("#listToggle").addEventListener("click",()=>{const o=$("#list").classList.toggle("open");$("#listToggle").setAttribute("aria-expanded",o);draw()});
+["#bud","#py","#showOver","#lStn","#lRing"].forEach(s=>$(s).addEventListener("input",draw));
+fetch("data/recommend.json",{cache:"no-store"}).then(r=>r.json()).then(d=>{D=d;$("#bud").value=d.budget_eok;draw();
+  const b=L.latLngBounds(visible().slice(0,20).map(i=>[i.lat,i.lng]));if(b.isValid())map.fitBounds(b,{padding:[30,30]});
+  const q=new URLSearchParams(location.search).get("id");if(q)select(q,true)})
+ .catch(()=>{$("#items").innerHTML='<p class="sub">추천 데이터를 불러오지 못했습니다.</p>'});
+</script>
+</body>
+</html>

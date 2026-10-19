@@ -10,11 +10,17 @@
 config.json                 지역·예산·면적 조건, 단지별 역 정보
 collector/fetch_rent.py     국토부 아파트 전월세 실거래 API 수집 → data/rent_raw.csv
 collector/geo.py            카카오 로컬 API 위치·역·인프라 → data/geo.json
-notify/telegram.py          매일 아침 TOP 5 텔레그램 알림
+collector/fetch_sale.py     국토부 아파트 매매 실거래 API → data/sale_raw.csv (전세가율·매수자 분석)
+notify/dispatch.py          알림 발송기: config/notify.json 의 주기·켜기/끄기·받는 사람대로 발송
+notify/telegram.py, email_alert.py  채널별 발송
+config/notify.json          알림 설정 (웹 '알림 설정' 화면에서 만들어 붙여넣기)
+config/loan_rules.json      LTV·대출 한도·DSR·취득세 규칙 (제도 바뀌면 여기만 수정)
+config/wealth_dist.json     순자산 → 상위 % 추정 기준점
 model/rank.py               단지별 집계·추천 점수·취향 학습 → web/data/recommend.json
-web/                        화면 (GitHub Pages로 배포)
+web/                        화면: 추천(index) · 지도(map) · 매수자 분석(buyer) · 알림 설정(settings)
 data/feedback.json          관심/제외 기록 (화면의 '기록 복사' 내용을 붙여넣기)
-.github/workflows/daily.yml 매일 06:00 KST 자동 실행
+.github/workflows/daily.yml  매일 06:00 KST 수집·계산·화면 배포
+.github/workflows/notify.yml KST 06~22시 매시 5분 알림 발송 (수동 실행 시 즉시 발송)
 tests/                      모의 데이터 테스트
 ```
 
@@ -34,6 +40,8 @@ tests/                      모의 데이터 테스트
 | `KAKAO_REST_KEY` | 단지 위치, 가까운 역·도보시간, 학교·어린이집·마트·병원 수 | developers.kakao.com → 앱 추가 → REST API 키. 앱 설정에서 '카카오맵' 사용 설정 ON |
 | `TELEGRAM_BOT_TOKEN` | 매일 아침 TOP 5 알림 | 텔레그램 @BotFather → /newbot |
 | `TELEGRAM_CHAT_ID` | 알림 받을 대화방 | 봇에게 메시지를 보낸 뒤 Actions를 실행하면 로그에 chat id가 출력됨 |
+| `GMAIL_USER`, `GMAIL_APP_PASSWORD` | 메일 발송 계정 | 구글 2단계 인증 후 myaccount.google.com/apppasswords |
+| `MAIL_RECIPIENTS` | 받는 사람 목록 | `본인=a@gmail.com, 배우자=b@naver.com` — 별칭은 알림 설정 화면에서 사용 |
 
 ## 조건 바꾸기
 
@@ -53,5 +61,5 @@ cd web && python -m http.server  # http://localhost:8000
 
 1. 실거래 수집 + 추천 화면 + 매일 자동 실행 (완료)
 2. 카카오맵 역·인프라 자동 계산, 텔레그램 아침 알림 (코드 완료, 키 등록 필요)
-3. 가격 전망 모델(LightGBM) 학습·백테스트, 피드백 자동 저장
+3. 매수자 자금 분석·지도·알림 설정 (완료) → 다음: 가격 전망 모델(LightGBM), 피드백 자동 저장
 4. 위험 필터(전세가율·등기), 시계열 딥러닝 모델 시험

@@ -75,7 +75,7 @@ def parse(xml_text: str, sgg_name: str) -> tuple[list[dict], int]:
             "area_m2": _num(_t(it, "excluUseAr", "전용면적")),
             "floor": int(_num(_t(it, "floor", "층"))),
             "deal_date": f"{int(_num(y)):04d}-{int(_num(m)):02d}-{int(_num(d)):02d}",
-            "deposit_man": int(_num(_t(it, "deposit", "보증금액"))),
+            "deposit_man": int(_num(_t(it, "deposit", "보증금액", "dealAmount", "거래금액"))),
             "monthly_man": int(_num(_t(it, "monthlyRent", "월세금액"))),
             "contract_type": _t(it, "contractType", "계약구분"),
         })

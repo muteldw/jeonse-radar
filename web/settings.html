@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>알림 설정 · 전세 레이더 9</title>
+<link rel="manifest" href="manifest.json">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;500;700&family=IBM+Plex+Mono:wght@500&display=swap">
+<link rel="stylesheet" href="app.css">
+<style>
+.target{border:1px solid var(--line);border-radius:10px;padding:12px;display:grid;gap:10px;margin-bottom:10px}
+.target.off{opacity:.6}
+.thead{display:flex;flex-wrap:wrap;gap:8px;align-items:center;justify-content:space-between}
+.chip{font-size:.74rem;border:1px solid var(--line);border-radius:999px;padding:2px 8px}
+.days{display:flex;flex-wrap:wrap;gap:6px}
+.days label{display:inline-flex;align-items:center;gap:4px;font-size:.85rem;border:1px solid var(--line);border-radius:8px;padding:4px 8px;cursor:pointer}
+.days input{width:auto}
+ol.steps{margin:6px 0 0;padding-left:1.2em;font-size:.88rem}
+ol.steps li{margin-bottom:4px}
+</style>
+</head>
+<body>
+<div class="wrap">
+ <nav class="topnav">
+  <a class="brand" href="./">전세 레이더<span>9</span></a>
+  <a class="tab" href="./">추천</a><a class="tab" href="map.html">지도</a><a class="tab" href="buyer.html">매수자 분석</a><a class="tab" href="settings.html" aria-current="page">알림 설정</a>
+ </nav>
+ <h1>알림 설정</h1>
+ <p class="sub">텔레그램·메일을 언제, 누구에게 보낼지 정합니다. 매일 06~22시 매시 5분에 설정을 확인해 해당 대상에게만 보냅니다.</p>
+
+ <section class="panel">
+  <div class="row" style="justify-content:space-between">
+   <label class="switch"><input type="checkbox" id="g-enabled"><i></i><b>전체 알림</b></label>
+   <label class="f" style="flex-direction:row;align-items:center;gap:8px">보낼 단지 수
+    <select id="g-topn" style="width:auto"><option>3</option><option selected>5</option><option>10</option></select></label>
+  </div>
+ </section>
+
+ <section class="panel">
+  <h2>받는 곳</h2>
+  <div id="targets"></div>
+  <div class="row">
+   <button class="btn" id="add-mail">+ 메일 받는 사람 추가</button>
+   <button class="btn" id="add-tg">+ 텔레그램 추가</button>
+  </div>
+  <p class="sub" style="margin-top:10px">메일은 별칭(예: 본인, 배우자)으로 지정합니다. 실제 주소는 이 공개 페이지에 남기지 않고 GitHub Secret <code>MAIL_RECIPIENTS</code>에 <code>본인=a@gmail.com, 배우자=b@naver.com</code> 형식으로 넣습니다.</p>
+ </section>
+
+ <section class="panel">
+  <h2>저장하기</h2>
+  <ol class="steps">
+   <li><b>설정 복사</b>를 누릅니다.</li>
+   <li><b>GitHub에서 열기</b> → 연필(편집) 화면에서 내용을 모두 지우고 붙여넣습니다.</li>
+   <li>오른쪽 위 <b>Commit changes</b>를 누르면 다음 정각부터 적용됩니다.</li>
+  </ol>
+  <div class="row" style="margin:10px 0">
+   <button class="btn primary" id="copy">설정 복사</button>
+   <a class="btn" href="https://github.com/muteldw/jeonse-radar/edit/main/config/notify.json" target="_blank" rel="noopener">GitHub에서 열기</a>
+   <a class="btn" href="https://github.com/muteldw/jeonse-radar/actions/workflows/notify.yml" target="_blank" rel="noopener">지금 시험 발송</a>
+   <span id="copymsg" class="sub"></span>
+  </div>
+  <textarea id="out" rows="10" readonly aria-label="저장할 설정 내용"></textarea>
+  <p class="sub">'지금 시험 발송'은 Actions 화면에서 <b>Run workflow</b>를 누르면 켜진 대상 모두에게 바로 보냅니다.</p>
+ </section>
+</div>
+<script>
+const $=s=>document.querySelector(s);
+const DAYS=["월","화","수","목","금","토","일"];
+const SCHED={daily:"매일",weekdays:"평일만",weekly:"매주 (요일 선택)",new_only:"새 단지가 TOP에 들어올 때만"};
+let CFG={enabled:true,top_n:5,targets:[]},SENT={};
+const esc=s=>String(s??"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+function hours(sel){let o="";for(let h=6;h<=22;h++)o+=`<option value="${h}"${h==sel?" selected":""}>${String(h).padStart(2,"0")}:05</option>`;return o}
+function render(){
+  $("#g-enabled").checked=!!CFG.enabled;$("#g-topn").value=String(CFG.top_n||5);
+  $("#targets").innerHTML=CFG.targets.map((t,i)=>`
+  <div class="target${t.enabled?"":" off"}" data-i="${i}">
+   <div class="thead">
+    <label class="switch"><input type="checkbox" data-k="enabled" ${t.enabled?"checked":""}><i></i>
+     <b>${t.channel==="telegram"?"텔레그램":"메일 · "+esc(t.recipient)}</b></label>
+    <span class="row"><span class="chip">${SENT[t.id]?"마지막 발송 "+esc(SENT[t.id].replace("T"," ").slice(0,16)):"아직 발송 기록 없음"}</span>
+    <button class="btn" data-del="${i}" aria-label="삭제">삭제</button></span>
+   </div>
+   <div class="grid2">
+    ${t.channel==="email"?`<label class="f">받는 사람 별칭<input data-k="recipient" value="${esc(t.recipient)}" maxlength="20"></label>`:""}
+    <label class="f">주기<select data-k="schedule">${Object.entries(SCHED).map(([k,v])=>`<option value="${k}"${k===t.schedule?" selected":""}>${v}</option>`).join("")}</select></label>
+    <label class="f">보내는 시각<select data-k="hour">${hours(t.hour)}</select></label>
+   </div>
+   ${t.schedule==="weekly"?`<div class="days">${DAYS.map((d,j)=>`<label><input type="checkbox" data-day="${j}" ${(t.days||[]).includes(j)?"checked":""}>${d}</label>`).join("")}</div>`:""}
+  </div>`).join("")||'<p class="sub">받는 곳이 없습니다. 아래 버튼으로 추가하세요.</p>';
+  out();
+}
+function out(){
+  const c={_help:CFG._help||"알림 설정. 메일 주소는 Secret MAIL_RECIPIENTS 에 '별칭=주소'로 넣는다.",enabled:CFG.enabled,top_n:+CFG.top_n,targets:CFG.targets.map(t=>({id:t.id,channel:t.channel,...(t.channel==="email"?{recipient:t.recipient}:{}),enabled:t.enabled,schedule:t.schedule,days:t.schedule==="weekly"?(t.days||[]).slice().sort():[],hour:+t.hour}))};
+  $("#out").value=JSON.stringify(c,null,2);
+}
+function uid(base){let n=1,id=base;const ids=new Set(CFG.targets.map(t=>t.id));while(ids.has(id))id=base+"-"+(++n);return id}
+$("#g-enabled").addEventListener("change",e=>{CFG.enabled=e.target.checked;out()});
+$("#g-topn").addEventListener("change",e=>{CFG.top_n=+e.target.value;out()});
+$("#targets").addEventListener("change",e=>{
+  const box=e.target.closest(".target");if(!box)return;const t=CFG.targets[+box.dataset.i];
+  if(e.target.dataset.day!==undefined){const d=+e.target.dataset.day;t.days=e.target.checked?[...new Set([...(t.days||[]),d])]:(t.days||[]).filter(x=>x!==d);out();return}
+  const k=e.target.dataset.k;if(!k)return;
+  t[k]=e.target.type==="checkbox"?e.target.checked:(k==="hour"?+e.target.value:e.target.value.trim());
+  if(k==="schedule"&&t.schedule==="weekly"&&!(t.days||[]).length)t.days=[5];
+  if(k==="enabled"||k==="schedule")render();else out();
+});
+$("#targets").addEventListener("click",e=>{const b=e.target.closest("[data-del]");if(!b)return;CFG.targets.splice(+b.dataset.del,1);render()});
+$("#add-mail").addEventListener("click",()=>{CFG.targets.push({id:uid("mail"),channel:"email",recipient:"배우자",enabled:true,schedule:"weekly",days:[5],hour:9});render()});
+$("#add-tg").addEventListener("click",()=>{CFG.targets.push({id:uid("telegram"),channel:"telegram",enabled:true,schedule:"daily",days:[],hour:7});render()});
+$("#copy").addEventListener("click",async()=>{const t=$("#out").value;try{await navigator.clipboard.writeText(t);$("#copymsg").textContent="복사됨 · GitHub 편집 화면에 붙여넣으세요"}catch(e){$("#out").select();$("#copymsg").textContent="선택된 내용을 직접 복사하세요"}});
+Promise.all([
+  fetch("data/notify.json",{cache:"no-store"}).then(r=>r.ok?r.json():null).catch(()=>null),
+  fetch("data/sent_status.json",{cache:"no-store"}).then(r=>r.ok?r.json():{}).catch(()=>({}))
+]).then(([c,s])=>{if(c)CFG=c;SENT=s||{};render()});
+render();
+</script>
+</body>
+</html>

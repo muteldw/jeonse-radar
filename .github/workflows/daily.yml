@@ -2,13 +2,8 @@ name: daily-recommend
 
 on:
   schedule:
-    - cron: "0 21 * * *"   # 매일 06:00 KST (UTC 21:00)
-  workflow_dispatch:         # Actions 탭에서 수동 실행
-    inputs:
-      notify:
-        description: "텔레그램·메일 알림도 보내기"
-        type: boolean
-        default: true
+    - cron: "0 21 * * *"   # 매일 06:00 KST (UTC 21:00) — 수집·계산·화면 배포
+  workflow_dispatch: {}      # Actions 탭에서 수동 실행
 
 permissions:
   contents: write
@@ -16,7 +11,7 @@ permissions:
   id-token: write
 
 concurrency:
-  group: daily
+  group: repo-write
   cancel-in-progress: false
 
 jobs:
@@ -28,32 +23,25 @@ jobs:
         with:
           python-version: "3.12"
       - run: pip install -r requirements.txt
-      - name: 실거래 수집
+      - name: 전세 실거래 수집
         env:
           MOLIT_API_KEY: ${{ secrets.MOLIT_API_KEY }}
         run: python collector/fetch_rent.py
+      - name: 매매 실거래 수집 (활용신청 전이면 건너뜀)
+        env:
+          MOLIT_API_KEY: ${{ secrets.MOLIT_API_KEY }}
+        run: python collector/fetch_sale.py
       - name: 위치·역·인프라 (카카오)
         env:
           KAKAO_REST_KEY: ${{ secrets.KAKAO_REST_KEY }}
         run: python collector/geo.py
       - name: 추천 계산
         run: python model/rank.py
-      - name: 텔레그램 아침 알림
-        if: github.event_name == 'schedule' || inputs.notify == true
-        env:
-          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
-          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
-        run: python notify/telegram.py
-      - name: 지메일 아침 알림
-        if: github.event_name == 'schedule' || inputs.notify == true
-        env:
-          GMAIL_USER: ${{ secrets.GMAIL_USER }}
-          GMAIL_APP_PASSWORD: ${{ secrets.GMAIL_APP_PASSWORD }}
-          MAIL_TO: ${{ secrets.MAIL_TO }}
-        run: python notify/email_alert.py
-      - name: 오늘 TOP 저장
-        if: github.event_name == 'schedule' || inputs.notify == true
-        run: python notify/common.py save
+      - name: 화면용 설정 복사
+        run: |
+          cp config/notify.json web/data/notify.json
+          cp config/loan_rules.json web/data/loan_rules.json
+          cp config/wealth_dist.json web/data/wealth_dist.json
       - name: 데이터 커밋
         run: |
           git config user.name "jeonse-radar-bot"
