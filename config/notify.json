@@ -4,6 +4,6 @@
   "top_n": 5,
   "targets": [
     {"id": "telegram", "channel": "telegram", "enabled": true, "schedule": "daily", "days": [], "hour": 7},
-    {"id": "me", "channel": "email", "recipient": "본인", "enabled": true, "schedule": "daily", "days": [], "hour": 7}
+    {"id": "me", "channel": "email", "recipient": "본인", "enabled": true, "schedule": "weekly", "days": [0, 2], "hour": 7}
   ]
 }
