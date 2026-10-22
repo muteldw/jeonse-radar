@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-10-22T08:47+09:00",
+ "generated_at": "2026-10-23T08:45+09:00",
  "budget_eok": 8.0,
  "weights": {
   "station": 1.3,
@@ -1040,59 +1040,6 @@
    "score": 72
   },
   {
-   "id": "강서구-방화동-동부센트레빌-84",
-   "name": "동부센트레빌",
-   "sgg": "강서구",
-   "umd": "방화동",
-   "built": 2003,
-   "area_m2": 84,
-   "pyeong": 34,
-   "bath": 2,
-   "price_eok": 5.75,
-   "deals_12m": 1,
-   "last_deal": "2026-05-06",
-   "trend_q": [
-    "2024Q4",
-    "2025Q1",
-    "2025Q3",
-    "2026Q2"
-   ],
-   "trend": [
-    5.35,
-    5.0,
-    5.4,
-    5.75
-   ],
-   "station": "개화산",
-   "walk_min": 1,
-   "lines": [
-    "5호선"
-   ],
-   "lat": 37.573191,
-   "lng": 126.806127,
-   "base_km": 1.99,
-   "infra": {
-    "학교": 4,
-    "어린이집·유치원": 6,
-    "대형마트": 5,
-    "병원": 52
-   },
-   "st_lat": 37.572537,
-   "st_lng": 126.806814,
-   "sale_eok": null,
-   "jeonse_ratio": null,
-   "within_budget": true,
-   "features": {
-    "station": 0.801,
-    "age": 0.15,
-    "budget": 1.0,
-    "trend": 0.851,
-    "activity": 0.083,
-    "infra": 1.0
-   },
-   "score": 71
-  },
-  {
    "id": "강서구-마곡동-한솔솔파크-84",
    "name": "한솔솔파크",
    "sgg": "강서구",
@@ -1901,59 +1848,6 @@
    "score": 68
   },
   {
-   "id": "강서구-방화동-방화동동부센트레빌(875번지)-84",
-   "name": "방화동동부센트레빌(875번지)",
-   "sgg": "강서구",
-   "umd": "방화동",
-   "built": 2003,
-   "area_m2": 84,
-   "pyeong": 34,
-   "bath": 2,
-   "price_eok": 5.9,
-   "deals_12m": 1,
-   "last_deal": "2026-05-12",
-   "trend_q": [
-    "2024Q4",
-    "2025Q2",
-    "2025Q3",
-    "2026Q2"
-   ],
-   "trend": [
-    5.5,
-    5.0,
-    4.7,
-    5.9
-   ],
-   "station": "방화",
-   "walk_min": 6,
-   "lines": [
-    "5호선"
-   ],
-   "lat": 37.574722,
-   "lng": 126.81493,
-   "base_km": 1.4,
-   "infra": {
-    "학교": 8,
-    "어린이집·유치원": 15,
-    "대형마트": 4,
-    "병원": 78
-   },
-   "st_lat": 37.577603,
-   "st_lng": 126.812819,
-   "sale_eok": null,
-   "jeonse_ratio": null,
-   "within_budget": true,
-   "features": {
-    "station": 0.709,
-    "age": 0.15,
-    "budget": 1.0,
-    "trend": 0.864,
-    "activity": 0.083,
-    "infra": 1.0
-   },
-   "score": 68
-  },
-  {
    "id": "강서구-방화동-보람-84",
    "name": "보람",
    "sgg": "강서구",
@@ -2004,126 +1898,6 @@
     "budget": 1.0,
     "trend": 0.7,
     "activity": 0.167,
-    "infra": 1.0
-   },
-   "score": 68
-  },
-  {
-   "id": "강서구-가양동-대림경동아파트-115",
-   "name": "대림경동아파트",
-   "sgg": "강서구",
-   "umd": "가양동",
-   "built": 1993,
-   "area_m2": 115,
-   "pyeong": 46,
-   "bath": 2,
-   "price_eok": 7.3,
-   "deals_12m": 13,
-   "last_deal": "2026-10-06",
-   "trend_q": [
-    "2024Q4",
-    "2025Q1",
-    "2025Q2",
-    "2025Q3",
-    "2025Q4",
-    "2026Q1",
-    "2026Q2",
-    "2026Q4"
-   ],
-   "trend": [
-    7.5,
-    6.75,
-    7.5,
-    6.75,
-    6.9,
-    7.0,
-    7.0,
-    8.0
-   ],
-   "station": "가양",
-   "walk_min": 8,
-   "lines": [
-    "9호선"
-   ],
-   "lat": 37.566347,
-   "lng": 126.854031,
-   "base_km": 2.37,
-   "infra": {
-    "학교": 6,
-    "어린이집·유치원": 4,
-    "대형마트": 10,
-    "병원": 90
-   },
-   "st_lat": 37.561433,
-   "st_lng": 126.854421,
-   "sale_eok": null,
-   "jeonse_ratio": null,
-   "within_budget": true,
-   "features": {
-    "station": 0.568,
-    "age": 0.0,
-    "budget": 0.85,
-    "trend": 0.9,
-    "activity": 1.0,
-    "infra": 0.96
-   },
-   "score": 68
-  },
-  {
-   "id": "강서구-등촌동-등촌라인(조합)-84",
-   "name": "등촌라인(조합)",
-   "sgg": "강서구",
-   "umd": "등촌동",
-   "built": 1997,
-   "area_m2": 84,
-   "pyeong": 34,
-   "bath": 2,
-   "price_eok": 6.0,
-   "deals_12m": 6,
-   "last_deal": "2026-08-21",
-   "trend_q": [
-    "2024Q4",
-    "2025Q1",
-    "2025Q2",
-    "2025Q3",
-    "2025Q4",
-    "2026Q2",
-    "2026Q3"
-   ],
-   "trend": [
-    6.0,
-    5.48,
-    5.8,
-    4.9,
-    5.8,
-    5.95,
-    6.5
-   ],
-   "station": "가양",
-   "walk_min": 4,
-   "lines": [
-    "9호선"
-   ],
-   "lat": 37.559197,
-   "lng": 126.85629,
-   "base_km": 2.7,
-   "infra": {
-    "학교": 10,
-    "어린이집·유치원": 7,
-    "대형마트": 15,
-    "병원": 128
-   },
-   "st_lat": 37.561433,
-   "st_lng": 126.854421,
-   "sale_eok": null,
-   "jeonse_ratio": null,
-   "within_budget": true,
-   "features": {
-    "station": 0.654,
-    "age": 0.0,
-    "budget": 1.0,
-    "trend": 0.8,
-    "activity": 0.5,
     "infra": 1.0
    },
    "score": 68
@@ -2506,6 +2280,65 @@
     "budget": 0.25,
     "trend": 0.925,
     "activity": 1.0,
+    "infra": 1.0
+   },
+   "score": 67
+  },
+  {
+   "id": "강서구-등촌동-등촌라인(조합)-84",
+   "name": "등촌라인(조합)",
+   "sgg": "강서구",
+   "umd": "등촌동",
+   "built": 1997,
+   "area_m2": 84,
+   "pyeong": 34,
+   "bath": 2,
+   "price_eok": 6.0,
+   "deals_12m": 5,
+   "last_deal": "2026-08-21",
+   "trend_q": [
+    "2024Q4",
+    "2025Q1",
+    "2025Q2",
+    "2025Q3",
+    "2025Q4",
+    "2026Q2",
+    "2026Q3"
+   ],
+   "trend": [
+    6.0,
+    5.48,
+    5.8,
+    4.9,
+    5.8,
+    5.95,
+    6.5
+   ],
+   "station": "가양",
+   "walk_min": 4,
+   "lines": [
+    "9호선"
+   ],
+   "lat": 37.559197,
+   "lng": 126.85629,
+   "base_km": 2.7,
+   "infra": {
+    "학교": 10,
+    "어린이집·유치원": 7,
+    "대형마트": 15,
+    "병원": 128
+   },
+   "st_lat": 37.561433,
+   "st_lng": 126.854421,
+   "sale_eok": null,
+   "jeonse_ratio": null,
+   "within_budget": true,
+   "features": {
+    "station": 0.654,
+    "age": 0.0,
+    "budget": 1.0,
+    "trend": 0.8,
+    "activity": 0.417,
     "infra": 1.0
    },
    "score": 67
@@ -2984,67 +2817,6 @@
     "infra": 1.0
    },
    "score": 67
-  },
-  {
-   "id": "강서구-마곡동-마곡엠밸리9단지-84",
-   "name": "마곡엠밸리9단지",
-   "sgg": "강서구",
-   "umd": "마곡동",
-   "built": 2021,
-   "area_m2": 84,
-   "pyeong": 34,
-   "bath": 2,
-   "price_eok": 8.3,
-   "deals_12m": 27,
-   "last_deal": "2026-10-17",
-   "trend_q": [
-    "2025Q1",
-    "2025Q2",
-    "2025Q3",
-    "2025Q4",
-    "2026Q1",
-    "2026Q2",
-    "2026Q3",
-    "2026Q4"
-   ],
-   "trend": [
-    7.0,
-    7.3,
-    7.8,
-    7.8,
-    8.25,
-    8.5,
-    8.95,
-    8.65
-   ],
-   "station": "마곡",
-   "walk_min": 8,
-   "lines": [
-    "5호선"
-   ],
-   "lat": 37.562267,
-   "lng": 126.819206,
-   "base_km": 0.86,
-   "infra": {
-    "학교": 5,
-    "어린이집·유치원": 13,
-    "대형마트": 10,
-    "병원": 135
-   },
-   "st_lat": 37.560229,
-   "st_lng": 126.824697,
-   "sale_eok": null,
-   "jeonse_ratio": null,
-   "within_budget": true,
-   "features": {
-    "station": 0.698,
-    "age": 1.0,
-    "budget": 0.35,
-    "trend": 0.0,
-    "activity": 1.0,
-    "infra": 1.0
-   },
-   "score": 66
   },
   {
    "id": "강서구-마곡동-마곡나루경남아파트-84",
@@ -3887,6 +3659,61 @@
    "score": 65
   },
   {
+   "id": "강서구-방화동-방화동동부센트레빌(875번지)-84",
+   "name": "방화동동부센트레빌(875번지)",
+   "sgg": "강서구",
+   "umd": "방화동",
+   "built": 2003,
+   "area_m2": 84,
+   "pyeong": 34,
+   "bath": 2,
+   "price_eok": 6.05,
+   "deals_12m": 2,
+   "last_deal": "2026-10-15",
+   "trend_q": [
+    "2024Q4",
+    "2025Q2",
+    "2025Q3",
+    "2026Q2",
+    "2026Q4"
+   ],
+   "trend": [
+    5.5,
+    5.0,
+    4.9,
+    5.9,
+    6.2
+   ],
+   "station": "방화",
+   "walk_min": 6,
+   "lines": [
+    "5호선"
+   ],
+   "lat": 37.574722,
+   "lng": 126.81493,
+   "base_km": 1.4,
+   "infra": {
+    "학교": 8,
+    "어린이집·유치원": 15,
+    "대형마트": 4,
+    "병원": 78
+   },
+   "st_lat": 37.577603,
+   "st_lng": 126.812819,
+   "sale_eok": null,
+   "jeonse_ratio": null,
+   "within_budget": true,
+   "features": {
+    "station": 0.709,
+    "age": 0.15,
+    "budget": 1.0,
+    "trend": 0.536,
+    "activity": 0.167,
+    "infra": 1.0
+   },
+   "score": 65
+  },
+  {
    "id": "강서구-마곡동-마곡보타닉경남아너스빌-84",
    "name": "마곡보타닉경남아너스빌",
    "sgg": "강서구",
@@ -4346,6 +4173,67 @@
    "score": 65
   },
   {
+   "id": "강서구-마곡동-마곡엠밸리9단지-84",
+   "name": "마곡엠밸리9단지",
+   "sgg": "강서구",
+   "umd": "마곡동",
+   "built": 2021,
+   "area_m2": 84,
+   "pyeong": 34,
+   "bath": 2,
+   "price_eok": 8.5,
+   "deals_12m": 28,
+   "last_deal": "2026-10-17",
+   "trend_q": [
+    "2025Q1",
+    "2025Q2",
+    "2025Q3",
+    "2025Q4",
+    "2026Q1",
+    "2026Q2",
+    "2026Q3",
+    "2026Q4"
+   ],
+   "trend": [
+    7.0,
+    7.3,
+    7.8,
+    7.8,
+    8.25,
+    8.5,
+    8.95,
+    8.5
+   ],
+   "station": "마곡",
+   "walk_min": 8,
+   "lines": [
+    "5호선"
+   ],
+   "lat": 37.562267,
+   "lng": 126.819206,
+   "base_km": 0.86,
+   "infra": {
+    "학교": 5,
+    "어린이집·유치원": 13,
+    "대형마트": 10,
+    "병원": 135
+   },
+   "st_lat": 37.560229,
+   "st_lng": 126.824697,
+   "sale_eok": null,
+   "jeonse_ratio": null,
+   "within_budget": true,
+   "features": {
+    "station": 0.698,
+    "age": 1.0,
+    "budget": 0.25,
+    "trend": 0.014,
+    "activity": 1.0,
+    "infra": 1.0
+   },
+   "score": 64
+  },
+  {
    "id": "강서구-등촌동-우성-84",
    "name": "우성",
    "sgg": "강서구",
@@ -4392,6 +4280,61 @@
     "budget": 1.0,
     "trend": 0.64,
     "activity": 0.25,
+    "infra": 1.0
+   },
+   "score": 64
+  },
+  {
+   "id": "강서구-방화동-동부센트레빌-84",
+   "name": "동부센트레빌",
+   "sgg": "강서구",
+   "umd": "방화동",
+   "built": 2003,
+   "area_m2": 84,
+   "pyeong": 34,
+   "bath": 2,
+   "price_eok": 5.97,
+   "deals_12m": 2,
+   "last_deal": "2026-10-12",
+   "trend_q": [
+    "2024Q4",
+    "2025Q1",
+    "2025Q3",
+    "2026Q2",
+    "2026Q4"
+   ],
+   "trend": [
+    5.35,
+    5.0,
+    5.4,
+    5.75,
+    6.2
+   ],
+   "station": "개화산",
+   "walk_min": 1,
+   "lines": [
+    "5호선"
+   ],
+   "lat": 37.573191,
+   "lng": 126.806127,
+   "base_km": 1.99,
+   "infra": {
+    "학교": 4,
+    "어린이집·유치원": 6,
+    "대형마트": 5,
+    "병원": 52
+   },
+   "st_lat": 37.572537,
+   "st_lng": 126.806814,
+   "sale_eok": null,
+   "jeonse_ratio": null,
+   "within_budget": true,
+   "features": {
+    "station": 0.801,
+    "age": 0.15,
+    "budget": 1.0,
+    "trend": 0.347,
+    "activity": 0.167,
     "infra": 1.0
    },
    "score": 64
@@ -5241,9 +5184,9 @@
    "area_m2": 84,
    "pyeong": 34,
    "bath": 2,
-   "price_eok": 6.55,
-   "deals_12m": 16,
-   "last_deal": "2026-10-17",
+   "price_eok": 7.0,
+   "deals_12m": 17,
+   "last_deal": "2026-10-21",
    "trend_q": [
     "2025Q1",
     "2025Q2",
@@ -6352,64 +6295,6 @@
    "score": 62
   },
   {
-   "id": "강서구-화곡동-미성아파트(연립)-84",
-   "name": "미성아파트(연립)",
-   "sgg": "강서구",
-   "umd": "화곡동",
-   "built": 1987,
-   "area_m2": 84,
-   "pyeong": 34,
-   "bath": 2,
-   "price_eok": 3.6,
-   "deals_12m": 7,
-   "last_deal": "2026-10-14",
-   "trend_q": [
-    "2024Q4",
-    "2025Q1",
-    "2025Q2",
-    "2025Q4",
-    "2026Q1",
-    "2026Q4"
-   ],
-   "trend": [
-    3.5,
-    3.2,
-    3.5,
-    3.6,
-    3.65,
-    3.5
-   ],
-   "station": "까치산",
-   "walk_min": 6,
-   "lines": [
-    "2호선",
-    "5호선"
-   ],
-   "lat": 37.535751,
-   "lng": 126.844913,
-   "base_km": 3.78,
-   "infra": {
-    "학교": 2,
-    "어린이집·유치원": 7,
-    "대형마트": 5,
-    "병원": 184
-   },
-   "st_lat": 37.532231,
-   "st_lng": 126.846444,
-   "sale_eok": null,
-   "jeonse_ratio": null,
-   "within_budget": true,
-   "features": {
-    "station": 0.505,
-    "age": 0.0,
-    "budget": 1.0,
-    "trend": 0.7,
-    "activity": 0.583,
-    "infra": 0.9
-   },
-   "score": 62
-  },
-  {
    "id": "강서구-내발산동-길성그랑프리텔-84",
    "name": "길성그랑프리텔",
    "sgg": "강서구",
@@ -6457,55 +6342,6 @@
     "trend": 0.536,
     "activity": 0.083,
     "infra": 1.0
-   },
-   "score": 62
-  },
-  {
-   "id": "강서구-가양동-가양1차보람더하임-84",
-   "name": "가양1차보람더하임",
-   "sgg": "강서구",
-   "umd": "가양동",
-   "built": 2006,
-   "area_m2": 84,
-   "pyeong": 34,
-   "bath": 2,
-   "price_eok": 6.0,
-   "deals_12m": 1,
-   "last_deal": "2026-01-20",
-   "trend_q": [
-    "2025Q2",
-    "2026Q1"
-   ],
-   "trend": [
-    4.9,
-    6.0
-   ],
-   "station": "양천향교",
-   "walk_min": 9,
-   "lines": [
-    "9호선"
-   ],
-   "lat": 37.567132,
-   "lng": 126.84857,
-   "base_km": 1.88,
-   "infra": {
-    "학교": 7,
-    "어린이집·유치원": 4,
-    "대형마트": 11,
-    "병원": 99
-   },
-   "st_lat": 37.568081,
-   "st_lng": 126.841979,
-   "sale_eok": null,
-   "jeonse_ratio": null,
-   "within_budget": true,
-   "features": {
-    "station": 0.582,
-    "age": 0.3,
-    "budget": 1.0,
-    "trend": 0.5,
-    "activity": 0.083,
-    "infra": 0.96
    },
    "score": 62
   },
@@ -6559,6 +6395,67 @@
     "trend": 0.496,
     "activity": 0.417,
     "infra": 1.0
+   },
+   "score": 62
+  },
+  {
+   "id": "강서구-가양동-대림경동아파트-115",
+   "name": "대림경동아파트",
+   "sgg": "강서구",
+   "umd": "가양동",
+   "built": 1993,
+   "area_m2": 115,
+   "pyeong": 46,
+   "bath": 2,
+   "price_eok": 8.0,
+   "deals_12m": 14,
+   "last_deal": "2026-10-19",
+   "trend_q": [
+    "2024Q4",
+    "2025Q1",
+    "2025Q2",
+    "2025Q3",
+    "2025Q4",
+    "2026Q1",
+    "2026Q2",
+    "2026Q4"
+   ],
+   "trend": [
+    7.5,
+    6.75,
+    7.5,
+    6.75,
+    6.9,
+    7.0,
+    7.0,
+    8.0
+   ],
+   "station": "가양",
+   "walk_min": 8,
+   "lines": [
+    "9호선"
+   ],
+   "lat": 37.566347,
+   "lng": 126.854031,
+   "base_km": 2.37,
+   "infra": {
+    "학교": 6,
+    "어린이집·유치원": 4,
+    "대형마트": 10,
+    "병원": 90
+   },
+   "st_lat": 37.561433,
+   "st_lng": 126.854421,
+   "sale_eok": null,
+   "jeonse_ratio": null,
+   "within_budget": true,
+   "features": {
+    "station": 0.568,
+    "age": 0.0,
+    "budget": 0.5,
+    "trend": 0.9,
+    "activity": 1.0,
+    "infra": 0.96
    },
    "score": 62
   },
@@ -7033,6 +6930,64 @@
     "trend": 0.327,
     "activity": 0.417,
     "infra": 1.0
+   },
+   "score": 61
+  },
+  {
+   "id": "강서구-화곡동-미성아파트(연립)-84",
+   "name": "미성아파트(연립)",
+   "sgg": "강서구",
+   "umd": "화곡동",
+   "built": 1987,
+   "area_m2": 84,
+   "pyeong": 34,
+   "bath": 2,
+   "price_eok": 3.6,
+   "deals_12m": 6,
+   "last_deal": "2026-10-14",
+   "trend_q": [
+    "2024Q4",
+    "2025Q1",
+    "2025Q2",
+    "2025Q4",
+    "2026Q1",
+    "2026Q4"
+   ],
+   "trend": [
+    3.5,
+    3.2,
+    3.5,
+    3.6,
+    3.65,
+    3.5
+   ],
+   "station": "까치산",
+   "walk_min": 6,
+   "lines": [
+    "2호선",
+    "5호선"
+   ],
+   "lat": 37.535751,
+   "lng": 126.844913,
+   "base_km": 3.78,
+   "infra": {
+    "학교": 2,
+    "어린이집·유치원": 7,
+    "대형마트": 5,
+    "병원": 184
+   },
+   "st_lat": 37.532231,
+   "st_lng": 126.846444,
+   "sale_eok": null,
+   "jeonse_ratio": null,
+   "within_budget": true,
+   "features": {
+    "station": 0.505,
+    "age": 0.0,
+    "budget": 1.0,
+    "trend": 0.7,
+    "activity": 0.5,
+    "infra": 0.9
    },
    "score": 61
   },
@@ -10169,55 +10124,6 @@
    "score": 59
   },
   {
-   "id": "강서구-내발산동-타워힐101동-84",
-   "name": "타워힐101동",
-   "sgg": "강서구",
-   "umd": "내발산동",
-   "built": 2002,
-   "area_m2": 84,
-   "pyeong": 34,
-   "bath": 2,
-   "price_eok": 5.4,
-   "deals_12m": 1,
-   "last_deal": "2025-10-22",
-   "trend_q": [
-    "2025Q2",
-    "2025Q4"
-   ],
-   "trend": [
-    5.3,
-    5.4
-   ],
-   "station": "발산",
-   "walk_min": 9,
-   "lines": [
-    "5호선"
-   ],
-   "lat": 37.555135,
-   "lng": 126.843249,
-   "base_km": 1.91,
-   "infra": {
-    "학교": 6,
-    "어린이집·유치원": 5,
-    "대형마트": 16,
-    "병원": 182
-   },
-   "st_lat": 37.558678,
-   "st_lng": 126.837736,
-   "sale_eok": null,
-   "jeonse_ratio": null,
-   "within_budget": true,
-   "features": {
-    "station": 0.579,
-    "age": 0.1,
-    "budget": 1.0,
-    "trend": 0.5,
-    "activity": 0.083,
-    "infra": 1.0
-   },
-   "score": 59
-  },
-  {
    "id": "강서구-내발산동-롯데1차-99",
    "name": "롯데1차",
    "sgg": "강서구",
@@ -10366,57 +10272,6 @@
     "trend": 0.5,
     "activity": 0.083,
     "infra": 1.0
-   },
-   "score": 59
-  },
-  {
-   "id": "양천구-신월동-수명산그린시아-84",
-   "name": "수명산그린시아",
-   "sgg": "양천구",
-   "umd": "신월동",
-   "built": 2014,
-   "area_m2": 84,
-   "pyeong": 34,
-   "bath": 2,
-   "price_eok": 4.95,
-   "deals_12m": 2,
-   "last_deal": "2026-01-22",
-   "trend_q": [
-    "2025Q3",
-    "2025Q4",
-    "2026Q1"
-   ],
-   "trend": [
-    4.85,
-    5.5,
-    4.4
-   ],
-   "station": "우장산",
-   "walk_min": 14,
-   "lines": [
-    "5호선"
-   ],
-   "lat": 37.54349,
-   "lng": 126.82857,
-   "base_km": 2.58,
-   "infra": {
-    "학교": 8,
-    "어린이집·유치원": 4,
-    "대형마트": 5,
-    "병원": 122
-   },
-   "st_lat": 37.548816,
-   "st_lng": 126.836326,
-   "sale_eok": null,
-   "jeonse_ratio": null,
-   "within_budget": true,
-   "features": {
-    "station": 0.379,
-    "age": 0.7,
-    "budget": 1.0,
-    "trend": 0.143,
-    "activity": 0.167,
-    "infra": 0.96
    },
    "score": 59
   },
@@ -11944,6 +11799,57 @@
     "trend": 0.633,
     "activity": 0.25,
     "infra": 1.0
+   },
+   "score": 58
+  },
+  {
+   "id": "양천구-신월동-수명산그린시아-84",
+   "name": "수명산그린시아",
+   "sgg": "양천구",
+   "umd": "신월동",
+   "built": 2014,
+   "area_m2": 84,
+   "pyeong": 34,
+   "bath": 2,
+   "price_eok": 4.4,
+   "deals_12m": 1,
+   "last_deal": "2026-01-22",
+   "trend_q": [
+    "2025Q3",
+    "2025Q4",
+    "2026Q1"
+   ],
+   "trend": [
+    4.85,
+    5.5,
+    4.4
+   ],
+   "station": "우장산",
+   "walk_min": 14,
+   "lines": [
+    "5호선"
+   ],
+   "lat": 37.54349,
+   "lng": 126.82857,
+   "base_km": 2.58,
+   "infra": {
+    "학교": 8,
+    "어린이집·유치원": 4,
+    "대형마트": 5,
+    "병원": 122
+   },
+   "st_lat": 37.548816,
+   "st_lng": 126.836326,
+   "sale_eok": null,
+   "jeonse_ratio": null,
+   "within_budget": true,
+   "features": {
+    "station": 0.379,
+    "age": 0.7,
+    "budget": 1.0,
+    "trend": 0.143,
+    "activity": 0.083,
+    "infra": 0.96
    },
    "score": 58
   },
@@ -13540,6 +13446,57 @@
     "trend": 0.0,
     "activity": 0.833,
     "infra": 1.0
+   },
+   "score": 56
+  },
+  {
+   "id": "강서구-가양동-가양1차보람더하임-84",
+   "name": "가양1차보람더하임",
+   "sgg": "강서구",
+   "umd": "가양동",
+   "built": 2006,
+   "area_m2": 84,
+   "pyeong": 34,
+   "bath": 2,
+   "price_eok": 6.0,
+   "deals_12m": 2,
+   "last_deal": "2026-10-09",
+   "trend_q": [
+    "2025Q2",
+    "2026Q1",
+    "2026Q4"
+   ],
+   "trend": [
+    4.9,
+    6.0,
+    6.0
+   ],
+   "station": "양천향교",
+   "walk_min": 9,
+   "lines": [
+    "9호선"
+   ],
+   "lat": 37.567132,
+   "lng": 126.84857,
+   "base_km": 1.88,
+   "infra": {
+    "학교": 7,
+    "어린이집·유치원": 4,
+    "대형마트": 11,
+    "병원": 99
+   },
+   "st_lat": 37.568081,
+   "st_lng": 126.841979,
+   "sale_eok": null,
+   "jeonse_ratio": null,
+   "within_budget": true,
+   "features": {
+    "station": 0.582,
+    "age": 0.3,
+    "budget": 1.0,
+    "trend": 0.0,
+    "activity": 0.167,
+    "infra": 0.96
    },
    "score": 56
   },
@@ -16105,6 +16062,59 @@
    "score": 54
   },
   {
+   "id": "강서구-염창동-성원-115",
+   "name": "성원",
+   "sgg": "강서구",
+   "umd": "염창동",
+   "built": 2001,
+   "area_m2": 115,
+   "pyeong": 46,
+   "bath": 2,
+   "price_eok": 7.4,
+   "deals_12m": 5,
+   "last_deal": "2026-10-13",
+   "trend_q": [
+    "2025Q4",
+    "2026Q1",
+    "2026Q2",
+    "2026Q4"
+   ],
+   "trend": [
+    7.2,
+    7.5,
+    8.3,
+    7.2
+   ],
+   "station": "등촌",
+   "walk_min": 12,
+   "lines": [
+    "9호선"
+   ],
+   "lat": 37.55558,
+   "lng": 126.872086,
+   "base_km": 4.15,
+   "infra": {
+    "학교": 5,
+    "어린이집·유치원": 7,
+    "대형마트": 6,
+    "병원": 104
+   },
+   "st_lat": 37.550729,
+   "st_lng": 126.865571,
+   "sale_eok": null,
+   "jeonse_ratio": null,
+   "within_budget": true,
+   "features": {
+    "station": 0.301,
+    "age": 0.05,
+    "budget": 0.8,
+    "trend": 0.7,
+    "activity": 0.417,
+    "infra": 1.0
+   },
+   "score": 54
+  },
+  {
    "id": "강서구-화곡동-해태드림타운-84",
    "name": "해태드림타운",
    "sgg": "강서구",
@@ -16152,56 +16162,6 @@
     "budget": 1.0,
     "trend": 0.289,
     "activity": 0.083,
-    "infra": 1.0
-   },
-   "score": 54
-  },
-  {
-   "id": "양천구-신월동-새롬-84",
-   "name": "새롬",
-   "sgg": "양천구",
-   "umd": "신월동",
-   "built": 2002,
-   "area_m2": 84,
-   "pyeong": 34,
-   "bath": 2,
-   "price_eok": 3.6,
-   "deals_12m": 2,
-   "last_deal": "2026-01-14",
-   "trend_q": [
-    "2025Q4",
-    "2026Q1"
-   ],
-   "trend": [
-    3.6,
-    3.6
-   ],
-   "station": "까치산",
-   "walk_min": 9,
-   "lines": [
-    "2호선",
-    "5호선"
-   ],
-   "lat": 37.526466,
-   "lng": 126.845102,
-   "base_km": 4.74,
-   "infra": {
-    "학교": 5,
-    "어린이집·유치원": 8,
-    "대형마트": 6,
-    "병원": 164
-   },
-   "st_lat": 37.531406,
-   "st_lng": 126.846948,
-   "sale_eok": null,
-   "jeonse_ratio": null,
-   "within_budget": true,
-   "features": {
-    "station": 0.337,
-    "age": 0.1,
-    "budget": 1.0,
-    "trend": 0.5,
-    "activity": 0.167,
     "infra": 1.0
    },
    "score": 54
@@ -17678,6 +17638,56 @@
    "features": {
     "station": 0.093,
     "age": 0.5,
+    "budget": 1.0,
+    "trend": 0.5,
+    "activity": 0.083,
+    "infra": 1.0
+   },
+   "score": 53
+  },
+  {
+   "id": "양천구-신월동-새롬-84",
+   "name": "새롬",
+   "sgg": "양천구",
+   "umd": "신월동",
+   "built": 2002,
+   "area_m2": 84,
+   "pyeong": 34,
+   "bath": 2,
+   "price_eok": 3.6,
+   "deals_12m": 1,
+   "last_deal": "2026-01-14",
+   "trend_q": [
+    "2025Q4",
+    "2026Q1"
+   ],
+   "trend": [
+    3.6,
+    3.6
+   ],
+   "station": "까치산",
+   "walk_min": 9,
+   "lines": [
+    "2호선",
+    "5호선"
+   ],
+   "lat": 37.526466,
+   "lng": 126.845102,
+   "base_km": 4.74,
+   "infra": {
+    "학교": 5,
+    "어린이집·유치원": 8,
+    "대형마트": 6,
+    "병원": 164
+   },
+   "st_lat": 37.531406,
+   "st_lng": 126.846948,
+   "sale_eok": null,
+   "jeonse_ratio": null,
+   "within_budget": true,
+   "features": {
+    "station": 0.337,
+    "age": 0.1,
     "budget": 1.0,
     "trend": 0.5,
     "activity": 0.083,
@@ -22320,57 +22330,6 @@
    "score": 47
   },
   {
-   "id": "강서구-염창동-성원-115",
-   "name": "성원",
-   "sgg": "강서구",
-   "umd": "염창동",
-   "built": 2001,
-   "area_m2": 115,
-   "pyeong": 46,
-   "bath": 2,
-   "price_eok": 7.5,
-   "deals_12m": 4,
-   "last_deal": "2026-05-23",
-   "trend_q": [
-    "2025Q4",
-    "2026Q1",
-    "2026Q2"
-   ],
-   "trend": [
-    7.2,
-    7.5,
-    8.3
-   ],
-   "station": "등촌",
-   "walk_min": 12,
-   "lines": [
-    "9호선"
-   ],
-   "lat": 37.55558,
-   "lng": 126.872086,
-   "base_km": 4.15,
-   "infra": {
-    "학교": 5,
-    "어린이집·유치원": 7,
-    "대형마트": 6,
-    "병원": 104
-   },
-   "st_lat": 37.550729,
-   "st_lng": 126.865571,
-   "sale_eok": null,
-   "jeonse_ratio": null,
-   "within_budget": true,
-   "features": {
-    "station": 0.301,
-    "age": 0.05,
-    "budget": 0.75,
-    "trend": 0.383,
-    "activity": 0.333,
-    "infra": 1.0
-   },
-   "score": 47
-  },
-  {
    "id": "양천구-목동-목동이-편한세상-84",
    "name": "목동이-편한세상",
    "sgg": "양천구",
@@ -23005,6 +22964,57 @@
     "trend": 0.0,
     "activity": 0.917,
     "infra": 1.0
+   },
+   "score": 45
+  },
+  {
+   "id": "양천구-목동-스카이빌아파트-84",
+   "name": "스카이빌아파트",
+   "sgg": "양천구",
+   "umd": "목동",
+   "built": 2002,
+   "area_m2": 84,
+   "pyeong": 34,
+   "bath": 2,
+   "price_eok": 7.9,
+   "deals_12m": 3,
+   "last_deal": "2026-09-12",
+   "trend_q": [
+    "2025Q3",
+    "2026Q1",
+    "2026Q3"
+   ],
+   "trend": [
+    6.75,
+    8.0,
+    7.2
+   ],
+   "station": "목동",
+   "walk_min": 15,
+   "lines": [
+    "5호선"
+   ],
+   "lat": 37.534236,
+   "lng": 126.86925,
+   "base_km": 5.17,
+   "infra": {
+    "학교": 5,
+    "어린이집·유치원": 4,
+    "대형마트": 13,
+    "병원": 165
+   },
+   "st_lat": 37.526135,
+   "st_lng": 126.864625,
+   "sale_eok": null,
+   "jeonse_ratio": null,
+   "within_budget": true,
+   "features": {
+    "station": 0.128,
+    "age": 0.1,
+    "budget": 0.55,
+    "trend": 0.9,
+    "activity": 0.25,
+    "infra": 0.96
    },
    "score": 45
   },
@@ -25172,53 +25182,57 @@
    "score": 38
   },
   {
-   "id": "양천구-목동-스카이빌아파트-84",
-   "name": "스카이빌아파트",
+   "id": "양천구-신정동-경남아너스빌-84",
+   "name": "경남아너스빌",
    "sgg": "양천구",
-   "umd": "목동",
-   "built": 2002,
+   "umd": "신정동",
+   "built": 2004,
    "area_m2": 84,
    "pyeong": 34,
    "bath": 2,
-   "price_eok": 7.95,
-   "deals_12m": 2,
-   "last_deal": "2026-07-29",
+   "price_eok": 8.5,
+   "deals_12m": 3,
+   "last_deal": "2026-10-17",
    "trend_q": [
+    "2024Q4",
     "2025Q3",
+    "2025Q4",
     "2026Q1",
-    "2026Q3"
+    "2026Q4"
    ],
    "trend": [
-    6.75,
     8.0,
-    7.9
+    8.4,
+    8.5,
+    8.8,
+    8.0
    ],
-   "station": "목동",
-   "walk_min": 15,
+   "station": "오목교",
+   "walk_min": 12,
    "lines": [
     "5호선"
    ],
-   "lat": 37.534236,
-   "lng": 126.86925,
-   "base_km": 5.17,
+   "lat": 37.518191,
+   "lng": 126.871395,
+   "base_km": 6.65,
    "infra": {
     "학교": 5,
-    "어린이집·유치원": 4,
-    "대형마트": 13,
-    "병원": 165
+    "어린이집·유치원": 2,
+    "대형마트": 15,
+    "병원": 127
    },
-   "st_lat": 37.526135,
-   "st_lng": 126.864625,
+   "st_lat": 37.524534,
+   "st_lng": 126.875307,
    "sale_eok": null,
    "jeonse_ratio": null,
    "within_budget": true,
    "features": {
-    "station": 0.128,
-    "age": 0.1,
-    "budget": 0.525,
-    "trend": 0.278,
-    "activity": 0.167,
-    "infra": 0.96
+    "station": 0.087,
+    "age": 0.2,
+    "budget": 0.25,
+    "trend": 0.7,
+    "activity": 0.25,
+    "infra": 0.88
    },
    "score": 36
   },
@@ -25704,67 +25718,6 @@
    "score": 69
   },
   {
-   "id": "강서구-화곡동-강서힐스테이트-84",
-   "name": "강서힐스테이트",
-   "sgg": "강서구",
-   "umd": "화곡동",
-   "built": 2015,
-   "area_m2": 84,
-   "pyeong": 34,
-   "bath": 2,
-   "price_eok": 8.8,
-   "deals_12m": 23,
-   "last_deal": "2026-09-22",
-   "trend_q": [
-    "2024Q4",
-    "2025Q1",
-    "2025Q2",
-    "2025Q3",
-    "2025Q4",
-    "2026Q1",
-    "2026Q2",
-    "2026Q3"
-   ],
-   "trend": [
-    8.0,
-    7.5,
-    7.5,
-    7.5,
-    7.85,
-    8.3,
-    8.0,
-    8.6
-   ],
-   "station": "우장산",
-   "walk_min": 6,
-   "lines": [
-    "5호선"
-   ],
-   "lat": 37.546634,
-   "lng": 126.840034,
-   "base_km": 2.5,
-   "infra": {
-    "학교": 5,
-    "어린이집·유치원": 8,
-    "대형마트": 12,
-    "병원": 172
-   },
-   "st_lat": 37.548816,
-   "st_lng": 126.836326,
-   "sale_eok": null,
-   "jeonse_ratio": null,
-   "within_budget": false,
-   "features": {
-    "station": 0.614,
-    "age": 0.75,
-    "budget": 0.1,
-    "trend": 0.85,
-    "activity": 1.0,
-    "infra": 1.0
-   },
-   "score": 67
-  },
-  {
    "id": "강서구-화곡동-우장산아이파크,이편한세상-84",
    "name": "우장산아이파크,이편한세상",
    "sgg": "강서구",
@@ -25951,8 +25904,8 @@
    "area_m2": 115,
    "pyeong": 46,
    "bath": 2,
-   "price_eok": 9.5,
-   "deals_12m": 3,
+   "price_eok": 9.65,
+   "deals_12m": 2,
    "last_deal": "2026-10-20",
    "trend_q": [
     "2025Q1",
@@ -25992,10 +25945,10 @@
     "age": 0.7,
     "budget": 0.0,
     "trend": 0.889,
-    "activity": 0.25,
+    "activity": 0.167,
     "infra": 1.0
    },
-   "score": 61
+   "score": 60
   },
   {
    "id": "강서구-가양동-강서한강자이-115",
@@ -26064,7 +26017,7 @@
    "pyeong": 46,
    "bath": 2,
    "price_eok": 11.9,
-   "deals_12m": 20,
+   "deals_12m": 19,
    "last_deal": "2026-10-21",
    "trend_q": [
     "2025Q1",
@@ -26346,7 +26299,7 @@
    "pyeong": 34,
    "bath": 2,
    "price_eok": 11.0,
-   "deals_12m": 25,
+   "deals_12m": 24,
    "last_deal": "2026-10-03",
    "trend_q": [
     "2025Q1",
@@ -26677,6 +26630,67 @@
     "infra": 1.0
    },
    "score": 54
+  },
+  {
+   "id": "강서구-화곡동-강서힐스테이트-84",
+   "name": "강서힐스테이트",
+   "sgg": "강서구",
+   "umd": "화곡동",
+   "built": 2015,
+   "area_m2": 84,
+   "pyeong": 34,
+   "bath": 2,
+   "price_eok": 9.0,
+   "deals_12m": 24,
+   "last_deal": "2026-10-02",
+   "trend_q": [
+    "2025Q1",
+    "2025Q2",
+    "2025Q3",
+    "2025Q4",
+    "2026Q1",
+    "2026Q2",
+    "2026Q3",
+    "2026Q4"
+   ],
+   "trend": [
+    7.5,
+    7.5,
+    7.5,
+    7.85,
+    8.3,
+    8.0,
+    8.6,
+    9.3
+   ],
+   "station": "우장산",
+   "walk_min": 6,
+   "lines": [
+    "5호선"
+   ],
+   "lat": 37.546634,
+   "lng": 126.840034,
+   "base_km": 2.5,
+   "infra": {
+    "학교": 5,
+    "어린이집·유치원": 8,
+    "대형마트": 12,
+    "병원": 172
+   },
+   "st_lat": 37.548816,
+   "st_lng": 126.836326,
+   "sale_eok": null,
+   "jeonse_ratio": null,
+   "within_budget": false,
+   "features": {
+    "station": 0.614,
+    "age": 0.75,
+    "budget": 0.0,
+    "trend": 0.0,
+    "activity": 1.0,
+    "infra": 1.0
+   },
+   "score": 53
   },
   {
    "id": "강서구-염창동-e편한세상염창-84",
@@ -27536,7 +27550,7 @@
    "pyeong": 34,
    "bath": 2,
    "price_eok": 9.0,
-   "deals_12m": 47,
+   "deals_12m": 46,
    "last_deal": "2026-10-13",
    "trend_q": [
     "2025Q1",
@@ -27882,7 +27896,7 @@
    "pyeong": 40,
    "bath": 2,
    "price_eok": 9.0,
-   "deals_12m": 23,
+   "deals_12m": 22,
    "last_deal": "2026-09-19",
    "trend_q": [
     "2024Q4",
@@ -28486,65 +28500,6 @@
    "score": 39
   },
   {
-   "id": "양천구-목동-목동신시가지1-84",
-   "name": "목동신시가지1",
-   "sgg": "양천구",
-   "umd": "목동",
-   "built": 1985,
-   "area_m2": 84,
-   "pyeong": 34,
-   "bath": 2,
-   "price_eok": 10.5,
-   "deals_12m": 8,
-   "last_deal": "2026-09-11",
-   "trend_q": [
-    "2024Q4",
-    "2025Q1",
-    "2025Q2",
-    "2025Q4",
-    "2026Q1",
-    "2026Q2",
-    "2026Q3"
-   ],
-   "trend": [
-    9.0,
-    8.85,
-    8.65,
-    9.75,
-    8.5,
-    10.5,
-    9.85
-   ],
-   "station": "신목동",
-   "walk_min": 10,
-   "lines": [
-    "9호선"
-   ],
-   "lat": 37.539736,
-   "lng": 126.877998,
-   "base_km": 5.39,
-   "infra": {
-    "학교": 7,
-    "어린이집·유치원": 4,
-    "대형마트": 10,
-    "병원": 85
-   },
-   "st_lat": 37.544288,
-   "st_lng": 126.883096,
-   "sale_eok": null,
-   "jeonse_ratio": null,
-   "within_budget": false,
-   "features": {
-    "station": 0.252,
-    "age": 0.0,
-    "budget": 0.0,
-    "trend": 0.733,
-    "activity": 0.667,
-    "infra": 0.96
-   },
-   "score": 38
-  },
-  {
    "id": "양천구-목동-목동센트럴푸르지오-84",
    "name": "목동센트럴푸르지오",
    "sgg": "양천구",
@@ -28773,6 +28728,65 @@
     "infra": 1.0
    },
    "score": 38
+  },
+  {
+   "id": "양천구-목동-목동신시가지1-84",
+   "name": "목동신시가지1",
+   "sgg": "양천구",
+   "umd": "목동",
+   "built": 1985,
+   "area_m2": 84,
+   "pyeong": 34,
+   "bath": 2,
+   "price_eok": 10.5,
+   "deals_12m": 7,
+   "last_deal": "2026-09-11",
+   "trend_q": [
+    "2024Q4",
+    "2025Q1",
+    "2025Q2",
+    "2025Q4",
+    "2026Q1",
+    "2026Q2",
+    "2026Q3"
+   ],
+   "trend": [
+    9.0,
+    8.85,
+    8.65,
+    9.75,
+    8.5,
+    10.5,
+    9.85
+   ],
+   "station": "신목동",
+   "walk_min": 10,
+   "lines": [
+    "9호선"
+   ],
+   "lat": 37.539736,
+   "lng": 126.877998,
+   "base_km": 5.39,
+   "infra": {
+    "학교": 7,
+    "어린이집·유치원": 4,
+    "대형마트": 10,
+    "병원": 85
+   },
+   "st_lat": 37.544288,
+   "st_lng": 126.883096,
+   "sale_eok": null,
+   "jeonse_ratio": null,
+   "within_budget": false,
+   "features": {
+    "station": 0.252,
+    "age": 0.0,
+    "budget": 0.0,
+    "trend": 0.733,
+    "activity": 0.583,
+    "infra": 0.96
+   },
+   "score": 37
   },
   {
    "id": "양천구-목동-목동신시가지2-115",
@@ -29777,59 +29791,6 @@
     "trend": 0.554,
     "activity": 1.0,
     "infra": 0.96
-   },
-   "score": 34
-  },
-  {
-   "id": "양천구-신정동-경남아너스빌-84",
-   "name": "경남아너스빌",
-   "sgg": "양천구",
-   "umd": "신정동",
-   "built": 2004,
-   "area_m2": 84,
-   "pyeong": 34,
-   "bath": 2,
-   "price_eok": 8.65,
-   "deals_12m": 2,
-   "last_deal": "2026-01-31",
-   "trend_q": [
-    "2024Q4",
-    "2025Q3",
-    "2025Q4",
-    "2026Q1"
-   ],
-   "trend": [
-    8.0,
-    8.4,
-    8.5,
-    8.8
-   ],
-   "station": "오목교",
-   "walk_min": 12,
-   "lines": [
-    "5호선"
-   ],
-   "lat": 37.518191,
-   "lng": 126.871395,
-   "base_km": 6.65,
-   "infra": {
-    "학교": 5,
-    "어린이집·유치원": 2,
-    "대형마트": 15,
-    "병원": 127
-   },
-   "st_lat": 37.524534,
-   "st_lng": 126.875307,
-   "sale_eok": null,
-   "jeonse_ratio": null,
-   "within_budget": false,
-   "features": {
-    "station": 0.087,
-    "age": 0.2,
-    "budget": 0.175,
-    "trend": 0.7,
-    "activity": 0.167,
-    "infra": 0.88
    },
    "score": 34
   },
