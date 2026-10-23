@@ -50,9 +50,10 @@ def main() -> int:
         with path.open(encoding="utf-8") as f:
             for r in csv.DictReader(f):
                 rows[tuple(r[k] for k in FIELDS)] = r
-    n = 12 if not rows else 3
+    have = {r["sgg"] for r in rows.values()}
     ok = fail = 0
     for lawd, name in cfg["regions"].items():
+        n = 12 if name not in have else 3
         for ymd in fr.months_back(n):
             try:
                 got = fetch(key, lawd, ymd, name)

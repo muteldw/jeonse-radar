@@ -63,6 +63,23 @@ def infra_score(inf: dict | None) -> float:
                + 0.3 * min(1, inf.get("대형마트", 0) / 2) + 0.2 * min(1, inf.get("병원", 0) / 10))
 
 
+def km(lat1, lng1, lat2, lng2) -> float:
+    import math
+    p1, p2 = math.radians(lat1), math.radians(lat2)
+    a = math.sin((p2 - p1) / 2) ** 2 + math.cos(p1) * math.cos(p2) * math.sin(math.radians(lng2 - lng1) / 2) ** 2
+    return 2 * 6371.0 * math.asin(math.sqrt(a))
+
+
+def area_of(sgg: str, cfg: dict) -> tuple[str, dict]:
+    """생활권(areas) 찾기. 설정에 없으면 첫 생활권."""
+    areas = cfg.get("areas") or {"default": {"name": "", "sgg": [], "base": cfg.get("base_station", {})}}
+    for k, a in areas.items():
+        if sgg in a.get("sgg", []):
+            return k, a
+    k = next(iter(areas))
+    return k, areas[k]
+
+
 def band_of_area(a: float) -> int:
     return 84 if a < 95 else (99 if a < 110 else 115)
 
@@ -92,6 +109,7 @@ def build(rows: list[dict], cfg: dict, weights: dict, today: date, geo: dict | N
     budget = cfg["budget_eok"]
     meta = {norm_name(k): v for k, v in cfg.get("complex_meta", {}).items()}
     st_min = cfg.get("station_minutes_from_base", {})
+    regulated = set(cfg.get("regulated_sgg", []))
     out = []
     for (sgg, umd, apt, band), deals in groups.items():
         deals.sort(key=lambda r: r["deal_date"])
@@ -121,9 +139,12 @@ def build(rows: list[dict], cfg: dict, weights: dict, today: date, geo: dict | N
         walk = g.get("walk_min", m.get("walk_min"))
         stn = g.get("station", m.get("station"))
         lines = g.get("lines") or m.get("lines", [])
-        if g.get("base_km") is not None:
-            # 도보시간 + 기준역(마곡나루)까지 거리 1km당 3분으로 환산
-            station_f = max(0.0, 1 - (min(walk or 20, 20) + g["base_km"] * 3) / 35)
+        area_key, area = area_of(sgg, cfg)
+        base = area.get("base") or {}
+        base_km = round(km(g["lat"], g["lng"], base["lat"], base["lng"]), 2) if g.get("lat") and base.get("lat") else None
+        if base_km is not None:
+            # 도보시간 + 생활권 기준역(서울 강서·양천=마곡나루, 안양=범계)까지 거리 1km당 3분으로 환산
+            station_f = max(0.0, 1 - (min(walk or 20, 20) + base_km * 3) / 35)
         else:
             station_f = max(0.0, 1 - ((walk or 15) + st_min.get(stn, 15)) / 30)
 
@@ -149,7 +170,9 @@ def build(rows: list[dict], cfg: dict, weights: dict, today: date, geo: dict | N
             "last_deal": recent[-1]["deal_date"],
             "trend_q": qs, "trend": trend,
             "station": stn, "walk_min": walk, "lines": lines,
-            "lat": g.get("lat"), "lng": g.get("lng"), "base_km": g.get("base_km"),
+            "lat": g.get("lat"), "lng": g.get("lng"), "base_km": base_km,
+            "area": area_key, "area_name": area.get("name", ""), "base_name": base.get("name", ""),
+            "regulated": sgg in regulated if regulated else None,
             "infra": g.get("infra"),
             "st_lat": g.get("st_lat"), "st_lng": g.get("st_lng"),
             "sale_eok": sales.get((sgg, umd, apt, band)),
@@ -181,6 +204,9 @@ def update_weights(weights: dict, items: list[dict], feedback: dict) -> dict:
 
 def main() -> None:
     cfg = json.loads((ROOT / "config.json").read_text(encoding="utf-8"))
+    lr = ROOT / "config" / "loan_rules.json"
+    if lr.exists():
+        cfg["regulated_sgg"] = json.loads(lr.read_text(encoding="utf-8")).get("regulated_sgg", [])
     fb_path = ROOT / "data" / "feedback.json"
     feedback = json.loads(fb_path.read_text(encoding="utf-8")) if fb_path.exists() else {}
     rows = load_rows()
@@ -201,6 +227,8 @@ def main() -> None:
         "budget_eok": cfg["budget_eok"],
         "weights": {k: round(v, 3) for k, v in w.items()},
         "source": "국토교통부 아파트 전월세 실거래가",
+        "areas": {k: {"name": a["name"], "base": a.get("base", {}), "sgg": a.get("sgg", [])}
+                  for k, a in cfg.get("areas", {}).items()},
         "items": items,
     }
     dst = ROOT / "web" / "data" / "recommend.json"

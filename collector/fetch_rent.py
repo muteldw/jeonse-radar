@@ -140,9 +140,13 @@ def main() -> int:
     # 계약기간 열이 없던 예전 파일이면 전체를 다시 받아 채운다(이사 시기 예측용, 한 번만)
     has_term = out_path.exists() and "contract_term" in out_path.open(encoding="utf-8").readline()
     # 처음에는 months_back 전체, 이후에는 최근 3개월만 다시 받아 지연 신고분을 반영
-    n = cfg["months_back"] if (not rows or not has_term) else 3
+    have = {r["sgg"] for r in rows.values()}
     added, failed, calls = 0, 0, 0
     for lawd, name in cfg["regions"].items():
+        # 새로 추가된 지역이나 계약기간 열이 없던 파일은 전체 기간, 나머지는 최근 3개월만
+        n = cfg["months_back"] if (name not in have or not has_term) else 3
+        if name not in have:
+            print(f"새 지역 {name}: {n}개월치 수집")
         for ymd in months_back(n):
             calls += 1
             try:

@@ -16,20 +16,26 @@ from email.mime.text import MIMEText
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
-from common import PAGES_URL, load_rec, pick_top, prev_ids  # noqa: E402
+from common import PAGES_URL, load_rec, pick_top, place, prev_ids  # noqa: E402
 
 
 def build(rec: dict, prev: set[str], top: list[dict] | None = None) -> tuple[str, str, str]:
     top = top if top is not None else pick_top(rec["items"])
     day = rec["generated_at"][:10]
-    subject = f"[전세 레이더] {day} 추천 TOP {len(top)}"
+    subject = f"[전세 레이더] {day} 추천 {len(top)}곳"
     if top:
         subject += f" · 1위 {top[0]['name']} {top[0]['price_eok']:.1f}억"
     text_lines, rows = [], []
-    for n, it in enumerate(top, 1):
+    area, n = None, 0
+    for it in top:
+        if it.get("area_name") and it.get("area") != area:
+            area, n = it.get("area"), 0
+            text_lines.append(f"[{it['area_name']}]")
+            rows.append(f'<tr><td colspan="3" style="padding:14px 8px 4px;font-weight:700;color:#a8954f">{html.escape(it["area_name"])}</td></tr>')
+        n += 1
         new = it["id"] not in prev
         st = f"{it['station']}역 도보 {it['walk_min']}분" if it.get("station") and it.get("walk_min") else "-"
-        text_lines.append(f"{n}. {it['name']} ({it['umd']}){' [신규]' if new else ''} "
+        text_lines.append(f"{n}. {it['name']} ({place(it)}){' [신규]' if new else ''} "
                           f"{it['price_eok']:.1f}억 · {it['built']}년 · {it['pyeong']}평형 · {st} · 점수 {it['score']}")
         badge = ('<span style="background:#2f7d4f;color:#fff;border-radius:9px;padding:1px 7px;'
                  'font-size:11px;margin-left:6px">NEW</span>') if new else ""
@@ -39,7 +45,7 @@ def build(rec: dict, prev: set[str], top: list[dict] | None = None) -> tuple[str
             f'<tr><td style="padding:10px 8px;border-bottom:1px solid #e3e0d6;color:#a8954f;font-weight:700">{n}</td>'
             f'<td style="padding:10px 8px;border-bottom:1px solid #e3e0d6"><a href="{map_url}" '
             f'style="color:#1f2328;font-weight:700;text-decoration:none">{html.escape(it["name"])}</a>{badge}'
-            f'<div style="color:#6b6f63;font-size:12px">{html.escape(it["sgg"])} {html.escape(it["umd"])} · '
+            f'<div style="color:#6b6f63;font-size:12px">{html.escape(place(it))} · '
             f'{it["built"]}년 · {it["pyeong"]}평형 · {html.escape(st)}</div></td>'
             f'<td style="padding:10px 8px;border-bottom:1px solid #e3e0d6;text-align:right;white-space:nowrap">'
             f'<b>{it["price_eok"]:.1f}억</b><div style="color:#6b6f63;font-size:12px">점수 {it["score"]}</div></td></tr>')

@@ -16,7 +16,22 @@ def load_rec() -> dict:
 
 
 def pick_top(items: list[dict], n: int = 5) -> list[dict]:
-    return [i for i in items if i.get("within_budget") and i.get("deals_12m", 0) >= 3][:n]
+    """생활권(서울 강서·양천, 안양 …)마다 상위 n곳. 한 지역이 다른 지역을 밀어내지 않게 한다."""
+    ok = [i for i in items if i.get("within_budget") and i.get("deals_12m", 0) >= 3]
+    out, cnt = [], {}
+    for i in ok:
+        a = i.get("area") or "_"
+        if cnt.get(a, 0) < n:
+            out.append(i)
+            cnt[a] = cnt.get(a, 0) + 1
+    order = list(dict.fromkeys(i.get("area") or "_" for i in ok))
+    return sorted(out, key=lambda i: order.index(i.get("area") or "_"))
+
+
+def place(it: dict) -> str:
+    """서울은 동 이름, 경기는 '안양 평촌동'처럼 시 이름을 붙인다."""
+    sgg = it.get("sgg", "")
+    return f"{sgg.split()[0].removesuffix('시')} {it['umd']}" if "시 " in sgg else it["umd"]
 
 
 def prev_ids() -> set[str]:

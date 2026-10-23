@@ -60,10 +60,11 @@ class Kakao:
 
     def locate(self, sgg: str, umd: str, jibun: str, apt: str) -> tuple[float, float] | None:
         if jibun:
-            d = self.get("search/address.json", query=f"서울 {sgg} {umd} {jibun}").get("documents", [])
+            d = self.get("search/address.json", query=f"{'경기' if '시 ' in sgg else '서울'} {sgg} {umd} {jibun}").get("documents", [])
             if d:
                 return float(d[0]["y"]), float(d[0]["x"])
-        d = self.get("search/keyword.json", query=f"{umd} {apt}").get("documents", [])
+        city = sgg.split()[0] if "시 " in sgg else ""
+        d = self.get("search/keyword.json", query=f"{city} {umd} {apt}".strip()).get("documents", [])
         for doc in d:
             if "아파트" in doc.get("category_name", "") or not doc.get("category_name"):
                 return float(doc["y"]), float(doc["x"])

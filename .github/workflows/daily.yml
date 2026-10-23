@@ -4,6 +4,9 @@ on:
   schedule:
     - cron: "0 21 * * *"   # 매일 06:00 KST (UTC 21:00) — 수집·계산·화면 배포
   workflow_dispatch: {}      # Actions 탭에서 수동 실행
+  push:                      # 지역·조건·수집/모델 코드가 바뀌면 바로 다시 수집
+    branches: [main]
+    paths: ["config.json", "config/loan_rules.json", "collector/**", "model/**"]
 
 permissions:
   contents: write

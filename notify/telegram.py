@@ -13,16 +13,21 @@ from pathlib import Path
 import requests
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
-from common import PAGES_URL, load_rec, pick_top, prev_ids  # noqa: E402
+from common import PAGES_URL, load_rec, pick_top, place, prev_ids  # noqa: E402
 
 
 def compose(rec: dict, prev: set[str], top: list[dict] | None = None) -> str:
     top = top if top is not None else pick_top(rec["items"])
     lines = [f"🏠 전세 레이더 · {rec['generated_at'][:10]} 추천", f"예산 {rec['budget_eok']}억 · 34평형↑", ""]
-    for n, it in enumerate(top, 1):
+    area, n = None, 0
+    for it in top:
+        if it.get("area_name") and it.get("area") != area:
+            area, n = it.get("area"), 0
+            lines.append(f"[{it['area_name']}]")
+        n += 1
         new = " 🆕" if it["id"] not in prev else ""
         st = f" · {it['station']}역 도보 {it['walk_min']}분" if it.get("station") and it.get("walk_min") else ""
-        lines.append(f"{n}. {it['name']} ({it['umd']}){new}")
+        lines.append(f"{n}. {it['name']} ({place(it)}){new}")
         lines.append(f"   {it['price_eok']:.1f}억 · {it['built']}년 · {it['pyeong']}평형{st} · 점수 {it['score']}")
     if not top:
         lines.append("오늘은 조건에 맞는 단지가 없습니다.")
