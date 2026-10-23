@@ -40,3 +40,6 @@ td.r,th.r{text-align:right}
 button:focus-visible,select:focus-visible,input:focus-visible,a:focus-visible,textarea:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
 @media (prefers-reduced-motion:reduce){*{transition:none!important}}
 .topnav .brand .ver{font:500 .7rem var(--f-num);color:var(--muted);margin-left:6px;vertical-align:middle}
+.kind{display:inline-block;font:600 .68rem var(--f-body);color:#fff;background:var(--warn);border-radius:6px;padding:1px 6px;margin-left:6px;vertical-align:2px}
+.more{display:block;margin:14px auto 0}
+[hidden]{display:none!important}

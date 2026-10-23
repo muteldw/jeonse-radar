@@ -22,8 +22,8 @@ ol.steps li{margin-bottom:4px}
 <body>
 <div class="wrap">
  <nav class="topnav">
-  <a class="brand" href="./">전세 레이더<span>9</span><small class="ver">v3.3.0</small></a>
-  <a class="tab" href="./">추천</a><a class="tab" href="map.html">지도</a><a class="tab" href="timing.html">이사 시기</a><a class="tab" href="buyer.html">매수자 분석</a><a class="tab" href="settings.html" aria-current="page">알림 설정</a>
+  <a class="brand" href="./">전세 레이더<span>9</span><small class="ver">v4.0.0</small></a>
+  <a class="tab" href="./">추천</a><a class="tab" href="buy.html">매매</a><a class="tab" href="map.html">지도</a><a class="tab" href="timing.html">이사 시기</a><a class="tab" href="buyer.html">매수자 분석</a><a class="tab" href="settings.html" aria-current="page">알림 설정</a>
  </nav>
  <h1>알림 설정</h1>
  <p class="sub">텔레그램·메일을 언제, 누구에게 보낼지 정합니다. 매일 06~22시 매시 5분에 설정을 확인해 해당 대상에게만 보냅니다.</p>
@@ -34,6 +34,12 @@ ol.steps li{margin-bottom:4px}
    <label class="f" style="flex-direction:row;align-items:center;gap:8px">보낼 단지 수
     <select id="g-topn" style="width:auto"><option>3</option><option selected>5</option><option>10</option></select></label>
   </div>
+ </section>
+
+ <section class="panel">
+  <h2>알림에 넣을 생활권</h2>
+  <div class="days" id="areas"><span class="sub">불러오는 중…</span></div>
+  <p class="sub" style="margin-top:8px">생활권마다 상위 단지를 따로 묶어 보냅니다. 많이 고를수록 메시지가 길어져요.</p>
  </section>
 
  <section class="panel">
@@ -90,12 +96,15 @@ function render(){
   out();
 }
 function out(){
-  const c={_help:CFG._help||"알림 설정. 메일 주소는 Secret MAIL_RECIPIENTS 에 '별칭=주소'로 넣는다.",enabled:CFG.enabled,top_n:+CFG.top_n,targets:CFG.targets.map(t=>({id:t.id,channel:t.channel,...(t.channel==="email"?{recipient:t.recipient}:{}),enabled:t.enabled,schedule:t.schedule,days:t.schedule==="weekly"?(t.days||[]).slice().sort():[],hour:+t.hour}))};
+  const c={_help:CFG._help||"알림 설정. 메일 주소는 Secret MAIL_RECIPIENTS 에 '별칭=주소'로 넣는다.",enabled:CFG.enabled,top_n:+CFG.top_n,areas:CFG.areas||[],targets:CFG.targets.map(t=>({id:t.id,channel:t.channel,...(t.channel==="email"?{recipient:t.recipient}:{}),enabled:t.enabled,schedule:t.schedule,days:t.schedule==="weekly"?(t.days||[]).slice().sort():[],hour:+t.hour}))};
   $("#out").value=JSON.stringify(c,null,2);
 }
 function uid(base){let n=1,id=base;const ids=new Set(CFG.targets.map(t=>t.id));while(ids.has(id))id=base+"-"+(++n);return id}
 $("#g-enabled").addEventListener("change",e=>{CFG.enabled=e.target.checked;out()});
 $("#g-topn").addEventListener("change",e=>{CFG.top_n=+e.target.value;out()});
+$("#areas").addEventListener("change",e=>{const k=e.target.dataset.area;if(!k)return;const a=new Set(CFG.areas||[]);e.target.checked?a.add(k):a.delete(k);CFG.areas=[...a];out()});
+function renderAreas(meta){const on=new Set(CFG.areas||[]);
+  $("#areas").innerHTML=Object.entries(meta.areas||{}).map(([k,a])=>`<label><input type="checkbox" data-area="${k}" ${on.has(k)?"checked":""}>${esc(a.name)}</label>`).join("")}
 $("#targets").addEventListener("change",e=>{
   const box=e.target.closest(".target");if(!box)return;const t=CFG.targets[+box.dataset.i];
   if(e.target.dataset.day!==undefined){const d=+e.target.dataset.day;t.days=e.target.checked?[...new Set([...(t.days||[]),d])]:(t.days||[]).filter(x=>x!==d);out();return}
@@ -111,7 +120,8 @@ $("#copy").addEventListener("click",async()=>{const t=$("#out").value;try{await 
 Promise.all([
   fetch("data/notify.json",{cache:"no-store"}).then(r=>r.ok?r.json():null).catch(()=>null),
   fetch("data/sent_status.json",{cache:"no-store"}).then(r=>r.ok?r.json():{}).catch(()=>({}))
-]).then(([c,s])=>{if(c)CFG=c;SENT=s||{};render()});
+  ,fetch("data/recommend.json",{cache:"no-store"}).then(r=>r.ok?r.json():{areas:{}}).catch(()=>({areas:{}}))
+]).then(([c,s,m])=>{if(c)CFG=c;SENT=s||{};render();renderAreas(m)});
 render();
 </script>
 </body>

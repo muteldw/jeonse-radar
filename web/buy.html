@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>매매 · 전세 레이더 9</title>
+<link rel="manifest" href="manifest.json">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;500;700&family=IBM+Plex+Mono:wght@500&display=swap">
+<link rel="stylesheet" href="app.css">
+<style>
+.filters{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px;background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:12px;margin-bottom:14px}
+.filters label{display:flex;flex-direction:column;gap:4px;font-size:.78rem;color:var(--muted)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,440px),1fr));gap:14px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:14px;display:flex;flex-direction:column;gap:10px;min-width:0}
+.card.over{opacity:.6}
+.top{display:flex;justify-content:space-between;gap:10px}
+.card h3{margin:2px 0 0;font-size:1.06rem}
+.meta{font-size:.82rem;color:var(--muted)}
+.score b{font:500 1.6rem/1 var(--f-num);color:var(--accent)}.score small{display:block;font-size:.7rem;color:var(--muted);text-align:right}
+.facts{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}
+.fact{background:var(--bg);border-radius:8px;padding:7px 8px;min-width:0}
+.fact small{display:block;font-size:.68rem;color:var(--muted)}.fact strong{font:500 .9rem var(--f-num)}
+.up{color:var(--bad)}.down{color:var(--good)}
+.chips{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+.chip{font-size:.74rem;border:1px solid var(--line);border-radius:999px;padding:2px 8px}
+.chip.st{border-color:var(--accent);background:var(--accent-soft)}
+.chip.reg{border-color:var(--warn);color:var(--warn)}
+.chart{background:var(--bg);border-radius:8px;padding:8px}.chart svg{display:block;width:100%;height:auto}
+.chart .lbl{display:flex;justify-content:space-between;font-size:.7rem;color:var(--muted)}
+.actions{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.actions a{font-size:.82rem;color:var(--accent);text-decoration:none}
+.empty{background:var(--surface);border:1px dashed var(--line);border-radius:12px;padding:24px;color:var(--muted);line-height:1.7}
+@media (max-width:420px){.facts{grid-template-columns:repeat(2,1fr)}}
+</style>
+</head>
+<body>
+<div class="wrap">
+ <nav class="topnav">
+  <a class="brand" href="./">전세 레이더<span>9</span><small class="ver">v4.0.0</small></a>
+  <a class="tab" href="./">추천</a><a class="tab" href="buy.html" aria-current="page">매매</a><a class="tab" href="map.html">지도</a><a class="tab" href="timing.html">이사 시기</a><a class="tab" href="buyer.html">매수자 분석</a><a class="tab" href="settings.html">알림 설정</a>
+ </nav>
+ <h1>매매</h1>
+ <p class="sub" id="gen">불러오는 중…</p>
+ <div class="filters">
+  <label>생활권<select id="f-area"></select></label>
+  <label>구<select id="f-sgg"><option value="all">전체</option></select></label>
+  <label>유형<select id="f-kind"><option value="all">아파트+빌라</option><option>아파트</option><option>빌라</option></select></label>
+  <label>매수 예산(억)<input id="f-bud" type="number" step="0.5" min="2" max="60"></label>
+  <label>최소 평형<select id="f-py"><option value="34">34평형↑</option><option value="40">40평형↑</option></select></label>
+  <label>정렬<select id="f-sort"><option value="score">추천 점수</option><option value="price">매매가 낮은 순</option><option value="gap">갭(매매−전세) 작은 순</option><option value="growth">1년 상승률 높은 순</option></select></label>
+  <label>단지명 검색<input id="f-q" type="search" placeholder="예: 래미안"></label>
+  <label>예산 초과<select id="f-over"><option value="hide">숨기기</option><option value="show">흐리게 보기</option></select></label>
+ </div>
+ <p class="sub" id="count"></p>
+ <div class="grid" id="list"></div>
+ <button class="btn more" id="more" hidden>더 보기</button>
+ <p class="sub" style="margin-top:16px" id="src"></p>
+</div>
+<script src="data.js"></script>
+<script>
+const $=s=>document.querySelector(s);
+const esc=s=>String(s??"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+let META=null,ITEMS=[],LIMIT=60;
+function spark(tr){if(!tr||tr.length<2)return '<div class="meta">거래 분기가 부족합니다</div>';
+  const w=300,h=56,p=6,mn=Math.min(...tr)*0.98,mx=Math.max(...tr)*1.02,X=i=>p+i*(w-2*p)/(tr.length-1),Y=v=>h-p-(v-mn)/(mx-mn||1)*(h-2*p);
+  const pts=tr.map((v,i)=>X(i)+","+Y(v)).join(" ");
+  return `<svg viewBox="0 0 ${w} ${h}" role="img" aria-label="분기별 매매 중위가"><polygon points="${X(0)},${h-p} ${pts} ${X(tr.length-1)},${h-p}" fill="var(--accent-soft)"/><polyline points="${pts}" fill="none" stroke="var(--accent)" stroke-width="2"/><circle cx="${X(tr.length-1)}" cy="${Y(tr.at(-1))}" r="3.5" fill="var(--accent)"/></svg>`}
+function card(it,i,bud){
+  const over=it.price_eok>bud+0.5,g=it.growth_1y;
+  const gtxt=g==null?"-":`<span class="${g>0?"up":g<0?"down":""}">${g>0?"+":""}${(g*100).toFixed(1)}%</span>`;
+  const st=it.station?`<span class="chip st">${esc(it.station)}역 · 도보 ${it.walk_min}분</span>`:"";
+  const base=it.base_km!=null?`<span class="chip">${esc(it.base_name)}까지 ${it.base_km}km</span>`:"";
+  const reg=it.toheo?'<span class="chip reg">토지거래허가 · 실거주 2년</span>':it.regulated?'<span class="chip reg">규제지역 (토허 아님)</span>':'<span class="chip">비규제</span>';
+  const buyer=`buyer.html?name=${encodeURIComponent(it.name)}&price=${it.price_eok}&sgg=${encodeURIComponent(it.sgg)}&kind=${encodeURIComponent(it.kind||"아파트")}`;
+  const map=it.lat?`https://map.kakao.com/link/map/${encodeURIComponent(it.name)},${it.lat},${it.lng}`:`https://map.kakao.com/?q=${encodeURIComponent(it.name+" "+it.umd)}`;
+  return `<article class="card${over?" over":""}">
+  <div class="top"><div><div class="meta">#${i+1} · ${esc(it.sgg)} ${esc(it.umd)}</div><h3>${esc(it.name)}${JR.kindLabel(it)}</h3>
+   <div class="meta">${it.built||"?"}년 · ${it.pyeong}평형대(전용 ${it.area_m2}㎡) · ${JR.bath(it)}</div></div>
+   <div class="score"><b>${it.score}</b><small>추천 점수</small></div></div>
+  <div class="facts">
+   <div class="fact"><small>최근 매매(중위)</small><strong>${it.price_eok.toFixed(2)}억</strong></div>
+   <div class="fact"><small>전세 / 전세가율</small><strong>${it.jeonse_eok?it.jeonse_eok.toFixed(1)+"억 · "+Math.round(it.jeonse_ratio*100)+"%":"-"}</strong></div>
+   <div class="fact"><small>1년 변화</small><strong>${gtxt}</strong></div>
+   <div class="fact"><small>12개월 거래</small><strong>${it.deals_12m}건</strong></div>
+  </div>
+  <div class="chips">${st}${base}${reg}</div>
+  <div class="chart"><div class="lbl"><span>분기별 매매 중위가</span><span>${esc((it.trend_q||[])[0]||"")}–${esc((it.trend_q||[]).at(-1)||"")}</span></div>${spark(it.trend)}</div>
+  ${it.kind==="빌라"&&it.jeonse_ratio>0.8?'<p class="meta" style="color:var(--bad);margin:0">전세가율 80% 이상 — 전세로 들어갈 때 보증금 회수 위험이 큰 건물이에요.</p>':""}
+  <div class="actions"><a class="btn primary" href="${buyer}" style="color:#fff">자금 계획 보기</a>
+   <a href="${map}" target="_blank" rel="noopener">카카오맵</a>
+   <a href="https://new.land.naver.com/search?query=${encodeURIComponent(it.name.replace(/ \(.*\)$/,""))}" target="_blank" rel="noopener">호가·평면도</a></div>
+  </article>`}
+function render(){
+  const kind=$("#f-kind").value,sgg=$("#f-sgg").value,bud=+$("#f-bud").value||META.budget_eok,py=+$("#f-py").value,q=$("#f-q").value.trim(),over=$("#f-over").value==="show",so=$("#f-sort").value;
+  let its=ITEMS.filter(it=>(sgg==="all"||it.sgg===sgg)&&(kind==="all"||(it.kind||"아파트")===kind)&&it.pyeong>=py&&(!q||it.name.includes(q))&&(over||it.price_eok<=bud+0.5));
+  const key={score:i=>-i.score,price:i=>i.price_eok,gap:i=>i.gap_eok??99,growth:i=>-(i.growth_1y??-9)}[so];
+  its.sort((a,b)=>key(a)-key(b));
+  $("#count").textContent=`${its.length}곳`+(its.length>LIMIT?` · 상위 ${LIMIT}곳 표시`:"");
+  $("#more").hidden=its.length<=LIMIT;
+  $("#list").innerHTML=its.length?its.slice(0,LIMIT).map((it,i)=>card(it,i,bud)).join(""):'<div class="empty">조건에 맞는 매물이 없습니다. 예산이나 생활권을 바꿔보세요.</div>';
+}
+async function loadArea(){
+  const v=$("#f-area").value;$("#list").innerHTML='<div class="empty">불러오는 중…</div>';
+  ITEMS=await JR.items(META.folder||"sale",JR.areasOf(META,v));
+  const sg=v==="all"?[...new Set(ITEMS.map(i=>i.sgg))]:(META.areas[v].sgg||[]);
+  $("#f-sgg").innerHTML='<option value="all">전체</option>'+sg.map(s=>`<option>${esc(s)}</option>`).join("");
+  LIMIT=60;render();
+}
+["#f-sgg","#f-kind","#f-bud","#f-py","#f-q","#f-over","#f-sort"].forEach(s=>$(s).addEventListener("input",()=>{LIMIT=60;render()}));
+$("#more").addEventListener("click",()=>{LIMIT+=60;render()});
+$("#f-area").addEventListener("change",loadArea);
+JR.meta("sale.json").then(m=>{
+  META=m;$("#f-bud").value=m.budget_eok;
+  $("#gen").textContent=`${m.generated_at.replace("T"," ")} 기준 · 최근 12개월 매매 실거래, 34평형↑(전용 80㎡↑)`;
+  $("#src").textContent=`출처: ${m.source}. 매매가는 최근 거래 3건 중위값, 전세가는 같은 단지·평형의 최근 신규 전세 중위값입니다.`;
+  const total=Object.values(m.areas).reduce((s,a)=>s+a.count,0);
+  if(!total){$("#list").innerHTML=`<div class="empty"><b>아직 매매 데이터가 없습니다.</b><br>공공데이터포털(data.go.kr)에서 아래 자료를 활용신청하면 다음 수집부터 채워집니다. 인증키는 그대로 씁니다.<br>· 국토교통부_아파트 매매 실거래가 자료<br>· 국토교통부_연립다세대 매매 실거래가 자료</div>`;JR.fillAreas($("#f-area"),m);return}
+  JR.fillAreas($("#f-area"),m);return loadArea();
+}).catch(()=>{$("#gen").textContent="매매 데이터를 불러오지 못했습니다";$("#list").innerHTML='<div class="empty">다음 자동 수집 후 다시 열어주세요.</div>'});
+</script>
+</body>
+</html>

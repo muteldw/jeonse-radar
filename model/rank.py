@@ -165,7 +165,10 @@ def build(rows: list[dict], cfg: dict, weights: dict, today: date, geo: dict | N
         out.append({
             "id": f"{sgg}-{umd}-{apt}-{band}",
             "name": apt, "sgg": sgg, "umd": umd, "built": built,
-            "area_m2": band, "pyeong": pyeong(band), "bath": 2 if band >= 80 else 1,
+            "kind": deals[-1].get("kind") or "아파트",
+            "area_m2": band, "pyeong": pyeong(band),
+            # 아파트 84㎡↑는 욕실 2개가 표준. 빌라는 구조가 제각각이라 확인 필요(None)
+            "bath": (2 if band >= 80 else 1) if (deals[-1].get("kind") or "아파트") == "아파트" else None,
             "price_eok": price, "deals_12m": len(recent),
             "last_deal": recent[-1]["deal_date"],
             "trend_q": qs, "trend": trend,
@@ -222,19 +225,41 @@ def main() -> None:
     w = update_weights(DEFAULT_W, items, feedback)
     if w != DEFAULT_W:
         items = build(rows, cfg, w, today, geo, sales)
-    out = {
+    write_split(items, cfg, w, "rec", "recommend.json", "국토교통부 아파트·연립다세대 전월세 실거래가")
+
+
+def public(it: dict) -> dict:
+    """화면용으로 가볍게: 학습용 features 제거, 분기 이름은 처음·끝만."""
+    o = {k: v for k, v in it.items() if k != "features"}
+    if o.get("trend_q"):
+        o["trend_q"] = [o["trend_q"][0], o["trend_q"][-1]]
+    return o
+
+
+def write_split(items: list[dict], cfg: dict, w: dict, folder: str, meta_name: str, source: str,
+                budget_key: str = "budget_eok") -> None:
+    """생활권별 파일(web/data/<folder>/<area>.json) + 목록·설정만 담은 메타 파일."""
+    d = ROOT / "web" / "data" / folder
+    d.mkdir(parents=True, exist_ok=True)
+    by: dict[str, list] = defaultdict(list)
+    for it in items:
+        by[it.get("area") or "_"].append(public(it))
+    areas = cfg.get("areas", {})
+    for k in areas:
+        (d / f"{k}.json").write_text(json.dumps({"area": k, "items": by.get(k, [])}, ensure_ascii=False,
+                                                separators=(",", ":")), encoding="utf-8")
+    meta = {
         "generated_at": datetime.now(KST).isoformat(timespec="minutes"),
-        "budget_eok": cfg["budget_eok"],
+        "budget_eok": cfg.get(budget_key, cfg["budget_eok"]),
         "weights": {k: round(v, 3) for k, v in w.items()},
-        "source": "국토교통부 아파트 전월세 실거래가",
-        "areas": {k: {"name": a["name"], "base": a.get("base", {}), "sgg": a.get("sgg", [])}
-                  for k, a in cfg.get("areas", {}).items()},
-        "items": items,
+        "source": source, "folder": folder,
+        "areas": {k: {"name": a["name"], "base": a.get("base", {}), "sgg": a.get("sgg", []),
+                      "count": len(by.get(k, [])),
+                      "kinds": sorted({i.get("kind", "아파트") for i in by.get(k, [])})}
+                  for k, a in areas.items()},
     }
-    dst = ROOT / "web" / "data" / "recommend.json"
-    dst.parent.mkdir(parents=True, exist_ok=True)
-    dst.write_text(json.dumps(out, ensure_ascii=False, indent=1), encoding="utf-8")
-    print(f"단지 {len(items)}곳 추천 생성 → {dst.relative_to(ROOT)}")
+    (ROOT / "web" / "data" / meta_name).write_text(json.dumps(meta, ensure_ascii=False, indent=1), encoding="utf-8")
+    print(f"{len(items)}곳 → web/data/{meta_name} + {folder}/ ({', '.join(f'{k} {len(by.get(k, []))}' for k in areas)})")
 
 
 if __name__ == "__main__":

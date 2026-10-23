@@ -30,8 +30,8 @@
 <body>
 <div class="wrap">
  <nav class="topnav">
-  <a class="brand" href="./">전세 레이더<span>9</span><small class="ver">v3.3.0</small></a>
-  <a class="tab" href="./">추천</a><a class="tab" href="map.html">지도</a><a class="tab" href="timing.html" aria-current="page">이사 시기</a><a class="tab" href="buyer.html">매수자 분석</a><a class="tab" href="settings.html">알림 설정</a>
+  <a class="brand" href="./">전세 레이더<span>9</span><small class="ver">v4.0.0</small></a>
+  <a class="tab" href="./">추천</a><a class="tab" href="buy.html">매매</a><a class="tab" href="map.html">지도</a><a class="tab" href="timing.html" aria-current="page">이사 시기</a><a class="tab" href="buyer.html">매수자 분석</a><a class="tab" href="settings.html">알림 설정</a>
  </nav>
  <h1>이사 시기</h1>
  <p class="sub">실거래 신고의 계약기간으로 단지별 전세 만기를 세고, 단지의 갱신 비율로 나올 매물을 추정합니다. 매물은 보통 만기 <span id="lead">2</span>개월 전에 나옵니다.</p>
@@ -41,7 +41,8 @@
    <label class="f">지금 집 만기일 (이 기기에만 저장)<input id="end" type="date"></label>
    <label class="f">앞당겨 이사 가능<select id="shift"><option value="0">만기일에만</option><option value="1">1개월 전까지</option><option value="2" selected>2개월 전까지</option><option value="3">3개월 전까지</option></select></label>
    <label class="f">전세 예산 (억)<input id="bud" type="number" step="0.5" min="3" max="20"></label>
-   <label class="f">지역<select id="area"><option value="all">전체</option></select></label>
+   <label class="f">생활권<select id="area"></select></label>
+   <label class="f">유형<select id="kind"><option value="all">아파트+빌라</option><option>아파트</option><option>빌라</option></select></label>
    <label class="f">대상 단지<select id="scope"><option value="top20">추천 상위 20곳</option><option value="budget">예산 안 전체</option><option value="liked">관심 표시한 단지</option></select></label>
   </div>
  </section>
@@ -60,6 +61,7 @@
   <p class="sub" id="foot"></p>
  </section>
 </div>
+<script src="data.js"></script>
 <script>
 const $=s=>document.querySelector(s);
 const esc=s=>String(s??"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
@@ -71,8 +73,8 @@ const iso=x=>`${x.getFullYear()}-${String(x.getMonth()+1).padStart(2,"0")}-${Str
 const kdate=x=>`${x.getFullYear()}년 ${x.getMonth()+1}월 ${x.getDate()}일`;
 function liked(){try{const f=JSON.parse(localStorage.getItem("jr9_fb")||"{}");return new Set(Object.keys(f).filter(k=>f[k]==="like"))}catch(e){return new Set()}}
 function targets(){const bud=+$("#bud").value||REC.budget_eok,sc=$("#scope").value;
-  const ar=$("#area").value;
-  let its=REC.items.filter(i=>i.pyeong>=34&&i.price_eok<=bud+0.5&&SUP.items[i.id]&&(ar==="all"||i.area===ar));
+  const kd=$("#kind").value;
+  let its=REC.items.filter(i=>i.pyeong>=34&&i.price_eok<=bud+0.5&&SUP.items[i.id]&&(kd==="all"||(i.kind||"아파트")===kd));
   if(sc==="top20")its=its.filter(i=>i.deals_12m>=3).slice(0,20);
   if(sc==="liked"){const L=liked();its=its.filter(i=>L.has(i.id))}
   return its}
@@ -130,12 +132,16 @@ function render(){
 }
 const saved=store.get("jr9_move_end");if(saved)$("#end").value=saved;
 $("#end").addEventListener("input",e=>{store.set("jr9_move_end",e.target.value);render()});
-["#shift","#bud","#scope","#area"].forEach(s=>$(s).addEventListener("input",render));
-Promise.all([fetch("data/recommend.json",{cache:"no-store"}).then(r=>r.json()),fetch("data/supply.json",{cache:"no-store"}).then(r=>r.json())])
- .then(([r,s])=>{REC=r;SUP=s;$("#bud").value=r.budget_eok;
-   Object.entries(r.areas||{}).forEach(([k,a])=>$("#area").insertAdjacentHTML("beforeend",`<option value="${k}">${esc(a.name)}</option>`));
-   try{const v=localStorage.getItem("jr9_area");if(v)$("#area").value=v}catch(e){}
-   $("#area").addEventListener("change",e=>{try{localStorage.setItem("jr9_area",e.target.value)}catch(_){}});$("#lead").textContent=s.lead_months;render()})
+["#shift","#bud","#scope","#kind"].forEach(s=>$(s).addEventListener("input",render));
+let META=null;
+async function loadArea(){
+  const areas=JR.areasOf(META,$("#area").value);
+  const [items,sup]=await Promise.all([JR.items(META.folder||"rec",areas),JR.supply(areas)]);
+  items.sort((a,b)=>(!a.within_budget)-(!b.within_budget)||b.score-a.score);
+  REC={...META,items};SUP=sup;$("#lead").textContent=sup.lead_months;render();
+}
+$("#area").addEventListener("change",loadArea);
+JR.meta().then(m=>{META=m;$("#bud").value=m.budget_eok;JR.fillAreas($("#area"),m);return loadArea()})
  .catch(()=>{$("#reco").innerHTML='<p class="sub">예상 매물 데이터가 아직 없습니다. 다음 자동 실행(매일 06시) 후 다시 열어주세요.</p>'});
 </script>
 </body>

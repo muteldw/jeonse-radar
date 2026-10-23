@@ -59,11 +59,12 @@ body{display:flex;flex-direction:column}
 <body>
 <div class="bar">
  <nav class="topnav">
-  <a class="brand" href="./">전세 레이더<span>9</span><small class="ver">v3.3.0</small></a>
-  <a class="tab" href="./">추천</a><a class="tab" href="map.html" aria-current="page">지도</a><a class="tab" href="timing.html">이사 시기</a><a class="tab" href="buyer.html">매수자 분석</a><a class="tab" href="settings.html">알림 설정</a>
+  <a class="brand" href="./">전세 레이더<span>9</span><small class="ver">v4.0.0</small></a>
+  <a class="tab" href="./">추천</a><a class="tab" href="buy.html">매매</a><a class="tab" href="map.html" aria-current="page">지도</a><a class="tab" href="timing.html">이사 시기</a><a class="tab" href="buyer.html">매수자 분석</a><a class="tab" href="settings.html">알림 설정</a>
  </nav>
  <div class="filters">
-  <label>지역 <select id="area"><option value="all">전체</option></select></label>
+  <label>생활권 <select id="area"></select></label>
+  <label>유형 <select id="kind"><option value="all">아파트+빌라</option><option>아파트</option><option>빌라</option></select></label>
   <label>예산 <input id="bud" type="number" step="0.5" min="3" max="20" style="width:70px">억</label>
   <label>평형 <select id="py"><option value="34">34평형↑</option><option value="40">40평형↑</option></select></label>
   <label class="layer"><input type="checkbox" id="showOver">예산 초과도</label>
@@ -78,6 +79,7 @@ body{display:flex;flex-direction:column}
 </div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.5.3/leaflet.markercluster.min.js"></script>
+<script src="data.js"></script>
 <script>
 const $=s=>document.querySelector(s);
 const esc=s=>String(s??"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
@@ -91,8 +93,8 @@ map.addLayer(cluster);
 const stnLayer=L.layerGroup().addTo(map), ringLayer=L.layerGroup().addTo(map);
 function lineClass(lines){const s=(lines||[]).join(" ");return /5호선/.test(s)?"l5":/2호선/.test(s)?"l2":/공항/.test(s)&&!/9호선/.test(s)?"ap":""}
 function visible(){const bud=+$("#bud").value||D.budget_eok,py=+$("#py").value,over=$("#showOver").checked;
-  const ar=$("#area").value;
-  return D.items.filter(i=>i.lat&&i.pyeong>=py&&i.deals_12m>=2&&(over||i.price_eok<=bud+0.5)&&(ar==="all"||i.area===ar))}
+  const kd=$("#kind").value;
+  return D.items.filter(i=>i.lat&&i.pyeong>=py&&i.deals_12m>=2&&(over||i.price_eok<=bud+0.5)&&(kd==="all"||(i.kind||"아파트")===kd))}
 function fit(){const b=L.latLngBounds(visible().slice(0,20).map(i=>[i.lat,i.lng]));if(b.isValid())map.fitBounds(b,{padding:[30,30]})}
 function draw(){
   cluster.clearLayers();markers={};stnLayer.clearLayers();
@@ -125,9 +127,9 @@ function select(id,pan){
   if(pan)map.setView([it.lat,it.lng],Math.max(map.getZoom(),15));
   const inf=it.infra?Object.entries(it.infra).map(([k,v])=>`<span class="chip">${esc(k)} ${v}</span>`).join(""):"";
   const ratio=it.jeonse_ratio?Math.round(it.jeonse_ratio*100)+"%":"-";
-  const buyer=`buyer.html?name=${encodeURIComponent(it.name)}&price=${it.sale_eok||""}&sgg=${encodeURIComponent(it.sgg)}`;
+  const buyer=`buyer.html?name=${encodeURIComponent(it.name)}&price=${it.sale_eok||""}&sgg=${encodeURIComponent(it.sgg)}&kind=${encodeURIComponent(it.kind||"아파트")}`;
   $("#sheet").innerHTML=`<button class="close" aria-label="닫기">×</button>
-   <h3>${esc(it.name)}</h3><div class="sub">${esc(it.sgg)} ${esc(it.umd)} · ${it.built||"?"}년 · ${it.pyeong}평형(전용 ${it.area_m2}㎡) · 욕실 ${it.bath}</div>
+   <h3>${esc(it.name)}${JR.kindLabel(it)}</h3><div class="sub">${esc(it.sgg)} ${esc(it.umd)} · ${it.built||"?"}년 · ${it.pyeong}평형(전용 ${it.area_m2}㎡) · ${JR.bath(it)}</div>
    <div class="facts"><div class="fact"><small>전세(최근 신규)</small><strong>${it.price_eok.toFixed(2)}억</strong></div>
     <div class="fact"><small>매매(최근)</small><strong>${it.sale_eok?it.sale_eok.toFixed(1)+"억":"-"}</strong></div>
     <div class="fact"><small>전세가율</small><strong>${ratio}</strong></div></div>
@@ -144,14 +146,26 @@ $("#items").addEventListener("click",e=>{const el=e.target.closest(".item");if(e
 $("#items").addEventListener("keydown",e=>{if(e.key==="Enter"){const el=e.target.closest(".item");if(el)select(el.dataset.id,true)}});
 $("#listToggle").addEventListener("click",()=>{const o=$("#list").classList.toggle("open");$("#listToggle").setAttribute("aria-expanded",o);draw()});
 ["#bud","#py","#showOver","#lStn","#lRing"].forEach(s=>$(s).addEventListener("input",draw));
-$("#area").addEventListener("input",()=>{draw();fit()});
-fetch("data/supply.json",{cache:"no-store"}).then(r=>r.ok?r.json():null).then(s=>{SUP=s;if(SEL)select(SEL,false)}).catch(()=>{});
-fetch("data/recommend.json",{cache:"no-store"}).then(r=>r.json()).then(d=>{D=d;$("#bud").value=d.budget_eok;
-  Object.entries(d.areas||{}).forEach(([k,a])=>$("#area").insertAdjacentHTML("beforeend",`<option value="${k}">${esc(a.name)}</option>`));
-  if(Object.keys(d.areas||{}).length)$("#area").value=Object.keys(d.areas)[0];
-  draw();fit();
-  const q=new URLSearchParams(location.search).get("id");if(q){const it=D.items.find(i=>i.id===q);if(it&&it.area){$("#area").value=it.area;draw()}select(q,true)}})
- .catch(()=>{$("#items").innerHTML='<p class="sub">추천 데이터를 불러오지 못했습니다.</p>'});
+$("#kind").addEventListener("input",()=>{draw();fit()});
+let META=null;
+async function loadArea(selectId){
+  const areas=JR.areasOf(META,$("#area").value);
+  $("#items").innerHTML='<p class="sub">불러오는 중…</p>';
+  const items=await JR.items(META.folder||"rec",areas);
+  items.sort((a,b)=>(!a.within_budget)-(!b.within_budget)||b.score-a.score);
+  D={...META,items};SUP=await JR.supply(areas).catch(()=>null);
+  SEL=null;$("#sheet").hidden=true;ringLayer.clearLayers();draw();fit();
+  if(selectId)select(selectId,true);
+}
+$("#area").addEventListener("change",()=>loadArea());
+JR.meta().then(async d=>{
+  META=d;$("#bud").value=d.budget_eok;
+  if(d.items){D=d;$("#area").innerHTML="<option>전체</option>";draw();fit();return}
+  JR.fillAreas($("#area"),d);
+  const q=new URLSearchParams(location.search).get("id");
+  if(q){const sg=q.split("-")[0];const k=Object.entries(d.areas).find(([_,a])=>(a.sgg||[]).includes(sg));if(k)$("#area").value=k[0]}
+  await loadArea(q);
+}).catch(()=>{$("#items").innerHTML='<p class="sub">추천 데이터를 불러오지 못했습니다.</p>'});
 </script>
 </body>
 </html>

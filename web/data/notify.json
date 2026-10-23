@@ -3,7 +3,30 @@
   "enabled": true,
   "top_n": 5,
   "targets": [
-    {"id": "telegram", "channel": "telegram", "enabled": true, "schedule": "daily", "days": [], "hour": 7},
-    {"id": "me", "channel": "email", "recipient": "본인", "enabled": true, "schedule": "weekly", "days": [0, 2], "hour": 7}
-  ]
+    {
+      "id": "telegram",
+      "channel": "telegram",
+      "enabled": true,
+      "schedule": "daily",
+      "days": [],
+      "hour": 7
+    },
+    {
+      "id": "me",
+      "channel": "email",
+      "recipient": "본인",
+      "enabled": true,
+      "schedule": "weekly",
+      "days": [
+        0,
+        2
+      ],
+      "hour": 7
+    }
+  ],
+  "areas": [
+    "seoul_west",
+    "anyang"
+  ],
+  "_areas_help": "알림에 넣을 생활권. 비우면 전체. 이름: seoul_west, seoul_sw, seoul_nw, seoul_center, seoul_ne, seoul_se, anyang"
 }

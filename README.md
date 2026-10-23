@@ -1,24 +1,25 @@
 # 전세 레이더 9
 
 신안아파트(2027.4 만기) 이후 이사 후보를 찾기 위한 전세 추천 프로그램.
-강서·양천과 안양(만안·동안) 전용 80㎡↑(34평형대 이상) 전세 실거래를 매일 06:00(KST)에 수집해 단지별 추천 순위를 만들고,
+서울 25개 구와 안양(만안·동안)의 아파트·빌라 전용 80㎡↑(34평형대 이상) 전세·매매 실거래를 매일 06:00(KST)에 수집해 단지별 추천 순위를 만들고,
 휴대폰·PC 공용 웹(PWA)으로 보여준다.
 
 ## 구조
 
 ```
 config.json                 지역·예산·면적 조건, 단지별 역 정보
-collector/fetch_rent.py     국토부 아파트 전월세 실거래 API 수집 → data/rent_raw.csv
+collector/fetch_rent.py     국토부 아파트·연립다세대 전월세 실거래 → data/rent_raw.csv (지역별 이어받기: data/collect_state.json)
 collector/geo.py            카카오 로컬 API 위치·역·인프라 → data/geo.json
-collector/fetch_sale.py     국토부 아파트 매매 실거래 API → data/sale_raw.csv (전세가율·매수자 분석)
+collector/fetch_sale.py     국토부 아파트·연립다세대 매매 실거래 → data/sale_raw.csv
+model/rank_sale.py          매매 추천(매매가·전세가율·갭·1년 상승률) → web/data/sale.json + sale/<생활권>.json
 notify/dispatch.py          알림 발송기: config/notify.json 의 주기·켜기/끄기·받는 사람대로 발송
 notify/telegram.py, email_alert.py  채널별 발송
 config/notify.json          알림 설정 (웹 '알림 설정' 화면에서 만들어 붙여넣기)
 config/loan_rules.json      LTV·대출 한도·DSR·취득세 규칙 (제도 바뀌면 여기만 수정)
 config/wealth_dist.json     순자산 → 상위 % 추정 기준점
-model/rank.py               단지별 집계·추천 점수·취향 학습 → web/data/recommend.json
+model/rank.py               전세 추천 점수·취향 학습 → web/data/recommend.json(목록) + rec/<생활권>.json
 model/supply.py             계약기간·갱신율로 단지별 월별 예상 매물, 계절 시세 → web/data/supply.json
-web/                        화면: 추천(index) · 지도(map) · 이사 시기(timing) · 매수자 분석(buyer) · 알림 설정(settings)
+web/                        화면: 추천(index) · 매매(buy) · 지도(map) · 이사 시기(timing) · 매수자 분석(buyer) · 알림 설정(settings)
 data/feedback.json          관심/제외 기록 (화면의 '기록 복사' 내용을 붙여넣기)
 .github/workflows/daily.yml  매일 06:00 KST 수집·계산·화면 배포
 .github/workflows/notify.yml KST 06~22시 매시 5분 알림 발송 (수동 실행 시 즉시 발송)
@@ -27,7 +28,7 @@ tests/                      모의 데이터 테스트
 
 ## 처음 설정 (한 번만)
 
-1. **API 키 발급**: 공공데이터포털(data.go.kr)에서 `국토교통부_아파트 전월세 실거래가 자료` 활용신청 → 마이페이지에서 일반 인증키(Decoding) 복사. 승인은 보통 즉시~1시간.
+1. **API 키 발급**: 공공데이터포털(data.go.kr)에서 `국토교통부_아파트 전월세 실거래가 자료` 활용신청 (빌라·매매는 `연립다세대 전월세`, `아파트 매매`, `연립다세대 매매` 자료도 각각 신청, 키는 하나) → 마이페이지에서 일반 인증키(Decoding) 복사. 승인은 보통 즉시~1시간.
 2. **키 등록**: GitHub 저장소 → Settings → Secrets and variables → Actions → New repository secret
    - Name: `MOLIT_API_KEY`, Value: 복사한 키
 3. **Pages 켜기**: Settings → Pages → Source를 `GitHub Actions`로 선택.

@@ -110,14 +110,19 @@ def lookup(k: Kakao, sgg, umd, jibun, apt, base: dict) -> dict:
 
 
 def complexes_from_raw() -> dict[str, tuple]:
-    p = ROOT / "data" / "rent_raw.csv"
-    out = {}
-    if not p.exists():
-        return out
-    with p.open(encoding="utf-8") as f:
-        for r in csv.DictReader(f):
-            out.setdefault(complex_key(r["sgg"], r["umd"], r["apt"]), (r["sgg"], r["umd"], r["jibun"], r["apt"]))
-    return out
+    """전세·매매 거래에 나온 단지·건물. 최근 거래가 많은 곳부터 조회하도록 거래 수 순으로 정렬."""
+    out, cnt = {}, {}
+    since = (date.today() - timedelta(days=365)).isoformat()
+    for name in ("rent_raw.csv", "sale_raw.csv"):
+        p = ROOT / "data" / name
+        if not p.exists():
+            continue
+        with p.open(encoding="utf-8") as f:
+            for r in csv.DictReader(f):
+                ck = complex_key(r["sgg"], r["umd"], r["apt"])
+                out.setdefault(ck, (r["sgg"], r["umd"], r["jibun"], r["apt"]))
+                cnt[ck] = cnt.get(ck, 0) + (r["deal_date"] >= since)
+    return dict(sorted(out.items(), key=lambda kv: -cnt[kv[0]]))
 
 
 def main() -> int:
@@ -126,7 +131,7 @@ def main() -> int:
         print("KAKAO_REST_KEY 없음 — 위치 정보 단계를 건너뜁니다.")
         return 0
     cfg = json.loads((ROOT / "config.json").read_text(encoding="utf-8"))
-    base = cfg["base_station"]
+    base = cfg.get("base_station") or {"lat": 37.5667, "lng": 126.8272}
     path = ROOT / "data" / "geo.json"
     cache = json.loads(path.read_text(encoding="utf-8")) if path.exists() else {}
     retry_before = (date.today() - timedelta(days=30)).isoformat()
@@ -144,6 +149,10 @@ def main() -> int:
         cache[ck].update(st or {"st_lat": None, "st_lng": None})
     if patch:
         print(f"역 좌표 보강 {len(patch)}곳")
+    cap = int(cfg.get("geo_max_per_run", 2500))
+    if len(todo) > cap:
+        print(f"위치 조회 대상 {len(todo)}곳 중 거래 많은 {cap}곳만 이번에 조회 (나머지는 다음 실행에서)")
+        todo = todo[:cap]
     print(f"위치 조회 대상 {len(todo)}곳 (캐시 {len(cache)}곳)")
     for i, (ck, (sgg, umd, jibun, apt)) in enumerate(todo, 1):
         try:

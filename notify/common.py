@@ -11,8 +11,25 @@ LAST = ROOT / "data" / "last_top.json"
 PAGES_URL = os.environ.get("PAGES_URL", "https://muteldw.github.io/jeonse-radar/")
 
 
-def load_rec() -> dict:
-    return json.loads((ROOT / "web" / "data" / "recommend.json").read_text(encoding="utf-8"))
+def load_rec(areas: list[str] | None = None) -> dict:
+    """메타(recommend.json) + 생활권별 파일(rec/<area>.json)을 합친다. areas가 비면 전체."""
+    meta = json.loads((ROOT / "web" / "data" / "recommend.json").read_text(encoding="utf-8"))
+    if "items" in meta:  # 예전 형식
+        return meta
+    if areas is None:
+        try:
+            areas = json.loads((ROOT / "config" / "notify.json").read_text(encoding="utf-8")).get("areas") or None
+        except (OSError, ValueError):
+            areas = None
+    items = []
+    for k in (areas or list(meta.get("areas", {}))):
+        f = ROOT / "web" / "data" / meta.get("folder", "rec") / f"{k}.json"
+        if f.exists():
+            items += json.loads(f.read_text(encoding="utf-8")).get("items", [])
+    order = list(meta.get("areas", {}))
+    items.sort(key=lambda i: (order.index(i["area"]) if i.get("area") in order else 99,
+                              not i.get("within_budget"), -i.get("score", 0)))
+    return {**meta, "items": items}
 
 
 def pick_top(items: list[dict], n: int = 5) -> list[dict]:

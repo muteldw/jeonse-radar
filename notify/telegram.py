@@ -27,7 +27,7 @@ def compose(rec: dict, prev: set[str], top: list[dict] | None = None) -> str:
         n += 1
         new = " 🆕" if it["id"] not in prev else ""
         st = f" · {it['station']}역 도보 {it['walk_min']}분" if it.get("station") and it.get("walk_min") else ""
-        lines.append(f"{n}. {it['name']} ({place(it)}){new}")
+        lines.append(f"{n}. {it['name']} ({place(it)}){' · 빌라' if it.get('kind') == '빌라' else ''}{new}")
         lines.append(f"   {it['price_eok']:.1f}억 · {it['built']}년 · {it['pyeong']}평형{st} · 점수 {it['score']}")
     if not top:
         lines.append("오늘은 조건에 맞는 단지가 없습니다.")

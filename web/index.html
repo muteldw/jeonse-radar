@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>전세 레이더 9</title>
-<meta name="version" content="3.3.0">
+<meta name="version" content="4.0.0">
 <link rel="manifest" href="manifest.json">
 <link rel="stylesheet" href="app.css">
 <meta name="theme-color" content="#a8954f">
@@ -51,13 +51,15 @@ footer{margin-top:20px;font-size:.78rem;color:var(--muted);display:flex;flex-wra
 <body>
 <div class="wrap">
  <nav class="topnav">
-  <a class="brand" href="./">전세 레이더<span>9</span><small class="ver">v3.3.0</small></a>
-  <a class="tab" href="./" aria-current="page">추천</a><a class="tab" href="map.html">지도</a><a class="tab" href="timing.html">이사 시기</a><a class="tab" href="buyer.html">매수자 분석</a><a class="tab" href="settings.html">알림 설정</a>
+  <a class="brand" href="./">전세 레이더<span>9</span><small class="ver">v4.0.0</small></a>
+  <a class="tab" href="./" aria-current="page">추천</a><a class="tab" href="buy.html">매매</a><a class="tab" href="map.html">지도</a><a class="tab" href="timing.html">이사 시기</a><a class="tab" href="buyer.html">매수자 분석</a><a class="tab" href="settings.html">알림 설정</a>
  </nav>
  <div class="sub" id="gen" style="margin-bottom:12px">불러오는 중…</div>
  <div class="note" id="note" hidden></div>
  <div class="filters">
-  <label>지역<select id="f-sgg"><option value="all">전체</option></select></label>
+  <label>생활권<select id="f-area"></select></label>
+  <label>구<select id="f-sgg"><option value="all">전체</option></select></label>
+  <label>유형<select id="f-kind"><option value="all">아파트+빌라</option><option>아파트</option><option>빌라</option></select></label>
   <label>전세 예산(억)<input id="f-bud" type="number" step="0.5" min="3" max="20"></label>
   <label>최소 평형<select id="f-py"><option value="34">34평형↑</option><option value="40">40평형↑</option></select></label>
   <label>단지명 검색<input id="f-q" type="search" placeholder="예: 엠밸리"></label>
@@ -65,15 +67,17 @@ footer{margin-top:20px;font-size:.78rem;color:var(--muted);display:flex;flex-wra
  </div>
  <p class="sub" id="count"></p>
  <div class="grid" id="list"></div>
+ <button class="btn more" id="more" hidden>더 보기</button>
  <footer>
   <span id="src"></span>
   <button class="btn" id="export">관심/제외 기록 복사</button>
   <span id="exmsg"></span>
  </footer>
 </div>
+<script src="data.js"></script>
 <script>
 const $=s=>document.querySelector(s);
-let DATA=null,FB={};
+let DATA=null,META=null,FB={},LIMIT=60;
 try{FB=JSON.parse(localStorage.getItem("jr9_fb")||"{}")}catch(e){}
 const saveFB=()=>{try{localStorage.setItem("jr9_fb",JSON.stringify(FB))}catch(e){}};
 function spark(tr,qs){
@@ -91,8 +95,8 @@ function card(it,i,bud){
   const base=it.base_km!=null?`<span class="tag">${it.base_name||"기준역"}까지 ${it.base_km}km</span>`:"";
   const map=it.lat?`https://map.kakao.com/link/map/${encodeURIComponent(it.name)},${it.lat},${it.lng}`:`https://map.kakao.com/?q=${q}`;
   return `<article class="card${over?' over':''}">
-  <div class="top"><div><div class="meta">#${i+1} · ${it.sgg} ${it.umd}</div><h3>${it.name}</h3>
-   <div class="meta">${it.built||"?"}년 준공 · ${it.pyeong}평형대(전용 ${it.area_m2}㎡) · 욕실 ${it.bath}</div></div>
+  <div class="top"><div><div class="meta">#${i+1} · ${it.sgg} ${it.umd}</div><h3>${it.name}${JR.kindLabel(it)}</h3>
+   <div class="meta">${it.built||"?"}년 준공 · ${it.pyeong}평형대(전용 ${it.area_m2}㎡) · ${JR.bath(it)}</div></div>
    <div class="score"><b>${it.score}</b><small>추천 점수</small></div></div>
   <div class="facts">
    <div class="fact"><small>최근 전세(중위)</small><strong>${it.price_eok.toFixed(2)}억</strong></div>
@@ -107,29 +111,41 @@ function card(it,i,bud){
    <a href="${map}" target="_blank" rel="noopener">카카오맵</a>
    <a href="https://new.land.naver.com/search?query=${encodeURIComponent(it.name)}" target="_blank" rel="noopener">호가 보기</a>
    <a href="map.html?id=${encodeURIComponent(it.id)}">지도에서 보기</a>
-   <a href="buyer.html?name=${encodeURIComponent(it.name)}&price=${it.sale_eok||""}&sgg=${encodeURIComponent(it.sgg)}">매수자 분석</a>
+   <a href="buyer.html?name=${encodeURIComponent(it.name)}&price=${it.sale_eok||""}&sgg=${encodeURIComponent(it.sgg)}&kind=${encodeURIComponent(it.kind||"아파트")}">매수자 분석</a>
   </div></article>`;
 }
 function render(){
-  const sgg=$("#f-sgg").value,bud=+$("#f-bud").value||DATA.budget_eok,py=+$("#f-py").value,q=$("#f-q").value.trim(),showOver=$("#f-over").value==="show";
-  const items=DATA.items.filter(it=>(sgg==="all"||(sgg.startsWith("area:")?it.area===sgg.slice(5):it.sgg===sgg))&&it.pyeong>=py&&FB[it.id]!=="no"&&(!q||it.name.includes(q))&&(showOver||it.price_eok<=bud+0.5));
+  const kind=$("#f-kind").value,sgg=$("#f-sgg").value,bud=+$("#f-bud").value||DATA.budget_eok,py=+$("#f-py").value,q=$("#f-q").value.trim(),showOver=$("#f-over").value==="show";
+  const items=DATA.items.filter(it=>(sgg==="all"||it.sgg===sgg)&&(kind==="all"||(it.kind||"아파트")===kind)&&it.pyeong>=py&&FB[it.id]!=="no"&&(!q||it.name.includes(q))&&(showOver||it.price_eok<=bud+0.5));
   const hid=Object.values(FB).filter(v=>v==="no").length;
-  $("#count").textContent=`단지 ${items.length}곳`+(hid?` · 제외 ${hid}곳 숨김`:"");
-  $("#list").innerHTML=items.length?items.map((it,i)=>card(it,i,bud)).join(""):'<div class="empty">조건에 맞는 단지가 없습니다. 예산을 올리거나 구를 바꿔보세요.</div>';
+  $("#count").textContent=`단지 ${items.length}곳`+(items.length>LIMIT?` · 상위 ${LIMIT}곳 표시`:"")+(hid?` · 제외 ${hid}곳 숨김`:"");
+  $("#more").hidden=items.length<=LIMIT;
+  $("#list").innerHTML=items.length?items.slice(0,LIMIT).map((it,i)=>card(it,i,bud)).join(""):'<div class="empty">조건에 맞는 단지가 없습니다. 예산을 올리거나 구를 바꿔보세요.</div>';
 }
 $("#list").addEventListener("click",e=>{const b=e.target.closest("[data-k]");if(!b)return;const id=b.dataset.id,k=b.dataset.k;
   if(FB[id]===k)delete FB[id];else FB[id]=k;saveFB();render()});
 $("#export").addEventListener("click",async()=>{const t=JSON.stringify(FB,null,1);
   try{await navigator.clipboard.writeText(t);$("#exmsg").textContent="복사됨 · 저장소 data/feedback.json에 붙여넣으면 내일 추천에 반영됩니다"}catch(e){$("#exmsg").textContent=t}});
-["#f-sgg","#f-bud","#f-py","#f-q","#f-over"].forEach(s=>$(s).addEventListener("input",render));
-fetch("data/recommend.json",{cache:"no-store"}).then(r=>r.json()).then(d=>{
-  DATA=d;$("#f-bud").value=d.budget_eok;
-  Object.entries(d.areas||{}).forEach(([k,a])=>$("#f-sgg").insertAdjacentHTML("beforeend",`<option value="area:${k}">${a.name} 전체</option>`));
-  [...new Set(d.items.map(i=>i.sgg))].forEach(s=>$("#f-sgg").insertAdjacentHTML("beforeend",`<option value="${s}">· ${s}</option>`));
+["#f-sgg","#f-bud","#f-py","#f-q","#f-over","#f-kind"].forEach(s=>$(s).addEventListener("input",()=>{LIMIT=60;render()}));
+$("#more").addEventListener("click",()=>{LIMIT+=60;render()});
+async function loadArea(){
+  const v=$("#f-area").value;$("#list").innerHTML='<div class="empty">불러오는 중…</div>';
+  const items=await JR.items(META.folder||"rec",JR.areasOf(META,v));
+  items.sort((a,b)=>(!a.within_budget)-(!b.within_budget)||b.score-a.score);
+  DATA={...META,items};
+  const sg=v==="all"?[...new Set(items.map(i=>i.sgg))]:(META.areas[v].sgg||[]);
+  $("#f-sgg").innerHTML='<option value="all">전체</option>'+sg.map(s=>`<option>${s}</option>`).join("");
+  LIMIT=60;render();
+}
+$("#f-area").addEventListener("change",loadArea);
+JR.meta().then(d=>{
+  if(d.items){d.folder=null}
+  META=d;$("#f-bud").value=d.budget_eok;
   $("#gen").textContent=`${d.generated_at.replace("T"," ")} 기준 추천`;
   $("#src").textContent=`출처: ${d.source}`;
   if(d.sample){$("#note").hidden=false;$("#note").textContent="예시 데이터입니다. 첫 자동 실행(매일 06:00) 후 실제 실거래가로 바뀝니다."}
-  render();
+  if(d.items){DATA=d;$("#f-area").innerHTML='<option>전체</option>';render();return}
+  JR.fillAreas($("#f-area"),d);return loadArea();
 }).catch(()=>{$("#gen").textContent="데이터를 불러오지 못했습니다";$("#list").innerHTML='<div class="empty">recommend.json이 아직 없습니다. GitHub Actions에서 daily-recommend를 한 번 실행하세요.</div>'});
 </script>
 </body>

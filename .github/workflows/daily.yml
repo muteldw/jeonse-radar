@@ -20,17 +20,18 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-latest
+    timeout-minutes: 330    # 서울 전체 첫 소급 수집은 오래 걸림(끊겨도 다음 실행에서 이어받음)
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
       - run: pip install -r requirements.txt
-      - name: 전세 실거래 수집
+      - name: 전세 실거래 수집 (아파트·빌라)
         env:
           MOLIT_API_KEY: ${{ secrets.MOLIT_API_KEY }}
         run: python collector/fetch_rent.py
-      - name: 매매 실거래 수집 (활용신청 전이면 건너뜀)
+      - name: 매매 실거래 수집 (아파트·빌라, 활용신청 전이면 건너뜀)
         env:
           MOLIT_API_KEY: ${{ secrets.MOLIT_API_KEY }}
         run: python collector/fetch_sale.py
@@ -40,6 +41,8 @@ jobs:
         run: python collector/geo.py
       - name: 추천 계산
         run: python model/rank.py
+      - name: 매매 추천 계산
+        run: cd model && python rank_sale.py
       - name: 월별 예상 매물·이사 시기
         run: cd model && python supply.py
       - name: 화면용 설정 복사
