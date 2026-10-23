@@ -1,0 +1,502 @@
+{
+ "generated_at": "2026-10-23T16:21+09:00",
+ "repo": "https://github.com/muteldw/jeonse-radar",
+ "conditions": {
+  "min_area_m2": 80,
+  "months_back": 24,
+  "jeonse_only": true
+ },
+ "datasets": [
+  {
+   "name": "국토교통부_아파트 전월세 실거래가 자료",
+   "provider": "국토교통부 · 공공데이터포털",
+   "url": "https://www.data.go.kr/tcs/dss/selectDataSetList.do?keyword=아파트 전월세 실거래가",
+   "use": "전세 추천·시세·계약기간(이사 시기)",
+   "rows": 127318,
+   "period": {
+    "from": "2024-11-01",
+    "to": "2026-10-22",
+    "rows": 127318,
+    "by_kind": {
+     "아파트": 127318
+    }
+   },
+   "file": "data/rent_raw.csv"
+  },
+  {
+   "name": "국토교통부_연립다세대 전월세 실거래가 자료",
+   "provider": "국토교통부 · 공공데이터포털",
+   "url": "https://www.data.go.kr/tcs/dss/selectDataSetList.do?keyword=연립다세대 전월세 실거래가",
+   "use": "빌라 전세 추천",
+   "rows": 0,
+   "period": {
+    "from": "2024-11-01",
+    "to": "2026-10-22",
+    "rows": 127318,
+    "by_kind": {
+     "아파트": 127318
+    }
+   },
+   "file": "data/rent_raw.csv"
+  },
+  {
+   "name": "국토교통부_아파트 매매 실거래가 자료",
+   "provider": "국토교통부 · 공공데이터포털",
+   "url": "https://www.data.go.kr/tcs/dss/selectDataSetList.do?keyword=아파트 매매 실거래가",
+   "use": "매매 추천·전세가율·매수자 분석",
+   "rows": 0,
+   "period": {
+    "from": null,
+    "to": null,
+    "rows": 0,
+    "by_kind": {}
+   },
+   "file": "data/sale_raw.csv"
+  },
+  {
+   "name": "국토교통부_연립다세대 매매 실거래가 자료",
+   "provider": "국토교통부 · 공공데이터포털",
+   "url": "https://www.data.go.kr/tcs/dss/selectDataSetList.do?keyword=연립다세대 매매 실거래가",
+   "use": "빌라 매매 추천·전세가율",
+   "rows": 0,
+   "period": {
+    "from": null,
+    "to": null,
+    "rows": 0,
+    "by_kind": {}
+   },
+   "file": "data/sale_raw.csv"
+  },
+  {
+   "name": "카카오 로컬 API (주소·키워드·카테고리 검색)",
+   "provider": "카카오",
+   "url": "https://developers.kakao.com/docs/latest/ko/local/dev-guide",
+   "use": "단지 위치, 가까운 전철역·도보 시간, 학교·어린이집·마트·병원 수",
+   "rows": 5140,
+   "period": {},
+   "file": "data/geo.json"
+  },
+  {
+   "name": "OpenStreetMap 지도",
+   "provider": "OpenStreetMap 기여자",
+   "url": "https://www.openstreetmap.org/copyright",
+   "use": "지도 배경",
+   "rows": null,
+   "period": {},
+   "file": null
+  },
+  {
+   "name": "주택담보대출 규칙 (LTV·한도·DSR·취득세)",
+   "provider": "한국경제 2026.3.18·2025.6.27 대출규제, 경인일보 10·15 규제지역 12곳, 아주경제 2026.9.17 토허구역 실거주 유예",
+   "url": null,
+   "use": "매수자 자금 분석",
+   "rows": null,
+   "period": {
+    "as_of": "2026-10-23"
+   },
+   "file": "config/loan_rules.json"
+  },
+  {
+   "name": "규제지역·토지거래허가구역 목록",
+   "provider": "10·15 대책 (서울 25개 구 + 경기 12곳)",
+   "url": null,
+   "use": "대출·실거주 의무 판단",
+   "rows": 26,
+   "period": {
+    "as_of": "2026-10-23"
+   },
+   "file": "config/loan_rules.json"
+  },
+  {
+   "name": "가구 순자산 분포 (상위 % 추정)",
+   "provider": "평균 순자산 4억 7,144만원 (통계청 2025 가계금융복지조사) · 5억 이하 가구 약 72%, 10억 이상 가구 11.8% (2025 조사 요약) · 상위 1% 하한 33억원 (NH투자증권 100세시대연구소, 2024 조사 분석)",
+   "url": null,
+   "use": "매수자 자산 상위 % 추정",
+   "rows": 5,
+   "period": {
+    "as_of": "2025-03 조사"
+   },
+   "file": "config/wealth_dist.json"
+  }
+ ],
+ "regions": [
+  {
+   "code": "11500",
+   "name": "강서구",
+   "area": "서울 강서·양천",
+   "rent": {
+    "아파트": 6154
+   },
+   "sale": {},
+   "rent_done": {
+    "아파트": true
+   },
+   "sale_done": {},
+   "located": 306
+  },
+  {
+   "code": "11470",
+   "name": "양천구",
+   "area": "서울 강서·양천",
+   "rent": {
+    "아파트": 5950
+   },
+   "sale": {},
+   "rent_done": {
+    "아파트": true
+   },
+   "sale_done": {},
+   "located": 286
+  },
+  {
+   "code": "11110",
+   "name": "종로구",
+   "area": "서울 도심(종로·중구·용산)",
+   "rent": {
+    "아파트": 940
+   },
+   "sale": {},
+   "rent_done": {
+    "아파트": true
+   },
+   "sale_done": {},
+   "located": 59
+  },
+  {
+   "code": "11140",
+   "name": "중구",
+   "area": "서울 도심(종로·중구·용산)",
+   "rent": {
+    "아파트": 1427
+   },
+   "sale": {},
+   "rent_done": {
+    "아파트": true
+   },
+   "sale_done": {},
+   "located": 46
+  },
+  {
+   "code": "11170",
+   "name": "용산구",
+   "area": "서울 도심(종로·중구·용산)",
+   "rent": {
+    "아파트": 3474
+   },
+   "sale": {},
+   "rent_done": {
+    "아파트": true
+   },
+   "sale_done": {},
+   "located": 156
+  },
+  {
+   "code": "11200",
+   "name": "성동구",
+   "area": "서울 동북(성동·광진·동대문·중랑·성북·강북·도봉·노원)",
+   "rent": {
+    "아파트": 5509
+   },
+   "sale": {},
+   "rent_done": {
+    "아파트": true
+   },
+   "sale_done": {},
+   "located": 141
+  },
+  {
+   "code": "11215",
+   "name": "광진구",
+   "area": "서울 동북(성동·광진·동대문·중랑·성북·강북·도봉·노원)",
+   "rent": {
+    "아파트": 3039
+   },
+   "sale": {},
+   "rent_done": {
+    "아파트": true
+   },
+   "sale_done": {},
+   "located": 145
+  },
+  {
+   "code": "11230",
+   "name": "동대문구",
+   "area": "서울 동북(성동·광진·동대문·중랑·성북·강북·도봉·노원)",
+   "rent": {
+    "아파트": 4344
+   },
+   "sale": {},
+   "rent_done": {
+    "아파트": true
+   },
+   "sale_done": {},
+   "located": 167
+  },
+  {
+   "code": "11260",
+   "name": "중랑구",
+   "area": "서울 동북(성동·광진·동대문·중랑·성북·강북·도봉·노원)",
+   "rent": {
+    "아파트": 2822
+   },
+   "sale": {},
+   "rent_done": {
+    "아파트": true
+   },
+   "sale_done": {},
+   "located": 147
+  },
+  {
+   "code": "11290",
+   "name": "성북구",
+   "area": "서울 동북(성동·광진·동대문·중랑·성북·강북·도봉·노원)",
+   "rent": {
+    "아파트": 4559
+   },
+   "sale": {},
+   "rent_done": {
+    "아파트": true
+   },
+   "sale_done": {},
+   "located": 139
+  },
+  {
+   "code": "11305",
+   "name": "강북구",
+   "area": "서울 동북(성동·광진·동대문·중랑·성북·강북·도봉·노원)",
+   "rent": {
+    "아파트": 1359
+   },
+   "sale": {},
+   "rent_done": {
+    "아파트": true
+   },
+   "sale_done": {},
+   "located": 60
+  },
+  {
+   "code": "11320",
+   "name": "도봉구",
+   "area": "서울 동북(성동·광진·동대문·중랑·성북·강북·도봉·노원)",
+   "rent": {
+    "아파트": 2446
+   },
+   "sale": {},
+   "rent_done": {
+    "아파트": true
+   },
+   "sale_done": {},
+   "located": 116
+  },
+  {
+   "code": "11350",
+   "name": "노원구",
+   "area": "서울 동북(성동·광진·동대문·중랑·성북·강북·도봉·노원)",
+   "rent": {
+    "아파트": 4434
+   },
+   "sale": {},
+   "rent_done": {
+    "아파트": true
+   },
+   "sale_done": {},
+   "located": 213
+  },
+  {
+   "code": "11380",
+   "name": "은평구",
+   "area": "서울 서북(은평·서대문·마포)",
+   "rent": {
+    "아파트": 4949
+   },
+   "sale": {},
+   "rent_done": {
+    "아파트": true
+   },
+   "sale_done": {},
+   "located": 246
+  },
+  {
+   "code": "11410",
+   "name": "서대문구",
+   "area": "서울 서북(은평·서대문·마포)",
+   "rent": {
+    "아파트": 3864
+   },
+   "sale": {},
+   "rent_done": {
+    "아파트": true
+   },
+   "sale_done": {},
+   "located": 162
+  },
+  {
+   "code": "11440",
+   "name": "마포구",
+   "area": "서울 서북(은평·서대문·마포)",
+   "rent": {
+    "아파트": 5513
+   },
+   "sale": {},
+   "rent_done": {
+    "아파트": true
+   },
+   "sale_done": {},
+   "located": 225
+  },
+  {
+   "code": "11530",
+   "name": "구로구",
+   "area": "서울 서남(구로·금천·영등포·동작·관악)",
+   "rent": {
+    "아파트": 3575
+   },
+   "sale": {},
+   "rent_done": {
+    "아파트": true
+   },
+   "sale_done": {},
+   "located": 180
+  },
+  {
+   "code": "11545",
+   "name": "금천구",
+   "area": "서울 서남(구로·금천·영등포·동작·관악)",
+   "rent": {
+    "아파트": 1038
+   },
+   "sale": {},
+   "rent_done": {
+    "아파트": true
+   },
+   "sale_done": {},
+   "located": 66
+  },
+  {
+   "code": "11560",
+   "name": "영등포구",
+   "area": "서울 서남(구로·금천·영등포·동작·관악)",
+   "rent": {
+    "아파트": 5248
+   },
+   "sale": {},
+   "rent_done": {
+    "아파트": true
+   },
+   "sale_done": {},
+   "located": 179
+  },
+  {
+   "code": "11590",
+   "name": "동작구",
+   "area": "서울 서남(구로·금천·영등포·동작·관악)",
+   "rent": {
+    "아파트": 6017
+   },
+   "sale": {},
+   "rent_done": {
+    "아파트": true
+   },
+   "sale_done": {},
+   "located": 159
+  },
+  {
+   "code": "11620",
+   "name": "관악구",
+   "area": "서울 서남(구로·금천·영등포·동작·관악)",
+   "rent": {
+    "아파트": 2650
+   },
+   "sale": {},
+   "rent_done": {
+    "아파트": true
+   },
+   "sale_done": {},
+   "located": 146
+  },
+  {
+   "code": "11650",
+   "name": "서초구",
+   "area": "서울 동남(서초·강남·송파·강동)",
+   "rent": {
+    "아파트": 9431
+   },
+   "sale": {},
+   "rent_done": {
+    "아파트": true
+   },
+   "sale_done": {},
+   "located": 501
+  },
+  {
+   "code": "11680",
+   "name": "강남구",
+   "area": "서울 동남(서초·강남·송파·강동)",
+   "rent": {
+    "아파트": 11527
+   },
+   "sale": {},
+   "rent_done": {
+    "아파트": true
+   },
+   "sale_done": {},
+   "located": 479
+  },
+  {
+   "code": "11710",
+   "name": "송파구",
+   "area": "서울 동남(서초·강남·송파·강동)",
+   "rent": {
+    "아파트": 12613
+   },
+   "sale": {},
+   "rent_done": {
+    "아파트": true
+   },
+   "sale_done": {},
+   "located": 262
+  },
+  {
+   "code": "11740",
+   "name": "강동구",
+   "area": "서울 동남(서초·강남·송파·강동)",
+   "rent": {
+    "아파트": 8091
+   },
+   "sale": {},
+   "rent_done": {
+    "아파트": true
+   },
+   "sale_done": {},
+   "located": 330
+  },
+  {
+   "code": "41171",
+   "name": "안양시 만안구",
+   "area": "안양",
+   "rent": {
+    "아파트": 1474
+   },
+   "sale": {},
+   "rent_done": {
+    "아파트": true
+   },
+   "sale_done": {},
+   "located": 94
+  },
+  {
+   "code": "41173",
+   "name": "안양시 동안구",
+   "area": "안양",
+   "rent": {
+    "아파트": 4871
+   },
+   "sale": {},
+   "rent_done": {
+    "아파트": true
+   },
+   "sale_done": {},
+   "located": 130
+  }
+ ]
+}

@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-10-23T14:42+09:00",
+ "generated_at": "2026-10-23T16:21+09:00",
  "budget_eok": 12.0,
  "weights": {
   "station": 1.3,
@@ -11,6 +11,13 @@
  },
  "source": "국토교통부 아파트·연립다세대 매매 실거래가",
  "folder": "sale",
+ "layout": "sgg",
+ "period": {
+  "from": null,
+  "to": null,
+  "rows": 0,
+  "by_kind": {}
+ },
  "areas": {
   "seoul_west": {
    "name": "서울 강서·양천",
@@ -23,8 +30,11 @@
     "강서구",
     "양천구"
    ],
-   "count": 0,
-   "kinds": []
+   "codes": [
+    "11500",
+    "11470"
+   ],
+   "count": 0
   },
   "seoul_sw": {
    "name": "서울 서남(구로·금천·영등포·동작·관악)",
@@ -40,8 +50,14 @@
     "동작구",
     "관악구"
    ],
-   "count": 0,
-   "kinds": []
+   "codes": [
+    "11530",
+    "11545",
+    "11560",
+    "11590",
+    "11620"
+   ],
+   "count": 0
   },
   "seoul_nw": {
    "name": "서울 서북(은평·서대문·마포)",
@@ -55,8 +71,12 @@
     "서대문구",
     "마포구"
    ],
-   "count": 0,
-   "kinds": []
+   "codes": [
+    "11380",
+    "11410",
+    "11440"
+   ],
+   "count": 0
   },
   "seoul_center": {
    "name": "서울 도심(종로·중구·용산)",
@@ -70,8 +90,12 @@
     "중구",
     "용산구"
    ],
-   "count": 0,
-   "kinds": []
+   "codes": [
+    "11110",
+    "11140",
+    "11170"
+   ],
+   "count": 0
   },
   "seoul_ne": {
    "name": "서울 동북(성동·광진·동대문·중랑·성북·강북·도봉·노원)",
@@ -90,8 +114,17 @@
     "도봉구",
     "노원구"
    ],
-   "count": 0,
-   "kinds": []
+   "codes": [
+    "11200",
+    "11215",
+    "11230",
+    "11260",
+    "11290",
+    "11305",
+    "11320",
+    "11350"
+   ],
+   "count": 0
   },
   "seoul_se": {
    "name": "서울 동남(서초·강남·송파·강동)",
@@ -106,8 +139,13 @@
     "송파구",
     "강동구"
    ],
-   "count": 0,
-   "kinds": []
+   "codes": [
+    "11650",
+    "11680",
+    "11710",
+    "11740"
+   ],
+   "count": 0
   },
   "anyang": {
    "name": "안양",
@@ -120,8 +158,337 @@
     "안양시 만안구",
     "안양시 동안구"
    ],
+   "codes": [
+    "41171",
+    "41173"
+   ],
+   "count": 0
+  }
+ },
+ "sgg": {
+  "11500": {
+   "name": "강서구",
+   "area": "seoul_west",
    "count": 0,
-   "kinds": []
+   "center": [
+    37.5509,
+    126.8495
+   ],
+   "with_location": 0,
+   "bbox": null,
+   "collected": {}
+  },
+  "11470": {
+   "name": "양천구",
+   "area": "seoul_west",
+   "count": 0,
+   "center": [
+    37.517,
+    126.8665
+   ],
+   "with_location": 0,
+   "bbox": null,
+   "collected": {}
+  },
+  "11110": {
+   "name": "종로구",
+   "area": "seoul_center",
+   "count": 0,
+   "center": [
+    37.573,
+    126.9794
+   ],
+   "with_location": 0,
+   "bbox": null,
+   "collected": {}
+  },
+  "11140": {
+   "name": "중구",
+   "area": "seoul_center",
+   "count": 0,
+   "center": [
+    37.5641,
+    126.9979
+   ],
+   "with_location": 0,
+   "bbox": null,
+   "collected": {}
+  },
+  "11170": {
+   "name": "용산구",
+   "area": "seoul_center",
+   "count": 0,
+   "center": [
+    37.5326,
+    126.9905
+   ],
+   "with_location": 0,
+   "bbox": null,
+   "collected": {}
+  },
+  "11200": {
+   "name": "성동구",
+   "area": "seoul_ne",
+   "count": 0,
+   "center": [
+    37.5633,
+    127.0371
+   ],
+   "with_location": 0,
+   "bbox": null,
+   "collected": {}
+  },
+  "11215": {
+   "name": "광진구",
+   "area": "seoul_ne",
+   "count": 0,
+   "center": [
+    37.5385,
+    127.0823
+   ],
+   "with_location": 0,
+   "bbox": null,
+   "collected": {}
+  },
+  "11230": {
+   "name": "동대문구",
+   "area": "seoul_ne",
+   "count": 0,
+   "center": [
+    37.5744,
+    127.0396
+   ],
+   "with_location": 0,
+   "bbox": null,
+   "collected": {}
+  },
+  "11260": {
+   "name": "중랑구",
+   "area": "seoul_ne",
+   "count": 0,
+   "center": [
+    37.6066,
+    127.0927
+   ],
+   "with_location": 0,
+   "bbox": null,
+   "collected": {}
+  },
+  "11290": {
+   "name": "성북구",
+   "area": "seoul_ne",
+   "count": 0,
+   "center": [
+    37.5894,
+    127.0167
+   ],
+   "with_location": 0,
+   "bbox": null,
+   "collected": {}
+  },
+  "11305": {
+   "name": "강북구",
+   "area": "seoul_ne",
+   "count": 0,
+   "center": [
+    37.6396,
+    127.0257
+   ],
+   "with_location": 0,
+   "bbox": null,
+   "collected": {}
+  },
+  "11320": {
+   "name": "도봉구",
+   "area": "seoul_ne",
+   "count": 0,
+   "center": [
+    37.6688,
+    127.0471
+   ],
+   "with_location": 0,
+   "bbox": null,
+   "collected": {}
+  },
+  "11350": {
+   "name": "노원구",
+   "area": "seoul_ne",
+   "count": 0,
+   "center": [
+    37.6542,
+    127.0568
+   ],
+   "with_location": 0,
+   "bbox": null,
+   "collected": {}
+  },
+  "11380": {
+   "name": "은평구",
+   "area": "seoul_nw",
+   "count": 0,
+   "center": [
+    37.6027,
+    126.9291
+   ],
+   "with_location": 0,
+   "bbox": null,
+   "collected": {}
+  },
+  "11410": {
+   "name": "서대문구",
+   "area": "seoul_nw",
+   "count": 0,
+   "center": [
+    37.5791,
+    126.9368
+   ],
+   "with_location": 0,
+   "bbox": null,
+   "collected": {}
+  },
+  "11440": {
+   "name": "마포구",
+   "area": "seoul_nw",
+   "count": 0,
+   "center": [
+    37.5663,
+    126.9019
+   ],
+   "with_location": 0,
+   "bbox": null,
+   "collected": {}
+  },
+  "11530": {
+   "name": "구로구",
+   "area": "seoul_sw",
+   "count": 0,
+   "center": [
+    37.4954,
+    126.8874
+   ],
+   "with_location": 0,
+   "bbox": null,
+   "collected": {}
+  },
+  "11545": {
+   "name": "금천구",
+   "area": "seoul_sw",
+   "count": 0,
+   "center": [
+    37.4569,
+    126.8955
+   ],
+   "with_location": 0,
+   "bbox": null,
+   "collected": {}
+  },
+  "11560": {
+   "name": "영등포구",
+   "area": "seoul_sw",
+   "count": 0,
+   "center": [
+    37.5264,
+    126.8962
+   ],
+   "with_location": 0,
+   "bbox": null,
+   "collected": {}
+  },
+  "11590": {
+   "name": "동작구",
+   "area": "seoul_sw",
+   "count": 0,
+   "center": [
+    37.5124,
+    126.9393
+   ],
+   "with_location": 0,
+   "bbox": null,
+   "collected": {}
+  },
+  "11620": {
+   "name": "관악구",
+   "area": "seoul_sw",
+   "count": 0,
+   "center": [
+    37.4784,
+    126.9516
+   ],
+   "with_location": 0,
+   "bbox": null,
+   "collected": {}
+  },
+  "11650": {
+   "name": "서초구",
+   "area": "seoul_se",
+   "count": 0,
+   "center": [
+    37.4837,
+    127.0324
+   ],
+   "with_location": 0,
+   "bbox": null,
+   "collected": {}
+  },
+  "11680": {
+   "name": "강남구",
+   "area": "seoul_se",
+   "count": 0,
+   "center": [
+    37.5172,
+    127.0473
+   ],
+   "with_location": 0,
+   "bbox": null,
+   "collected": {}
+  },
+  "11710": {
+   "name": "송파구",
+   "area": "seoul_se",
+   "count": 0,
+   "center": [
+    37.5145,
+    127.1059
+   ],
+   "with_location": 0,
+   "bbox": null,
+   "collected": {}
+  },
+  "11740": {
+   "name": "강동구",
+   "area": "seoul_se",
+   "count": 0,
+   "center": [
+    37.5301,
+    127.1238
+   ],
+   "with_location": 0,
+   "bbox": null,
+   "collected": {}
+  },
+  "41171": {
+   "name": "안양시 만안구",
+   "area": "anyang",
+   "count": 0,
+   "center": [
+    37.3866,
+    126.9327
+   ],
+   "with_location": 0,
+   "bbox": null,
+   "collected": {}
+  },
+  "41173": {
+   "name": "안양시 동안구",
+   "area": "anyang",
+   "count": 0,
+   "center": [
+    37.3925,
+    126.9568
+   ],
+   "with_location": 0,
+   "bbox": null,
+   "collected": {}
   }
  }
 }
