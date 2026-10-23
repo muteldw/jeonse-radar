@@ -6,7 +6,7 @@ on:
   workflow_dispatch: {}      # Actions 탭에서 수동 실행
   push:                      # 지역·조건·수집/모델 코드가 바뀌면 바로 다시 수집
     branches: [main]
-    paths: ["config.json", "config/loan_rules.json", "collector/**", "model/**"]
+    paths: ["config.json", "config/loan_rules.json", "collector/**", "model/**", ".github/workflows/daily.yml"]
 
 permissions:
   contents: write
@@ -56,10 +56,16 @@ jobs:
         run: |
           git config user.name "jeonse-radar-bot"
           git config user.email "actions@users.noreply.github.com"
-          git add data web/data
-          git diff --cached --quiet || git commit -m "daily: $(TZ=Asia/Seoul date +%F) 실거래 갱신"
-          git pull --rebase -X theirs origin main || true
-          git push
+          # 실행 중에 다른 커밋이 올라와도 충돌 없이: 최신 main 위에 이번 결과(data, web/data)만 올린다
+          for i in 1 2 3 4 5; do
+            git fetch -q origin main
+            git reset -q --mixed origin/main
+            git add -A data web/data
+            git diff --cached --quiet && { echo "변경 없음"; break; }
+            git commit -qm "daily: $(TZ=Asia/Seoul date +%F) 실거래 갱신"
+            git push -q origin HEAD:main && break
+            echo "push 재시도 $i"; sleep 5
+          done
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:
