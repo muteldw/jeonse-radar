@@ -43,3 +43,5 @@ button:focus-visible,select:focus-visible,input:focus-visible,a:focus-visible,te
 .kind{display:inline-block;font:600 .68rem var(--f-body);color:#fff;background:var(--warn);border-radius:6px;padding:1px 6px;margin-left:6px;vertical-align:2px}
 .more{display:block;margin:14px auto 0}
 [hidden]{display:none!important}
+.srcline{font-size:.72rem;color:var(--muted);margin-top:18px;line-height:1.6}
+.srcline a{color:var(--accent)}

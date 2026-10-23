@@ -225,7 +225,8 @@ def main() -> None:
     w = update_weights(DEFAULT_W, items, feedback)
     if w != DEFAULT_W:
         items = build(rows, cfg, w, today, geo, sales)
-    write_split(items, cfg, w, "rec", "recommend.json", "국토교통부 아파트·연립다세대 전월세 실거래가")
+    write_split(items, cfg, w, "rec", "recommend.json", "국토교통부 아파트·연립다세대 전월세 실거래가",
+                data_period=period(rows), status_prefix="rent")
 
 
 def public(it: dict) -> dict:
@@ -236,30 +237,66 @@ def public(it: dict) -> dict:
     return o
 
 
+def collect_status(prefix: str = "rent") -> dict[str, dict]:
+    """data/collect_state.json → {구 이름: {"아파트": True/False, "빌라": ...}} (24개월 소급이 끝났는지)."""
+    p = ROOT / "data" / "collect_state.json"
+    st = json.loads(p.read_text(encoding="utf-8")).get(prefix, {}) if p.exists() else {}
+    out: dict[str, dict] = defaultdict(dict)
+    for k, v in st.items():
+        kind, sgg = k.split("|", 1)
+        out[sgg][kind] = bool(v)
+    return out
+
+
+def period(rows: list[dict]) -> dict:
+    ds = [r["deal_date"] for r in rows if r.get("deal_date")]
+    by = defaultdict(int)
+    for r in rows:
+        by[r.get("kind") or "아파트"] += 1
+    return {"from": min(ds) if ds else None, "to": max(ds) if ds else None, "rows": len(rows), "by_kind": dict(by)}
+
+
 def write_split(items: list[dict], cfg: dict, w: dict, folder: str, meta_name: str, source: str,
-                budget_key: str = "budget_eok") -> None:
-    """생활권별 파일(web/data/<folder>/<area>.json) + 목록·설정만 담은 메타 파일."""
+                budget_key: str = "budget_eok", data_period: dict | None = None, status_prefix: str = "rent") -> None:
+    """구별 파일(web/data/<folder>/<법정동코드>.json) + 목록·범위·출처를 담은 메타 파일."""
     d = ROOT / "web" / "data" / folder
     d.mkdir(parents=True, exist_ok=True)
+    code_of = {name: code for code, name in cfg["regions"].items()}
     by: dict[str, list] = defaultdict(list)
     for it in items:
-        by[it.get("area") or "_"].append(public(it))
-    areas = cfg.get("areas", {})
-    for k in areas:
-        (d / f"{k}.json").write_text(json.dumps({"area": k, "items": by.get(k, [])}, ensure_ascii=False,
-                                                separators=(",", ":")), encoding="utf-8")
+        by[code_of.get(it["sgg"], "_")].append(public(it))
+    for old in d.glob("*.json"):          # 예전 생활권 단위 파일 정리
+        if old.stem not in cfg["regions"]:
+            old.unlink()
+    status = collect_status(status_prefix)
+    sgg_meta = {}
+    for code, name in cfg["regions"].items():
+        its = by.get(code, [])
+        (d / f"{code}.json").write_text(json.dumps({"sgg": name, "code": code, "items": its}, ensure_ascii=False,
+                                                   separators=(",", ":")), encoding="utf-8")
+        pts = [(i["lat"], i["lng"]) for i in its if i.get("lat")]
+        sgg_meta[code] = {
+            "name": name, "area": area_of(name, cfg)[0], "count": len(its),
+            "center": cfg.get("sgg_centers", {}).get(code),
+            "with_location": len(pts),
+            "bbox": [round(min(p[0] for p in pts), 4), round(min(p[1] for p in pts), 4),
+                     round(max(p[0] for p in pts), 4), round(max(p[1] for p in pts), 4)] if pts else None,
+            "collected": status.get(name, {}),
+        }
     meta = {
         "generated_at": datetime.now(KST).isoformat(timespec="minutes"),
         "budget_eok": cfg.get(budget_key, cfg["budget_eok"]),
         "weights": {k: round(v, 3) for k, v in w.items()},
-        "source": source, "folder": folder,
+        "source": source, "folder": folder, "layout": "sgg",
+        "period": data_period or {},
         "areas": {k: {"name": a["name"], "base": a.get("base", {}), "sgg": a.get("sgg", []),
-                      "count": len(by.get(k, [])),
-                      "kinds": sorted({i.get("kind", "아파트") for i in by.get(k, [])})}
-                  for k, a in areas.items()},
+                      "codes": [code_of[n] for n in a.get("sgg", []) if n in code_of],
+                      "count": sum(len(by.get(code_of.get(n, ""), [])) for n in a.get("sgg", []))}
+                  for k, a in cfg.get("areas", {}).items()},
+        "sgg": sgg_meta,
     }
     (ROOT / "web" / "data" / meta_name).write_text(json.dumps(meta, ensure_ascii=False, indent=1), encoding="utf-8")
-    print(f"{len(items)}곳 → web/data/{meta_name} + {folder}/ ({', '.join(f'{k} {len(by.get(k, []))}' for k in areas)})")
+    print(f"{len(items)}곳 → web/data/{meta_name} + {folder}/<구코드>.json ({sum(1 for c in sgg_meta.values() if c['count'])}개 구에 데이터)")
 
 
 if __name__ == "__main__":

@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>자료 · 전세 레이더 9</title>
+<link rel="manifest" href="manifest.json">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;500;700&family=IBM+Plex+Mono:wght@500&display=swap">
+<link rel="stylesheet" href="app.css">
+<style>
+.ds{display:grid;gap:10px}
+.d{border:1px solid var(--line);border-radius:10px;padding:12px;background:var(--surface)}
+.d h3{margin:0 0 4px;font-size:.98rem}
+.d .row{gap:6px 14px;font-size:.8rem;color:var(--muted)}
+.badge{font:600 .7rem var(--f-body);border-radius:6px;padding:1px 7px;color:#fff}
+.badge.ok{background:var(--good)}.badge.wait{background:var(--warn)}.badge.ref{background:var(--muted)}
+td.c,th.c{text-align:center}
+.yes{color:var(--good)}.no{color:var(--warn)}
+</style>
+</head>
+<body>
+<div class="wrap">
+ <nav class="topnav">
+  <a class="brand" href="./">전세 레이더<span>9</span><small class="ver">v4.1.0</small></a>
+  <a class="tab" href="./">추천</a><a class="tab" href="buy.html">매매</a><a class="tab" href="map.html">지도</a><a class="tab" href="timing.html">이사 시기</a><a class="tab" href="buyer.html">매수자 분석</a><a class="tab" href="settings.html">알림 설정</a><a class="tab" href="sources.html" aria-current="page">자료</a>
+ </nav>
+ <h1>자료</h1>
+ <p class="sub" id="gen">전세 레이더가 쓰는 모든 자료와 수집 현황입니다.</p>
+
+ <section class="panel"><h2>사용한 자료</h2><div class="ds" id="ds"><p class="sub">불러오는 중…</p></div></section>
+
+ <section class="panel">
+  <h2>지역별 수집 현황</h2>
+  <p class="sub" id="cond"></p>
+  <div class="tblwrap"><table id="reg"></table></div>
+  <p class="sub" style="margin-top:8px">'소급 완료'는 최근 24개월치를 다 받았다는 뜻입니다. 미완료 지역은 매일 06시 실행 때 이어서 받습니다. 위치는 카카오 하루 사용량 때문에 거래가 많은 단지부터 하루 2,500곳씩 채웁니다.</p>
+ </section>
+
+ <section class="panel">
+  <h2>원본 파일</h2>
+  <div class="row" id="files"></div>
+  <p class="sub" style="margin-top:8px">GitHub 저장소에 매일 쌓이는 원본입니다. 엑셀에서 열 수 있는 CSV 형식입니다.</p>
+ </section>
+</div>
+<script src="data.js"></script>
+<script>
+const $=s=>document.querySelector(s),e=JR.esc;
+const per=p=>!p?"":p.as_of?`기준일 ${e(p.as_of)}`:p.from?`거래일 ${e(p.from)} ~ ${e(p.to)}`:"";
+const kv=o=>Object.entries(o||{}).map(([k,v])=>`${k} ${v.toLocaleString()}`).join(" · ")||"-";
+const done=o=>{const ks=Object.keys(o||{});return ks.length?ks.map(k=>`<span class="${o[k]?"yes":"no"}">${k} ${o[k]?"완료":"진행"}</span>`).join(" · "):'<span class="no">대기</span>'};
+fetch("data/sources.json",{cache:"no-store"}).then(r=>r.json()).then(d=>{
+  $("#gen").textContent=`전세 레이더가 쓰는 모든 자료와 수집 현황입니다. ${d.generated_at.replace("T"," ").slice(0,16)} 기준.`;
+  $("#ds").innerHTML=d.datasets.map(x=>{
+    const st=(x.rows==null||(x.file||"").startsWith("config/"))?'<span class="badge ref">참고</span>':x.rows>0?'<span class="badge ok">수집 중</span>':'<span class="badge wait">활용신청 필요</span>';
+    return `<div class="d"><h3>${x.url?`<a href="${e(x.url)}" target="_blank" rel="noopener" style="color:inherit">${e(x.name)}</a>`:e(x.name)} ${st}</h3>
+     <div class="row"><span>제공: ${e(x.provider)}</span><span>쓰는 곳: ${e(x.use)}</span>${x.rows!=null?`<span>${x.rows.toLocaleString()}건</span>`:""}${per(x.period)?`<span>${per(x.period)}</span>`:""}${x.file?`<span><a href="${e(d.repo)}/blob/main/${e(x.file)}" target="_blank" rel="noopener" style="color:var(--accent)">${e(x.file)}</a></span>`:""}</div></div>`}).join("");
+  const c=d.conditions;$("#cond").textContent=`수집 조건: 전용 ${c.min_area_m2}㎡ 이상 · ${c.jeonse_only?"월세 없는 전세만":"전월세 전체"} · 최근 ${c.months_back}개월`;
+  $("#reg").innerHTML=`<thead><tr><th>지역</th><th>생활권</th><th class="r">전세 건수</th><th>전세 소급</th><th class="r">매매 건수</th><th>매매 소급</th><th class="r">위치 확인</th></tr></thead><tbody>`+
+    d.regions.map(r=>`<tr><td>${e(r.name)}</td><td class="sub">${e(r.area)}</td><td class="r num">${kv(r.rent)}</td><td>${done(r.rent_done)}</td><td class="r num">${kv(r.sale)}</td><td>${done(r.sale_done)}</td><td class="r num">${r.located.toLocaleString()}</td></tr>`).join("")+"</tbody>";
+  $("#files").innerHTML=["data/rent_raw.csv","data/sale_raw.csv","data/geo.json","config/loan_rules.json","config/wealth_dist.json","CHANGELOG.md"]
+    .map(f=>`<a class="btn" href="${e(d.repo)}/blob/main/${f}" target="_blank" rel="noopener">${f}</a>`).join("");
+}).catch(()=>{$("#ds").innerHTML='<p class="sub">자료 목록은 다음 자동 실행(매일 06시) 후 생성됩니다.</p>'});
+</script>
+</body>
+</html>

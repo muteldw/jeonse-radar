@@ -22,8 +22,11 @@ def load_rec(areas: list[str] | None = None) -> dict:
         except (OSError, ValueError):
             areas = None
     items = []
+    files = []
     for k in (areas or list(meta.get("areas", {}))):
-        f = ROOT / "web" / "data" / meta.get("folder", "rec") / f"{k}.json"
+        files += meta.get("areas", {}).get(k, {}).get("codes") or [k]   # 구 단위 파일(신) 또는 생활권 파일(구)
+    for code in files:
+        f = ROOT / "web" / "data" / meta.get("folder", "rec") / f"{code}.json"
         if f.exists():
             items += json.loads(f.read_text(encoding="utf-8")).get("items", [])
     order = list(meta.get("areas", {}))

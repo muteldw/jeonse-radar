@@ -36,14 +36,14 @@
 <body>
 <div class="wrap">
  <nav class="topnav">
-  <a class="brand" href="./">전세 레이더<span>9</span><small class="ver">v4.0.0</small></a>
-  <a class="tab" href="./">추천</a><a class="tab" href="buy.html" aria-current="page">매매</a><a class="tab" href="map.html">지도</a><a class="tab" href="timing.html">이사 시기</a><a class="tab" href="buyer.html">매수자 분석</a><a class="tab" href="settings.html">알림 설정</a>
+  <a class="brand" href="./">전세 레이더<span>9</span><small class="ver">v4.1.0</small></a>
+  <a class="tab" href="./">추천</a><a class="tab" href="buy.html" aria-current="page">매매</a><a class="tab" href="map.html">지도</a><a class="tab" href="timing.html">이사 시기</a><a class="tab" href="buyer.html">매수자 분석</a><a class="tab" href="settings.html">알림 설정</a><a class="tab" href="sources.html">자료</a>
  </nav>
  <h1>매매</h1>
  <p class="sub" id="gen">불러오는 중…</p>
  <div class="filters">
-  <label>생활권<select id="f-area"></select></label>
-  <label>구<select id="f-sgg"><option value="all">전체</option></select></label>
+  <label>지역 (구)<select id="f-area"></select></label>
+  <label hidden>구<select id="f-sgg"><option value="all">전체</option></select></label>
   <label>유형<select id="f-kind"><option value="all">아파트+빌라</option><option>아파트</option><option>빌라</option></select></label>
   <label>매수 예산(억)<input id="f-bud" type="number" step="0.5" min="2" max="60"></label>
   <label>최소 평형<select id="f-py"><option value="34">34평형↑</option><option value="40">40평형↑</option></select></label>
@@ -54,6 +54,7 @@
  <p class="sub" id="count"></p>
  <div class="grid" id="list"></div>
  <button class="btn more" id="more" hidden>더 보기</button>
+ <p class="srcline" id="srcline"></p>
  <p class="sub" style="margin-top:16px" id="src"></p>
 </div>
 <script src="data.js"></script>
@@ -101,21 +102,19 @@ function render(){
 }
 async function loadArea(){
   const v=$("#f-area").value;$("#list").innerHTML='<div class="empty">불러오는 중…</div>';
-  ITEMS=await JR.items(META.folder||"sale",JR.areasOf(META,v));
-  const sg=v==="all"?[...new Set(ITEMS.map(i=>i.sgg))]:(META.areas[v].sgg||[]);
-  $("#f-sgg").innerHTML='<option value="all">전체</option>'+sg.map(s=>`<option>${esc(s)}</option>`).join("");
+  ITEMS=await JR.items(META.folder||"sale",JR.codesOf(META,v));
   LIMIT=60;render();
 }
 ["#f-sgg","#f-kind","#f-bud","#f-py","#f-q","#f-over","#f-sort"].forEach(s=>$(s).addEventListener("input",()=>{LIMIT=60;render()}));
 $("#more").addEventListener("click",()=>{LIMIT+=60;render()});
 $("#f-area").addEventListener("change",loadArea);
 JR.meta("sale.json").then(m=>{
-  META=m;$("#f-bud").value=m.budget_eok;
+  META=m;$("#f-bud").value=m.budget_eok;$("#srcline").innerHTML=JR.sourceLine(m);
   $("#gen").textContent=`${m.generated_at.replace("T"," ")} 기준 · 최근 12개월 매매 실거래, 34평형↑(전용 80㎡↑)`;
   $("#src").textContent=`출처: ${m.source}. 매매가는 최근 거래 3건 중위값, 전세가는 같은 단지·평형의 최근 신규 전세 중위값입니다.`;
   const total=Object.values(m.areas).reduce((s,a)=>s+a.count,0);
-  if(!total){$("#list").innerHTML=`<div class="empty"><b>아직 매매 데이터가 없습니다.</b><br>공공데이터포털(data.go.kr)에서 아래 자료를 활용신청하면 다음 수집부터 채워집니다. 인증키는 그대로 씁니다.<br>· 국토교통부_아파트 매매 실거래가 자료<br>· 국토교통부_연립다세대 매매 실거래가 자료</div>`;JR.fillAreas($("#f-area"),m);return}
-  JR.fillAreas($("#f-area"),m);return loadArea();
+  if(!total){$("#list").innerHTML=`<div class="empty"><b>아직 매매 데이터가 없습니다.</b><br>공공데이터포털(data.go.kr)에서 아래 자료를 활용신청하면 다음 수집부터 채워집니다. 인증키는 그대로 씁니다.<br>· 국토교통부_아파트 매매 실거래가 자료<br>· 국토교통부_연립다세대 매매 실거래가 자료</div>`;JR.fillRegions($("#f-area"),m,{all:true});return}
+  JR.fillRegions($("#f-area"),m,{all:true});return loadArea();
 }).catch(()=>{$("#gen").textContent="매매 데이터를 불러오지 못했습니다";$("#list").innerHTML='<div class="empty">다음 자동 수집 후 다시 열어주세요.</div>'});
 </script>
 </body>

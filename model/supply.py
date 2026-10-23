@@ -143,18 +143,22 @@ def main() -> None:
     # 생활권별로 나눠 저장 (휴대폰에서 필요한 지역만 내려받도록)
     d = ROOT / "web" / "data" / "supply"
     d.mkdir(parents=True, exist_ok=True)
+    code_of = {name: code for code, name in cfg["regions"].items()}
     by: dict[str, dict] = defaultdict(dict)
     for gid, v in items.items():
-        sgg = gid.split("-", 1)[0]
-        by[rank.area_of(sgg, cfg)[0]][gid] = v
-    for k in cfg.get("areas", {}):
+        by[code_of.get(gid.split("-", 1)[0], "_")][gid] = v
+    for old in d.glob("*.json"):
+        if old.stem not in cfg["regions"]:
+            old.unlink()
+    for k in cfg["regions"]:
         sub = by.get(k, {})
         h = len(out["months"])
         reg = {"exp": [round(sum(v["exp"][i] for v in sub.values()), 1) for i in range(h)],
                "list": [round(sum(v["list"][i] for v in sub.values()), 1) for i in range(h)]}
-        (d / f"{k}.json").write_text(json.dumps({"area": k, "region": reg, "items": sub}, ensure_ascii=False,
+        (d / f"{k}.json").write_text(json.dumps({"code": k, "region": reg, "items": sub}, ensure_ascii=False,
                                                 separators=(",", ":")), encoding="utf-8")
     dst = ROOT / "web" / "data" / "supply.json"
+    out["period"] = rank.period(rows)
     dst.write_text(json.dumps(out, ensure_ascii=False), encoding="utf-8")
     print(f"예상 매물 계산: 단지 {len(items)}곳, 계약기간 확인 {out['terms_known']}/{out['rows']}건 → supply.json + supply/")
 

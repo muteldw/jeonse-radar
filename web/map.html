@@ -59,21 +59,22 @@ body{display:flex;flex-direction:column}
 <body>
 <div class="bar">
  <nav class="topnav">
-  <a class="brand" href="./">전세 레이더<span>9</span><small class="ver">v4.0.0</small></a>
-  <a class="tab" href="./">추천</a><a class="tab" href="buy.html">매매</a><a class="tab" href="map.html" aria-current="page">지도</a><a class="tab" href="timing.html">이사 시기</a><a class="tab" href="buyer.html">매수자 분석</a><a class="tab" href="settings.html">알림 설정</a>
+  <a class="brand" href="./">전세 레이더<span>9</span><small class="ver">v4.1.0</small></a>
+  <a class="tab" href="./">추천</a><a class="tab" href="buy.html">매매</a><a class="tab" href="map.html" aria-current="page">지도</a><a class="tab" href="timing.html">이사 시기</a><a class="tab" href="buyer.html">매수자 분석</a><a class="tab" href="settings.html">알림 설정</a><a class="tab" href="sources.html">자료</a>
  </nav>
  <div class="filters">
-  <label>생활권 <select id="area"></select></label>
+  <label>지역으로 이동 <select id="area"></select></label>
   <label>유형 <select id="kind"><option value="all">아파트+빌라</option><option>아파트</option><option>빌라</option></select></label>
   <label>예산 <input id="bud" type="number" step="0.5" min="3" max="20" style="width:70px">억</label>
   <label>평형 <select id="py"><option value="34">34평형↑</option><option value="40">40평형↑</option></select></label>
   <label class="layer"><input type="checkbox" id="showOver">예산 초과도</label>
   <label class="layer"><input type="checkbox" id="lStn" checked>전철역</label>
   <label class="layer"><input type="checkbox" id="lRing" checked>도보 500m·1km</label>
+  <span class="sub" id="loaded" style="font-size:.76rem"></span>
  </div>
 </div>
 <div class="main">
- <aside id="list"><button id="listToggle" aria-expanded="false">추천 목록 ▲</button><div id="items"></div></aside>
+ <aside id="list"><button id="listToggle" aria-expanded="false">추천 목록 ▲</button><div id="items"></div><p class="srcline" id="srcline" style="margin:8px 2px"></p></aside>
  <div class="mapwrap"><div id="map" role="region" aria-label="추천 단지 지도"></div>
   <div id="sheet" hidden></div></div>
 </div>
@@ -92,15 +93,15 @@ const cluster=L.markerClusterGroup({showCoverageOnHover:false,maxClusterRadius:4
 map.addLayer(cluster);
 const stnLayer=L.layerGroup().addTo(map), ringLayer=L.layerGroup().addTo(map);
 function lineClass(lines){const s=(lines||[]).join(" ");return /5호선/.test(s)?"l5":/2호선/.test(s)?"l2":/공항/.test(s)&&!/9호선/.test(s)?"ap":""}
-function visible(){const bud=+$("#bud").value||D.budget_eok,py=+$("#py").value,over=$("#showOver").checked;
-  const kd=$("#kind").value;
-  return D.items.filter(i=>i.lat&&i.pyeong>=py&&i.deals_12m>=2&&(over||i.price_eok<=bud+0.5)&&(kd==="all"||(i.kind||"아파트")===kd))}
+function visible(inView){const bud=+$("#bud").value||D.budget_eok,py=+$("#py").value,over=$("#showOver").checked;
+  const kd=$("#kind").value,b=inView?map.getBounds():null;
+  return D.items.filter(i=>i.lat&&i.pyeong>=py&&i.deals_12m>=2&&(over||i.price_eok<=bud+0.5)&&(kd==="all"||(i.kind||"아파트")===kd)&&(!b||b.contains([i.lat,i.lng])))}
 function fit(){const b=L.latLngBounds(visible().slice(0,20).map(i=>[i.lat,i.lng]));if(b.isValid())map.fitBounds(b,{padding:[30,30]})}
 function draw(){
   cluster.clearLayers();markers={};stnLayer.clearLayers();
-  const bud=+$("#bud").value||D.budget_eok, vis=visible();
+  const bud=+$("#bud").value||D.budget_eok, all=visible(false), vis=visible(true);
   const top3=new Set(vis.filter(i=>i.price_eok<=bud+0.5).slice(0,3).map(i=>i.id));
-  vis.forEach((it,n)=>{
+  all.forEach((it,n)=>{
     const cls=["pill",top3.has(it.id)?"top":"",it.price_eok>bud+0.5?"over":"",SEL===it.id?"sel":""].join(" ");
     const m=L.marker([it.lat,it.lng],{price:it.price_eok,title:it.name,icon:L.divIcon({className:"",html:`<span class="${cls}">${it.price_eok.toFixed(1)}억</span>`,iconSize:null})});
     m.on("click",()=>select(it.id,false));markers[it.id]=m;cluster.addLayer(m);
@@ -111,15 +112,15 @@ function draw(){
   $("#items").innerHTML=vis.slice(0,80).map((it,n)=>`<div class="item${SEL===it.id?" sel":""}" data-id="${esc(it.id)}" tabindex="0">
     <span class="p">${it.price_eok.toFixed(1)}억</span><b>${n+1}. ${esc(it.name)}</b>
     <div class="m">${esc(it.umd)} · ${it.built||"?"}년 · ${it.pyeong}평형 · 점수 ${it.score}</div>
-    <div class="m">${it.station?esc(it.station)+"역 도보 "+it.walk_min+"분":"역 정보 없음"}</div></div>`).join("")||'<p class="sub">조건에 맞는 단지가 없습니다. 예산을 올려보세요.</p>';
-  $("#listToggle").textContent=`추천 목록 ${vis.length}곳 ${$("#list").classList.contains("open")?"▼":"▲"}`;
+    <div class="m">${it.station?esc(it.station)+"역 도보 "+it.walk_min+"분":"역 정보 없음"}</div></div>`).join("")||'<p class="sub">이 화면 안에 조건에 맞는 단지가 없습니다. 지도를 옮기거나 예산을 올려보세요.</p>';
+  $("#listToggle").textContent=`화면 안 ${vis.length}곳 ${$("#list").classList.contains("open")?"▼":"▲"}`;
   if(SEL)showRings(D.items.find(i=>i.id===SEL));
 }
 function showRings(it){ringLayer.clearLayers();if(!it||!$("#lRing").checked)return;
   const c=getComputedStyle(document.documentElement).getPropertyValue("--accent").trim()||"#a8954f";
   [500,1000].forEach(r=>L.circle([it.lat,it.lng],{radius:r,color:c,weight:1.5,dashArray:"4 4",fill:false,interactive:false}).addTo(ringLayer));
   if(it.st_lat)L.polyline([[it.lat,it.lng],[it.st_lat,it.st_lng]],{color:c,weight:2,interactive:false}).addTo(ringLayer)}
-function supplyMini(id){const s=SUP&&SUP.items[id];if(!s)return"";const M=SUP.months.slice(0,6),v=s.list.slice(0,6),mx=Math.max(1,...v);
+function supplyMini(id){const s=SUP&&SUP.items&&SUP.items[id];if(!s||!SUP.months)return"";const M=SUP.months.slice(0,6),v=s.list.slice(0,6),mx=Math.max(1,...v);
   return `<div style="margin:2px 0 10px"><div class="sub" style="font-size:.74rem;margin-bottom:4px">앞으로 6개월 예상 전세 매물 · <a href="timing.html" style="color:var(--accent)">이사 시기</a></div>
    <div style="display:flex;gap:4px;align-items:flex-end;height:46px">${v.map((x,i)=>`<div style="flex:1;text-align:center;font:500 10px var(--f-num);color:var(--muted)"><div style="height:${Math.max(2,x/mx*28)}px;background:var(--accent);border-radius:3px;margin-bottom:2px" title="${M[i]} ${x.toFixed(1)}건"></div>${M[i].slice(5)}월</div>`).join("")}</div></div>`}
 function select(id,pan){
@@ -146,26 +147,42 @@ $("#items").addEventListener("click",e=>{const el=e.target.closest(".item");if(e
 $("#items").addEventListener("keydown",e=>{if(e.key==="Enter"){const el=e.target.closest(".item");if(el)select(el.dataset.id,true)}});
 $("#listToggle").addEventListener("click",()=>{const o=$("#list").classList.toggle("open");$("#listToggle").setAttribute("aria-expanded",o);draw()});
 ["#bud","#py","#showOver","#lStn","#lRing"].forEach(s=>$(s).addEventListener("input",draw));
-$("#kind").addEventListener("input",()=>{draw();fit()});
-let META=null;
-async function loadArea(selectId){
-  const areas=JR.areasOf(META,$("#area").value);
-  $("#items").innerHTML='<p class="sub">불러오는 중…</p>';
-  const items=await JR.items(META.folder||"rec",areas);
-  items.sort((a,b)=>(!a.within_budget)-(!b.within_budget)||b.score-a.score);
-  D={...META,items};SUP=await JR.supply(areas).catch(()=>null);
-  SEL=null;$("#sheet").hidden=true;ringLayer.clearLayers();draw();fit();
-  if(selectId)select(selectId,true);
+$("#kind").addEventListener("input",draw);
+let META=null;const LOADED=new Set(),LOADING=new Set();
+function bboxOf(code){const g=META.sgg[code];if(g.bbox)return L.latLngBounds([g.bbox[0],g.bbox[1]],[g.bbox[2],g.bbox[3]]);
+  if(g.center)return L.latLng(g.center).toBounds(5000);return null}
+function codeOfName(n){return Object.keys(META.sgg).find(c=>META.sgg[c].name===n)}
+async function loadCodes(codes){
+  codes=codes.filter(c=>!LOADED.has(c)&&!LOADING.has(c));if(!codes.length)return;
+  codes.forEach(c=>LOADING.add(c));status();
+  const [items,sups]=await Promise.all([JR.items(META.folder||"rec",codes),Promise.all(codes.map(c=>JR.file("supply",c)))]);
+  codes.forEach(c=>{LOADING.delete(c);LOADED.add(c)});
+  const have=new Set(D.items.map(i=>i.id));
+  D.items=D.items.concat(items.filter(i=>!have.has(i.id))).sort((a,b)=>(!a.within_budget)-(!b.within_budget)||b.score-a.score);
+  sups.forEach(x=>Object.assign(SUP.items,x.items||{}));
+  status();draw();
 }
-$("#area").addEventListener("change",()=>loadArea());
+function status(){const n=[...LOADED].map(c=>META.sgg[c].name.replace(/^안양시 /,"안양 "));
+  $("#loaded").textContent=(LOADING.size?"불러오는 중… · ":"")+(n.length?`불러온 구 ${n.length}곳 (${D.items.length}단지)`:"")+(map.getZoom()<12?" · 확대하면 주변 구를 자동으로 불러옵니다":"")}
+function autoLoad(){if(!META||!D||!JR.isSgg(META))return;status();if(map.getZoom()<12)return;
+  const b=map.getBounds().pad(0.15);
+  const want=Object.keys(META.sgg).filter(c=>{const bb=bboxOf(c);return bb&&b.intersects(bb)}).slice(0,8);
+  loadCodes(want)}
+map.on("moveend",()=>{autoLoad();if(D)draw()});
+function goRegion(v){const codes=JR.codesOf(META,v);let b=null;
+  codes.forEach(c=>{const bb=bboxOf(c);if(bb)b=b?b.extend(bb):L.latLngBounds(bb.getSouthWest(),bb.getNorthEast())});
+  if(b&&b.isValid())map.fitBounds(b,{padding:[20,20],maxZoom:15});loadCodes(codes)}
+$("#area").addEventListener("change",()=>goRegion($("#area").value));
 JR.meta().then(async d=>{
-  META=d;$("#bud").value=d.budget_eok;
-  if(d.items){D=d;$("#area").innerHTML="<option>전체</option>";draw();fit();return}
-  JR.fillAreas($("#area"),d);
+  META=d;$("#bud").value=d.budget_eok;D={...d,items:d.items||[]};$("#srcline").innerHTML=JR.sourceLine(d)+" · 지도: OpenStreetMap";
+  SUP={...(await JR.meta("supply.json").catch(()=>({})))};SUP.items={};
+  if(!JR.isSgg(d)){$("#area").innerHTML="<option>전체</option>";
+    const codes=Object.keys(d.areas||{});D.items=await JR.items(d.folder||"rec",codes);draw();fit();return}
+  JR.fillRegions($("#area"),d,{key:"jr9_region"});
   const q=new URLSearchParams(location.search).get("id");
-  if(q){const sg=q.split("-")[0];const k=Object.entries(d.areas).find(([_,a])=>(a.sgg||[]).includes(sg));if(k)$("#area").value=k[0]}
-  await loadArea(q);
-}).catch(()=>{$("#items").innerHTML='<p class="sub">추천 데이터를 불러오지 못했습니다.</p>'});
+  if(q){const c=codeOfName(q.split("-")[0]);if(c){await loadCodes([c]);const it=D.items.find(i=>i.id===q);if(it){select(q,true);return}goRegion(c);return}}
+  goRegion($("#area").value);
+}).catch(e=>{$("#items").innerHTML='<p class="sub">추천 데이터를 불러오지 못했습니다.</p>'});
 </script>
 </body>
 </html>
