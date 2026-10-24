@@ -36,7 +36,7 @@
 <body>
 <div class="wrap">
  <nav class="topnav">
-  <a class="brand" href="./">전세 레이더<span>9</span><small class="ver">v4.2.0</small></a>
+  <a class="brand" href="./">전세 레이더<span>9</span><small class="ver">v4.2.1</small></a>
   <a class="tab" href="./">추천</a><a class="tab" href="buy.html" aria-current="page">매매</a><a class="tab" href="map.html">지도</a><a class="tab" href="timing.html">이사 시기</a><a class="tab" href="stats.html">통계</a><a class="tab" href="buyer.html">매수자 분석</a><a class="tab" href="settings.html">알림 설정</a><a class="tab" href="sources.html">자료</a>
  </nav>
  <h1>매매</h1>
@@ -89,7 +89,7 @@ function card(it,i,bud){
   ${it.kind==="빌라"&&it.jeonse_ratio>0.8?'<p class="meta" style="color:var(--bad);margin:0">전세가율 80% 이상 — 전세로 들어갈 때 보증금 회수 위험이 큰 건물이에요.</p>':""}
   <div class="actions"><a class="btn primary" href="${buyer}" style="color:#fff">자금 계획 보기</a>
    <a href="${map}" target="_blank" rel="noopener">카카오맵</a>
-   <a href="https://new.land.naver.com/search?query=${encodeURIComponent(it.name.replace(/ \(.*\)$/,""))}" target="_blank" rel="noopener">호가·평면도</a></div>
+   ${JR.naverHtml(it,"sale")}</div>
   </article>`}
 function render(){
   const kind=$("#f-kind").value,sgg=$("#f-sgg").value,bud=+$("#f-bud").value||META.budget_eok,py=+$("#f-py").value,q=$("#f-q").value.trim(),over=$("#f-over").value==="show",so=$("#f-sort").value;

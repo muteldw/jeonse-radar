@@ -58,6 +58,26 @@ const JR = {
     const kinds = p.by_kind ? Object.entries(p.by_kind).map(([k, n]) => `${k} ${n.toLocaleString()}건`).join(" · ") : "";
     return `출처: ${e(meta.source || "")}${p.from ? ` · ${label} ${p.from} ~ ${p.to}` : ""}${kinds ? ` · ${kinds}` : ""} · ${e((meta.generated_at || "").replace("T", " ").slice(0, 16))} 갱신 · 위치·역·인프라: 카카오 로컬 · <a href="sources.html">자료 전체 보기</a>`;
   },
+  // 국토부 단지명 → 네이버 검색용 이름: 동·지번 괄호 삭제, "(14단지)"·"(5차)"는 살림
+  naverName(it) {
+    let n = String(it.name || "").replace(/ \([^)]*\)$/, "");          // 빌라 "이름 (지번)"
+    n = n.replace(/\(([^)]*)\)/g, (m, x) => /^[\d\s,~-]+$|동|상가|^[가-하]$/.test(x) ? " " : " " + x + " ");
+    n = n.replace(/\d+동(?=[,\s]|$)/g, " ").replace(/[,~]/g, " ").replace(/[\u4e00-\u9fff]/g, "");
+    return n.replace(/\s+/g, " ").trim() || String(it.name || "");
+  },
+  // 호가 링크: 1) 단지 위치로 네이버 부동산 지도(그 자리 단지가 바로 보임) 2) 동+단지명 검색
+  naverLinks(it, trade) {
+    const t = trade === "sale" ? "A1" : "B1", villa = it.kind === "빌라", q = `${it.umd || ""} ${JR.naverName(it)}`.trim();
+    const map = it.lat && it.lng ? `https://new.land.naver.com/${villa ? "houses" : "complexes"}?ms=${it.lat},${it.lng},18&a=${villa ? "VL:DDDGG:JWJT:SGJT:HOJT" : "APT:ABYG:JGC"}&b=${t}&e=RETAIL` : null;
+    const search = `https://m.land.naver.com/search/result/${encodeURIComponent(q)}`;
+    const web = `https://search.naver.com/search.naver?query=${encodeURIComponent(q + (villa ? "" : " 아파트") + " 네이버부동산")}`;
+    return { map, search, web, q };
+  },
+  naverHtml(it, trade, cls = "") {
+    const L = JR.naverLinks(it, trade), c = cls ? ` class="${cls}"` : "", o = ' target="_blank" rel="noopener"';
+    return (L.map ? `<a${c} href="${L.map}"${o} title="네이버 부동산 지도에서 이 위치 열기">호가(지도)</a> ` : "") +
+      `<a${c} href="${L.search}"${o} title="${JR.esc(L.q)} 검색">호가(검색)</a>`;
+  },
   kindLabel(it) { return it.kind === "빌라" ? '<span class="kind">빌라</span>' : ""; },
   bath(it) { return it.bath == null ? "욕실 수 확인 필요" : `욕실 ${it.bath}`; }
 };

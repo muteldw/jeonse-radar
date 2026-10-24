@@ -59,7 +59,7 @@ body{display:flex;flex-direction:column}
 <body>
 <div class="bar">
  <nav class="topnav">
-  <a class="brand" href="./">전세 레이더<span>9</span><small class="ver">v4.2.0</small></a>
+  <a class="brand" href="./">전세 레이더<span>9</span><small class="ver">v4.2.1</small></a>
   <a class="tab" href="./">추천</a><a class="tab" href="buy.html">매매</a><a class="tab" href="map.html" aria-current="page">지도</a><a class="tab" href="timing.html">이사 시기</a><a class="tab" href="stats.html">통계</a><a class="tab" href="buyer.html">매수자 분석</a><a class="tab" href="settings.html">알림 설정</a><a class="tab" href="sources.html">자료</a>
  </nav>
  <div class="filters">
@@ -137,7 +137,7 @@ function select(id,pan){
    <div class="chips">${it.station?`<span class="chip st">${esc(it.station)}역 ${esc((it.lines||[]).join("·"))} · 도보 ${it.walk_min}분</span>`:""}${it.base_km!=null?`<span class="chip">${esc(it.base_name||"기준역")}까지 ${it.base_km}km</span>`:""}${inf}</div>
    ${supplyMini(it.id)}
    <div class="links"><a class="btn" href="https://map.kakao.com/link/map/${encodeURIComponent(it.name)},${it.lat},${it.lng}" target="_blank" rel="noopener">카카오맵</a>
-    <a class="btn" href="https://new.land.naver.com/search?query=${encodeURIComponent(it.name)}" target="_blank" rel="noopener">호가·평면도</a>
+    ${JR.naverHtml(it,"rent","btn")}
     <a class="btn primary" href="${buyer}">매수자 자금 분석</a></div>`;
   $("#sheet").hidden=false;draw();
   const el=document.querySelector(`.item[data-id="${CSS.escape(id)}"]`);if(el)el.scrollIntoView({block:"nearest"});
