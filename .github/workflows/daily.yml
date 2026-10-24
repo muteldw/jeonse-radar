@@ -45,6 +45,8 @@ jobs:
         run: cd model && python rank_sale.py
       - name: 월별 예상 매물·이사 시기
         run: cd model && python supply.py
+      - name: 월별 통계
+        run: cd model && python stats.py
       - name: 자료 목록·수집 현황
         run: cd model && python sources.py
       - name: 화면용 설정 복사

@@ -1,0 +1,176 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>통계 · 전세 레이더 9</title>
+<link rel="manifest" href="manifest.json">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;500;700&family=IBM+Plex+Mono:wght@500&display=swap">
+<link rel="stylesheet" href="app.css">
+<style>
+:root{--c-now:#9a7f2e;--c-prev:#8a8f86;--c-up:#c4532f;--c-down:#2f6fb0;--grid:#e8e5dc}
+@media (prefers-color-scheme:dark){:root{--c-now:#cdb86e;--c-prev:#8d918a;--c-up:#e07a5f;--c-down:#6aa0dc;--grid:#2e3238}}
+.filters{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:10px;background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:12px;margin-bottom:14px}
+.filters label{display:flex;flex-direction:column;gap:4px;font-size:.78rem;color:var(--muted)}
+.seg{display:flex;gap:6px;margin:0 0 12px}
+.seg button{font:500 .9rem var(--f-body);border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:999px;padding:6px 14px;cursor:pointer}
+.seg button[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,180px),1fr));gap:10px;margin-bottom:14px}
+.kpi{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:12px}
+.kpi small{display:block;font-size:.74rem;color:var(--muted)}
+.kpi b{display:block;font:500 1.45rem/1.2 var(--f-num);margin:4px 0 2px}
+.kpi span{font-size:.8rem;color:var(--muted)}
+.delta.up{color:var(--c-up)}.delta.down{color:var(--c-down)}
+.charts{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,460px),1fr));gap:14px}
+.chart{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:14px;min-width:0;position:relative}
+.chart h3{margin:0;font-size:.95rem}
+.chart p.cap{margin:2px 0 8px;font-size:.78rem;color:var(--muted)}
+.chart svg{display:block;width:100%;height:auto;overflow:visible}
+.legend{display:flex;flex-wrap:wrap;gap:12px;font-size:.76rem;color:var(--muted);margin-top:6px}
+.legend i{display:inline-block;width:16px;height:0;border-top:2px solid;vertical-align:middle;margin-right:5px}
+.legend i.box{width:10px;height:10px;border:0;border-radius:2px;vertical-align:-1px}
+.tip{position:absolute;pointer-events:none;background:var(--ink);color:var(--bg);font-size:.76rem;line-height:1.5;border-radius:8px;padding:6px 9px;white-space:nowrap;z-index:5;transform:translate(-50%,-110%)}
+.tip b{font-family:var(--f-num)}
+table.yoy td,table.yoy th{white-space:nowrap}
+.prov{color:var(--muted);font-style:italic}
+.empty{background:var(--surface);border:1px dashed var(--line);border-radius:12px;padding:24px;color:var(--muted);line-height:1.7}
+</style>
+</head>
+<body>
+<div class="wrap">
+ <nav class="topnav">
+  <a class="brand" href="./">전세 레이더<span>9</span><small class="ver">v4.2.0</small></a>
+  <a class="tab" href="./">추천</a><a class="tab" href="buy.html">매매</a><a class="tab" href="map.html">지도</a><a class="tab" href="timing.html">이사 시기</a><a class="tab" href="stats.html" aria-current="page">통계</a><a class="tab" href="buyer.html">매수자 분석</a><a class="tab" href="settings.html">알림 설정</a><a class="tab" href="sources.html">자료</a>
+ </nav>
+ <h1>통계</h1>
+ <p class="sub" id="lead">최근 12개월 월별 실거래 흐름과 1년 전 같은 달 비교입니다.</p>
+ <div class="filters">
+  <label>지역<select id="scope"></select></label>
+  <label>유형<select id="kind"><option value="all">아파트+빌라</option><option>아파트</option><option>빌라</option></select></label>
+ </div>
+ <div class="seg" role="group" aria-label="거래 종류"><button id="t-rent" aria-pressed="true" data-t="rent">전세</button><button id="t-sale" aria-pressed="false" data-t="sale">매매</button></div>
+ <div id="body"></div>
+ <p class="srcline" id="srcline"></p>
+</div>
+<script src="data.js"></script>
+<script>
+const $=s=>document.querySelector(s),E=JR.esc;
+let S=null,T="rent";
+const css=v=>getComputedStyle(document.documentElement).getPropertyValue(v).trim();
+const pct=(a,b)=>a==null||b==null||!b?null:(a/b-1)*100;
+const fmtP=v=>v==null?"-":(v>0?"+":"")+v.toFixed(1)+"%";
+const dcls=v=>v==null?"":v>0.05?"up":v<-0.05?"down":"";
+const mlab=m=>`${m.slice(2,4)}.${m.slice(5)}`;
+function niceTicks(lo,hi,n=4){if(lo===hi){lo-=1;hi+=1}const raw=(hi-lo)/n,p=Math.pow(10,Math.floor(Math.log10(raw))),st=[1,2,2.5,5,10].map(x=>x*p).find(x=>raw<=x);const a=Math.floor(lo/st)*st,b=Math.ceil(hi/st)*st;const t=[];for(let v=a;v<=b+1e-9;v+=st)t.push(+v.toFixed(6));return t}
+/* 공통 차트 틀: 축·격자·툴팁 */
+function frame(el,labels,ticks,yfmt,prov){
+  const W=Math.max(300,el.clientWidth),H=Math.round(Math.min(260,Math.max(190,W*0.42))),L=46,R=12,Tp=10,B=26;
+  const cw=(W-L-R)/labels.length,y0=ticks[0],y1=ticks.at(-1),Y=v=>Tp+(H-Tp-B)*(1-(v-y0)/(y1-y0||1)),X=i=>L+cw*i+cw/2;
+  let g=ticks.map(t=>`<line x1="${L}" x2="${W-R}" y1="${Y(t)}" y2="${Y(t)}" stroke="var(--grid)"/><text x="${L-6}" y="${Y(t)+4}" text-anchor="end" font-size="11" fill="var(--muted)">${yfmt(t)}</text>`).join("");
+  const step=W<480?2:1;
+  g+=labels.map((m,i)=>i%step===(labels.length-1)%step?`<text x="${X(i)}" y="${H-8}" text-anchor="middle" font-size="11" fill="${prov(i)?"var(--muted)":"var(--ink)"}">${mlab(m)}</text>`:"").join("");
+  return {W,H,L,R,Tp,B,cw,X,Y,g};
+}
+function attachTip(el,f,labels,html){
+  const svg=el.querySelector("svg"),tip=document.createElement("div");tip.className="tip";tip.hidden=true;el.appendChild(tip);
+  const hl=svg.querySelector(".hl");
+  const at=evt=>{const r=svg.getBoundingClientRect(),x=(evt.clientX-r.left)*f.W/r.width;const i=Math.max(0,Math.min(labels.length-1,Math.floor((x-f.L)/f.cw)));
+    tip.innerHTML=html(i);tip.hidden=false;const ex=el.getBoundingClientRect();tip.style.left=(r.left-ex.left+f.X(i)*r.width/f.W)+"px";tip.style.top=(r.top-ex.top+f.Tp*r.height/f.H+8)+"px";
+    if(hl){hl.setAttribute("x1",f.X(i));hl.setAttribute("x2",f.X(i));hl.style.display=""}};
+  svg.addEventListener("pointermove",at);svg.addEventListener("pointerdown",at);
+  svg.addEventListener("pointerleave",()=>{tip.hidden=true;if(hl)hl.style.display="none"});
+}
+/* 선: 올해(실선) vs 1년 전(점선) */
+function lineChart(el,labels,now,prev,yfmt,tipfmt,prov){
+  const vals=[...now,...prev].filter(v=>v!=null);if(!vals.length){el.innerHTML+='<p class="cap">표본이 부족합니다.</p>';return}
+  const t=niceTicks(Math.min(...vals),Math.max(...vals)),f=frame(el,labels,t,yfmt,prov);
+  const path=(arr)=>{let d="",pen=false;arr.forEach((v,i)=>{if(v==null){pen=false;return}d+=(pen?"L":"M")+f.X(i)+" "+f.Y(v);pen=true});return d};
+  const lastFirm=labels.findIndex((_,i)=>prov(i));const cut=lastFirm<0?labels.length:lastFirm;
+  const firm=now.map((v,i)=>i<cut?v:null),pv=now.map((v,i)=>i>=cut-1?v:null);
+  let s=`<svg viewBox="0 0 ${f.W} ${f.H}" role="img" aria-label="${E(el.dataset.title)}">${f.g}
+   <line class="hl" y1="${f.Tp}" y2="${f.H-f.B}" stroke="var(--muted)" stroke-dasharray="2 3" style="display:none"/>
+   <path d="${path(prev)}" fill="none" stroke="var(--c-prev)" stroke-width="2" stroke-dasharray="5 4"/>
+   <path d="${path(firm)}" fill="none" stroke="var(--c-now)" stroke-width="2.25"/>
+   <path d="${path(pv)}" fill="none" stroke="var(--c-now)" stroke-width="2" stroke-dasharray="2 3"/>`;
+  now.forEach((v,i)=>{if(v!=null&&(i===now.length-1||i===cut-1))s+=`<circle cx="${f.X(i)}" cy="${f.Y(v)}" r="4.5" fill="${prov(i)?"var(--surface)":"var(--c-now)"}" stroke="var(--c-now)" stroke-width="2"/>`});
+  const li=cut-1;if(li>=0&&now[li]!=null)s+=`<text x="${Math.min(f.X(li),f.W-f.R-4)}" y="${f.Y(now[li])-10}" text-anchor="end" font-size="11.5" font-weight="600" fill="var(--ink)">${yfmt(now[li])}</text>`;
+  el.innerHTML+=s+"</svg>"+`<div class="legend"><span><i style="border-color:var(--c-now)"></i>최근 12개월</span><span><i style="border-color:var(--c-prev);border-top-style:dashed"></i>1년 전 같은 달</span><span><i style="border-color:var(--c-now);border-top-style:dotted"></i>잠정(신고 진행 중)</span></div>`;
+  attachTip(el,f,labels,i=>`${labels[i]}${prov(i)?" (잠정)":""}<br>올해 <b>${now[i]==null?"-":tipfmt(now[i])}</b> · 1년 전 <b>${prev[i]==null?"-":tipfmt(prev[i])}</b>${now[i]!=null&&prev[i]!=null?`<br>전년 동월 대비 <b>${fmtP(pct(now[i],prev[i]))}</b>`:""}`);
+}
+/* 부호 막대: 전월 대비 변화 */
+function signedBars(el,labels,vals,prov){
+  const v=vals.filter(x=>x!=null);if(!v.length){el.innerHTML+='<p class="cap">표본이 부족합니다.</p>';return}
+  const m=Math.max(0.5,...v.map(Math.abs)),t=niceTicks(-m,m),f=frame(el,labels,t,x=>x.toFixed(1)+"%",prov),bw=Math.min(28,f.cw*0.62);
+  let s=`<svg viewBox="0 0 ${f.W} ${f.H}" role="img" aria-label="${E(el.dataset.title)}">${f.g}<line x1="${f.L}" x2="${f.W-f.R}" y1="${f.Y(0)}" y2="${f.Y(0)}" stroke="var(--muted)"/>`;
+  vals.forEach((x,i)=>{if(x==null)return;const y=f.Y(Math.max(0,x)),h=Math.max(1,Math.abs(f.Y(x)-f.Y(0)));
+    s+=`<rect x="${f.X(i)-bw/2}" y="${y}" width="${bw}" height="${h}" rx="3" fill="${x>=0?"var(--c-up)":"var(--c-down)"}" opacity="${prov(i)?0.45:1}"/>`});
+  el.innerHTML+=s+"</svg>"+`<div class="legend"><span><i class="box" style="background:var(--c-up)"></i>상승</span><span><i class="box" style="background:var(--c-down)"></i>하락</span><span>흐린 막대 = 잠정</span></div>`;
+  attachTip(el,f,labels,i=>`${labels[i]}${prov(i)?" (잠정)":""}<br>전월 대비 <b>${fmtP(vals[i])}</b>`);
+}
+/* 묶음 막대: 거래량 올해 vs 1년 전 */
+function pairBars(el,labels,now,prev,prov){
+  const t=niceTicks(0,Math.max(1,...now,...prev)),f=frame(el,labels,t,x=>x>=1000?(x/1000).toFixed(x%1000?1:0)+"천":x,prov),bw=Math.min(14,f.cw*0.34);
+  let s=`<svg viewBox="0 0 ${f.W} ${f.H}" role="img" aria-label="${E(el.dataset.title)}">${f.g}`;
+  labels.forEach((_,i)=>{[[prev[i],-1,"var(--c-prev)"],[now[i],1,"var(--c-now)"]].forEach(([v,sgn,c])=>{if(!v)return;const x=f.X(i)+(sgn<0?-bw-1:1);
+    s+=`<rect x="${x}" y="${f.Y(v)}" width="${bw}" height="${f.Y(0)-f.Y(v)}" rx="3" fill="${c}" opacity="${sgn>0&&prov(i)?0.45:1}"/>`})});
+  el.innerHTML+=s+"</svg>"+`<div class="legend"><span><i class="box" style="background:var(--c-now)"></i>최근 12개월</span><span><i class="box" style="background:var(--c-prev)"></i>1년 전 같은 달</span></div>`;
+  attachTip(el,f,labels,i=>`${labels[i]}${prov(i)?" (잠정)":""}<br>올해 <b>${now[i].toLocaleString()}건</b> · 1년 전 <b>${prev[i].toLocaleString()}건</b><br>전년 동월 대비 <b>${fmtP(pct(now[i],prev[i]))}</b>`);
+}
+function sd(a){const v=a.filter(x=>x!=null);if(v.length<3)return null;const m=v.reduce((s,x)=>s+x,0)/v.length;return Math.sqrt(v.reduce((s,x)=>s+(x-m)**2,0)/(v.length-1))}
+function render(){
+  const D=S[T],scope=$("#scope").value,kind=$("#kind").value,body=$("#body");
+  const ser=D.data&&D.data[scope]&&D.data[scope][kind];
+  if(!D.rows){body.innerHTML=`<div class="empty"><b>아직 ${T==="sale"?"매매":"전세"} 실거래가 없습니다.</b><br>${T==="sale"?"공공데이터포털에서 '국토교통부_아파트 매매 실거래가 자료'·'연립다세대 매매 실거래가 자료'를 활용신청하면 다음 수집부터 통계가 채워집니다.":""}</div>`;return}
+  if(!ser){body.innerHTML='<div class="empty">이 지역·유형에는 거래가 없습니다.</div>';return}
+  const M=D.months,n=M.length,k=Math.min(12,n),off=n-k,lab=M.slice(off);
+  const cur=a=>a.slice(off),prv=a=>M.slice(off).map((_,i)=>{const j=off+i-12;return j>=0?a[j]:null});
+  const prov=i=>lab[i]>=S.provisional_from;
+  const firm=lab.reduce((b,m,i)=>prov(i)?b:i,-1);
+  const idx=ser.idx,ppy=ser.ppy,cnt=ser.n;
+  const mom=cur(idx.map((v,i)=>i&&v!=null&&idx[i-1]!=null?(v/idx[i-1]-1)*100:null));
+  const vol=sd(mom.filter((_,i)=>!prov(i)));
+  const fi=off+firm, fm=M[fi];
+  const ppyY=pct(ppy[fi],ppy[fi-12]),idxY=pct(idx[fi],idx[fi-12]);
+  const sum=(a,from,to)=>a.slice(Math.max(0,from),to+1).reduce((s,x)=>s+(x||0),0);
+  const v3=sum(cnt,fi-2,fi),v3p=fi-14>=0?sum(cnt,fi-14,fi-12):null;
+  const label=T==="rent"?"전세":"매매";
+  const kpi=(t,v,d,note)=>`<div class="kpi"><small>${t}</small><b>${v}</b><span>${d}</span>${note?`<span> · ${note}</span>`:""}</div>`;
+  body.innerHTML=`<div class="kpis">
+   ${kpi(`${label} 평당 중위가 (${mlab(fm)})`,ppy[fi]!=null?ppy[fi].toLocaleString()+"만원":"-",`전년 동월 대비 <span class="delta ${dcls(ppyY)}">${fmtP(ppyY)}</span>`)}
+   ${kpi("단지 보정 지수 변화 (1년)",idx[fi]!=null?idx[fi].toFixed(1):"-",`전년 동월 대비 <span class="delta ${dcls(idxY)}">${fmtP(idxY)}</span>`,"같은 단지끼리 비교")}
+   ${kpi("최근 3개월 거래량",v3.toLocaleString()+"건",`1년 전 같은 기간 대비 <span class="delta">${fmtP(pct(v3,v3p))}</span>`)}
+   ${kpi("월 변동성",vol==null?"-":vol.toFixed(2)+"%p",`지수 월간 변화의 표준편차 (최근 ${k}개월)`)}
+   ${T==="rent"?kpi(`갱신 계약 비중 (${mlab(fm)})`,ser.renew[fi]!=null?Math.round(ser.renew[fi]*100)+"%":"-",`1년 전 ${ser.renew[fi-12]!=null?Math.round(ser.renew[fi-12]*100)+"%":"-"}`,ser.gap[fi]!=null?`신규가 갱신보다 ${((ser.gap[fi]-1)*100).toFixed(1)}% 비쌈`:""):""}
+  </div><div class="charts">
+   <div class="chart" id="c1" data-title="${label} 단지 보정 가격지수"><h3>가격 흐름 · 단지 보정 지수</h3><p class="cap">같은 단지·평형의 24개월 중위가=100. 비싼 단지가 많이 거래된 달에 튀는 효과를 걸렀어요.</p></div>
+   <div class="chart" id="c2" data-title="${label} 지수 전월 대비 변화"><h3>월 변동률 · 전월 대비</h3><p class="cap">단지 보정 지수의 한 달 변화. 막대가 들쭉날쭉할수록 변동성이 큽니다.</p></div>
+   <div class="chart" id="c3" data-title="${label} 평당 중위가"><h3>평당 중위가 (만원/3.3㎡)</h3><p class="cap">${T==="rent"?"신규 계약 기준 · ":""}실제 거래된 단지 구성에 따라 움직입니다.</p></div>
+   <div class="chart" id="c4" data-title="${label} 거래량"><h3>거래량 · 1년 전 같은 달과 비교</h3><p class="cap">${T==="rent"?"신규+갱신 전세 계약 수":"매매 거래 수"} (전용 80㎡↑)</p></div>
+   ${T==="rent"?`<div class="chart" id="c5" data-title="갱신 계약 비중"><h3>갱신 계약 비중</h3><p class="cap">전세 계약 중 갱신 비율. 오르면 세입자가 이사 대신 머무는 쪽 — 시장에 나오는 매물이 줄어요.</p></div>`:""}
+  </div>
+  <section class="panel" style="margin-top:14px"><h2>전년 동월 비교표</h2><div class="tblwrap"><table class="yoy"><thead><tr><th>월</th><th class="r">평당 중위가</th><th class="r">1년 전</th><th class="r">변화</th><th class="r">지수</th><th class="r">1년 전</th><th class="r">변화</th><th class="r">거래량</th><th class="r">1년 전</th><th class="r">변화</th></tr></thead><tbody>
+  ${lab.map((m,i)=>{const j=off+i,q=j-12,c=(a,b)=>`<td class="r num"><span class="delta ${dcls(pct(a,b))}">${fmtP(pct(a,b))}</span></td>`;
+    return `<tr class="${prov(i)?"prov":""}"><td>${m}${prov(i)?" 잠정":""}</td><td class="r num">${ppy[j]?.toLocaleString()??"-"}</td><td class="r num">${q>=0?(ppy[q]?.toLocaleString()??"-"):"-"}</td>${c(ppy[j],q>=0?ppy[q]:null)}<td class="r num">${idx[j]??"-"}</td><td class="r num">${q>=0?(idx[q]??"-"):"-"}</td>${c(idx[j],q>=0?idx[q]:null)}<td class="r num">${cnt[j].toLocaleString()}</td><td class="r num">${q>=0?cnt[q].toLocaleString():"-"}</td>${c(cnt[j],q>=0?cnt[q]:null)}</tr>`}).reverse().join("")}
+  </tbody></table></div><p class="sub">잠정: 실거래 신고 기한(계약 후 30일)이 남아 아직 덜 집계된 달. 거래량이 적게 보이는 것이 정상입니다. 표본 ${S.min_n}건 미만인 달은 '-'로 비웁니다.</p></section>`;
+  lineChart($("#c1"),lab,cur(idx),prv(idx),v=>v.toFixed(0),v=>v.toFixed(1),prov);
+  signedBars($("#c2"),lab,mom,prov);
+  lineChart($("#c3"),lab,cur(ppy),prv(ppy),v=>v>=1000?(v/1000).toFixed(1)+"천":String(v),v=>v.toLocaleString()+"만원",prov);
+  pairBars($("#c4"),lab,cur(cnt),prv(cnt).map(x=>x||0),prov);
+  if(T==="rent")lineChart($("#c5"),lab,cur(ser.renew).map(v=>v==null?null:v*100),prv(ser.renew).map(v=>v==null?null:v*100),v=>v.toFixed(0)+"%",v=>v.toFixed(1)+"%",prov);
+}
+function fillScopes(){
+  const e=E;let h=`<option value="all">${e(S.scopes.all)}</option>`;
+  for(const [k,g] of Object.entries(S.groups)){h+=`<optgroup label="${e(g.name)}"><option value="area:${k}">${e(g.name)} 전체</option>`+g.codes.map(c=>`<option value="${c}">${e(S.scopes[c])}</option>`).join("")+"</optgroup>"}
+  $("#scope").innerHTML=h;try{const v=localStorage.getItem("jr9_stats_scope");if(v&&[...$("#scope").options].some(o=>o.value===v))$("#scope").value=v}catch(x){}
+}
+document.querySelectorAll(".seg button").forEach(b=>b.addEventListener("click",()=>{T=b.dataset.t;document.querySelectorAll(".seg button").forEach(x=>x.setAttribute("aria-pressed",x===b));render()}));
+$("#scope").addEventListener("change",e=>{try{localStorage.setItem("jr9_stats_scope",e.target.value)}catch(x){}render()});
+$("#kind").addEventListener("change",render);
+let rt;window.addEventListener("resize",()=>{clearTimeout(rt);rt=setTimeout(()=>S&&render(),200)});
+fetch("data/stats.json",{cache:"no-store"}).then(r=>r.json()).then(d=>{S=d;fillScopes();
+  $("#lead").textContent=`최근 12개월 월별 실거래 흐름과 1년 전 같은 달 비교입니다. 마지막 거래 ${d.last_deal} · ${d.provisional_from} 이후는 신고가 덜 들어온 잠정 수치예요.`;
+  $("#srcline").innerHTML=`출처: 국토교통부 아파트·연립다세대 전월세/매매 실거래가 · 전세 ${d.rent.rows.toLocaleString()}건, 매매 ${d.sale.rows.toLocaleString()}건 (전용 80㎡↑) · ${d.generated_at.replace("T"," ").slice(0,16)} 계산 · <a href="sources.html">자료 전체 보기</a>`;
+  render()}).catch(()=>{$("#body").innerHTML='<div class="empty">통계는 다음 자동 실행(매일 06시) 후 생성됩니다.</div>'});
+</script>
+</body>
+</html>

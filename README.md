@@ -18,6 +18,7 @@ config/notify.json          알림 설정 (웹 '알림 설정' 화면에서 만�
 config/loan_rules.json      LTV·대출 한도·DSR·취득세 규칙 (제도 바뀌면 여기만 수정)
 config/wealth_dist.json     순자산 → 상위 % 추정 기준점
 model/rank.py               전세 추천 점수·취향 학습 → web/data/recommend.json(목록) + rec/<생활권>.json
+model/stats.py              월별 통계(단지 보정 지수·평당가·거래량·갱신 비중, 전년 동월 비교) → web/data/stats.json
 model/supply.py             계약기간·갱신율로 단지별 월별 예상 매물, 계절 시세 → web/data/supply.json
 web/                        화면: 추천(index) · 매매(buy) · 지도(map) · 이사 시기(timing) · 매수자 분석(buyer) · 알림 설정(settings)
 data/feedback.json          관심/제외 기록 (화면의 '기록 복사' 내용을 붙여넣기)
