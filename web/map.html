@@ -59,8 +59,8 @@ body{display:flex;flex-direction:column}
 <body>
 <div class="bar">
  <nav class="topnav">
-  <a class="brand" href="./">전세 레이더<span>9</span><small class="ver">v4.3.0</small></a>
-  <a class="tab" href="./">홈</a><a class="tab" href="list.html">추천</a><a class="tab" href="buy.html">매매</a><a class="tab" href="map.html" aria-current="page">지도</a><a class="tab" href="timing.html">이사 시기</a><a class="tab" href="stats.html">통계</a><a class="tab" href="buyer.html">매수자 분석</a><a class="tab" href="settings.html">알림 설정</a><a class="tab" href="sources.html">자료</a>
+  <a class="brand" href="./">전세 레이더<span>9</span><small class="ver">v4.4.0</small></a>
+  <a class="tab" href="./">홈</a><a class="tab" href="list.html">추천</a><a class="tab" href="buy.html">매매</a><a class="tab" href="map.html" aria-current="page">지도</a><a class="tab" href="timing.html">이사 시기</a><a class="tab" href="stats.html">통계</a><a class="tab" href="buyer.html">매수자 분석</a><a class="tab" href="me.html">내 설정</a><a class="tab" href="settings.html">알림 설정</a><a class="tab" href="sources.html">자료</a>
  </nav>
  <div class="filters">
   <label>지역으로 이동 <select id="area"></select></label>
@@ -174,7 +174,7 @@ function goRegion(v){const codes=JR.codesOf(META,v);let b=null;
   if(b&&b.isValid())map.fitBounds(b,{padding:[20,20],maxZoom:15});loadCodes(codes)}
 $("#area").addEventListener("change",()=>goRegion($("#area").value));
 JR.meta().then(async d=>{
-  META=d;$("#bud").value=d.budget_eok;D={...d,items:d.items||[]};$("#srcline").innerHTML=JR.sourceLine(d)+" · 지도: OpenStreetMap";
+  META=d;$("#bud").value=JR.budget(d);$("#py").value=String(JR.minPy());D={...d,items:d.items||[]};$("#srcline").innerHTML=JR.sourceLine(d)+" · 지도: OpenStreetMap";
   SUP={...(await JR.meta("supply.json").catch(()=>({})))};SUP.items={};
   if(!JR.isSgg(d)){$("#area").innerHTML="<option>전체</option>";
     const codes=Object.keys(d.areas||{});D.items=await JR.items(d.folder||"rec",codes);draw();fit();return}

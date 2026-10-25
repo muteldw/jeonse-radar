@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>내 설정 · 전세 레이더 9</title>
+<link rel="manifest" href="manifest.json">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;500;700&family=IBM+Plex+Mono:wght@500&display=swap">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
+<link rel="stylesheet" href="app.css">
+<style>
+#pick{height:260px;border-radius:10px;border:1px solid var(--line);margin:8px 0}
+.leaflet-container{font-family:var(--f-body);background:var(--bg)}
+.home{transform:translate(-50%,-50%);font:600 .72rem var(--f-body);background:var(--ink);color:var(--surface);border-radius:999px;padding:3px 8px;white-space:nowrap;box-shadow:0 1px 3px rgba(0,0,0,.35)}
+.areas{display:grid;gap:10px}
+.ag b{display:block;font-size:.8rem;margin-bottom:4px}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chips label{display:inline-flex;align-items:center;gap:4px;font-size:.85rem;border:1px solid var(--line);border-radius:999px;padding:4px 10px;cursor:pointer;background:var(--bg)}
+.chips label:has(input:checked){border-color:var(--accent);background:var(--accent-soft)}
+.chips input{width:auto;margin:0}
+.ok{color:var(--good);font-size:.85rem}
+.sticky{position:sticky;bottom:0;background:var(--bg);padding:10px 0;border-top:1px solid var(--line);margin-top:10px;z-index:600}
+</style>
+</head>
+<body>
+<div class="wrap">
+ <nav class="topnav">
+  <a class="brand" href="./">전세 레이더<span>9</span><small class="ver">v4.4.0</small></a>
+  <a class="tab" href="./">홈</a><a class="tab" href="list.html">추천</a><a class="tab" href="buy.html">매매</a><a class="tab" href="map.html">지도</a><a class="tab" href="timing.html">이사 시기</a><a class="tab" href="stats.html">통계</a><a class="tab" href="buyer.html">매수자 분석</a><a class="tab" href="me.html" aria-current="page">내 설정</a><a class="tab" href="settings.html">알림 설정</a><a class="tab" href="sources.html">자료</a>
+ </nav>
+ <h1>내 설정</h1>
+ <p class="sub">지금 집, 이사 시점, 관심 지역, 예산을 정하면 홈·추천·지도·이사 시기 화면이 모두 이 기준으로 바뀝니다. 설정은 <b>이 휴대폰(브라우저)에만</b> 저장되고 서버로 보내지지 않아요. 그래서 여러 사람이 같은 주소로 각자 다르게 쓸 수 있습니다.</p>
+ <div class="note" id="imported" hidden style="margin:10px 0">받은 설정 링크로 불러왔어요. 확인하고 필요하면 고친 뒤 저장하세요.</div>
+
+ <section class="panel">
+  <h2>1. 지금 사는 집</h2>
+  <div class="grid2">
+   <label class="f">집 이름 (화면에 표시)<input id="hname" maxlength="20" placeholder="예: 우리 집"></label>
+   <label class="f">전세 만기일 (이사 시점)<input id="end" type="date"></label>
+  </div>
+  <p class="sub" style="margin:8px 0 0">지도를 눌러 집 위치를 찍거나, 집에 있다면 <b>지금 위치로</b>를 누르세요. 위치는 홈 화면의 기준점과 거리 계산에만 씁니다.</p>
+  <div id="pick" role="application" aria-label="집 위치 고르기 지도"></div>
+  <div class="row"><button class="btn" id="gps">◎ 지금 위치로</button><button class="btn" id="clearhome">위치 지우기</button><span class="sub" id="hpos">위치 미설정</span></div>
+ </section>
+
+ <section class="panel">
+  <h2>2. 관심 지역</h2>
+  <p class="sub" style="margin:0 0 8px">고른 구가 추천·매매·이사 시기 화면의 기본 지역이 되고, 홈 지도도 (집 위치가 없으면) 여기서 시작해요.</p>
+  <div class="areas" id="areas"><span class="sub">불러오는 중…</span></div>
+ </section>
+
+ <section class="panel">
+  <h2>3. 예산·조건</h2>
+  <div class="grid2">
+   <label class="f">전세 예산 (억)<input id="br" type="number" step="0.5" min="1" max="30" inputmode="decimal"></label>
+   <label class="f">매수 예산 (억)<input id="bs" type="number" step="0.5" min="1" max="80" inputmode="decimal"></label>
+   <label class="f">최소 평형<select id="py"><option value="34">34평형↑ (전용 80㎡↑)</option><option value="40">40평형↑</option></select></label>
+  </div>
+  <p class="sub" style="margin:8px 0 0">자료는 전용 80㎡ 이상(욕실 2개 수준) 단지만 모아요. 더 작은 평형은 지금은 볼 수 없어요.</p>
+ </section>
+
+ <section class="panel">
+  <h2>다른 기기·가족과 같이 쓰기</h2>
+  <p class="sub" style="margin:0 0 8px">아래 링크를 열면 그 기기에 지금 설정이 그대로 들어갑니다. 배우자 휴대폰이나 PC에 보내세요. 링크에 집 위치가 들어 있으니 아는 사람에게만 보내세요.</p>
+  <div class="row"><button class="btn" id="share">설정 링크 복사</button><span class="sub" id="sharemsg"></span></div>
+  <p class="sub" style="margin:10px 0 0">설정 없이 서비스만 소개하려면 홈 주소만 보내면 됩니다: <code id="base"></code></p>
+ </section>
+
+ <div class="sticky row"><button class="btn primary" id="save">저장</button><button class="btn" id="reset">전부 지우기</button><span id="msg" class="ok"></span></div>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+<script src="data.js"></script>
+<script>
+const $=s=>document.querySelector(s),e=JR.esc;
+let P={...JR.profile()};
+if(JR._imported)$("#imported").hidden=false;
+$("#base").textContent=location.origin+location.pathname.replace(/[^/]*$/,"");
+
+const map=L.map("pick").setView(P.home?[P.home.lat,P.home.lng]:[37.5663,126.9779],P.home?15:11);
+L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",{maxZoom:19,attribution:'&copy; OpenStreetMap'}).addTo(map);
+let mk=null;
+function setHome(lat,lng,move){
+  P.home={lat:+lat.toFixed(6),lng:+lng.toFixed(6)};
+  if(mk)mk.remove();mk=L.marker([lat,lng],{interactive:false,icon:L.divIcon({className:"",html:`<div class="home">⌂ ${e(P.home_name||$("#hname").value||"지금 집")}</div>`,iconSize:null})}).addTo(map);
+  if(move)map.setView([lat,lng],15);
+  $("#hpos").textContent=`위치 설정됨 (${P.home.lat.toFixed(4)}, ${P.home.lng.toFixed(4)})`;
+}
+map.on("click",ev=>setHome(ev.latlng.lat,ev.latlng.lng,false));
+$("#gps").addEventListener("click",()=>{if(!navigator.geolocation)return;$("#hpos").textContent="위치 찾는 중…";
+  navigator.geolocation.getCurrentPosition(p=>setHome(p.coords.latitude,p.coords.longitude,true),()=>$("#hpos").textContent="위치를 가져오지 못했어요 · 지도를 눌러 찍어 주세요",{timeout:8000})});
+$("#clearhome").addEventListener("click",()=>{delete P.home;if(mk)mk.remove();mk=null;$("#hpos").textContent="위치 미설정"});
+
+$("#hname").value=P.home_name||"";$("#end").value=P.end||"";
+$("#br").value=P.budget_rent||"";$("#bs").value=P.budget_sale||"";$("#py").value=String(P.min_py||34);
+if(P.home)setHome(P.home.lat,P.home.lng,false);
+
+JR.meta().then(m=>{
+  $("#br").placeholder=`기본 ${m.budget_eok}억`;$("#bs").placeholder="기본 12억";
+  const on=new Set(P.areas||[]);
+  $("#areas").innerHTML=Object.entries(m.areas||{}).map(([k,a])=>`<div class="ag"><b>${e(a.name)}</b><div class="chips">${(a.codes||[]).map(c=>`<label><input type="checkbox" value="${c}" ${on.has(c)?"checked":""}>${e(m.sgg[c]?.name.replace(/^안양시 /,"안양 ")||c)}</label>`).join("")}</div></div>`).join("");
+  if(!P.home&&on.size){const c=m.sgg[[...on][0]]?.center;if(c)map.setView(c,13)}
+});
+
+function collect(){
+  const n=v=>{const x=parseFloat(v);return isFinite(x)&&x>0?x:undefined};
+  const p={...P,home_name:$("#hname").value.trim()||undefined,end:$("#end").value||undefined,
+    budget_rent:n($("#br").value),budget_sale:n($("#bs").value),min_py:+$("#py").value===34?undefined:+$("#py").value,
+    areas:[...document.querySelectorAll("#areas input:checked")].map(i=>i.value)};
+  if(!p.areas.length)delete p.areas;
+  Object.keys(p).forEach(k=>p[k]===undefined&&delete p[k]);return p;
+}
+$("#save").addEventListener("click",()=>{P=collect();JR.saveProfile(P);$("#msg").textContent="저장됨 · 홈으로 가면 바로 반영돼요";setTimeout(()=>$("#msg").textContent="",4000)});
+$("#reset").addEventListener("click",()=>{P={};JR.saveProfile({});try{localStorage.removeItem("jr9_home_center");localStorage.removeItem("jr9_region")}catch(x){}location.reload()});
+$("#share").addEventListener("click",async()=>{const link=JR.profileLink(collect());
+  try{if(navigator.share){await navigator.share({title:"전세 레이더 설정",url:link});return}await navigator.clipboard.writeText(link);$("#sharemsg").textContent="복사됨"}
+  catch(x){prompt("이 링크를 복사하세요",link)}});
+</script>
+</body>
+</html>

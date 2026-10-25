@@ -11,6 +11,40 @@ const JR = {
     if (!this._c[k]) this._c[k] = fetch(`data/${folder}/${code}.json`, { cache: "no-store" }).then(r => r.ok ? r.json() : { items: [] }).catch(() => ({ items: [] }));
     return this._c[k];
   },
+  /* 개인 설정: 이 기기(브라우저)에만 저장. ?p=… 링크로 다른 기기·가족에게 옮길 수 있다. */
+  PKEY: "jr9_profile",
+  profile() {
+    if (this._p) return this._p;
+    let p = {};
+    try { p = JSON.parse(localStorage.getItem(this.PKEY) || "{}") || {}; } catch (x) {}
+    const q = new URLSearchParams(location.search).get("p");
+    if (q) {
+      try {
+        const b = atob(q.replace(/-/g, "+").replace(/_/g, "/"));
+        const imp = JSON.parse(new TextDecoder().decode(Uint8Array.from(b, c => c.charCodeAt(0))));
+        if (imp && typeof imp === "object") { p = imp; this.saveProfile(p); this._imported = true; }
+        const u = new URL(location.href); u.searchParams.delete("p"); history.replaceState(null, "", u.pathname + u.search + u.hash);
+      } catch (x) {}
+    }
+    if (!p.end) { try { const e = localStorage.getItem("jr9_move_end"); if (e) p.end = e; } catch (x) {} }
+    return (this._p = p);
+  },
+  saveProfile(p) {
+    this._p = p;
+    try {
+      localStorage.setItem(this.PKEY, JSON.stringify(p));
+      if (p.end) localStorage.setItem("jr9_move_end", p.end); else localStorage.removeItem("jr9_move_end");
+      if (p.areas && p.areas.length) localStorage.setItem("jr9_region", p.areas[0]);
+    } catch (x) {}
+  },
+  profileLink(p) {
+    const bytes = new TextEncoder().encode(JSON.stringify(p));
+    const b = btoa(String.fromCharCode(...bytes)).replace(/\+/g, "-").replace(/\//g, "_").replace(/=+$/, "");
+    return location.origin + location.pathname.replace(/[^/]*$/, "") + "?p=" + b;
+  },
+  hasProfile() { const p = this.profile(); return !!(p.home || p.end || (p.areas && p.areas.length) || p.budget_rent); },
+  budget(meta, kind = "rent") { const p = this.profile(); return (kind === "sale" ? p.budget_sale : p.budget_rent) || meta.budget_eok; },
+  minPy() { return this.profile().min_py || 34; },
   isSgg(meta) { return meta.layout === "sgg" && meta.sgg; },
   /* 선택값 → 내려받을 파일 코드 목록. 'area:키' = 생활권 전체, 'all' = 전체, 그 외 = 구 코드 */
   codesOf(meta, v) {
@@ -48,6 +82,7 @@ const JR = {
     if (all) html += `<option value="all">전체 (데이터가 많아 느릴 수 있음)</option>`;
     sel.innerHTML = html;
     let v = new URLSearchParams(location.search).get("sgg") || def || null; try { v = v || localStorage.getItem(key); } catch (x) {}
+    v = v || (this.profile().areas || [])[0] || null;
     if (v && [...sel.options].some(o => o.value === v)) sel.value = v;
     sel.addEventListener("change", () => { try { localStorage.setItem(key, sel.value); } catch (x) {} });
     return sel.value;

@@ -30,8 +30,8 @@
 <body>
 <div class="wrap">
  <nav class="topnav">
-  <a class="brand" href="./">전세 레이더<span>9</span><small class="ver">v4.3.0</small></a>
-  <a class="tab" href="./">홈</a><a class="tab" href="list.html">추천</a><a class="tab" href="buy.html">매매</a><a class="tab" href="map.html">지도</a><a class="tab" href="timing.html" aria-current="page">이사 시기</a><a class="tab" href="stats.html">통계</a><a class="tab" href="buyer.html">매수자 분석</a><a class="tab" href="settings.html">알림 설정</a><a class="tab" href="sources.html">자료</a>
+  <a class="brand" href="./">전세 레이더<span>9</span><small class="ver">v4.4.0</small></a>
+  <a class="tab" href="./">홈</a><a class="tab" href="list.html">추천</a><a class="tab" href="buy.html">매매</a><a class="tab" href="map.html">지도</a><a class="tab" href="timing.html" aria-current="page">이사 시기</a><a class="tab" href="stats.html">통계</a><a class="tab" href="buyer.html">매수자 분석</a><a class="tab" href="me.html">내 설정</a><a class="tab" href="settings.html">알림 설정</a><a class="tab" href="sources.html">자료</a>
  </nav>
  <h1>이사 시기</h1>
  <p class="sub">실거래 신고의 계약기간으로 단지별 전세 만기를 세고, 단지의 갱신 비율로 나올 매물을 추정합니다. 매물은 보통 만기 <span id="lead">2</span>개월 전에 나옵니다.</p>
@@ -131,8 +131,8 @@ function render(){
      `<td class="r num">${W?win.reduce((x,y)=>x+y,0).toFixed(1):"-"}</td></tr>`}).join("")+"</tbody>";
   $("#foot").textContent=`예상 매물 = 만기 건수 × 나갈 확률. 첫 계약은 단지 갱신율(지역 평균 ${Math.round(SUP.region_renew_rate*100)}%)로, 갱신권을 이미 쓴 계약은 ${Math.round(SUP.renewed_leave_prob*100)}%가 나간다고 봅니다. 신고된 거래만 세므로 실제 매물보다 적게 잡히는 하한 추정이고, 칸의 숫자는 '그 달에 나올 것으로 보이는 매물 수'입니다. 계약기간 확인 ${SUP.terms_known.toLocaleString()}/${SUP.rows.toLocaleString()}건 (나머지는 계약일+24개월로 계산).`;
 }
-const saved=store.get("jr9_move_end");if(saved)$("#end").value=saved;
-$("#end").addEventListener("input",e=>{store.set("jr9_move_end",e.target.value);render()});
+const saved=JR.profile().end||store.get("jr9_move_end");if(saved)$("#end").value=saved;
+$("#end").addEventListener("input",e=>{const p=JR.profile();p.end=e.target.value;JR.saveProfile(p);render()});
 ["#shift","#bud","#scope","#kind"].forEach(s=>$(s).addEventListener("input",render));
 let META=null;
 async function loadArea(){
@@ -142,7 +142,7 @@ async function loadArea(){
   REC={...META,items};SUP=sup;$("#lead").textContent=sup.lead_months;render();
 }
 $("#area").addEventListener("change",loadArea);
-JR.meta().then(m=>{META=m;$("#bud").value=m.budget_eok;JR.fillRegions($("#area"),m);$("#srcline").innerHTML=JR.sourceLine(m)+" · 예상 매물은 계약기간으로 계산한 추정치";return loadArea()})
+JR.meta().then(m=>{META=m;$("#bud").value=JR.budget(m);JR.fillRegions($("#area"),m);$("#srcline").innerHTML=JR.sourceLine(m)+" · 예상 매물은 계약기간으로 계산한 추정치";return loadArea()})
  .catch(()=>{$("#reco").innerHTML='<p class="sub">예상 매물 데이터가 아직 없습니다. 다음 자동 실행(매일 06시) 후 다시 열어주세요.</p>'});
 </script>
 </body>

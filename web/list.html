@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>추천 · 전세 레이더 9</title>
-<meta name="version" content="4.3.0">
+<meta name="version" content="4.4.0">
 <link rel="manifest" href="manifest.json">
 <link rel="stylesheet" href="app.css">
 <meta name="theme-color" content="#a8954f">
@@ -51,8 +51,8 @@ footer{margin-top:20px;font-size:.78rem;color:var(--muted);display:flex;flex-wra
 <body>
 <div class="wrap">
  <nav class="topnav">
-  <a class="brand" href="./">전세 레이더<span>9</span><small class="ver">v4.3.0</small></a>
-  <a class="tab" href="./">홈</a><a class="tab" href="list.html" aria-current="page">추천</a><a class="tab" href="buy.html">매매</a><a class="tab" href="map.html">지도</a><a class="tab" href="timing.html">이사 시기</a><a class="tab" href="stats.html">통계</a><a class="tab" href="buyer.html">매수자 분석</a><a class="tab" href="settings.html">알림 설정</a><a class="tab" href="sources.html">자료</a>
+  <a class="brand" href="./">전세 레이더<span>9</span><small class="ver">v4.4.0</small></a>
+  <a class="tab" href="./">홈</a><a class="tab" href="list.html" aria-current="page">추천</a><a class="tab" href="buy.html">매매</a><a class="tab" href="map.html">지도</a><a class="tab" href="timing.html">이사 시기</a><a class="tab" href="stats.html">통계</a><a class="tab" href="buyer.html">매수자 분석</a><a class="tab" href="me.html">내 설정</a><a class="tab" href="settings.html">알림 설정</a><a class="tab" href="sources.html">자료</a>
  </nav>
  <div class="sub" id="gen" style="margin-bottom:12px">불러오는 중…</div>
  <div class="note" id="note" hidden></div>
@@ -139,7 +139,7 @@ async function loadArea(){
 $("#f-area").addEventListener("change",loadArea);
 JR.meta().then(d=>{
   if(d.items){d.folder=null}
-  META=d;$("#f-bud").value=d.budget_eok;$("#srcline").innerHTML=JR.sourceLine(d);
+  META=d;$("#f-bud").value=JR.budget(d);$("#f-py").value=String(JR.minPy());$("#srcline").innerHTML=JR.sourceLine(d);
   $("#gen").textContent=`${d.generated_at.replace("T"," ")} 기준 추천`;
   $("#src").textContent=`출처: ${d.source}`;
   if(d.sample){$("#note").hidden=false;$("#note").textContent="예시 데이터입니다. 첫 자동 실행(매일 06:00) 후 실제 실거래가로 바뀝니다."}

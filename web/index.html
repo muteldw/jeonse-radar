@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>전세 레이더 9</title>
-<meta name="version" content="4.3.0">
+<meta name="version" content="4.4.0">
 <link rel="manifest" href="manifest.json">
 <meta name="theme-color" content="#a8954f">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;500;700&family=IBM+Plex+Mono:wght@500&display=swap">
@@ -65,10 +65,11 @@ h2.sec a{font:400 .8rem var(--f-body);color:var(--accent);text-decoration:none}
 <body>
 <div class="wrap">
  <nav class="topnav">
-  <a class="brand" href="./">전세 레이더<span>9</span><small class="ver">v4.3.0</small></a>
-  <a class="tab" href="./" aria-current="page">홈</a><a class="tab" href="list.html">추천</a><a class="tab" href="buy.html">매매</a><a class="tab" href="map.html">지도</a><a class="tab" href="timing.html">이사 시기</a><a class="tab" href="stats.html">통계</a><a class="tab" href="buyer.html">매수자 분석</a><a class="tab" href="settings.html">알림 설정</a><a class="tab" href="sources.html">자료</a>
+  <a class="brand" href="./">전세 레이더<span>9</span><small class="ver">v4.4.0</small></a>
+  <a class="tab" href="./" aria-current="page">홈</a><a class="tab" href="list.html">추천</a><a class="tab" href="buy.html">매매</a><a class="tab" href="map.html">지도</a><a class="tab" href="timing.html">이사 시기</a><a class="tab" href="stats.html">통계</a><a class="tab" href="buyer.html">매수자 분석</a><a class="tab" href="me.html">내 설정</a><a class="tab" href="settings.html">알림 설정</a><a class="tab" href="sources.html">자료</a>
  </nav>
 
+ <div class="note" id="welcome" hidden style="margin-bottom:10px">처음 오셨나요? <a href="me.html" style="color:inherit;font-weight:700">내 설정</a>에서 지금 집·이사 시점·관심 지역·예산을 넣으면 이 화면이 내 기준으로 바뀌어요. 설정은 이 기기에만 저장됩니다.</div>
  <div class="hero">
   <div id="map" role="region" aria-label="주변 추천 단지 지도"></div>
   <div class="mapbar">
@@ -97,17 +98,19 @@ h2.sec a{font:400 .8rem var(--f-body);color:var(--accent);text-decoration:none}
 <script src="data.js"></script>
 <script>
 const $=s=>document.querySelector(s),e=JR.esc;
-const HOME={name:"신안아파트",lat:37.568775,lng:126.823374,end:"2027-04-19"};
+const PRO=JR.profile();
+const HOME=PRO.home?{...PRO.home,name:PRO.home_name||"지금 집"}:null;
+const CITY=[37.5663,126.9779];   /* 설정이 없을 때 시작점: 서울시청 */
 const store={get(k){try{return localStorage.getItem(k)}catch(_){return null}},set(k,v){try{localStorage.setItem(k,v)}catch(_){}}};
-const leaseEnd=()=>store.get("jr9_move_end")||HOME.end;
+const leaseEnd=()=>JR.profile().end||null;
 let MODE=store.get("jr9_home_mode")||"both",RENT=[],SALE=[],META=null,STATS=null,SUPPLY=null,ME=null,pinOf={};
 
 /* ---------- 지도 ---------- */
-const map=L.map("map",{zoomControl:false,attributionControl:true}).setView([HOME.lat,HOME.lng],14);
+const map=L.map("map",{zoomControl:false,attributionControl:true}).setView(HOME?[HOME.lat,HOME.lng]:CITY,HOME?14:12);
 L.control.zoom({position:"bottomright"}).addTo(map);
 L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",{maxZoom:19,attribution:'&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'}).addTo(map);
 const pinLayer=L.layerGroup().addTo(map);
-L.marker([HOME.lat,HOME.lng],{interactive:false,keyboard:false,zIndexOffset:1000,icon:L.divIcon({className:"",html:`<div class="home">⌂ 지금 집</div>`,iconSize:null})}).addTo(map);
+if(HOME)L.marker([HOME.lat,HOME.lng],{interactive:false,keyboard:false,zIndexOffset:1000,icon:L.divIcon({className:"",html:`<div class="home">⌂ ${e(HOME.name)}</div>`,iconSize:null})}).addTo(map);
 let meMarker=null;
 
 const km=(a,b,c,d)=>{const R=6371,r=x=>x*Math.PI/180,dl=r(c-a),dn=r(d-b);const h=Math.sin(dl/2)**2+Math.cos(r(a))*Math.cos(r(c))*Math.sin(dn/2)**2;return 2*R*Math.asin(Math.sqrt(h))};
@@ -162,11 +165,11 @@ function renderTop(){
   if(!t.length){$("#tops").innerHTML=`<div class="empty">${MODE==="sale"&&!SALE.length?"매매 실거래 자료가 아직 없어요. data.go.kr '아파트 매매 실거래가' 활용신청이 승인되면 다음 날 아침부터 표시됩니다.":"이 근처에 조건(전용 80㎡↑)에 맞는 단지가 없어요. 지도를 옮겨 보세요."}</div>`;return}
   const me=ME&&inCoverage(ME.lat,ME.lng);
   $("#tops").innerHTML=t.map(({it,kind},n)=>{
-    const d=me?km(ME.lat,ME.lng,it.lat,it.lng):km(HOME.lat,HOME.lng,it.lat,it.lng);
+    const ref=me?ME:HOME,d=ref?km(ref.lat,ref.lng,it.lat,it.lng):null;
     return `<button class="tc ${kind}" data-k="${e(it.id+kind)}">
      <div class="hd"><h3><span class="tag">${kind==="sale"?"매매":"전세"}</span>${e(it.name)}${it.new?'<span class="new">NEW</span>':""}</h3><div class="sc">${it.score}<small>점수</small></div></div>
      <div class="p">${price(it)} <span class="m">· ${it.pyeong}평형 · ${it.built||"?"}년</span></div>
-     <div class="m">${e(it.sgg)} ${e(it.umd)}${it.station?` · ${e(it.station)}역 ${it.walk_min!=null?it.walk_min+"분":""}`:""} · ${me?"내 위치":"지금 집"}에서 ${d<1?Math.round(d*1000)+"m":d.toFixed(1)+"km"}</div>
+     <div class="m">${e(it.sgg)} ${e(it.umd)}${it.station?` · ${e(it.station)}역 ${it.walk_min!=null?it.walk_min+"분":""}`:""}${d==null?"":` · ${me?"내 위치":e(HOME.name)}에서 ${d<1?Math.round(d*1000)+"m":d.toFixed(1)+"km"}`}</div>
      ${kind==="sale"&&it.jeonse_ratio?`<div class="m">전세가율 ${Math.round(it.jeonse_ratio*100)}% · 갭 ${it.gap_eok}억</div>`:""}
     </button>`}).join("");
 }
@@ -175,18 +178,21 @@ $("#tops").addEventListener("click",ev=>{const b=ev.target.closest(".tc");if(!b)
 
 /* ---------- 요약 카드 ---------- */
 function renderDday(){
+  if(!leaseEnd()){$("#s-dday").href="me.html";$("#s-dday strong").textContent="설정하기";$("#s-dday span").textContent="내 설정에서 만기일(이사 시점)을 넣어 주세요";return}
   const end=new Date(leaseEnd()+"T00:00:00"),now=new Date(),d=Math.ceil((end-now)/864e5);
   $("#s-dday strong").textContent=d>=0?`D-${d}`:`만기 ${-d}일 지남`;
-  $("#s-dday span").textContent=`${HOME.name} · ${leaseEnd().replace(/-/g,".")} 만기`;
+  $("#s-dday span").textContent=`${HOME?HOME.name+" · ":""}${leaseEnd().replace(/-/g,".")} 만기`;
 }
 function renderMove(){
   if(!SUPPLY||!SUPPLY.months||!SUPPLY.region)return;
-  const end=leaseEnd().slice(0,7),[y,m]=end.split("-").map(Number);
-  const from=new Date(y,m-1-3,1),fromK=`${from.getFullYear()}-${String(from.getMonth()+1).padStart(2,"0")}`;
+  const ym=dt=>`${dt.getFullYear()}-${String(dt.getMonth()+1).padStart(2,"0")}`,now=new Date();
+  let end,fromK,label;
+  if(leaseEnd()){end=leaseEnd().slice(0,7);const [y,m]=end.split("-").map(Number);fromK=ym(new Date(y,m-1-3,1));label="만기 전 3개월 중"}
+  else{fromK=ym(now);end=ym(new Date(now.getFullYear(),now.getMonth()+6,1));label="앞으로 6개월 중"}
   let best=null;SUPPLY.months.forEach((mm,i)=>{if(mm>=fromK&&mm<=end){const v=SUPPLY.region.list[i];if(!best||v>best.v)best={m:mm,v}}});
   if(!best){$("#s-move strong").textContent="–";$("#s-move span").textContent="예측 범위 밖";return}
   $("#s-move strong").textContent=`${best.m.slice(2,4)}년 ${+best.m.slice(5)}월`;
-  $("#s-move span").textContent=`만기 전 3개월 중 · 예상 매물 ${Math.round(best.v).toLocaleString()}건(서울·안양)`;
+  $("#s-move span").textContent=`${label} · 예상 매물 ${Math.round(best.v).toLocaleString()}건(서울·안양)`;
 }
 function renderTrend(lat,lng){
   if(!STATS||!META)return;
@@ -213,11 +219,11 @@ function useGps(auto){
     if(meMarker)meMarker.remove();
     meMarker=L.marker([ME.lat,ME.lng],{interactive:false,icon:L.divIcon({className:"",html:'<div class="me"></div>',iconSize:null})}).addTo(map);
     if(inCoverage(ME.lat,ME.lng)){focusOn(ME.lat,ME.lng);setWhere("내 위치 기준")}
-    else{setWhere("서울·안양 밖이라 "+(auto&&store.get("jr9_home_center")?"마지막으로 본 동네":"지금 집(마곡)")+" 기준으로 보여드려요");if(!auto)goHome()}
+    else{setWhere("서울·안양 밖이라 "+(auto&&store.get("jr9_home_center")?"마지막으로 본 동네":HOME?HOME.name:(PRO.areas||[]).length?"관심 지역":"서울 중심")+" 기준으로 보여드려요");if(!auto)goHome()}
     renderTop();
   },err=>{if(!auto)setWhere(err.code===1?"위치 권한이 꺼져 있어요 · 브라우저 설정에서 허용하세요":"위치를 찾지 못했어요")},{enableHighAccuracy:false,timeout:8000,maximumAge:600000});
 }
-function goHome(){focusOn(HOME.lat,HOME.lng);setWhere("지금 집(마곡 신안아파트) 기준")}
+function goHome(){if(!HOME){location.href="me.html";return}focusOn(HOME.lat,HOME.lng);setWhere(HOME.name+" 기준")}
 $("#btn-gps").addEventListener("click",()=>useGps(false));
 $("#btn-home").addEventListener("click",goHome);
 document.querySelectorAll(".seg button").forEach(b=>{b.setAttribute("aria-pressed",b.dataset.mode===MODE);b.addEventListener("click",()=>{
@@ -229,11 +235,19 @@ map.on("dragstart",()=>setWhere("지도 가운데 기준"));
 /* ---------- 시작 ---------- */
 renderDday();
 const last=store.get("jr9_home_center");
-if(last){const [a,b]=last.split(",").map(Number);if(a&&b){map.setView([a,b],14);setWhere("마지막으로 본 동네 기준")}}else setWhere("지금 집(마곡 신안아파트) 기준");
+if(!JR.hasProfile())$("#welcome").hidden=false;
+if(!HOME)$("#btn-home").textContent="⌂ 집 설정";
+let startSet=false;
+if(last){const [a,b]=last.split(",").map(Number);if(a&&b){map.setView([a,b],14);setWhere("마지막으로 본 동네 기준");startSet=true}}
+if(!startSet&&HOME){setWhere(HOME.name+" 기준");startSet=true}
 const j=(n,f)=>fetch("data/"+n,{cache:"no-store"}).then(r=>r.ok?r.json():f).catch(()=>f);
 Promise.all([JR.meta("recommend.json"),j("top_rent.json",{items:[]}),j("top_sale.json",{items:[]}),j("stats.json",null),j("supply.json",null)])
 .then(([meta,r,s,st,sp])=>{
-  META=meta;RENT=r.items||[];SALE=s.items||[];STATS=st;SUPPLY=sp;
+  META=meta;STATS=st;SUPPLY=sp;
+  const py=JR.minPy(),br=JR.budget(meta),bs=JR.budget(meta,"sale");
+  RENT=(r.items||[]).filter(i=>i.price_eok<=br+0.5&&(i.pyeong||0)>=py);SALE=(s.items||[]).filter(i=>i.price_eok<=bs+0.5&&(i.pyeong||0)>=py);
+  if(!startSet){const a=(PRO.areas||[]).map(c=>meta.sgg[c]).find(x=>x&&(x.center||x.bbox));
+    if(a){const c=a.center||[(a.bbox[0]+a.bbox[2])/2,(a.bbox[1]+a.bbox[3])/2];map.setView(c,14);setWhere(a.name+" 기준 (관심 지역)")}else setWhere("서울 중심 · 내 설정에서 관심 지역을 고르세요")}
   renderMove();FIT=true;render();
   $("#src").innerHTML=`실거래: 국토교통부 RTMS · ${e((meta.generated_at||"").replace("T"," ").slice(0,16))} 갱신 · 구마다 점수 상위 단지만 지도에 표시 · 지도 © OpenStreetMap · <a href="sources.html">자료 전체 보기</a>`;
   useGps(true);
