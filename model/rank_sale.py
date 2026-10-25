@@ -103,6 +103,7 @@ def main() -> None:
     rank.write_split(items, cfg, SALE_W, "sale", "sale.json",
                      "국토교통부 아파트·연립다세대 매매 실거래가", budget_key="buy_budget_eok",
                      data_period=rank.period(sales), status_prefix="sale")
+    rank.write_top(items, "top_sale.json")
     if not sales:
         print("매매 실거래가 아직 없습니다 — data.go.kr에서 매매 실거래가 자료 활용신청이 필요합니다.")
 

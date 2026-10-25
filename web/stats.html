@@ -39,8 +39,8 @@ table.yoy td,table.yoy th{white-space:nowrap}
 <body>
 <div class="wrap">
  <nav class="topnav">
-  <a class="brand" href="./">전세 레이더<span>9</span><small class="ver">v4.2.1</small></a>
-  <a class="tab" href="./">추천</a><a class="tab" href="buy.html">매매</a><a class="tab" href="map.html">지도</a><a class="tab" href="timing.html">이사 시기</a><a class="tab" href="stats.html" aria-current="page">통계</a><a class="tab" href="buyer.html">매수자 분석</a><a class="tab" href="settings.html">알림 설정</a><a class="tab" href="sources.html">자료</a>
+  <a class="brand" href="./">전세 레이더<span>9</span><small class="ver">v4.3.0</small></a>
+  <a class="tab" href="./">홈</a><a class="tab" href="list.html">추천</a><a class="tab" href="buy.html">매매</a><a class="tab" href="map.html">지도</a><a class="tab" href="timing.html">이사 시기</a><a class="tab" href="stats.html" aria-current="page">통계</a><a class="tab" href="buyer.html">매수자 분석</a><a class="tab" href="settings.html">알림 설정</a><a class="tab" href="sources.html">자료</a>
  </nav>
  <h1>통계</h1>
  <p class="sub" id="lead">최근 12개월 월별 실거래 흐름과 1년 전 같은 달 비교입니다.</p>
@@ -161,7 +161,7 @@ function render(){
 function fillScopes(){
   const e=E;let h=`<option value="all">${e(S.scopes.all)}</option>`;
   for(const [k,g] of Object.entries(S.groups)){h+=`<optgroup label="${e(g.name)}"><option value="area:${k}">${e(g.name)} 전체</option>`+g.codes.map(c=>`<option value="${c}">${e(S.scopes[c])}</option>`).join("")+"</optgroup>"}
-  $("#scope").innerHTML=h;try{const v=localStorage.getItem("jr9_stats_scope");if(v&&[...$("#scope").options].some(o=>o.value===v))$("#scope").value=v}catch(x){}
+  $("#scope").innerHTML=h;try{const v=new URLSearchParams(location.search).get("scope")||localStorage.getItem("jr9_stats_scope");if(v&&[...$("#scope").options].some(o=>o.value===v))$("#scope").value=v}catch(x){}
 }
 document.querySelectorAll(".seg button").forEach(b=>b.addEventListener("click",()=>{T=b.dataset.t;document.querySelectorAll(".seg button").forEach(x=>x.setAttribute("aria-pressed",x===b));render()}));
 $("#scope").addEventListener("change",e=>{try{localStorage.setItem("jr9_stats_scope",e.target.value)}catch(x){}render()});

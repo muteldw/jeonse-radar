@@ -47,7 +47,7 @@ const JR = {
     }
     if (all) html += `<option value="all">전체 (데이터가 많아 느릴 수 있음)</option>`;
     sel.innerHTML = html;
-    let v = def || null; try { v = v || localStorage.getItem(key); } catch (x) {}
+    let v = new URLSearchParams(location.search).get("sgg") || def || null; try { v = v || localStorage.getItem(key); } catch (x) {}
     if (v && [...sel.options].some(o => o.value === v)) sel.value = v;
     sel.addEventListener("change", () => { try { localStorage.setItem(key, sel.value); } catch (x) {} });
     return sel.value;

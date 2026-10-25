@@ -227,6 +227,7 @@ def main() -> None:
         items = build(rows, cfg, w, today, geo, sales)
     write_split(items, cfg, w, "rec", "recommend.json", "국토교통부 아파트·연립다세대 전월세 실거래가",
                 data_period=period(rows), status_prefix="rent")
+    write_top(items, "top_rent.json")
 
 
 def public(it: dict) -> dict:
@@ -297,6 +298,36 @@ def write_split(items: list[dict], cfg: dict, w: dict, folder: str, meta_name: s
     }
     (ROOT / "web" / "data" / meta_name).write_text(json.dumps(meta, ensure_ascii=False, indent=1), encoding="utf-8")
     print(f"{len(items)}곳 → web/data/{meta_name} + {folder}/<구코드>.json ({sum(1 for c in sgg_meta.values() if c['count'])}개 구에 데이터)")
+
+
+TOP_KEYS = ("id", "name", "sgg", "umd", "kind", "area_m2", "pyeong", "built", "bath", "price_eok", "sale_eok",
+            "station", "walk_min", "lat", "lng", "score", "deals_12m", "jeonse_ratio", "growth_1y", "jeonse_eok", "gap_eok")
+
+
+def write_top(items: list[dict], name: str, n: int = 25, new_days: int = 3) -> None:
+    """첫 화면 지도용: 구마다 위치가 있는 상위 단지 n곳(가벼운 파일). 처음 순위에 든 날(since)을 이어 기록해 NEW 표시."""
+    path = ROOT / "web" / "data" / name
+    prev = {}
+    if path.exists():
+        try:
+            prev = {i["id"]: i.get("since") for i in json.loads(path.read_text(encoding="utf-8")).get("items", [])}
+        except (ValueError, KeyError):
+            prev = {}
+    today = datetime.now(KST).date()
+    by: dict[str, list] = defaultdict(list)
+    for i in sorted((i for i in items if i.get("lat") and i.get("lng") and i.get("within_budget", True)), key=lambda i: -i.get("score", 0)):
+        if len(by[i["sgg"]]) < n:
+            by[i["sgg"]].append(i)
+    top = sorted((i for v in by.values() for i in v), key=lambda i: -i.get("score", 0))
+    out = []
+    for i in top:
+        r = {k: i[k] for k in TOP_KEYS if i.get(k) is not None}
+        r["since"] = prev.get(i["id"]) or (today.isoformat() if prev else "2000-01-01")  # 첫 생성은 기준선
+        r["new"] = (today - date.fromisoformat(r["since"])).days < new_days
+        out.append(r)
+    path.write_text(json.dumps({"generated_at": datetime.now(KST).isoformat(timespec="minutes"), "items": out},
+                               ensure_ascii=False, separators=(",", ":")), encoding="utf-8")
+    print(f"첫 화면용 상위 {len(out)}곳 → web/data/{name} (NEW {sum(r['new'] for r in out)}곳)")
 
 
 if __name__ == "__main__":
