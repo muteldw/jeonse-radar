@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-10-25T20:14+09:00",
+ "generated_at": "2026-10-26T07:57+09:00",
  "repo": "https://github.com/muteldw/jeonse-radar",
  "conditions": {
   "min_area_m2": 80,
@@ -12,13 +12,13 @@
    "provider": "국토교통부 · 공공데이터포털",
    "url": "https://www.data.go.kr/tcs/dss/selectDataSetList.do?keyword=아파트 전월세 실거래가",
    "use": "전세 추천·시세·계약기간(이사 시기)",
-   "rows": 127502,
+   "rows": 127503,
    "period": {
     "from": "2024-11-01",
     "to": "2026-10-23",
-    "rows": 127502,
+    "rows": 127503,
     "by_kind": {
-     "아파트": 127502
+     "아파트": 127503
     }
    },
    "file": "data/rent_raw.csv"
@@ -32,9 +32,9 @@
    "period": {
     "from": "2024-11-01",
     "to": "2026-10-23",
-    "rows": 127502,
+    "rows": 127503,
     "by_kind": {
-     "아파트": 127502
+     "아파트": 127503
     }
    },
    "file": "data/rent_raw.csv"
@@ -139,7 +139,7 @@
    "name": "양천구",
    "area": "서울 강서·양천",
    "rent": {
-    "아파트": 5959
+    "아파트": 5960
    },
    "sale": {},
    "rent_done": {
