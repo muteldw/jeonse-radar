@@ -95,6 +95,24 @@ def sale_prices(sales: list[dict], today: date) -> dict[tuple, float]:
             for k, v in g.items()}
 
 
+def drop_price_spikes(deals: list[dict], k: int = 4, ratio: float = 1.6) -> list[dict]:
+    """같은 평형대에 섞인 펜트하우스·대형 평형·입력 오류 같은 고가 이상치 제외.
+
+    날짜순 앞뒤 k건(자기 제외)의 중앙값보다 ratio배 넘게 비싼 거래만 뺀다.
+    시세가 꾸준히 오르는 단지는 이웃 거래도 함께 올라 있으므로 남는다.
+    deals 는 날짜순 정렬되어 있어야 한다.
+    """
+    if len(deals) < 5:
+        return deals
+    ps = [int(d["deposit_man"]) for d in deals]
+    keep = []
+    for i, d in enumerate(deals):
+        nb = sorted(ps[max(0, i - k):i] + ps[i + 1:i + 1 + k])
+        if ps[i] <= ratio * median(nb):
+            keep.append(d)
+    return keep
+
+
 def build(rows: list[dict], cfg: dict, weights: dict, today: date, geo: dict | None = None,
           sales: dict | None = None) -> list[dict]:
     geo = geo or {}
@@ -122,6 +140,7 @@ def build(rows: list[dict], cfg: dict, weights: dict, today: date, geo: dict | N
             ps = sorted(int(d["deposit_man"]) for d in deals[-24:])
             p75 = ps[int(len(ps) * 0.75)]
             deals = [d for d in deals if int(d["deposit_man"]) >= 0.78 * p75]
+        deals = drop_price_spikes(deals)
         recent = [d for d in deals if d["deal_date"] >= (today.replace(year=today.year - 1)).isoformat()]
         if not recent:
             continue
