@@ -35,6 +35,10 @@ jobs:
         env:
           MOLIT_API_KEY: ${{ secrets.MOLIT_API_KEY }}
         run: python collector/fetch_sale.py
+      - name: 임시 거처 월세 수집 (아파트·오피스텔, 오피스텔은 활용신청 전이면 건너뜀)
+        env:
+          MOLIT_API_KEY: ${{ secrets.MOLIT_API_KEY }}
+        run: python collector/fetch_bridge.py
       - name: 위치·역·인프라 (카카오)
         env:
           KAKAO_REST_KEY: ${{ secrets.KAKAO_REST_KEY }}
@@ -47,6 +51,8 @@ jobs:
         run: cd model && python supply.py
       - name: 월별 통계
         run: cd model && python stats.py
+      - name: 임시 거처 시세
+        run: cd model && python bridge.py
       - name: 자료 목록·수집 현황
         run: cd model && python sources.py
       - name: 화면용 설정 복사

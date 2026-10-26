@@ -24,7 +24,8 @@ import requests
 ROOT = Path(__file__).resolve().parents[1]
 BASE = "https://apis.data.go.kr/1613000"
 RENT_API = {"아파트": f"{BASE}/RTMSDataSvcAptRent/getRTMSDataSvcAptRent",
-            "빌라": f"{BASE}/RTMSDataSvcRHRent/getRTMSDataSvcRHRent"}
+            "빌라": f"{BASE}/RTMSDataSvcRHRent/getRTMSDataSvcRHRent",
+            "오피스텔": f"{BASE}/RTMSDataSvcOffiRent/getRTMSDataSvcOffiRent"}   # 임시 거처용(fetch_bridge.py)
 API = RENT_API["아파트"]  # 예전 코드 호환
 FIELDS = ["kind", "sgg", "umd", "apt", "jibun", "build_year", "area_m2", "floor",
           "deal_date", "deposit_man", "monthly_man", "contract_type", "contract_term", "use_rr"]
@@ -85,7 +86,7 @@ def parse(xml_text: str, sgg_name: str, kind: str = "아파트") -> tuple[list[d
     for it in root.iter("item"):
         y, m, d = _t(it, "dealYear", "년"), _t(it, "dealMonth", "월"), _t(it, "dealDay", "일")
         jibun = _t(it, "jibun", "지번")
-        name = _t(it, "aptNm", "아파트", "mhouseNm", "연립다세대")
+        name = _t(it, "aptNm", "아파트", "mhouseNm", "연립다세대", "offiNm", "단지", "단지명")
         if kind == "빌라":
             # 빌라는 같은 이름이 흔해 지번으로 건물을 구분한다
             name = f"{name or '빌라'} ({jibun})" if jibun else (name or "빌라")

@@ -34,6 +34,7 @@ def main() -> None:
     wealth = json.loads((ROOT / "config" / "wealth_dist.json").read_text(encoding="utf-8"))
     rent_p, rent_by = scan("rent_raw.csv")
     sale_p, sale_by = scan("sale_raw.csv")
+    br_p, _ = scan("bridge_raw.csv")
     geo = json.loads((ROOT / "data" / "geo.json").read_text(encoding="utf-8")) if (ROOT / "data" / "geo.json").exists() else {}
     geo_by = defaultdict(int)
     for k, v in geo.items():
@@ -51,6 +52,10 @@ def main() -> None:
          "use": "매매 추천·전세가율·매수자 분석", "rows": kinds(sale_p, "아파트"), "period": sale_p, "file": "data/sale_raw.csv"},
         {"name": "국토교통부_연립다세대 매매 실거래가 자료", "provider": "국토교통부 · 공공데이터포털", "url": DGK + "연립다세대 매매 실거래가",
          "use": "빌라 매매 추천·전세가율", "rows": kinds(sale_p, "빌라"), "period": sale_p, "file": "data/sale_raw.csv"},
+        {"name": "국토교통부_오피스텔 전월세 실거래가 자료", "provider": "국토교통부 · 공공데이터포털", "url": DGK + "오피스텔 전월세 실거래가",
+         "use": "임시 거처(오피스텔 월세) 시세", "rows": kinds(br_p, "오피스텔"), "period": br_p, "file": "data/bridge_raw.csv"},
+        {"name": "아파트 월세 실거래 (임시 거처용, 전 평형)", "provider": "국토교통부 · 공공데이터포털", "url": DGK + "아파트 전월세 실거래가",
+         "use": "임시 거처(아파트 월세) 시세", "rows": kinds(br_p, "아파트"), "period": br_p, "file": "data/bridge_raw.csv"},
         {"name": "카카오 로컬 API (주소·키워드·카테고리 검색)", "provider": "카카오", "url": "https://developers.kakao.com/docs/latest/ko/local/dev-guide",
          "use": "단지 위치, 가까운 전철역·도보 시간, 학교·어린이집·마트·병원 수", "rows": sum(geo_by.values()), "period": {}, "file": "data/geo.json"},
         {"name": "OpenStreetMap 지도", "provider": "OpenStreetMap 기여자", "url": "https://www.openstreetmap.org/copyright",

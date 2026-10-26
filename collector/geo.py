@@ -113,7 +113,7 @@ def complexes_from_raw() -> dict[str, tuple]:
     """전세·매매 거래에 나온 단지·건물. 최근 거래가 많은 곳부터 조회하도록 거래 수 순으로 정렬."""
     out, cnt = {}, {}
     since = (date.today() - timedelta(days=365)).isoformat()
-    for name in ("rent_raw.csv", "sale_raw.csv"):
+    for name in ("rent_raw.csv", "sale_raw.csv", "bridge_raw.csv"):
         p = ROOT / "data" / name
         if not p.exists():
             continue
