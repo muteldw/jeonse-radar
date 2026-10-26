@@ -1,0 +1,229 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>임시 거처 · 전세 레이더 9</title>
+<link rel="manifest" href="manifest.json">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;500;700&family=IBM+Plex+Mono:wght@500&display=swap">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
+<link rel="stylesheet" href="app.css">
+<style>
+.tl{display:grid;gap:0;margin:4px 0 0;padding:0;list-style:none}
+.tl li{display:grid;grid-template-columns:92px 1fr;gap:10px;padding:7px 0;border-bottom:1px dashed var(--line);font-size:.88rem}
+.tl li:last-child{border-bottom:0}
+.tl time{font:500 .82rem var(--f-num);color:var(--muted)}
+.tl li.key time{color:var(--accent)}
+.tl li.gap{background:var(--accent-soft);border-radius:8px;padding:8px 10px;border:0;margin:4px 0}
+.gapbar{display:flex;height:26px;border-radius:8px;overflow:hidden;margin:10px 0 4px;font:600 .72rem var(--f-body);color:#fff}
+.gapbar div{display:flex;align-items:center;justify-content:center;white-space:nowrap;overflow:hidden;min-width:0}
+.sc{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,230px),1fr));gap:10px}
+.card{border:1px solid var(--line);border-radius:12px;padding:12px;background:var(--surface);display:flex;flex-direction:column;gap:6px;min-width:0}
+.card.best{border:2px solid var(--good)}
+.card h3{margin:0;font-size:.98rem;display:flex;justify-content:space-between;gap:6px;align-items:baseline}
+.card .badge{font:600 .68rem var(--f-body);color:#fff;background:var(--good);border-radius:6px;padding:1px 6px;white-space:nowrap}
+.card .tot{font:500 1.45rem/1.1 var(--f-num)}
+.card .tot small{font:400 .74rem var(--f-body);color:var(--muted);margin-left:4px}
+.card ul{margin:0;padding-left:1.1em;font-size:.8rem;color:var(--muted)}
+.card .pc{font-size:.8rem}.card .pc b{font-weight:600}
+.card.na{opacity:.55}
+details.inp{margin-top:12px}
+details.inp summary{cursor:pointer;font-size:.86rem;color:var(--accent)}
+#bmap{height:min(48vh,380px);min-height:260px;border-radius:10px;border:1px solid var(--line);margin:10px 0}
+.leaflet-container{font-family:var(--f-body);background:var(--bg)}
+.pin{display:inline-block;transform:translate(-50%,-100%);white-space:nowrap;font:600 .7rem var(--f-num);color:#fff;border-radius:6px;padding:2px 5px;box-shadow:0 1px 3px rgba(0,0,0,.35);background:#2f6fb5}
+.pin.o{background:#7a4fb5}
+.home{transform:translate(-50%,-50%);font:600 .72rem var(--f-body);background:var(--accent);color:#fff;border-radius:999px;padding:3px 8px;white-space:nowrap;box-shadow:0 1px 3px rgba(0,0,0,.35)}
+.filt{display:flex;flex-wrap:wrap;gap:8px}
+.filt label{display:flex;flex-direction:column;gap:3px;font-size:.74rem;color:var(--muted);min-width:110px;flex:1}
+td.num,th.num{text-align:right;font-family:var(--f-num);white-space:nowrap}
+.tag{font:600 .66rem var(--f-body);color:#fff;border-radius:5px;padding:1px 5px;background:#2f6fb5;margin-right:4px}
+.tag.o{background:#7a4fb5}
+.short{color:var(--good);font-size:.74rem}
+.warn{color:var(--warn)}
+</style>
+</head>
+<body>
+<div class="wrap">
+ <nav class="topnav">
+  <a class="brand" href="./">전세 레이더<span>9</span><small class="ver">v4.5.0</small></a>
+  <a class="tab" href="./">홈</a><a class="tab" href="list.html">추천</a><a class="tab" href="buy.html">매매</a><a class="tab" href="map.html">지도</a><a class="tab" href="timing.html">이사 시기</a><a class="tab" href="bridge.html" aria-current="page">임시 거처</a><a class="tab" href="stats.html">통계</a><a class="tab" href="buyer.html">매수자 분석</a><a class="tab" href="me.html">내 설정</a><a class="tab" href="settings.html">알림 설정</a><a class="tab" href="sources.html">자료</a>
+ </nav>
+ <h1>임시 거처</h1>
+ <p class="sub">지금 집 만기와 다음 집 입주 사이 공백을 어떻게 메울지 방법별 비용을 비교하고, 다음 집 근처 월세 실거래를 보여줍니다.</p>
+ <div class="note" id="need" hidden style="margin:10px 0"></div>
+
+ <section class="panel" id="plan">
+  <h2>일정</h2>
+  <div class="gapbar" id="bar"></div>
+  <ol class="tl" id="tl"></ol>
+ </section>
+
+ <section class="panel">
+  <h2>방법별 비용 비교 <span class="sub" style="font-weight:400">· 공백 기간 동안 추가로 드는 돈</span></h2>
+  <div class="sc" id="sc"></div>
+  <details class="inp" id="inp">
+   <summary>가정 바꾸기 (이사비·보관료·월세 등)</summary>
+   <div class="grid2" style="margin-top:10px">
+    <label class="f">지금 집 연장 협의 날짜<input id="i-ext" type="date"></label>
+    <label class="f">인테리어 기간 (주)<input id="i-int" type="number" min="0" max="20" step="1"></label>
+    <label class="f">이사비 1회 (만원)<input id="i-move" type="number" min="0" step="10"></label>
+    <label class="f">짐 보관료 월 (만원)<input id="i-stor" type="number" min="0" step="5"></label>
+    <label class="f">단기임대 월 (만원)<input id="i-short" type="number" min="0" step="10"></label>
+    <label class="f">오피스텔 월세 (만원)<input id="i-offi" type="number" min="0" step="5"></label>
+    <label class="f">오피스텔 보증금 (만원)<input id="i-offidep" type="number" min="0" step="100"></label>
+    <label class="f">오피스텔 중도 해지<select id="i-cancel"><option value="0">불가 (12개월 다 냄)</option><option value="1">가능 (새 세입자 중개보수 부담)</option></select></label>
+    <label class="f">지금 집주인 이사비 지원 (만원)<input id="i-sup" type="number" min="0" step="50"></label>
+    <label class="f">지금 집 보증금 (억)<input id="i-dep" type="number" min="0" step="0.01"></label>
+    <label class="f">맡겨둘 때 이자율 (%/년)<input id="i-rate" type="number" min="0" max="10" step="0.1"></label>
+    <label class="f">세입자 조기 퇴거 보상 (만원)<input id="i-comp" type="number" min="0" step="50"></label>
+   </div>
+   <p class="sub" style="margin-top:8px">값은 이 기기에 저장되고, 내 설정의 '설정 링크'에도 함께 담깁니다. 단기임대·오피스텔 기본값은 아래 근처 월세 실거래로 채웁니다.</p>
+  </details>
+ </section>
+
+ <section class="panel">
+  <h2>근처 월세 실거래 <span class="sub" style="font-weight:400" id="mk-sub"></span></h2>
+  <div class="filt">
+   <label>크기<select id="f-band"></select></label>
+   <label>유형<select id="f-kind"><option value="all">아파트+오피스텔</option><option>아파트</option><option>오피스텔</option></select></label>
+   <label>반경<select id="f-r"><option value="1">1km</option><option value="2" selected>2km</option><option value="3">3km</option><option value="5">5km</option></select></label>
+  </div>
+  <div id="bmap" role="region" aria-label="근처 월세 실거래 지도"></div>
+  <div class="tblwrap"><table id="tbl"></table></div>
+  <div class="tblwrap" style="margin-top:12px"><table id="sum"></table></div>
+  <p class="sub" style="margin-top:8px">월세는 1년간 신고된 실거래 중위값입니다. <span class="short">단기</span>는 1년 미만 계약이 있었던 곳 — 짧게 살 곳을 찾을 때 집주인이 단기 계약에 열려 있을 가능성이 높아요. 실거래에는 단기임대 플랫폼(가구 포함·주 단위) 매물이 거의 없어서, 그쪽 가격은 보통 일반 월세보다 높게 잡아야 합니다.</p>
+ </section>
+ <div class="srcline" id="src"></div>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+<script src="data.js"></script>
+<script>
+const $=s=>document.querySelector(s),e=JR.esc;
+const P=JR.profile(),NX=P.next||{};
+const D0=s=>s?new Date(s+"T00:00:00"):null;
+const iso=d=>`${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,"0")}-${String(d.getDate()).padStart(2,"0")}`;
+const kd=d=>`${String(d.getFullYear()).slice(2)}.${d.getMonth()+1}.${d.getDate()}`;
+const addD=(d,n)=>new Date(d.getTime()+n*864e5);
+const addM=(d,n)=>{const x=new Date(d);x.setMonth(x.getMonth()+n);return x};
+const mon=(a,b)=>Math.max(0,(b-a)/864e5/30.44);
+const won=v=>{v=Math.round(v);return Math.abs(v)>=10000?`${(v/10000).toFixed(2).replace(/\.?0+$/,"")}억`:`${v.toLocaleString()}만`};
+let B=null,BR=null;
+
+/* ---------- 가정값 ---------- */
+const DEF={int:4,move:150,stor:30,short:null,offi:null,offidep:null,cancel:0,sup:0,dep:null,rate:2.5,comp:500,ext:null};
+function A(){return {...DEF,...(P.bridge||{})}}
+function saveA(a){const p=JR.profile(),au=autoVals();p.bridge={};for(const k in a)if(a[k]!==DEF[k]&&a[k]!==null&&a[k]!==""&&a[k]!==au[k])p.bridge[k]=a[k];if(!Object.keys(p.bridge).length)delete p.bridge;JR.saveProfile(p)}
+const FIELDS={ext:"i-ext",int:"i-int",move:"i-move",stor:"i-stor",short:"i-short",offi:"i-offi",offidep:"i-offidep",cancel:"i-cancel",sup:"i-sup",dep:"i-dep",rate:"i-rate",comp:"i-comp"};
+function fillInputs(a,auto){for(const [k,id] of Object.entries(FIELDS)){const v=a[k]??auto[k];$("#"+id).value=v??""}}
+function readInputs(){const a={};for(const [k,id] of Object.entries(FIELDS)){const v=$("#"+id).value;a[k]=k==="ext"?(v||null):(v===""?null:+v)}return a}
+
+/* 실거래 기반 기본값 */
+function autoVals(){
+  const s=BR?.summary||{},g=(k,b)=>s[k]?.[b];
+  const two=g("아파트","two")||g("아파트","three"),ot=g("오피스텔","two")||g("오피스텔","one");
+  return {short:two?Math.round(two.mon*1.3/10)*10:250,offi:ot?ot.mon:(g("아파트","one")?.mon??120),offidep:ot?ot.dep:1000,
+          dep:null,ext:END?iso(addM(END,4)):null};
+}
+
+/* ---------- 계산 ---------- */
+let END=D0(P.end),ND=D0(NX.date);
+function calc(){
+  const a={...autoVals(),...Object.fromEntries(Object.entries(A()).filter(([k,v])=>v!==null))};
+  const MI=addD(ND,a.int*7),g=mon(END,MI),intM=a.int*7/30.44;
+  const dep=(a.dep||0)*1e4,r=(a.rate||0)/100;
+  const intr=(amt,from,to)=>amt>0&&to>from?amt*r*mon(from,to)/12:0;
+  const X=a.ext?D0(a.ext):null;
+  const out=[];
+  // A. 연장
+  if(X&&X>END){const stay=mon(X,MI),moves=stay>0.2?2:1;
+    const c=a.short*stay+(stay>0.2?a.stor*stay:0)+a.move*moves-intr(dep,X,ND);
+    out.push({k:"ext",t:`연장 후 짧게 버티기`,sub:`${kd(X)}까지 지금 집 → ${stay>0.2?`단기임대 ${stay.toFixed(1)}개월 + 짐 보관`:"바로 입주"}`,tot:c,
+      items:[stay>0.2&&`단기임대 ${won(a.short)} × ${stay.toFixed(1)}개월 = ${won(a.short*stay)}`,stay>0.2&&`짐 보관 ${won(a.stor)} × ${stay.toFixed(1)}개월 = ${won(a.stor*stay)}`,`이사 ${moves}번 × ${won(a.move)}`,dep&&X<ND&&`보증금 돌려받아 입주일까지 맡기면 이자 −${won(intr(dep,X,ND))}`].filter(Boolean),
+      pro:"이사 횟수·짐 보관 기간이 가장 짧음",con:"지금 집주인(또는 새 매수자)이 연장에 동의해야 함 — 매도 중이면 협의가 관건"});}
+  else out.push({k:"ext",na:true,t:"연장 후 짧게 버티기",sub:"아래 '가정 바꾸기'에서 연장 협의 날짜를 넣으면 계산해요",tot:null,items:[],pro:"",con:""});
+  // B. 오피스텔 1년
+  {const paid=a.cancel?Math.max(1,Math.ceil(mon(END,MI))):12,fee=a.cancel?50:0;
+   const c=a.offi*paid+a.move*2+fee-a.sup-intr(dep-a.offidep,END,ND);
+   out.push({k:"offi",t:"만기에 나가 오피스텔 1년",sub:`${kd(END)} 오피스텔 입주 → ${kd(MI)} 다음 집`,tot:c,
+     items:[`월세 ${won(a.offi)} × ${paid}개월${a.cancel?" (중도 해지)":" (1년 계약)"} = ${won(a.offi*paid)}`,`이사 2번 × ${won(a.move)}`,fee&&`중도 해지 중개보수 부담 약 ${won(fee)}`,a.sup&&`지금 집주인 이사비 지원 −${won(a.sup)}`,dep&&`보증금 차액 맡겨 이자 −${won(intr(dep-a.offidep,END,ND))}`].filter(Boolean),
+     pro:"계약이 안정적이고 짐을 거의 다 가져갈 수 있음",con:a.cancel?"중도 해지 조건을 계약서에 꼭 넣어야 함":`실제로 살 기간은 ${g.toFixed(1)}개월인데 12개월치를 냄`});}
+  // C. 단기임대 + 짐 보관
+  {const c=a.short*g+a.stor*g+a.move*2-a.sup-intr(dep,END,ND);
+   out.push({k:"short",t:"만기에 나가 단기임대 + 짐 보관",sub:`${kd(END)} ~ ${kd(MI)} · ${g.toFixed(1)}개월`,tot:c,
+     items:[`단기임대 ${won(a.short)} × ${g.toFixed(1)}개월 = ${won(a.short*g)}`,`짐 보관 ${won(a.stor)} × ${g.toFixed(1)}개월 = ${won(a.stor*g)}`,`이사 2번 × ${won(a.move)} (보관 입고·출고)`,a.sup&&`지금 집주인 이사비 지원 −${won(a.sup)}`,dep&&`보증금 맡겨 이자 −${won(intr(dep,END,ND))}`].filter(Boolean),
+     pro:"필요한 기간만 쓰고, 가구 딸린 집이라 짐을 적게 들고 다님",con:"단기임대는 월세가 비싸고 아기 짐·계절 옷 꺼내기 불편"});}
+  // D. 세입자 조기 퇴거
+  if(NX.own){const lost=(NX.rent||0)*mon(END,ND),tdep=(NX.dep||0)*1e4;
+    const c=a.comp+lost+a.short*intM+a.stor*intM+a.move*2;
+    out.push({k:"early",t:"다음 집 세입자 조기 퇴거 협의",sub:`${kd(END)} 무렵 세입자 퇴거 → 인테리어 ${a.int}주 → 입주`,tot:c,
+      items:[`세입자 이사비·보상 ${won(a.comp)}`,NX.rent&&`받지 못하는 월세 ${won(NX.rent)} × ${mon(END,ND).toFixed(1)}개월 = ${won(lost)}`,`인테리어 동안 단기임대·짐 보관 ${intM.toFixed(1)}개월 = ${won((a.short+a.stor)*intM)}`,`이사 2번 × ${won(a.move)}`].filter(Boolean),
+      pro:`지금 집 보증금${dep?` ${won(dep)}`:""}으로 세입자 보증금${tdep?` ${won(tdep)}`:""}을 바로 돌려줄 수 있어 돈 날짜가 딱 맞음 · 실거주 시작이 빨라짐`,con:"세입자 동의가 있어야 함 (계약 기간 중이라 강제 불가)"});}
+  return {a,MI,g,list:out};
+}
+
+/* ---------- 그리기 ---------- */
+function render(){
+  if(!END||!ND){$("#need").hidden=false;$("#need").innerHTML=`<a href="me.html" style="color:inherit;font-weight:700">내 설정</a>에서 <b>지금 집 만기일</b>과 <b>다음 집 입주 가능일</b>을 넣으면 일정과 비용을 계산해요.${!END?"":" (다음 집 입주일이 아직 없어요)"}`;
+    $("#plan").hidden=true;$("#sc").innerHTML='<p class="sub">날짜를 넣으면 계산합니다.</p>';return}
+  const {a,MI,g,list}=calc();
+  // 일정 막대
+  const X=a.ext?D0(a.ext):null,start=new Date(Math.min(END,X||END)),t0=addM(END,-1),t1=addM(MI,1),span=t1-t0,w=(x,y)=>`${Math.max(0,(y-x)/span*100)}%`;
+  $("#bar").innerHTML=`<div style="width:${w(t0,END)};background:var(--muted)">${e(P.home_name||"지금 집")}</div><div style="width:${w(END,ND)};background:var(--warn)">공백 ${mon(END,ND).toFixed(1)}개월</div><div style="width:${w(ND,MI)};background:#7a4fb5">인테리어</div><div style="width:${w(MI,t1)};background:var(--good)">입주</div>`;
+  const ev=[];
+  ev.push([new Date(),"지금 집주인에게 연장 가능 여부·이사비 지원 협의, 보증금 일부(10%) 먼저 받기 협의",true]);
+  if(NX.own){const a1=addM(ND,-6),a2=addM(ND,-2);ev.push([a1,`~ ${kd(a2)} · 다음 집 세입자의 계약갱신 요구 가능 기간. 내가 들어가 살 계획이면 이 기간 안에 '실거주로 갱신 거절'을 문자 등 기록이 남게 통보`,true])}
+  ev.push([addM(END,-2),"임시 거처 계약(오피스텔·단기임대)·이삿짐 보관 예약"]);
+  ev.push([END,`${e(P.home_name||"지금 집")} 만기 · 보증금 반환${a.dep?` (${won(a.dep*1e4)})`:""}`,true]);
+  if(X&&X>END)ev.push([X,"(연장 시) 지금 집에서 나가는 날"]);
+  ev.push([addM(ND,-2),"인테리어 업체 계약·일정 확정"]);
+  ev.push([ND,`${e(NX.name||"다음 집")} 입주 가능${NX.own&&NX.dep?` · 세입자 보증금 ${won(NX.dep*1e4)} 반환`:""}`,true]);
+  ev.push([MI,`인테리어 ${a.int}주 후 입주`,true]);
+  ev.sort((x,y)=>x[0]-y[0]);
+  $("#tl").innerHTML=ev.map(([d,t,k])=>`<li class="${k?"key":""}"><time>${kd(d)}</time><span>${t}</span></li>`).join("")+
+    `<li class="gap"><time>공백</time><span>지금 집 만기부터 입주까지 <b>${g.toFixed(1)}개월</b> (인테리어 포함)</span></li>`;
+  // 방법 카드
+  const ok=list.filter(x=>!x.na),best=ok.reduce((m,x)=>x.tot<m.tot?x:m,ok[0]);
+  $("#sc").innerHTML=list.map(x=>x.na?`<div class="card na"><h3>${x.t}</h3><div class="sub">${x.sub}</div></div>`:
+   `<div class="card${x===best?" best":""}"><h3>${x.t}${x===best?'<span class="badge">가장 적게 듦</span>':""}</h3>
+    <div class="tot">${won(x.tot)}<small>추가 비용</small></div><div class="sub">${x.sub}</div><ul>${x.items.map(i=>`<li>${i}</li>`).join("")}</ul>
+    <div class="pc"><b>좋은 점</b> ${x.pro}</div><div class="pc"><b class="warn">조건</b> ${x.con}</div></div>`).join("")+
+   `<p class="sub" style="grid-column:1/-1;margin:0">비용은 공백 기간에 추가로 나가는 돈만 셌어요(이사비·월세·보관료·이자). 지금 집을 연장할 때 월세나 보증금이 오르면 그만큼 더하세요. 법률 판단이 필요한 부분은 중개사·법률 상담으로 확인하세요.</p>`;
+}
+
+/* ---------- 근처 월세 ---------- */
+const CEN=NX.lat?{lat:NX.lat,lng:NX.lng,name:NX.name||"다음 집"}:P.home?{lat:P.home.lat,lng:P.home.lng,name:P.home_name||"지금 집"}:{lat:37.5663,lng:126.9779,name:"서울시청"};
+const map=L.map("bmap").setView([CEN.lat,CEN.lng],14);
+L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",{maxZoom:19,attribution:'&copy; OpenStreetMap'}).addTo(map);
+L.marker([CEN.lat,CEN.lng],{interactive:false,zIndexOffset:1000,icon:L.divIcon({className:"",html:`<div class="home">→ ${e(CEN.name)}</div>`,iconSize:null})}).addTo(map);
+const layer=L.layerGroup().addTo(map);let circle=null;
+const km=(a,b,c,d)=>{const R=6371,r=x=>x*Math.PI/180,dl=r(c-a),dn=r(d-b);const h=Math.sin(dl/2)**2+Math.cos(r(a))*Math.cos(r(c))*Math.sin(dn/2)**2;return 2*R*Math.asin(Math.sqrt(h))};
+function renderMarket(){
+  if(!BR||!BR.rows){$("#tbl").innerHTML=`<tr><td class="sub">월세 실거래를 아직 모으는 중이에요. 다음 자동 실행(매일 06시) 후 채워집니다. 오피스텔은 data.go.kr '국토교통부_오피스텔 전월세 실거래가 자료' 활용신청이 필요해요.</td></tr>`;return}
+  const band=$("#f-band").value,kind=$("#f-kind").value,R=+$("#f-r").value;
+  const ps=BR.places.filter(p=>p.band===band&&(kind==="all"||p.kind===kind)).map(p=>({...p,d:km(CEN.lat,CEN.lng,p.lat,p.lng)})).filter(p=>p.d<=R).sort((a,b)=>a.eff-b.eff);
+  layer.clearLayers();if(circle)circle.remove();circle=L.circle([CEN.lat,CEN.lng],{radius:R*1000,color:"#a8954f",weight:1,fillOpacity:.04}).addTo(map);
+  map.fitBounds(circle.getBounds(),{padding:[10,10]});
+  ps.forEach(p=>L.marker([p.lat,p.lng],{title:p.name,icon:L.divIcon({className:"",html:`<span class="pin${p.kind==="오피스텔"?" o":""}">${p.mon}만</span>`,iconSize:null})})
+    .bindPopup(`<b>${e(p.name)}</b> <span class="sub">${p.kind}</span><br>전용 약 ${p.area}㎡ · ${p.built||"?"}년<br>보증금 ${won(p.dep)} / 월 ${p.mon}만 (${p.n}건)<br>${p.station?e(p.station)+"역 "+(p.walk_min??"?")+"분 · ":""}${p.d.toFixed(1)}km${p.short?`<br><span class="short">1년 미만 계약 ${p.short}건</span>`:""}<br>${JR.naverHtml({name:p.name,umd:p.umd,lat:p.lat,lng:p.lng,kind:p.kind==="오피스텔"?"빌라":"아파트"},"rent")}`).addTo(layer));
+  $("#mk-sub").textContent=`· ${CEN.name} 기준 ${R}km, ${ps.length}곳`;
+  $("#tbl").innerHTML=ps.length?`<thead><tr><th>단지·건물</th><th class="num">보증금</th><th class="num">월세</th><th class="num">거리</th><th class="num">건수</th></tr></thead><tbody>`+
+    ps.slice(0,25).map(p=>`<tr><td><span class="tag${p.kind==="오피스텔"?" o":""}">${p.kind==="오피스텔"?"오피":"아파트"}</span>${e(p.name)} <span class="sub">${p.area}㎡</span>${p.short?' <span class="short">단기</span>':""}</td><td class="num">${won(p.dep)}</td><td class="num">${p.mon}만</td><td class="num">${p.d.toFixed(1)}km</td><td class="num">${p.n}</td></tr>`).join("")+"</tbody>"
+    :`<tr><td class="sub">이 조건의 월세 거래가 반경 안에 없어요. 반경이나 크기를 바꿔 보세요.</td></tr>`;
+  const S=BR.summary;
+  $("#sum").innerHTML=`<thead><tr><th>${e(BR.regions.join("·"))} 전체 (1년)</th><th class="num">보증금</th><th class="num">월세 (하위25~상위25%)</th><th class="num">건수</th><th class="num">단기</th></tr></thead><tbody>`+
+    ["아파트","오피스텔"].flatMap(k=>BR.bands.map(b=>[k,b,S[k]?.[b.key]]).filter(x=>x[2])).map(([k,b,s])=>`<tr><td>${k} · ${b.label}</td><td class="num">${won(s.dep)}</td><td class="num">${s.mon}만 (${s.mon_p25}~${s.mon_p75})</td><td class="num">${s.n}</td><td class="num">${s.short}</td></tr>`).join("")+"</tbody>";
+}
+
+/* ---------- 시작 ---------- */
+$("#inp").addEventListener("change",()=>{saveA(readInputs());P.bridge=JR.profile().bridge;render()});
+["#f-band","#f-kind","#f-r"].forEach(s=>$(s).addEventListener("change",renderMarket));
+fetch("data/bridge.json",{cache:"no-store"}).then(r=>r.ok?r.json():null).catch(()=>null).then(d=>{
+  BR=d;const bands=d?.bands||[{key:"one",label:"원룸·1.5룸"},{key:"two",label:"투룸"},{key:"three",label:"쓰리룸"},{key:"four",label:"국평 이상"}];
+  $("#f-band").innerHTML=bands.map(b=>`<option value="${b.key}"${b.key==="two"?" selected":""}>${b.label}${b.min!=null?` (전용 ${b.min}~${b.max<900?b.max+"㎡":""})`:""}</option>`).join("");
+  fillInputs(A(),autoVals());render();renderMarket();
+  $("#src").innerHTML=d?`출처: ${e(d.source)} · 거래일 ${e(d.period.from||"")} ~ ${e(d.period.to||"")} · ${e((d.generated_at||"").replace("T"," ").slice(0,16))} 갱신 · <a href="sources.html">자료 전체 보기</a>`:"";
+});
+</script>
+</body>
+</html>

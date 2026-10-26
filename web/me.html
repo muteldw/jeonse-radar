@@ -9,7 +9,7 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
 <link rel="stylesheet" href="app.css">
 <style>
-#pick{height:260px;border-radius:10px;border:1px solid var(--line);margin:8px 0}
+#pick,#pick2{height:240px;border-radius:10px;border:1px solid var(--line);margin:8px 0}
 .leaflet-container{font-family:var(--f-body);background:var(--bg)}
 .home{transform:translate(-50%,-50%);font:600 .72rem var(--f-body);background:var(--ink);color:var(--surface);border-radius:999px;padding:3px 8px;white-space:nowrap;box-shadow:0 1px 3px rgba(0,0,0,.35)}
 .areas{display:grid;gap:10px}
@@ -25,8 +25,8 @@
 <body>
 <div class="wrap">
  <nav class="topnav">
-  <a class="brand" href="./">전세 레이더<span>9</span><small class="ver">v4.4.1</small></a>
-  <a class="tab" href="./">홈</a><a class="tab" href="list.html">추천</a><a class="tab" href="buy.html">매매</a><a class="tab" href="map.html">지도</a><a class="tab" href="timing.html">이사 시기</a><a class="tab" href="stats.html">통계</a><a class="tab" href="buyer.html">매수자 분석</a><a class="tab" href="me.html" aria-current="page">내 설정</a><a class="tab" href="settings.html">알림 설정</a><a class="tab" href="sources.html">자료</a>
+  <a class="brand" href="./">전세 레이더<span>9</span><small class="ver">v4.5.0</small></a>
+  <a class="tab" href="./">홈</a><a class="tab" href="list.html">추천</a><a class="tab" href="buy.html">매매</a><a class="tab" href="map.html">지도</a><a class="tab" href="timing.html">이사 시기</a><a class="tab" href="bridge.html">임시 거처</a><a class="tab" href="stats.html">통계</a><a class="tab" href="buyer.html">매수자 분석</a><a class="tab" href="me.html" aria-current="page">내 설정</a><a class="tab" href="settings.html">알림 설정</a><a class="tab" href="sources.html">자료</a>
  </nav>
  <h1>내 설정</h1>
  <p class="sub">지금 집, 이사 시점, 관심 지역, 예산을 정하면 홈·추천·지도·이사 시기 화면이 모두 이 기준으로 바뀝니다. 설정은 <b>이 휴대폰(브라우저)에만</b> 저장되고 서버로 보내지지 않아요. 그래서 여러 사람이 같은 주소로 각자 다르게 쓸 수 있습니다.</p>
@@ -41,6 +41,22 @@
   <p class="sub" style="margin:8px 0 0">지도를 눌러 집 위치를 찍거나, 집에 있다면 <b>지금 위치로</b>를 누르세요. 위치는 홈 화면의 기준점과 거리 계산에만 씁니다.</p>
   <div id="pick" role="application" aria-label="집 위치 고르기 지도"></div>
   <div class="row"><button class="btn" id="gps">◎ 지금 위치로</button><button class="btn" id="clearhome">위치 지우기</button><span class="sub" id="hpos">위치 미설정</span></div>
+ </section>
+
+ <section class="panel">
+  <h2>1-2. 다음 집 (정해졌다면)</h2>
+  <p class="sub" style="margin:0 0 8px">들어갈 집이 이미 정해졌는데 지금 집 만기와 날짜가 안 맞으면 <a href="bridge.html" style="color:var(--accent)">임시 거처</a> 화면이 그 사이 기간 계획과 근처 월세 시세를 보여줘요.</p>
+  <div class="grid2">
+   <label class="f">다음 집 이름<input id="nname" maxlength="20" placeholder="예: 엠밸리 7단지"></label>
+   <label class="f">입주 가능일<input id="ndate" type="date"></label>
+  </div>
+  <label class="switch" style="margin:10px 0 4px"><input type="checkbox" id="nown"><i></i>내 소유 집이고 지금 세입자가 살고 있음</label>
+  <div class="grid2" id="nownbox" hidden>
+   <label class="f">세입자 월세 (만원)<input id="nrent" type="number" step="5" min="0" inputmode="numeric"></label>
+   <label class="f">세입자 보증금 (억)<input id="ndep" type="number" step="0.1" min="0" inputmode="decimal"></label>
+  </div>
+  <div id="pick2" role="application" aria-label="다음 집 위치 고르기 지도"></div>
+  <div class="row"><button class="btn" id="clearnext">다음 집 지우기</button><span class="sub" id="npos">지도를 눌러 다음 집 위치를 찍으세요</span></div>
  </section>
 
  <section class="panel">
@@ -90,6 +106,20 @@ $("#gps").addEventListener("click",()=>{if(!navigator.geolocation)return;$("#hpo
   navigator.geolocation.getCurrentPosition(p=>setHome(p.coords.latitude,p.coords.longitude,true),()=>$("#hpos").textContent="위치를 가져오지 못했어요 · 지도를 눌러 찍어 주세요",{timeout:8000})});
 $("#clearhome").addEventListener("click",()=>{delete P.home;if(mk)mk.remove();mk=null;$("#hpos").textContent="위치 미설정"});
 
+/* 다음 집 */
+const N=P.next||{};
+const map2=L.map("pick2").setView(N.lat?[N.lat,N.lng]:(P.home?[P.home.lat,P.home.lng]:[37.5663,126.9779]),N.lat||P.home?15:11);
+L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",{maxZoom:19,attribution:'&copy; OpenStreetMap'}).addTo(map2);
+let mk2=null;
+function setNext(lat,lng){N.lat=+lat.toFixed(6);N.lng=+lng.toFixed(6);if(mk2)mk2.remove();
+  mk2=L.marker([lat,lng],{interactive:false,icon:L.divIcon({className:"",html:`<div class="home" style="background:var(--accent)">→ ${e($("#nname").value||"다음 집")}</div>`,iconSize:null})}).addTo(map2);
+  $("#npos").textContent=`위치 설정됨 (${N.lat.toFixed(4)}, ${N.lng.toFixed(4)})`}
+map2.on("click",ev=>setNext(ev.latlng.lat,ev.latlng.lng));
+$("#nname").value=N.name||"";$("#ndate").value=N.date||"";$("#nown").checked=!!N.own;$("#nrent").value=N.rent??"";$("#ndep").value=N.dep??"";
+$("#nownbox").hidden=!N.own;$("#nown").addEventListener("change",ev=>$("#nownbox").hidden=!ev.target.checked);
+if(N.lat)setNext(N.lat,N.lng);
+$("#clearnext").addEventListener("click",()=>{for(const k of Object.keys(N))delete N[k];if(mk2)mk2.remove();mk2=null;["#nname","#ndate","#nrent","#ndep"].forEach(x=>$(x).value="");$("#nown").checked=false;$("#nownbox").hidden=true;$("#npos").textContent="지도를 눌러 다음 집 위치를 찍으세요"});
+
 $("#hname").value=P.home_name||"";$("#end").value=P.end||"";
 $("#br").value=P.budget_rent||"";$("#bs").value=P.budget_sale||"";$("#py").value=String(P.min_py||34);
 if(P.home)setHome(P.home.lat,P.home.lng,false);
@@ -107,6 +137,10 @@ function collect(){
     budget_rent:n($("#br").value),budget_sale:n($("#bs").value),min_py:+$("#py").value===34?undefined:+$("#py").value,
     areas:[...document.querySelectorAll("#areas input:checked")].map(i=>i.value)};
   if(!p.areas.length)delete p.areas;
+  const nx={name:$("#nname").value.trim()||undefined,date:$("#ndate").value||undefined,lat:N.lat,lng:N.lng,own:$("#nown").checked||undefined,
+    rent:$("#nown").checked?n($("#nrent").value):undefined,dep:$("#nown").checked?n($("#ndep").value):undefined};
+  Object.keys(nx).forEach(k=>nx[k]===undefined&&delete nx[k]);
+  if(Object.keys(nx).length)p.next=nx;else delete p.next;
   Object.keys(p).forEach(k=>p[k]===undefined&&delete p[k]);return p;
 }
 $("#save").addEventListener("click",()=>{P=collect();JR.saveProfile(P);$("#msg").textContent="저장됨 · 홈으로 가면 바로 반영돼요";setTimeout(()=>$("#msg").textContent="",4000)});
