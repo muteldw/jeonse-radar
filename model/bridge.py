@@ -16,7 +16,8 @@ from statistics import median
 ROOT = Path(__file__).resolve().parents[1]
 KST = timezone(timedelta(hours=9))
 BANDS = [("one", "원룸·1.5룸", 0, 40), ("two", "투룸", 40, 60), ("three", "쓰리룸", 60, 85), ("four", "국평 이상", 85, 999)]
-OPP = 0.03  # 보증금 기회비용(연) — 환산 월 비용 계산용
+OPP = 0.03
+LOW_DEP = 5000  # 만원 — 이 이하 보증금을 "저보증금 월세"로 본다  # 보증금 기회비용(연) — 환산 월 비용 계산용
 
 
 def band_of(a: float) -> str | None:
@@ -44,9 +45,29 @@ def stats(rows: list[dict]) -> dict:
     eff = sorted(int(r["monthly_man"]) + int(r["deposit_man"]) * OPP / 12 for r in rows)
     terms = [t for t in (term_months(r.get("contract_term", "")) for r in rows) if t]
     q = lambda xs, p: xs[min(len(xs) - 1, int(len(xs) * p))]
-    return {"n": len(rows), "dep": int(median(dep)), "mon": int(median(mon)), "eff": int(median(eff)),
+    low = [r for r in rows if int(r["deposit_man"]) <= LOW_DEP]   # 보증금 적은 월세 = 잠깐 살 집에 가까움
+    lows = {"n_low": len(low), "mon_low": int(median(int(r["monthly_man"]) for r in low)) if low else None,
+            "dep_low": int(median(int(r["deposit_man"]) for r in low)) if low else None}
+    return {**lows, "n": len(rows), "dep": int(median(dep)), "mon": int(median(mon)), "eff": int(median(eff)),
             "mon_p25": q(mon, .25), "mon_p75": q(mon, .75),
             "short": sum(1 for t in terms if t < 12), "terms": len(terms)}
+
+
+def conv(r: dict) -> float:
+    """환산 보증금(월세를 연 5%로 보증금 환산) — 공공임대 걸러내기용"""
+    return int(r["deposit_man"]) + int(r["monthly_man"]) * 12 / 0.05
+
+
+def drop_public(rows: list[dict], ratio: float = 0.55) -> list[dict]:
+    """SH·LH 공공임대(행복주택·국민임대 등) 제외 — 시장에서 구할 수 없는 집.
+    1) 보증금이 50만원 단위가 아닌 거래(5,553만·12,185만처럼 산식으로 정한 임대료)
+    2) 같은 구·크기 환산 보증금 중위값의 ratio 미만"""
+    rows = [r for r in rows if int(r["deposit_man"]) % 50 == 0]
+    pool: dict = defaultdict(list)
+    for r in rows:
+        pool[(r["kind"], r["sgg"], band_of(float(r["area_m2"])))].append(conv(r))
+    med = {k: median(v) for k, v in pool.items()}
+    return [r for r in rows if conv(r) >= ratio * med[(r["kind"], r["sgg"], band_of(float(r["area_m2"])))]]
 
 
 def main() -> None:
@@ -54,7 +75,9 @@ def main() -> None:
     out = ROOT / "web" / "data" / "bridge.json"
     rows = list(csv.DictReader(p.open(encoding="utf-8"))) if p.exists() else []
     since = (date.today() - timedelta(days=365)).isoformat()
-    rows = [r for r in rows if r["deal_date"] >= since and int(r["monthly_man"] or 0) > 0]
+    rows = [r for r in rows if r["deal_date"] >= since and int(r["monthly_man"] or 0) > 0 and band_of(float(r["area_m2"]))]
+    n0 = len(rows)
+    rows = drop_public(rows)
     geo = json.loads((ROOT / "data" / "geo.json").read_text(encoding="utf-8")) if (ROOT / "data" / "geo.json").exists() else {}
 
     summ: dict = defaultdict(lambda: defaultdict(list))
@@ -82,16 +105,16 @@ def main() -> None:
         "generated_at": datetime.now(KST).isoformat(timespec="minutes"),
         "source": "국토교통부 아파트·오피스텔 전월세 실거래가 (월세만)",
         "period": {"from": min((r["deal_date"] for r in rows), default=None), "to": max((r["deal_date"] for r in rows), default=None)},
-        "rows": len(rows),
+        "rows": len(rows), "dropped_public": n0 - len(rows),
         "by_kind": {k: sum(len(v) for v in d.values()) for k, d in summ.items()},
         "regions": sorted({r["sgg"] for r in rows}),
         "bands": [{"key": k, "label": l, "min": lo, "max": hi} for k, l, lo, hi in BANDS],
-        "opp_rate": OPP,
+        "opp_rate": OPP, "low_dep": LOW_DEP,
         "summary": {k: {b: stats(v) for b, v in d.items()} for k, d in summ.items()},
         "places": places,
     }
     out.write_text(json.dumps(data, ensure_ascii=False, separators=(",", ":")), encoding="utf-8")
-    print(f"임시 거처 월세 {len(rows)}건 → web/data/bridge.json (위치 확인 {len(places)}곳)")
+    print(f"임시 거처 월세 {len(rows)}건 (공공임대 추정 {n0 - len(rows)}건 제외) → web/data/bridge.json (위치 확인 {len(places)}곳)")
 
 
 if __name__ == "__main__":

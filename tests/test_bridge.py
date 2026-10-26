@@ -20,6 +20,7 @@ rows = [
  ["오피스텔","강서구","마곡동","마곡A오피스텔","1",2018,27,7,d,1000,100,"신규","26.10~27.10",""],
  ["아파트","강서구","마곡동","B아파트","2",2015,59,3,d,10000,150,"신규","26.10~28.10",""],
  ["아파트","강서구","마곡동","B아파트","2",2015,84,3,d,30000,0,"신규","26.10~28.10",""],   # 전세 → 제외
+ ["아파트","강서구","마곡동","B아파트","2",2015,58,3,d,5553,39,"신규","26.10~28.10",""],   # 공공임대(산식 보증금) → 제외
 ]
 with (tmp/"data"/"bridge_raw.csv").open("w", newline="", encoding="utf-8") as f:
     w = csv.writer(f); w.writerow(F); w.writerows(rows)
@@ -31,6 +32,7 @@ out = json.loads((tmp/"web"/"data"/"bridge.json").read_text(encoding="utf-8"))
 assert out["rows"] == 3, out["rows"]
 o = out["summary"]["오피스텔"]["one"]
 assert o["n"] == 2 and o["short"] == 1 and o["mon"] == 95, o
+assert o["n_low"] == 2 and o["mon_low"] == 95
 assert len(out["places"]) == 2
 shutil.rmtree(tmp)
 print("bridge OK")

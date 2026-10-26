@@ -92,7 +92,7 @@ td.num,th.num{text-align:right;font-family:var(--f-num);white-space:nowrap}
   <div id="bmap" role="region" aria-label="근처 월세 실거래 지도"></div>
   <div class="tblwrap"><table id="tbl"></table></div>
   <div class="tblwrap" style="margin-top:12px"><table id="sum"></table></div>
-  <p class="sub" style="margin-top:8px">월세는 1년간 신고된 실거래 중위값입니다. <span class="short">단기</span>는 1년 미만 계약이 있었던 곳 — 짧게 살 곳을 찾을 때 집주인이 단기 계약에 열려 있을 가능성이 높아요. 실거래에는 단기임대 플랫폼(가구 포함·주 단위) 매물이 거의 없어서, 그쪽 가격은 보통 일반 월세보다 높게 잡아야 합니다.</p>
+  <p class="sub" style="margin-top:8px">월세는 1년간 신고된 실거래 중위값입니다. 보증금을 크게 넣은 반전세가 섞여 있어 월세가 낮아 보일 수 있으니, 잠깐 살 집은 '보증금 5천 이하일 때 월세' 열을 보세요. 단기임대 기본값은 투룸 저보증금 월세의 1.3배로 잡았어요. <span class="short">단기</span>는 1년 미만 계약이 있었던 곳 — 짧게 살 곳을 찾을 때 집주인이 단기 계약에 열려 있을 가능성이 높아요. 실거래에는 단기임대 플랫폼(가구 포함·주 단위) 매물이 거의 없어서, 그쪽 가격은 보통 일반 월세보다 높게 잡아야 합니다.</p>
  </section>
  <div class="srcline" id="src"></div>
 </div>
@@ -121,8 +121,9 @@ function readInputs(){const a={};for(const [k,id] of Object.entries(FIELDS)){con
 /* 실거래 기반 기본값 */
 function autoVals(){
   const s=BR?.summary||{},g=(k,b)=>s[k]?.[b];
-  const two=g("아파트","two")||g("아파트","three"),ot=g("오피스텔","two")||g("오피스텔","one");
-  return {short:two?Math.round(two.mon*1.3/10)*10:250,offi:ot?ot.mon:(g("아파트","one")?.mon??120),offidep:ot?ot.dep:1000,
+  const lo=x=>x&&x.mon_low&&x.n_low>=5?x:null;
+  const two=lo(g("아파트","two"))||lo(g("아파트","three")),ot=lo(g("오피스텔","two"))||lo(g("오피스텔","one"))||lo(g("아파트","one"));
+  return {short:two?Math.round(two.mon_low*1.3/10)*10:250,offi:ot?ot.mon_low:120,offidep:ot?ot.dep_low:1000,
           dep:null,ext:END?iso(addM(END,4)):null};
 }
 
@@ -211,8 +212,8 @@ function renderMarket(){
     ps.slice(0,25).map(p=>`<tr><td><span class="tag${p.kind==="오피스텔"?" o":""}">${p.kind==="오피스텔"?"오피":"아파트"}</span>${e(p.name)} <span class="sub">${p.area}㎡</span>${p.short?' <span class="short">단기</span>':""}</td><td class="num">${won(p.dep)}</td><td class="num">${p.mon}만</td><td class="num">${p.d.toFixed(1)}km</td><td class="num">${p.n}</td></tr>`).join("")+"</tbody>"
     :`<tr><td class="sub">이 조건의 월세 거래가 반경 안에 없어요. 반경이나 크기를 바꿔 보세요.</td></tr>`;
   const S=BR.summary;
-  $("#sum").innerHTML=`<thead><tr><th>${e(BR.regions.join("·"))} 전체 (1년)</th><th class="num">보증금</th><th class="num">월세 (하위25~상위25%)</th><th class="num">건수</th><th class="num">단기</th></tr></thead><tbody>`+
-    ["아파트","오피스텔"].flatMap(k=>BR.bands.map(b=>[k,b,S[k]?.[b.key]]).filter(x=>x[2])).map(([k,b,s])=>`<tr><td>${k} · ${b.label}</td><td class="num">${won(s.dep)}</td><td class="num">${s.mon}만 (${s.mon_p25}~${s.mon_p75})</td><td class="num">${s.n}</td><td class="num">${s.short}</td></tr>`).join("")+"</tbody>";
+  $("#sum").innerHTML=`<thead><tr><th>${e(BR.regions.join("·"))} 전체 (1년)</th><th class="num">보증금</th><th class="num">월세 (하위25~상위25%)</th><th class="num">보증금 ${won(BR.low_dep||5000)} 이하일 때 월세</th><th class="num">건수</th><th class="num">단기</th></tr></thead><tbody>`+
+    ["아파트","오피스텔"].flatMap(k=>BR.bands.map(b=>[k,b,S[k]?.[b.key]]).filter(x=>x[2])).map(([k,b,s])=>`<tr><td>${k} · ${b.label}</td><td class="num">${won(s.dep)}</td><td class="num">${s.mon}만 (${s.mon_p25}~${s.mon_p75})</td><td class="num">${s.mon_low!=null?s.mon_low+"만 ("+s.n_low+"건)":"-"}</td><td class="num">${s.n}</td><td class="num">${s.short}</td></tr>`).join("")+"</tbody>";
 }
 
 /* ---------- 시작 ---------- */
