@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>전세 뉴스 · 전세 레이더 9</title>
+<link rel="manifest" href="manifest.json">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;500;700&family=IBM+Plex+Mono:wght@500&display=swap">
+<link rel="stylesheet" href="app.css">
+<style>
+.mast{border-top:4px solid var(--ink);border-bottom:1px solid var(--line);padding:10px 0 12px;margin-bottom:14px}
+.mast .kick{font:600 .74rem var(--f-body);letter-spacing:.08em;color:var(--accent)}
+.mast h1{font-size:1.45rem;line-height:1.3;margin:4px 0 6px}
+.kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:16px}
+@media (max-width:640px){.kpis{grid-template-columns:1fr 1fr}}
+.kpi{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:11px 12px;border-top:3px solid var(--muted);min-width:0}
+.kpi.bad{border-top-color:var(--bad)}.kpi.warn{border-top-color:var(--warn)}.kpi.good{border-top-color:var(--good)}
+.kpi small{display:block;font-size:.72rem;color:var(--muted);line-height:1.35}
+.kpi strong{display:block;font:500 1.3rem/1.2 var(--f-num);margin:4px 0 2px;letter-spacing:-.02em}
+.kpi .d{font-size:.76rem}.kpi.bad .d{color:var(--bad)}.kpi.warn .d{color:var(--warn)}
+.kpi .s{font-size:.66rem;color:var(--muted);margin-top:4px}
+h2.sec{font-size:1rem;margin:18px 0 8px;padding-bottom:6px;border-bottom:1px solid var(--line)}
+.rule{display:grid;grid-template-columns:1fr auto;gap:4px 10px;background:var(--surface);border:1px solid var(--line);border-left:4px solid var(--warn);border-radius:10px;padding:10px 12px;margin-bottom:8px}
+.rule b{font-size:.92rem}.rule .when{font:500 .76rem var(--f-num);color:var(--warn);white-space:nowrap}
+.rule .st{grid-column:1/-1;font-size:.86rem}.rule .nt{grid-column:1/-1;font-size:.78rem;color:var(--muted)}
+.art{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:12px 14px;margin-bottom:10px}
+.art .meta{display:flex;gap:8px;align-items:center;font-size:.74rem;color:var(--muted)}
+.art .cat{font:600 .68rem var(--f-body);color:#fff;background:var(--ink);border-radius:5px;padding:1px 6px}
+.art h3{margin:5px 0 6px;font-size:1rem;line-height:1.4}.art h3 a{color:inherit;text-decoration:none}
+.art ul{margin:0;padding-left:1.1em;font-size:.86rem}.art li{margin-bottom:2px}
+.arch{font-size:.8rem;color:var(--muted)}
+</style>
+</head>
+<body>
+<div class="wrap">
+ <nav class="topnav">
+  <a class="brand" href="./">전세 레이더<span>9</span><small class="ver">v4.6.0</small></a>
+  <a class="tab" href="./">홈</a><a class="tab" href="news.html" aria-current="page">뉴스</a><a class="tab" href="list.html">추천</a><a class="tab" href="buy.html">매매</a><a class="tab" href="map.html">지도</a><a class="tab" href="timing.html">이사 시기</a><a class="tab" href="bridge.html">임시 거처</a><a class="tab" href="stats.html">통계</a><a class="tab" href="buyer.html">매수자 분석</a><a class="tab" href="me.html">내 설정</a><a class="tab" href="settings.html">알림 설정</a><a class="tab" href="sources.html">자료</a>
+ </nav>
+ <div id="main"><p class="sub">불러오는 중…</p></div>
+</div>
+<script src="data.js"></script>
+<script>
+const e=JR.esc,$=s=>document.querySelector(s);
+fetch("data/news.json",{cache:"no-store"}).then(r=>r.json()).then(d=>{
+  $("#main").innerHTML=`
+  <header class="mast"><div class="kick">전세·대출 브리핑 · ${e(d.updated)}</div><h1>${e(d.headline)}</h1><div class="sub">수집 기간 ${e(d.window)} · 서울·수도권 전세대출 관련 보도 정리 · 매일 아침 갱신</div></header>
+  <div class="kpis">${d.kpis.map(k=>`<div class="kpi ${k.tone||""}"><small>${e(k.label)}</small><strong>${e(k.value)}</strong><div class="d">${e(k.delta||"")}</div><div class="s">${e(k.src||"")}</div></div>`).join("")}</div>
+  <h2 class="sec">지금 적용되는 대출 규칙</h2>
+  ${d.rules.map(r=>`<div class="rule"><b>${e(r.name)}</b><span class="when">${e(r.when)}</span><div class="st">${e(r.status)}</div>${r.note?`<div class="nt">${e(r.note)}</div>`:""}</div>`).join("")}
+  <h2 class="sec">주요 보도</h2>
+  ${d.items.map(a=>`<article class="art"><div class="meta"><span class="cat">${e(a.cat)}</span><span>${e(a.source)}</span><span>${e(a.date)}</span></div>
+    <h3><a href="${e(a.url)}" target="_blank" rel="noopener">${e(a.title)}</a></h3><ul>${a.points.map(p=>`<li>${e(p)}</li>`).join("")}</ul></article>`).join("")}
+  <p class="srcline">각 기사 원문 링크를 눌러 확인하세요. 요약은 자동 정리라 세부 조건은 원문·금융기관 안내가 우선입니다. 대출 규칙 변경은 <a href="sources.html">자료</a>의 대출 규칙 파일에도 반영합니다.</p>`;
+}).catch(()=>$("#main").innerHTML='<p class="sub">뉴스를 아직 정리하지 못했어요.</p>');
+</script>
+</body>
+</html>
