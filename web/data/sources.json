@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-10-26T07:57+09:00",
+ "generated_at": "2026-10-26T14:21+09:00",
  "repo": "https://github.com/muteldw/jeonse-radar",
  "conditions": {
   "min_area_m2": 80,
@@ -68,11 +68,43 @@
    "file": "data/sale_raw.csv"
   },
   {
+   "name": "국토교통부_오피스텔 전월세 실거래가 자료",
+   "provider": "국토교통부 · 공공데이터포털",
+   "url": "https://www.data.go.kr/tcs/dss/selectDataSetList.do?keyword=오피스텔 전월세 실거래가",
+   "use": "임시 거처(오피스텔 월세) 시세",
+   "rows": 0,
+   "period": {
+    "from": "2025-11-01",
+    "to": "2026-10-23",
+    "rows": 8975,
+    "by_kind": {
+     "아파트": 8975
+    }
+   },
+   "file": "data/bridge_raw.csv"
+  },
+  {
+   "name": "아파트 월세 실거래 (임시 거처용, 전 평형)",
+   "provider": "국토교통부 · 공공데이터포털",
+   "url": "https://www.data.go.kr/tcs/dss/selectDataSetList.do?keyword=아파트 전월세 실거래가",
+   "use": "임시 거처(아파트 월세) 시세",
+   "rows": 8975,
+   "period": {
+    "from": "2025-11-01",
+    "to": "2026-10-23",
+    "rows": 8975,
+    "by_kind": {
+     "아파트": 8975
+    }
+   },
+   "file": "data/bridge_raw.csv"
+  },
+  {
    "name": "카카오 로컬 API (주소·키워드·카테고리 검색)",
    "provider": "카카오",
    "url": "https://developers.kakao.com/docs/latest/ko/local/dev-guide",
    "use": "단지 위치, 가까운 전철역·도보 시간, 학교·어린이집·마트·병원 수",
-   "rows": 5140,
+   "rows": 5451,
    "period": {},
    "file": "data/geo.json"
   },
@@ -132,7 +164,7 @@
     "아파트": true
    },
    "sale_done": {},
-   "located": 306
+   "located": 533
   },
   {
    "code": "11470",
@@ -146,7 +178,7 @@
     "아파트": true
    },
    "sale_done": {},
-   "located": 286
+   "located": 370
   },
   {
    "code": "11110",
