@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-10-31T09:17+09:00",
+ "generated_at": "2026-11-01T08:54+09:00",
  "repo": "https://github.com/muteldw/jeonse-radar",
  "conditions": {
   "min_area_m2": 80,
@@ -12,13 +12,13 @@
    "provider": "국토교통부 · 공공데이터포털",
    "url": "https://www.data.go.kr/tcs/dss/selectDataSetList.do?keyword=아파트 전월세 실거래가",
    "use": "전세 추천·시세·계약기간(이사 시기)",
-   "rows": 128554,
+   "rows": 128557,
    "period": {
     "from": "2024-11-01",
     "to": "2026-10-30",
-    "rows": 128554,
+    "rows": 128557,
     "by_kind": {
-     "아파트": 128554
+     "아파트": 128557
     }
    },
    "file": "data/rent_raw.csv"
@@ -32,9 +32,9 @@
    "period": {
     "from": "2024-11-01",
     "to": "2026-10-30",
-    "rows": 128554,
+    "rows": 128557,
     "by_kind": {
-     "아파트": 128554
+     "아파트": 128557
     }
    },
    "file": "data/rent_raw.csv"
@@ -381,7 +381,7 @@
    "name": "구로구",
    "area": "서울 서남(구로·금천·영등포·동작·관악)",
    "rent": {
-    "아파트": 3605
+    "아파트": 3606
    },
    "sale": {},
    "rent_done": {
@@ -479,7 +479,7 @@
    "name": "송파구",
    "area": "서울 동남(서초·강남·송파·강동)",
    "rent": {
-    "아파트": 12741
+    "아파트": 12743
    },
    "sale": {},
    "rent_done": {
