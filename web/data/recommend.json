@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-10-30T09:32+09:00",
+ "generated_at": "2026-10-31T09:17+09:00",
  "budget_eok": 8.0,
  "weights": {
   "station": 1.3,
@@ -14,10 +14,10 @@
  "layout": "sgg",
  "period": {
   "from": "2024-11-01",
-  "to": "2026-10-29",
-  "rows": 128355,
+  "to": "2026-10-30",
+  "rows": 128554,
   "by_kind": {
-   "아파트": 128355
+   "아파트": 128554
   }
  },
  "areas": {
@@ -36,7 +36,7 @@
     "11500",
     "11470"
    ],
-   "count": 602
+   "count": 603
   },
   "seoul_sw": {
    "name": "서울 서남(구로·금천·영등포·동작·관악)",
@@ -59,7 +59,7 @@
     "11590",
     "11620"
    ],
-   "count": 844
+   "count": 843
   },
   "seoul_nw": {
    "name": "서울 서북(은평·서대문·마포)",
@@ -126,7 +126,7 @@
     "11320",
     "11350"
    ],
-   "count": 1300
+   "count": 1299
   },
   "seoul_se": {
    "name": "서울 동남(서초·강남·송파·강동)",
@@ -190,12 +190,12 @@
   "11470": {
    "name": "양천구",
    "area": "seoul_west",
-   "count": 288,
+   "count": 289,
    "center": [
     37.517,
     126.8665
    ],
-   "with_location": 288,
+   "with_location": 289,
    "bbox": [
     37.5058,
     126.8239,
@@ -323,12 +323,12 @@
   "11260": {
    "name": "중랑구",
    "area": "seoul_ne",
-   "count": 151,
+   "count": 150,
    "center": [
     37.6066,
     127.0927
    ],
-   "with_location": 151,
+   "with_location": 150,
    "bbox": [
     37.5725,
     127.0723,
@@ -475,12 +475,12 @@
   "11530": {
    "name": "구로구",
    "area": "seoul_sw",
-   "count": 206,
+   "count": 205,
    "center": [
     37.4954,
     126.8874
    ],
-   "with_location": 206,
+   "with_location": 205,
    "bbox": [
     37.4755,
     126.8158,
@@ -570,12 +570,12 @@
   "11650": {
    "name": "서초구",
    "area": "seoul_se",
-   "count": 495,
+   "count": 498,
    "center": [
     37.4837,
     127.0324
    ],
-   "with_location": 495,
+   "with_location": 498,
    "bbox": [
     37.4485,
     126.9822,
@@ -589,12 +589,12 @@
   "11680": {
    "name": "강남구",
    "area": "seoul_se",
-   "count": 525,
+   "count": 524,
    "center": [
     37.5172,
     127.0473
    ],
-   "with_location": 525,
+   "with_location": 524,
    "bbox": [
     37.4603,
     127.0183,
@@ -608,12 +608,12 @@
   "11710": {
    "name": "송파구",
    "area": "seoul_se",
-   "count": 272,
+   "count": 270,
    "center": [
     37.5145,
     127.1059
    ],
-   "with_location": 272,
+   "with_location": 270,
    "bbox": [
     37.4746,
     127.0731,
