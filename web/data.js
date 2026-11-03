@@ -132,3 +132,14 @@ JR.changelog().then(list => {
   });
 });
 
+
+/* 처음 온 사람(저장된 설정 없음)은 '내 설정'부터 안내한다. 나중에 할게요를 누르면 다시 묻지 않는다. */
+JR.onboarding = () => {
+  try {
+    const page = location.pathname.split("/").pop() || "index.html";
+    if (["me.html", "sources.html", "settings.html"].includes(page)) return;
+    if (JR.hasProfile() || localStorage.getItem("jr9_onboarded")) return;
+    location.replace("me.html?welcome=1");
+  } catch (x) {}
+};
+JR.onboarding();
