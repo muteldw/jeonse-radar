@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-11-03T16:40+09:00",
+ "generated_at": "2026-11-03T17:11+09:00",
  "repo": "https://github.com/muteldw/jeonse-radar",
  "conditions": {
   "min_area_m2": 80,
@@ -22,7 +22,8 @@
      "빌라": 3644
     }
    },
-   "file": "data/rent_raw.csv"
+   "file": "data/rent_raw.csv",
+   "approved": true
   },
   {
    "name": "국토교통부_연립다세대 전월세 실거래가 자료",
@@ -39,7 +40,8 @@
      "빌라": 3644
     }
    },
-   "file": "data/rent_raw.csv"
+   "file": "data/rent_raw.csv",
+   "approved": true
   },
   {
    "name": "국토교통부_아파트 매매 실거래가 자료",
@@ -55,7 +57,8 @@
      "아파트": 73025
     }
    },
-   "file": "data/sale_raw.csv"
+   "file": "data/sale_raw.csv",
+   "approved": true
   },
   {
    "name": "국토교통부_연립다세대 매매 실거래가 자료",
@@ -71,7 +74,8 @@
      "아파트": 73025
     }
    },
-   "file": "data/sale_raw.csv"
+   "file": "data/sale_raw.csv",
+   "approved": true
   },
   {
    "name": "국토교통부_오피스텔 전월세 실거래가 자료",
@@ -88,7 +92,8 @@
      "오피스텔": 10534
     }
    },
-   "file": "data/bridge_raw.csv"
+   "file": "data/bridge_raw.csv",
+   "approved": true
   },
   {
    "name": "아파트 월세 실거래 (임시 거처용, 전 평형)",
@@ -105,16 +110,18 @@
      "오피스텔": 10534
     }
    },
-   "file": "data/bridge_raw.csv"
+   "file": "data/bridge_raw.csv",
+   "approved": true
   },
   {
    "name": "카카오 로컬 API (주소·키워드·카테고리 검색)",
    "provider": "카카오",
    "url": "https://developers.kakao.com/docs/latest/ko/local/dev-guide",
    "use": "단지 위치, 가까운 전철역·도보 시간, 학교·어린이집·마트·병원 수",
-   "rows": 7962,
+   "rows": 8965,
    "period": {},
-   "file": "data/geo.json"
+   "file": "data/geo.json",
+   "approved": false
   },
   {
    "name": "OpenStreetMap 지도",
@@ -123,7 +130,8 @@
    "use": "지도 배경",
    "rows": null,
    "period": {},
-   "file": null
+   "file": null,
+   "approved": false
   },
   {
    "name": "주택담보대출 규칙 (LTV·한도·DSR·취득세)",
@@ -134,7 +142,8 @@
    "period": {
     "as_of": "2026-10-23"
    },
-   "file": "config/loan_rules.json"
+   "file": "config/loan_rules.json",
+   "approved": false
   },
   {
    "name": "규제지역·토지거래허가구역 목록",
@@ -145,7 +154,8 @@
    "period": {
     "as_of": "2026-10-23"
    },
-   "file": "config/loan_rules.json"
+   "file": "config/loan_rules.json",
+   "approved": false
   },
   {
    "name": "가구 순자산 분포 (상위 % 추정)",
@@ -156,7 +166,8 @@
    "period": {
     "as_of": "2025-03 조사"
    },
-   "file": "config/wealth_dist.json"
+   "file": "config/wealth_dist.json",
+   "approved": false
   }
  ],
  "regions": [
@@ -178,7 +189,7 @@
    "sale_done": {
     "아파트": true
    },
-   "located": 968
+   "located": 997
   },
   {
    "code": "11470",
@@ -198,7 +209,7 @@
    "sale_done": {
     "아파트": true
    },
-   "located": 514
+   "located": 542
   },
   {
    "code": "11110",
@@ -218,7 +229,7 @@
    "sale_done": {
     "아파트": true
    },
-   "located": 153
+   "located": 195
   },
   {
    "code": "11140",
@@ -238,7 +249,7 @@
    "sale_done": {
     "아파트": true
    },
-   "located": 77
+   "located": 87
   },
   {
    "code": "11170",
@@ -258,7 +269,7 @@
    "sale_done": {
     "아파트": true
    },
-   "located": 290
+   "located": 345
   },
   {
    "code": "11200",
@@ -278,7 +289,7 @@
    "sale_done": {
     "아파트": true
    },
-   "located": 183
+   "located": 195
   },
   {
    "code": "11215",
@@ -298,7 +309,7 @@
    "sale_done": {
     "아파트": true
    },
-   "located": 223
+   "located": 271
   },
   {
    "code": "11230",
@@ -318,7 +329,7 @@
    "sale_done": {
     "아파트": true
    },
-   "located": 204
+   "located": 220
   },
   {
    "code": "11260",
@@ -338,7 +349,7 @@
    "sale_done": {
     "아파트": true
    },
-   "located": 190
+   "located": 219
   },
   {
    "code": "11290",
@@ -358,7 +369,7 @@
    "sale_done": {
     "아파트": true
    },
-   "located": 212
+   "located": 242
   },
   {
    "code": "11305",
@@ -378,7 +389,7 @@
    "sale_done": {
     "아파트": true
    },
-   "located": 97
+   "located": 119
   },
   {
    "code": "11320",
@@ -398,7 +409,7 @@
    "sale_done": {
     "아파트": true
    },
-   "located": 138
+   "located": 147
   },
   {
    "code": "11350",
@@ -418,7 +429,7 @@
    "sale_done": {
     "아파트": true
    },
-   "located": 244
+   "located": 258
   },
   {
    "code": "11380",
@@ -438,7 +449,7 @@
    "sale_done": {
     "아파트": true
    },
-   "located": 347
+   "located": 411
   },
   {
    "code": "11410",
@@ -458,7 +469,7 @@
    "sale_done": {
     "아파트": true
    },
-   "located": 258
+   "located": 309
   },
   {
    "code": "11440",
@@ -478,7 +489,7 @@
    "sale_done": {
     "아파트": true
    },
-   "located": 306
+   "located": 346
   },
   {
    "code": "11530",
@@ -498,7 +509,7 @@
    "sale_done": {
     "아파트": true
    },
-   "located": 213
+   "located": 225
   },
   {
    "code": "11545",
@@ -518,7 +529,7 @@
    "sale_done": {
     "아파트": true
    },
-   "located": 91
+   "located": 101
   },
   {
    "code": "11560",
@@ -538,7 +549,7 @@
    "sale_done": {
     "아파트": true
    },
-   "located": 196
+   "located": 203
   },
   {
    "code": "11590",
@@ -558,7 +569,7 @@
    "sale_done": {
     "아파트": true
    },
-   "located": 234
+   "located": 275
   },
   {
    "code": "11620",
@@ -578,7 +589,7 @@
    "sale_done": {
     "아파트": true
    },
-   "located": 213
+   "located": 248
   },
   {
    "code": "11650",
@@ -598,7 +609,7 @@
    "sale_done": {
     "아파트": true
    },
-   "located": 744
+   "located": 865
   },
   {
    "code": "11680",
@@ -618,7 +629,7 @@
    "sale_done": {
     "아파트": true
    },
-   "located": 678
+   "located": 788
   },
   {
    "code": "11710",
@@ -638,7 +649,7 @@
    "sale_done": {
     "아파트": true
    },
-   "located": 504
+   "located": 611
   },
   {
    "code": "11740",
@@ -658,7 +669,7 @@
    "sale_done": {
     "아파트": true
    },
-   "located": 427
+   "located": 471
   },
   {
    "code": "41171",
@@ -678,7 +689,7 @@
    "sale_done": {
     "아파트": true
    },
-   "located": 115
+   "located": 124
   },
   {
    "code": "41173",
@@ -698,7 +709,7 @@
    "sale_done": {
     "아파트": true
    },
-   "located": 143
+   "located": 151
   }
  ]
 }
