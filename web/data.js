@@ -118,3 +118,17 @@ const JR = {
   kindLabel(it) { return it.kind === "빌라" ? '<span class="kind">빌라</span>' : ""; },
   bath(it) { return it.bath == null ? "욕실 수 확인 필요" : `욕실 ${it.bath}`; }
 };
+
+/* 버전 표시: 변경 기록(CHANGELOG) 맨 위 줄의 버전·날짜를 모든 화면 상단에 표시하고 '자료 > 변경 기록'으로 연결 */
+JR.changelog = () => fetch("data/CHANGELOG.md", { cache: "no-store" }).then(r => r.ok ? r.text() : "").then(t =>
+  t.split("\n").map(l => l.match(/^\|\s*(v[\d.]+)\s*\|\s*([\d-]+)\s*\|\s*(.+?)\s*\|\s*$/)).filter(Boolean).map(m => ({ v: m[1], d: m[2], t: m[3] }))).catch(() => []);
+JR.changelog().then(list => {
+  const top = list[0]; if (!top) return;
+  document.querySelectorAll(".topnav .ver").forEach(el => {
+    el.textContent = `${top.v} · ${top.d.slice(2).replace(/-/g, ".")} 업데이트`;
+    el.title = "변경 기록 보기";
+    el.style.cursor = "pointer";
+    el.addEventListener("click", ev => { ev.preventDefault(); location.href = "sources.html#changelog"; });
+  });
+});
+

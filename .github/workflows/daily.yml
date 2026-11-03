@@ -60,6 +60,8 @@ jobs:
           cp config/notify.json web/data/notify.json
           cp config/loan_rules.json web/data/loan_rules.json
           cp config/wealth_dist.json web/data/wealth_dist.json
+          cp VERSION web/data/VERSION
+          cp CHANGELOG.md web/data/CHANGELOG.md
       - name: 데이터 커밋
         run: |
           git config user.name "jeonse-radar-bot"
