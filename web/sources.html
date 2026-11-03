@@ -57,7 +57,7 @@ const done=o=>{const ks=Object.keys(o||{});return ks.length?ks.map(k=>`<span cla
 fetch("data/sources.json",{cache:"no-store"}).then(r=>r.json()).then(d=>{
   $("#gen").textContent=`전세 레이더가 쓰는 모든 자료와 수집 현황입니다. ${d.generated_at.replace("T"," ").slice(0,16)} 기준.`;
   $("#ds").innerHTML=d.datasets.map(x=>{
-    const st=(x.rows==null||(x.file||"").startsWith("config/"))?'<span class="badge ref">참고</span>':x.rows>0?'<span class="badge ok">수집 중</span>':'<span class="badge wait">활용신청 필요</span>';
+    const st=(x.rows==null||(x.file||"").startsWith("config/"))?'<span class="badge ref">참고</span>':x.rows>0?'<span class="badge ok">수집 중</span>':x.approved?'<span class="badge ok">승인 완료</span>':'<span class="badge wait">활용신청 필요</span>';
     return `<div class="d"><h3>${x.url?`<a href="${e(x.url)}" target="_blank" rel="noopener" style="color:inherit">${e(x.name)}</a>`:e(x.name)} ${st}</h3>
      <div class="row"><span>제공: ${e(x.provider)}</span><span>쓰는 곳: ${e(x.use)}</span>${x.rows!=null?`<span>${x.rows.toLocaleString()}건</span>`:""}${per(x.period)?`<span>${per(x.period)}</span>`:""}${x.file?`<span><a href="${e(d.repo)}/blob/main/${e(x.file)}" target="_blank" rel="noopener" style="color:var(--accent)">${e(x.file)}</a></span>`:""}</div></div>`}).join("");
   const c=d.conditions;$("#cond").textContent=`수집 조건: 전용 ${c.min_area_m2}㎡ 이상 · ${c.jeonse_only?"월세 없는 전세만":"전월세 전체"} · 최근 ${c.months_back}개월`;

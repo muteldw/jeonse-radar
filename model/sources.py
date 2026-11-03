@@ -67,6 +67,8 @@ def main() -> None:
         {"name": "가구 순자산 분포 (상위 % 추정)", "provider": " · ".join(wealth.get("notes", [])[:3]), "url": None,
          "use": "매수자 자산 상위 % 추정", "rows": len(wealth.get("points", [])), "period": {"as_of": wealth.get("as_of")}, "file": "config/wealth_dist.json"},
     ]
+    for d in datasets:
+        d["approved"] = d["name"] in cfg.get("approved_datasets", [])
     regions = []
     for code, name in cfg["regions"].items():
         regions.append({"code": code, "name": name, "area": rank.area_of(name, cfg)[1].get("name", ""),
