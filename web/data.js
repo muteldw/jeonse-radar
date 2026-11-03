@@ -61,8 +61,9 @@ const JR = {
     const [base, ...ds] = await Promise.all([this.meta("supply.json"), ...codes.map(c => this.file("supply", c))]);
     return { ...base, items: Object.assign({}, ...ds.map(d => d.items || {})) };
   },
-  sggLabel(s) {
+  sggLabel(s, total) {
     if (s.count) return `${s.name} (${s.count})`;
+    if (total === 0) return `${s.name} (승인 대기)`;   // 전체가 0건 = API 활용신청 승인 전
     const done = s.collected && Object.values(s.collected).some(Boolean);
     return `${s.name} (${done ? "위치 조회 중" : "수집 중"})`;
   },
@@ -71,9 +72,10 @@ const JR = {
     const e = this.esc;
     let html = "";
     if (this.isSgg(meta)) {
+      const total = Object.values(meta.sgg).reduce((n, x) => n + (x.count || 0), 0);
       for (const [k, a] of Object.entries(meta.areas || {})) {
         html += `<optgroup label="${e(a.name)}"><option value="area:${k}">${e(a.name)} 전체 (${a.count})</option>`;
-        for (const c of a.codes || []) html += `<option value="${c}">${e(this.sggLabel(meta.sgg[c]))}</option>`;
+        for (const c of a.codes || []) html += `<option value="${c}">${e(this.sggLabel(meta.sgg[c], total))}</option>`;
         html += "</optgroup>";
       }
     } else {
