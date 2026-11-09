@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-11-08T09:15+09:00",
+ "generated_at": "2026-11-09T09:24+09:00",
  "budget_eok": 12.0,
  "weights": {
   "station": 1.3,
@@ -15,9 +15,9 @@
  "period": {
   "from": "2024-12-01",
   "to": "2026-11-06",
-  "rows": 73386,
+  "rows": 73399,
   "by_kind": {
-   "아파트": 73386
+   "아파트": 73399
   }
  },
  "areas": {
@@ -36,7 +36,7 @@
     "11500",
     "11470"
    ],
-   "count": 623
+   "count": 624
   },
   "seoul_sw": {
    "name": "서울 서남(구로·금천·영등포·동작·관악)",
@@ -147,7 +147,7 @@
     "11710",
     "11740"
    ],
-   "count": 1482
+   "count": 1476
   },
   "anyang": {
    "name": "안양",
@@ -190,12 +190,12 @@
   "11470": {
    "name": "양천구",
    "area": "seoul_west",
-   "count": 282,
+   "count": 283,
    "center": [
     37.517,
     126.8665
    ],
-   "with_location": 282,
+   "with_location": 283,
    "bbox": [
     37.5058,
     126.8239,
@@ -570,12 +570,12 @@
   "11650": {
    "name": "서초구",
    "area": "seoul_se",
-   "count": 415,
+   "count": 413,
    "center": [
     37.4837,
     127.0324
    ],
-   "with_location": 415,
+   "with_location": 413,
    "bbox": [
     37.4485,
     126.9822,
@@ -589,12 +589,12 @@
   "11680": {
    "name": "강남구",
    "area": "seoul_se",
-   "count": 388,
+   "count": 385,
    "center": [
     37.5172,
     127.0473
    ],
-   "with_location": 388,
+   "with_location": 385,
    "bbox": [
     37.4603,
     127.0183,
@@ -608,12 +608,12 @@
   "11710": {
    "name": "송파구",
    "area": "seoul_se",
-   "count": 326,
+   "count": 325,
    "center": [
     37.5145,
     127.1059
    ],
-   "with_location": 326,
+   "with_location": 325,
    "bbox": [
     37.4746,
     127.0731,

@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-11-08T09:15+09:00",
+ "generated_at": "2026-11-09T09:24+09:00",
  "repo": "https://github.com/muteldw/jeonse-radar",
  "conditions": {
   "min_area_m2": 80,
@@ -48,13 +48,13 @@
    "provider": "국토교통부 · 공공데이터포털",
    "url": "https://www.data.go.kr/tcs/dss/selectDataSetList.do?keyword=아파트 매매 실거래가",
    "use": "매매 추천·전세가율·매수자 분석",
-   "rows": 73386,
+   "rows": 73399,
    "period": {
     "from": "2024-12-01",
     "to": "2026-11-06",
-    "rows": 73386,
+    "rows": 73399,
     "by_kind": {
-     "아파트": 73386
+     "아파트": 73399
     }
    },
    "file": "data/sale_raw.csv",
@@ -69,9 +69,9 @@
    "period": {
     "from": "2024-12-01",
     "to": "2026-11-06",
-    "rows": 73386,
+    "rows": 73399,
     "by_kind": {
-     "아파트": 73386
+     "아파트": 73399
     }
    },
    "file": "data/sale_raw.csv",
@@ -82,14 +82,14 @@
    "provider": "국토교통부 · 공공데이터포털",
    "url": "https://www.data.go.kr/tcs/dss/selectDataSetList.do?keyword=오피스텔 전월세 실거래가",
    "use": "임시 거처(오피스텔 월세) 시세",
-   "rows": 10707,
+   "rows": 10710,
    "period": {
     "from": "2025-11-01",
     "to": "2026-11-06",
-    "rows": 20132,
+    "rows": 20135,
     "by_kind": {
      "아파트": 9425,
-     "오피스텔": 10707
+     "오피스텔": 10710
     }
    },
    "file": "data/bridge_raw.csv",
@@ -104,10 +104,10 @@
    "period": {
     "from": "2025-11-01",
     "to": "2026-11-06",
-    "rows": 20132,
+    "rows": 20135,
     "by_kind": {
      "아파트": 9425,
-     "오피스텔": 10707
+     "오피스텔": 10710
     }
    },
    "file": "data/bridge_raw.csv",
@@ -200,7 +200,7 @@
     "빌라": 81
    },
    "sale": {
-    "아파트": 2969
+    "아파트": 2972
    },
    "rent_done": {
     "아파트": true,
@@ -420,7 +420,7 @@
     "빌라": 73
    },
    "sale": {
-    "아파트": 3312
+    "아파트": 3322
    },
    "rent_done": {
     "아파트": true,
