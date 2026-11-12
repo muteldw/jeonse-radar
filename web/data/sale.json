@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-11-11T10:05+09:00",
+ "generated_at": "2026-11-12T11:15+09:00",
  "budget_eok": 12.0,
  "weights": {
   "station": 1.3,
@@ -14,10 +14,10 @@
  "layout": "sgg",
  "period": {
   "from": "2024-12-01",
-  "to": "2026-11-10",
-  "rows": 73607,
+  "to": "2026-11-11",
+  "rows": 73724,
   "by_kind": {
-   "아파트": 73607
+   "아파트": 73724
   }
  },
  "areas": {
@@ -59,7 +59,7 @@
     "11590",
     "11620"
    ],
-   "count": 890
+   "count": 892
   },
   "seoul_nw": {
    "name": "서울 서북(은평·서대문·마포)",
@@ -78,7 +78,7 @@
     "11410",
     "11440"
    ],
-   "count": 717
+   "count": 719
   },
   "seoul_center": {
    "name": "서울 도심(종로·중구·용산)",
@@ -164,7 +164,7 @@
     "41171",
     "41173"
    ],
-   "count": 277
+   "count": 279
   }
  },
  "sgg": {
@@ -437,12 +437,12 @@
   "11410": {
    "name": "서대문구",
    "area": "seoul_nw",
-   "count": 200,
+   "count": 201,
    "center": [
     37.5791,
     126.9368
    ],
-   "with_location": 200,
+   "with_location": 201,
    "bbox": [
     37.5576,
     126.9032,
@@ -456,12 +456,12 @@
   "11440": {
    "name": "마포구",
    "area": "seoul_nw",
-   "count": 235,
+   "count": 236,
    "center": [
     37.5663,
     126.9019
    ],
-   "with_location": 235,
+   "with_location": 236,
    "bbox": [
     37.5361,
     126.8792,
@@ -551,12 +551,12 @@
   "11620": {
    "name": "관악구",
    "area": "seoul_sw",
-   "count": 167,
+   "count": 169,
    "center": [
     37.4784,
     126.9516
    ],
-   "with_location": 167,
+   "with_location": 169,
    "bbox": [
     37.4592,
     126.9034,
@@ -589,12 +589,12 @@
   "11680": {
    "name": "강남구",
    "area": "seoul_se",
-   "count": 385,
+   "count": 386,
    "center": [
     37.5172,
     127.0473
    ],
-   "with_location": 385,
+   "with_location": 386,
    "bbox": [
     37.4603,
     127.0183,
@@ -627,12 +627,12 @@
   "11740": {
    "name": "강동구",
    "area": "seoul_se",
-   "count": 354,
+   "count": 353,
    "center": [
     37.5301,
     127.1238
    ],
-   "with_location": 354,
+   "with_location": 353,
    "bbox": [
     37.5232,
     127.1213,
@@ -665,12 +665,12 @@
   "41173": {
    "name": "안양시 동안구",
    "area": "anyang",
-   "count": 165,
+   "count": 167,
    "center": [
     37.3925,
     126.9568
    ],
-   "with_location": 165,
+   "with_location": 167,
    "bbox": [
     37.3635,
     126.93,
