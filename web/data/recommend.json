@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-11-14T10:14+09:00",
+ "generated_at": "2026-11-15T09:40+09:00",
  "budget_eok": 8.0,
  "weights": {
   "station": 1.3,
@@ -15,9 +15,9 @@
  "period": {
   "from": "2024-11-01",
   "to": "2026-11-13",
-  "rows": 134357,
+  "rows": 134359,
   "by_kind": {
-   "아파트": 130679,
+   "아파트": 130681,
    "빌라": 3678
   }
  },
@@ -60,7 +60,7 @@
     "11590",
     "11620"
    ],
-   "count": 882
+   "count": 881
   },
   "seoul_nw": {
    "name": "서울 서북(은평·서대문·마포)",
@@ -148,7 +148,7 @@
     "11710",
     "11740"
    ],
-   "count": 1872
+   "count": 1867
   },
   "anyang": {
    "name": "안양",
@@ -312,12 +312,12 @@
   "11230": {
    "name": "동대문구",
    "area": "seoul_ne",
-   "count": 192,
+   "count": 191,
    "center": [
     37.5744,
     127.0396
    ],
-   "with_location": 192,
+   "with_location": 191,
    "bbox": [
     37.5628,
     127.0239,
@@ -352,12 +352,12 @@
   "11290": {
    "name": "성북구",
    "area": "seoul_ne",
-   "count": 210,
+   "count": 211,
    "center": [
     37.5894,
     127.0167
    ],
-   "with_location": 210,
+   "with_location": 211,
    "bbox": [
     37.5801,
     126.9912,
@@ -492,12 +492,12 @@
   "11530": {
    "name": "구로구",
    "area": "seoul_sw",
-   "count": 205,
+   "count": 204,
    "center": [
     37.4954,
     126.8874
    ],
-   "with_location": 205,
+   "with_location": 204,
    "bbox": [
     37.4755,
     126.8158,
@@ -592,12 +592,12 @@
   "11650": {
    "name": "서초구",
    "area": "seoul_se",
-   "count": 598,
+   "count": 595,
    "center": [
     37.4837,
     127.0324
    ],
-   "with_location": 598,
+   "with_location": 595,
    "bbox": [
     37.4485,
     126.9822,
@@ -612,12 +612,12 @@
   "11680": {
    "name": "강남구",
    "area": "seoul_se",
-   "count": 614,
+   "count": 612,
    "center": [
     37.5172,
     127.0473
    ],
-   "with_location": 614,
+   "with_location": 612,
    "bbox": [
     37.4603,
     127.0183,

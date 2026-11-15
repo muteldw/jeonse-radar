@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-11-14T10:14+09:00",
+ "generated_at": "2026-11-15T09:40+09:00",
  "repo": "https://github.com/muteldw/jeonse-radar",
  "conditions": {
   "min_area_m2": 80,
@@ -12,13 +12,13 @@
    "provider": "국토교통부 · 공공데이터포털",
    "url": "https://www.data.go.kr/tcs/dss/selectDataSetList.do?keyword=아파트 전월세 실거래가",
    "use": "전세 추천·시세·계약기간(이사 시기)",
-   "rows": 130679,
+   "rows": 130681,
    "period": {
     "from": "2024-11-01",
     "to": "2026-11-13",
-    "rows": 134357,
+    "rows": 134359,
     "by_kind": {
-     "아파트": 130679,
+     "아파트": 130681,
      "빌라": 3678
     }
    },
@@ -34,9 +34,9 @@
    "period": {
     "from": "2024-11-01",
     "to": "2026-11-13",
-    "rows": 134357,
+    "rows": 134359,
     "by_kind": {
-     "아파트": 130679,
+     "아파트": 130681,
      "빌라": 3678
     }
    },
@@ -48,13 +48,13 @@
    "provider": "국토교통부 · 공공데이터포털",
    "url": "https://www.data.go.kr/tcs/dss/selectDataSetList.do?keyword=아파트 매매 실거래가",
    "use": "매매 추천·전세가율·매수자 분석",
-   "rows": 73903,
+   "rows": 73906,
    "period": {
     "from": "2024-12-01",
     "to": "2026-11-13",
-    "rows": 73903,
+    "rows": 73906,
     "by_kind": {
-     "아파트": 73903
+     "아파트": 73906
     }
    },
    "file": "data/sale_raw.csv",
@@ -69,9 +69,9 @@
    "period": {
     "from": "2024-12-01",
     "to": "2026-11-13",
-    "rows": 73903,
+    "rows": 73906,
     "by_kind": {
-     "아파트": 73903
+     "아파트": 73906
     }
    },
    "file": "data/sale_raw.csv",
@@ -118,7 +118,7 @@
    "provider": "카카오",
    "url": "https://developers.kakao.com/docs/latest/ko/local/dev-guide",
    "use": "단지 위치, 가까운 전철역·도보 시간, 학교·어린이집·마트·병원 수",
-   "rows": 8999,
+   "rows": 9000,
    "period": {},
    "file": "data/geo.json",
    "approved": false
@@ -356,7 +356,7 @@
    "name": "성북구",
    "area": "서울 동북(성동·광진·동대문·중랑·성북·강북·도봉·노원)",
    "rent": {
-    "아파트": 4666,
+    "아파트": 4667,
     "빌라": 136
    },
    "sale": {
@@ -369,7 +369,7 @@
    "sale_done": {
     "아파트": true
    },
-   "located": 245
+   "located": 246
   },
   {
    "code": "11305",
@@ -440,7 +440,7 @@
     "빌라": 181
    },
    "sale": {
-    "아파트": 2736
+    "아파트": 2739
    },
    "rent_done": {
     "아파트": true,
@@ -456,7 +456,7 @@
    "name": "서대문구",
    "area": "서울 서북(은평·서대문·마포)",
    "rent": {
-    "아파트": 3956,
+    "아파트": 3957,
     "빌라": 173
    },
    "sale": {
