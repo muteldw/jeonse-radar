@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-11-18T11:51+09:00",
+ "generated_at": "2026-11-19T11:19+09:00",
  "budget_eok": 12.0,
  "weights": {
   "station": 1.3,
@@ -14,10 +14,10 @@
  "layout": "sgg",
  "period": {
   "from": "2024-12-01",
-  "to": "2026-11-17",
-  "rows": 74105,
+  "to": "2026-11-18",
+  "rows": 74224,
   "by_kind": {
-   "아파트": 74105
+   "아파트": 74224
   }
  },
  "areas": {
@@ -36,7 +36,7 @@
     "11500",
     "11470"
    ],
-   "count": 628
+   "count": 625
   },
   "seoul_sw": {
    "name": "서울 서남(구로·금천·영등포·동작·관악)",
@@ -147,7 +147,7 @@
     "11710",
     "11740"
    ],
-   "count": 1477
+   "count": 1481
   },
   "anyang": {
    "name": "안양",
@@ -171,12 +171,12 @@
   "11500": {
    "name": "강서구",
    "area": "seoul_west",
-   "count": 342,
+   "count": 341,
    "center": [
     37.5509,
     126.8495
    ],
-   "with_location": 342,
+   "with_location": 341,
    "bbox": [
     37.5276,
     126.8061,
@@ -190,12 +190,12 @@
   "11470": {
    "name": "양천구",
    "area": "seoul_west",
-   "count": 286,
+   "count": 284,
    "center": [
     37.517,
     126.8665
    ],
-   "with_location": 286,
+   "with_location": 284,
    "bbox": [
     37.5058,
     126.8239,
@@ -361,12 +361,12 @@
   "11305": {
    "name": "강북구",
    "area": "seoul_ne",
-   "count": 76,
+   "count": 77,
    "center": [
     37.6396,
     127.0257
    ],
-   "with_location": 76,
+   "with_location": 77,
    "bbox": [
     37.6128,
     127.0081,
@@ -399,12 +399,12 @@
   "11350": {
    "name": "노원구",
    "area": "seoul_ne",
-   "count": 259,
+   "count": 258,
    "center": [
     37.6542,
     127.0568
    ],
-   "with_location": 259,
+   "with_location": 258,
    "bbox": [
     37.6158,
     127.044,
@@ -570,12 +570,12 @@
   "11650": {
    "name": "서초구",
    "area": "seoul_se",
-   "count": 413,
+   "count": 418,
    "center": [
     37.4837,
     127.0324
    ],
-   "with_location": 413,
+   "with_location": 418,
    "bbox": [
     37.4485,
     126.9822,
@@ -589,12 +589,12 @@
   "11680": {
    "name": "강남구",
    "area": "seoul_se",
-   "count": 387,
+   "count": 386,
    "center": [
     37.5172,
     127.0473
    ],
-   "with_location": 387,
+   "with_location": 386,
    "bbox": [
     37.4603,
     127.0183,
