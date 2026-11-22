@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-11-21T11:05+09:00",
+ "generated_at": "2026-11-22T09:51+09:00",
  "budget_eok": 12.0,
  "weights": {
   "station": 1.3,
@@ -15,9 +15,9 @@
  "period": {
   "from": "2024-12-01",
   "to": "2026-11-19",
-  "rows": 74409,
+  "rows": 74410,
   "by_kind": {
-   "아파트": 74409
+   "아파트": 74410
   }
  },
  "areas": {
@@ -36,7 +36,7 @@
     "11500",
     "11470"
    ],
-   "count": 630
+   "count": 628
   },
   "seoul_sw": {
    "name": "서울 서남(구로·금천·영등포·동작·관악)",
@@ -59,7 +59,7 @@
     "11590",
     "11620"
    ],
-   "count": 895
+   "count": 893
   },
   "seoul_nw": {
    "name": "서울 서북(은평·서대문·마포)",
@@ -147,7 +147,7 @@
     "11710",
     "11740"
    ],
-   "count": 1480
+   "count": 1478
   },
   "anyang": {
    "name": "안양",
@@ -190,12 +190,12 @@
   "11470": {
    "name": "양천구",
    "area": "seoul_west",
-   "count": 288,
+   "count": 286,
    "center": [
     37.517,
     126.8665
    ],
-   "with_location": 288,
+   "with_location": 286,
    "bbox": [
     37.5058,
     126.8239,
@@ -475,12 +475,12 @@
   "11530": {
    "name": "구로구",
    "area": "seoul_sw",
-   "count": 235,
+   "count": 234,
    "center": [
     37.4954,
     126.8874
    ],
-   "with_location": 235,
+   "with_location": 234,
    "bbox": [
     37.4755,
     126.8158,
@@ -532,12 +532,12 @@
   "11590": {
    "name": "동작구",
    "area": "seoul_sw",
-   "count": 205,
+   "count": 204,
    "center": [
     37.5124,
     126.9393
    ],
-   "with_location": 205,
+   "with_location": 204,
    "bbox": [
     37.4773,
     126.9052,
@@ -589,12 +589,12 @@
   "11680": {
    "name": "강남구",
    "area": "seoul_se",
-   "count": 385,
+   "count": 384,
    "center": [
     37.5172,
     127.0473
    ],
-   "with_location": 385,
+   "with_location": 384,
    "bbox": [
     37.4603,
     127.0183,
@@ -608,12 +608,12 @@
   "11710": {
    "name": "송파구",
    "area": "seoul_se",
-   "count": 322,
+   "count": 321,
    "center": [
     37.5145,
     127.1059
    ],
-   "with_location": 322,
+   "with_location": 321,
    "bbox": [
     37.4746,
     127.0731,
