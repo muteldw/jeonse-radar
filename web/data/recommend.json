@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-11-23T10:25+09:00",
+ "generated_at": "2026-11-24T14:15+09:00",
  "budget_eok": 8.0,
  "weights": {
   "station": 1.3,
@@ -14,11 +14,11 @@
  "layout": "sgg",
  "period": {
   "from": "2024-11-01",
-  "to": "2026-11-20",
-  "rows": 135357,
+  "to": "2026-11-23",
+  "rows": 135631,
   "by_kind": {
-   "아파트": 131655,
-   "빌라": 3702
+   "아파트": 131925,
+   "빌라": 3706
   }
  },
  "areas": {
@@ -37,7 +37,7 @@
     "11500",
     "11470"
    ],
-   "count": 605
+   "count": 606
   },
   "seoul_sw": {
    "name": "서울 서남(구로·금천·영등포·동작·관악)",
@@ -60,7 +60,7 @@
     "11590",
     "11620"
    ],
-   "count": 871
+   "count": 872
   },
   "seoul_nw": {
    "name": "서울 서북(은평·서대문·마포)",
@@ -79,7 +79,7 @@
     "11410",
     "11440"
    ],
-   "count": 753
+   "count": 754
   },
   "seoul_center": {
    "name": "서울 도심(종로·중구·용산)",
@@ -127,7 +127,7 @@
     "11320",
     "11350"
    ],
-   "count": 1387
+   "count": 1388
   },
   "seoul_se": {
    "name": "서울 동남(서초·강남·송파·강동)",
@@ -148,7 +148,7 @@
     "11710",
     "11740"
    ],
-   "count": 1849
+   "count": 1853
   },
   "anyang": {
    "name": "안양",
@@ -165,19 +165,19 @@
     "41171",
     "41173"
    ],
-   "count": 260
+   "count": 261
   }
  },
  "sgg": {
   "11500": {
    "name": "강서구",
    "area": "seoul_west",
-   "count": 316,
+   "count": 317,
    "center": [
     37.5509,
     126.8495
    ],
-   "with_location": 316,
+   "with_location": 317,
    "bbox": [
     37.5276,
     126.8061,
@@ -272,12 +272,12 @@
   "11200": {
    "name": "성동구",
    "area": "seoul_ne",
-   "count": 194,
+   "count": 193,
    "center": [
     37.5633,
     127.0371
    ],
-   "with_location": 194,
+   "with_location": 193,
    "bbox": [
     37.5352,
     127.0099,
@@ -312,12 +312,12 @@
   "11230": {
    "name": "동대문구",
    "area": "seoul_ne",
-   "count": 189,
+   "count": 188,
    "center": [
     37.5744,
     127.0396
    ],
-   "with_location": 189,
+   "with_location": 188,
    "bbox": [
     37.5628,
     127.0239,
@@ -332,12 +332,12 @@
   "11260": {
    "name": "중랑구",
    "area": "seoul_ne",
-   "count": 159,
+   "count": 160,
    "center": [
     37.6066,
     127.0927
    ],
-   "with_location": 159,
+   "with_location": 160,
    "bbox": [
     37.5725,
     127.0723,
@@ -392,12 +392,12 @@
   "11320": {
    "name": "도봉구",
    "area": "seoul_ne",
-   "count": 132,
+   "count": 133,
    "center": [
     37.6688,
     127.0471
    ],
-   "with_location": 132,
+   "with_location": 133,
    "bbox": [
     37.6329,
     127.0136,
@@ -412,12 +412,12 @@
   "11350": {
    "name": "노원구",
    "area": "seoul_ne",
-   "count": 251,
+   "count": 252,
    "center": [
     37.6542,
     127.0568
    ],
-   "with_location": 251,
+   "with_location": 252,
    "bbox": [
     37.6158,
     127.044,
@@ -452,12 +452,12 @@
   "11410": {
    "name": "서대문구",
    "area": "seoul_nw",
-   "count": 195,
+   "count": 196,
    "center": [
     37.5791,
     126.9368
    ],
-   "with_location": 195,
+   "with_location": 196,
    "bbox": [
     37.5576,
     126.9032,
@@ -492,12 +492,12 @@
   "11530": {
    "name": "구로구",
    "area": "seoul_sw",
-   "count": 202,
+   "count": 203,
    "center": [
     37.4954,
     126.8874
    ],
-   "with_location": 202,
+   "with_location": 203,
    "bbox": [
     37.4755,
     126.8158,
@@ -592,12 +592,12 @@
   "11650": {
    "name": "서초구",
    "area": "seoul_se",
-   "count": 595,
+   "count": 597,
    "center": [
     37.4837,
     127.0324
    ],
-   "with_location": 595,
+   "with_location": 597,
    "bbox": [
     37.4485,
     126.9822,
@@ -612,12 +612,12 @@
   "11680": {
    "name": "강남구",
    "area": "seoul_se",
-   "count": 600,
+   "count": 601,
    "center": [
     37.5172,
     127.0473
    ],
-   "with_location": 600,
+   "with_location": 601,
    "bbox": [
     37.4603,
     127.0183,
@@ -632,12 +632,12 @@
   "11710": {
    "name": "송파구",
    "area": "seoul_se",
-   "count": 319,
+   "count": 320,
    "center": [
     37.5145,
     127.1059
    ],
-   "with_location": 319,
+   "with_location": 320,
    "bbox": [
     37.4746,
     127.0731,
@@ -672,12 +672,12 @@
   "41171": {
    "name": "안양시 만안구",
    "area": "anyang",
-   "count": 99,
+   "count": 100,
    "center": [
     37.3866,
     126.9327
    ],
-   "with_location": 99,
+   "with_location": 100,
    "bbox": [
     37.3768,
     126.8925,

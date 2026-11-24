@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-11-23T10:25+09:00",
+ "generated_at": "2026-11-24T14:15+09:00",
  "budget_eok": 12.0,
  "weights": {
   "station": 1.3,
@@ -14,10 +14,10 @@
  "layout": "sgg",
  "period": {
   "from": "2024-12-01",
-  "to": "2026-11-19",
-  "rows": 74413,
+  "to": "2026-11-23",
+  "rows": 74535,
   "by_kind": {
-   "아파트": 74413
+   "아파트": 74535
   }
  },
  "areas": {
@@ -59,7 +59,7 @@
     "11590",
     "11620"
    ],
-   "count": 893
+   "count": 894
   },
   "seoul_nw": {
    "name": "서울 서북(은평·서대문·마포)",
@@ -147,7 +147,7 @@
     "11710",
     "11740"
    ],
-   "count": 1477
+   "count": 1479
   },
   "anyang": {
    "name": "안양",
@@ -494,12 +494,12 @@
   "11545": {
    "name": "금천구",
    "area": "seoul_sw",
-   "count": 64,
+   "count": 65,
    "center": [
     37.4569,
     126.8955
    ],
-   "with_location": 64,
+   "with_location": 65,
    "bbox": [
     37.4392,
     126.8865,
@@ -570,12 +570,12 @@
   "11650": {
    "name": "서초구",
    "area": "seoul_se",
-   "count": 416,
+   "count": 417,
    "center": [
     37.4837,
     127.0324
    ],
-   "with_location": 416,
+   "with_location": 417,
    "bbox": [
     37.4485,
     126.9822,
@@ -589,12 +589,12 @@
   "11680": {
    "name": "강남구",
    "area": "seoul_se",
-   "count": 384,
+   "count": 385,
    "center": [
     37.5172,
     127.0473
    ],
-   "with_location": 384,
+   "with_location": 385,
    "bbox": [
     37.4603,
     127.0183,
